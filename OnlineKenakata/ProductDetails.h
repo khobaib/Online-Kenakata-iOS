@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "MWPhotoBrowser.h"
-
-@interface ProductDetails : UIViewController<UIScrollViewDelegate,MWPhotoBrowserDelegate>{
+#import <MessageUI/MessageUI.h>
+#import "share.h"
+@interface ProductDetails : UIViewController<UIScrollViewDelegate,MWPhotoBrowserDelegate,shareDelegate,MFMessageComposeViewControllerDelegate>{
     NSString *currency;
     NSMutableArray *photos;
 }

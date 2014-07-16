@@ -7,6 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1478B4CF19752269002C79B0 /* mail.png in Resources */ = {isa = PBXBuildFile; fileRef = 1478B4CD19752269002C79B0 /* mail.png */; };
+		1478B4D31975241F002C79B0 /* share.m in Sources */ = {isa = PBXBuildFile; fileRef = 1478B4D21975241F002C79B0 /* share.m */; };
+		1478B4D519752E33002C79B0 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1478B4D419752E33002C79B0 /* QuartzCore.framework */; };
+		1478B4D719752E5D002C79B0 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1478B4D619752E5D002C79B0 /* MapKit.framework */; };
+		1478B4D919752E67002C79B0 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1478B4D819752E67002C79B0 /* CoreLocation.framework */; };
+		1478B4DB19752E70002C79B0 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1478B4DA19752E70002C79B0 /* AddressBook.framework */; };
+		1478B4DD19752E7C002C79B0 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1478B4DC19752E7C002C79B0 /* Social.framework */; };
+		1478B4DF19752F7A002C79B0 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1478B4DE19752F7A002C79B0 /* FacebookSDK.framework */; };
+		1486EE4B197651BE0036C159 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1486EE4A197651BE0036C159 /* MessageUI.framework */; };
 		14D45A3A1974FC6800F677D0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14D45A391974FC6800F677D0 /* Foundation.framework */; };
 		14D45A3C1974FC6800F677D0 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14D45A3B1974FC6800F677D0 /* CoreGraphics.framework */; };
 		14D45A3E1974FC6800F677D0 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14D45A3D1974FC6800F677D0 /* UIKit.framework */; };
@@ -97,6 +106,7 @@
 		14D45B571974FFA500F677D0 /* tag_sale.png in Resources */ = {isa = PBXBuildFile; fileRef = 14D45B4D1974FFA400F677D0 /* tag_sale.png */; };
 		14D45B581974FFA500F677D0 /* twitter.png in Resources */ = {isa = PBXBuildFile; fileRef = 14D45B4E1974FFA500F677D0 /* twitter.png */; };
 		14D45B591974FFA500F677D0 /* video.png in Resources */ = {isa = PBXBuildFile; fileRef = 14D45B4F1974FFA500F677D0 /* video.png */; };
+		14D95EFF19766F52001D6CB3 /* imessege.png in Resources */ = {isa = PBXBuildFile; fileRef = 14D95EFE19766F52001D6CB3 /* imessege.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -110,6 +120,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1478B4CD19752269002C79B0 /* mail.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mail.png; sourceTree = "<group>"; };
+		1478B4D11975241F002C79B0 /* share.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = share.h; sourceTree = "<group>"; };
+		1478B4D21975241F002C79B0 /* share.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = share.m; sourceTree = "<group>"; };
+		1478B4D419752E33002C79B0 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		1478B4D619752E5D002C79B0 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		1478B4D819752E67002C79B0 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		1478B4DA19752E70002C79B0 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
+		1478B4DC19752E7C002C79B0 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
+		1478B4DE19752F7A002C79B0 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = OnlineKenakata/FacebookSDK.framework; sourceTree = "<group>"; };
+		1486EE4A197651BE0036C159 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		14D45A361974FC6800F677D0 /* OnlineKenakata.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OnlineKenakata.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		14D45A391974FC6800F677D0 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		14D45A3B1974FC6800F677D0 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -275,6 +295,7 @@
 		14D45B4D1974FFA400F677D0 /* tag_sale.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tag_sale.png; sourceTree = "<group>"; };
 		14D45B4E1974FFA500F677D0 /* twitter.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = twitter.png; sourceTree = "<group>"; };
 		14D45B4F1974FFA500F677D0 /* video.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = video.png; sourceTree = "<group>"; };
+		14D95EFE19766F52001D6CB3 /* imessege.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = imessege.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -282,6 +303,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1486EE4B197651BE0036C159 /* MessageUI.framework in Frameworks */,
+				1478B4DD19752E7C002C79B0 /* Social.framework in Frameworks */,
+				1478B4DB19752E70002C79B0 /* AddressBook.framework in Frameworks */,
+				1478B4D919752E67002C79B0 /* CoreLocation.framework in Frameworks */,
+				1478B4D719752E5D002C79B0 /* MapKit.framework in Frameworks */,
+				1478B4D519752E33002C79B0 /* QuartzCore.framework in Frameworks */,
+				1478B4DF19752F7A002C79B0 /* FacebookSDK.framework in Frameworks */,
 				14D45A3C1974FC6800F677D0 /* CoreGraphics.framework in Frameworks */,
 				14D45A3E1974FC6800F677D0 /* UIKit.framework in Frameworks */,
 				14D45A3A1974FC6800F677D0 /* Foundation.framework in Frameworks */,
@@ -323,6 +351,13 @@
 		14D45A381974FC6800F677D0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1486EE4A197651BE0036C159 /* MessageUI.framework */,
+				1478B4DE19752F7A002C79B0 /* FacebookSDK.framework */,
+				1478B4DC19752E7C002C79B0 /* Social.framework */,
+				1478B4DA19752E70002C79B0 /* AddressBook.framework */,
+				1478B4D819752E67002C79B0 /* CoreLocation.framework */,
+				1478B4D619752E5D002C79B0 /* MapKit.framework */,
+				1478B4D419752E33002C79B0 /* QuartzCore.framework */,
 				14D45A391974FC6800F677D0 /* Foundation.framework */,
 				14D45A3B1974FC6800F677D0 /* CoreGraphics.framework */,
 				14D45A3D1974FC6800F677D0 /* UIKit.framework */,
@@ -338,15 +373,6 @@
 				14D45A6E1974FCA600F677D0 /* Lib */,
 				14D45A481974FC6800F677D0 /* AppDelegate.h */,
 				14D45A491974FC6800F677D0 /* AppDelegate.m */,
-				14D45B1F1974FF4800F677D0 /* PushPin.m */,
-				14D45B201974FF4800F677D0 /* PushPin.h */,
-				14D45B341974FF4800F677D0 /* tabbarController.h */,
-				14D45B231974FF4800F677D0 /* tabbarController.m */,
-				14D45B301974FF4800F677D0 /* LoadingView.h */,
-				14D45B261974FF4800F677D0 /* LoadingView.m */,
-				14D45B321974FF4800F677D0 /* navicationController.h */,
-				14D45B331974FF4800F677D0 /* navicationController.m */,
-				14D45B351974FF4800F677D0 /* Constant.h */,
 				14D45A4B1974FC6800F677D0 /* Main.storyboard */,
 				14D45B311974FF4800F677D0 /* PostSplashImageScreen.h */,
 				14D45B191974FF4800F677D0 /* PostSplashImageScreen.m */,
@@ -370,6 +396,17 @@
 				14D45B1D1974FF4800F677D0 /* WebBrowser.m */,
 				14D45B1A1974FF4800F677D0 /* MapView.h */,
 				14D45B181974FF4800F677D0 /* MapView.m */,
+				14D45B1F1974FF4800F677D0 /* PushPin.m */,
+				14D45B201974FF4800F677D0 /* PushPin.h */,
+				14D45B341974FF4800F677D0 /* tabbarController.h */,
+				14D45B231974FF4800F677D0 /* tabbarController.m */,
+				1478B4D11975241F002C79B0 /* share.h */,
+				1478B4D21975241F002C79B0 /* share.m */,
+				14D45B301974FF4800F677D0 /* LoadingView.h */,
+				14D45B261974FF4800F677D0 /* LoadingView.m */,
+				14D45B321974FF4800F677D0 /* navicationController.h */,
+				14D45B331974FF4800F677D0 /* navicationController.m */,
+				14D45B351974FF4800F677D0 /* Constant.h */,
 				14D45A511974FC6800F677D0 /* Images.xcassets */,
 				14D45A401974FC6800F677D0 /* Supporting Files */,
 			);
@@ -595,6 +632,8 @@
 		14D45B451974FF7900F677D0 /* img */ = {
 			isa = PBXGroup;
 			children = (
+				1478B4CD19752269002C79B0 /* mail.png */,
+				14D95EFE19766F52001D6CB3 /* imessege.png */,
 				14D45B461974FFA400F677D0 /* placeholder.gif */,
 				14D45B471974FFA400F677D0 /* splash001.png */,
 				14D45B481974FFA400F677D0 /* a2mc_pressed.png */,
@@ -688,6 +727,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1478B4CF19752269002C79B0 /* mail.png in Resources */,
 				14D45B551974FFA500F677D0 /* tag_new.png in Resources */,
 				14D45B581974FFA500F677D0 /* twitter.png in Resources */,
 				14D45AE51974FCB900F677D0 /* README.md in Resources */,
@@ -702,6 +742,7 @@
 				14D45A441974FC6800F677D0 /* InfoPlist.strings in Resources */,
 				14D45A4D1974FC6800F677D0 /* Main.storyboard in Resources */,
 				14D45B501974FFA500F677D0 /* placeholder.gif in Resources */,
+				14D95EFF19766F52001D6CB3 /* imessege.png in Resources */,
 				14D45AE41974FCB900F677D0 /* LICENSE in Resources */,
 				14D45B521974FFA500F677D0 /* a2mc_pressed.png in Resources */,
 				14D45B571974FFA500F677D0 /* tag_sale.png in Resources */,
@@ -762,6 +803,7 @@
 				14D45ADC1974FCB900F677D0 /* PSTCollectionViewFlowLayout.m in Sources */,
 				14D45AD31974FCB900F677D0 /* MWZoomingScrollView.m in Sources */,
 				14D45AE61974FCB900F677D0 /* MKAnnotationView+WebCache.m in Sources */,
+				1478B4D31975241F002C79B0 /* share.m in Sources */,
 				14D45B371974FF4800F677D0 /* MapView.m in Sources */,
 				14D45B3A1974FF4800F677D0 /* WebBrowser.m in Sources */,
 				14D45AE91974FCB900F677D0 /* SDImageCache.m in Sources */,
@@ -914,6 +956,10 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/OnlineKenakata",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "OnlineKenakata/OnlineKenakata-Prefix.pch";
 				INFOPLIST_FILE = "OnlineKenakata/OnlineKenakata-Info.plist";
@@ -930,6 +976,10 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/OnlineKenakata",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "OnlineKenakata/OnlineKenakata-Prefix.pch";
 				INFOPLIST_FILE = "OnlineKenakata/OnlineKenakata-Info.plist";

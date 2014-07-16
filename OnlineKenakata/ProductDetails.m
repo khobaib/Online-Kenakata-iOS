@@ -8,7 +8,7 @@
 
 #import "ProductDetails.h"
 #import "UIImageView+WebCache.h"
-
+#import "share.h"
 @interface ProductDetails ()
 
 @end
@@ -274,7 +274,105 @@
 
 
 -(void)addShareButton{
-  //  UIButton *sharebtn=[UIButton alloc]initWithFrame:CGRectMake(<#CGFloat x#>, <#CGFloat y#>, <#CGFloat width#>, <#CGFloat height#>)
+    UIButton *sharebtn=[[UIButton alloc]initWithFrame:CGRectMake(110, 10, 100, 30)];
+    sharebtn.titleLabel.textColor=[UIColor whiteColor];
+    [sharebtn setTitle:@"Share" forState:UIControlStateNormal];
+    [sharebtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [sharebtn addTarget:self action:@selector(shareButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+
+    sharebtn.hidden=NO;
+   // [self.navigationController.navigationBar addSubview:sharebtn];
+    self.navigationItem.titleView=sharebtn;
+    
+    //[self.navigationItem.titleView addSubview:sharebtn];
+}
+-(void)shareButtonClick:(id)sender{
+    UIActionSheet * action = [[UIActionSheet alloc]
+                              initWithTitle:@"Share"
+                              delegate:nil
+                              cancelButtonTitle:@"Cancel"
+                              destructiveButtonTitle:nil
+                              otherButtonTitles:@"",nil];
+
+    
+       
+    share *background = [[share alloc]initWithFrame:CGRectMake(0, 0, 320, 150) actionSheet:action];
+    
+    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+    NSMutableDictionary *dic=[[[ud objectForKey:@"get_user_data"]objectForKey:@"success"]objectForKey:@"user"];
+    
+    
+    //fb twitter
+    background.titleName=[NSString stringWithFormat:@"Recommended - %@ , by %@ , Call %@ . Download Online Kenakata (Android/iOS)",self.name.text,[dic objectForKey:@"user_name"],[dic objectForKey:@"user_phone"]];
+    background.description=self.productDetails.text;
+    NSString *imageURL=[[[self.productData objectForKey:@"images"]objectAtIndex:0]objectForKey:@"image_url"];
+    background.url=imageURL;
+    background.viewController=self;
+    background.caption=@"";
+    background.imageUrl=@"";
+    background.delegate=self;
+    
+    //email
+    background.emailBody=[NSString stringWithFormat:@"%@ \n%@ .\nDownload Online Kenakata (Android/iOS)",self.productDetails.text,imageURL];
+    background.emailSub=[NSString stringWithFormat:@"Recommended - %@ , by %@ , Call %@ ",self.name.text,[dic objectForKey:@"user_name"],[dic objectForKey:@"user_phone"]];
+    
+   // background.image=
+    //NSLog(@"%@",background.caption);
+    
+   // background.backgroundColor = [UIColor whiteColor];
+    
+    
+    [action addSubview:background];
+    
+    [action showInView:self.view];
+    
+
+
+}
+
+-(void)setMessanger{
+    
+    NSLog(@"protocall");
+    if(![MFMessageComposeViewController canSendText]) {
+        UIAlertView *warningAlert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Your device doesn't support SMS!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [warningAlert show];
+        return;
+    }
+    
+  //  NSArray *recipents = @[@"12345678", @"72345524"];
+    NSString *message = [NSString stringWithFormat:@"Just sent the  file to your email. Please check!"];
+    
+    MFMessageComposeViewController *messageController = [[MFMessageComposeViewController alloc] init];
+    messageController.messageComposeDelegate = self;
+    //  [messageController setRecipients:recipents];
+    [messageController setBody:message];
+    
+    // Present message view controller on screen
+    [self presentViewController:messageController animated:YES completion:nil];
+}
+
+
+- (void)messageComposeViewController:(MFMessageComposeViewController *)controller didFinishWithResult:(MessageComposeResult) result
+{
+    switch (result) {
+        case MessageComposeResultCancelled:
+            break;
+            
+        case MessageComposeResultFailed:
+        {
+            UIAlertView *warningAlert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Failed to send SMS!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+            [warningAlert show];
+            break;
+        }
+            
+        case MessageComposeResultSent:
+            break;
+            
+        default:
+            break;
+    }
+    
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 /*
