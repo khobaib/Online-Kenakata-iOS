@@ -8,9 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "MWPhotoBrowser.h"
+#import "share.h"
+#import <MessageUI/MessageUI.h>
 
 
-@interface Info : UIViewController<UITableViewDataSource,UITableViewDelegate,MWPhotoBrowserDelegate,UIAlertViewDelegate>{
+@interface Info : UIViewController<UITableViewDataSource,UITableViewDelegate,MWPhotoBrowserDelegate,UIAlertViewDelegate,shareDelegate,MFMessageComposeViewControllerDelegate>{
     NSMutableDictionary *dic;
     NSMutableArray *photos;
 

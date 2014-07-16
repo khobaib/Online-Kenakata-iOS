@@ -331,6 +331,8 @@
 }
 
 -(void)setMessanger{
+    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+    NSMutableDictionary *dic=[[[ud objectForKey:@"get_user_data"]objectForKey:@"success"]objectForKey:@"user"];
     
     NSLog(@"protocall");
     if(![MFMessageComposeViewController canSendText]) {
@@ -340,7 +342,7 @@
     }
     
   //  NSArray *recipents = @[@"12345678", @"72345524"];
-    NSString *message = [NSString stringWithFormat:@"Just sent the  file to your email. Please check!"];
+    NSString *message = [NSString stringWithFormat:@"Recommended - %@ , %@ , %@ .Download Online Kenakata (Android/iOS)",self.name.text,[dic objectForKey:@"user_name"],[dic objectForKey:@"user_phone"]];
     
     MFMessageComposeViewController *messageController = [[MFMessageComposeViewController alloc] init];
     messageController.messageComposeDelegate = self;

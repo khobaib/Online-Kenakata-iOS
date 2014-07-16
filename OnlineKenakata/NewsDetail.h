@@ -7,8 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "share.h"
+#import <MessageUI/MessageUI.h>
 
-@interface NewsDetail : UIViewController{
+@interface NewsDetail : UIViewController<shareDelegate,MFMessageComposeViewControllerDelegate>{
     
 }
 @property (strong,nonatomic) NSString *nameString;

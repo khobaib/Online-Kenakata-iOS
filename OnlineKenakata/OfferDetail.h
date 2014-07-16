@@ -8,9 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "MWPhotoBrowser.h"
+#import "share.h"
+#import <MessageUI/MessageUI.h>
 
 
-@interface OfferDetail : UIViewController<MWPhotoBrowserDelegate>{
+@interface OfferDetail : UIViewController<MWPhotoBrowserDelegate,shareDelegate,MFMessageComposeViewControllerDelegate>{
     
     NSMutableArray *photos;
     

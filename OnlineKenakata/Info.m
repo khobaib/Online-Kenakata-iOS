@@ -44,7 +44,7 @@
         [newPageView setImageWithURL:[NSURL URLWithString:[self.pageImages objectAtIndex:page]]
                     placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
         
-        newPageView.contentMode = UIViewContentModeScaleAspectFit;
+        //newPageView.contentMode = UIViewContentModeScaleAspectFit;
         newPageView.frame = frame;
         
         [self.scrollView addSubview:newPageView];
@@ -106,8 +106,12 @@
     
     // 5
     [self loadVisiblePages];
+    [self addShareButton];
 }
-
+-(void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    [self.tabBarController.navigationItem setTitleView:nil];
+}
 
 
 - (void)viewDidLoad
@@ -468,6 +472,114 @@
     
     
 }
+-(void)addShareButton{
+    UIButton *sharebtn=[[UIButton alloc]initWithFrame:CGRectMake(110, 10, 100, 30)];
+    sharebtn.titleLabel.textColor=[UIColor whiteColor];
+    [sharebtn setTitle:@"Share" forState:UIControlStateNormal];
+    [sharebtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [sharebtn addTarget:self action:@selector(shareButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+    
+    sharebtn.hidden=NO;
+    // [self.navigationController.navigationBar addSubview:sharebtn];
+    self.tabBarController.navigationItem.titleView=sharebtn;
+    
+    //[self.navigationItem.titleView addSubview:sharebtn];
+}
+-(void)shareButtonClick:(id)sender{
+    UIActionSheet * action = [[UIActionSheet alloc]
+                              initWithTitle:@"Share"
+                              delegate:nil
+                              cancelButtonTitle:@"Cancel"
+                              destructiveButtonTitle:nil
+                              otherButtonTitles:@"",nil];
+    
+    
+    
+    share *background = [[share alloc]initWithFrame:CGRectMake(0, 0, 320, 150) actionSheet:action];
+    
+    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+    NSMutableDictionary *dic1=[[[ud objectForKey:@"get_user_data"]objectForKey:@"success"]objectForKey:@"user"];
+    
+    
+    //fb twitter
+    background.caption=[NSString stringWithFormat:@"Recommended - %@ , by %@ , Call %@ . Download Online Kenakata (Android/iOS)",[dic1 objectForKey:@"user_name"],[dic1 objectForKey:@"user_name"],[dic1 objectForKey:@"user_phone"]];
+    
+    background.description=[NSString stringWithFormat:@"Check out %@. Call %@ or email %@. Opening hours - %@",[dic1 objectForKey:@"user_name"],[dic1 objectForKey:@"user_phone"],[dic1 objectForKey:@"email_address"],[dic1 objectForKey:@"hours"]];
+    
+    NSString *url=[dic1 objectForKey:@"user_website"];
+    background.url=url;
+    background.viewController=self;
+    background.titleName=background.caption;
+    background.imageUrl=@"";
+    background.delegate=self;
+    
+    //email
+    background.emailBody=[NSString stringWithFormat:@"Name: %@ \nPhone: %@\nOpening hours: %@\nEmail: %@\nWebsite: %@\nDownload  Online Kenakata  (Android/iOS)",[dic1 objectForKey:@"user_name"],[dic1 objectForKey:@"user_phone"],[dic1 objectForKey:@"hours"],[dic1 objectForKey:@"email_address"],[dic1 objectForKey:@"user_website"]];
+    
+    
+    background.emailSub=[NSString stringWithFormat:@"Recommended - %@ , by %@ , Call %@ ",[dic objectForKey:@"user_name"],[dic objectForKey:@"user_name"],[dic objectForKey:@"user_phone"]];
+    
+    // background.image=
+    //NSLog(@"%@",background.caption);
+    
+    // background.backgroundColor = [UIColor whiteColor];
+    
+    
+    [action addSubview:background];
+    
+    [action showInView:self.view];
+    
+    
+    
+}
+
+-(void)setMessanger{
+    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+    NSMutableDictionary *dic1=[[[ud objectForKey:@"get_user_data"]objectForKey:@"success"]objectForKey:@"user"];
+    
+    NSLog(@"protocall");
+    if(![MFMessageComposeViewController canSendText]) {
+        UIAlertView *warningAlert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Your device doesn't support SMS!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [warningAlert show];
+        return;
+    }
+    
+    //  NSArray *recipents = @[@"12345678", @"72345524"];
+    NSString *message = [NSString stringWithFormat:@"Recommended - %@ , %@ , %@ .Download Online Kenakata (Android/iOS)",[dic1 objectForKey:@"user_name"],[dic1 objectForKey:@"user_phone"],[dic1 objectForKey:@"user_website"]];
+    
+    MFMessageComposeViewController *messageController = [[MFMessageComposeViewController alloc] init];
+    messageController.messageComposeDelegate = self;
+    //  [messageController setRecipients:recipents];
+    [messageController setBody:message];
+    
+    // Present message view controller on screen
+    [self presentViewController:messageController animated:YES completion:nil];
+}
+
+
+- (void)messageComposeViewController:(MFMessageComposeViewController *)controller didFinishWithResult:(MessageComposeResult) result
+{
+    switch (result) {
+        case MessageComposeResultCancelled:
+            break;
+            
+        case MessageComposeResultFailed:
+        {
+            UIAlertView *warningAlert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Failed to send SMS!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+            [warningAlert show];
+            break;
+        }
+            
+        case MessageComposeResultSent:
+            break;
+            
+        default:
+            break;
+    }
+    
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
 
 
 #pragma mark - Navigation
