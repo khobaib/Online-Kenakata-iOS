@@ -29,7 +29,7 @@
 @property(strong,nonatomic) IBOutlet UITextView *productDetails;
 @property(strong,nonatomic) IBOutlet UILabel *itemCode;
 @property (strong,nonatomic) IBOutlet UILabel *itemCodeLable;
-
+@property (strong,nonatomic) IBOutlet UIButton *cartBtn;
 
 -(IBAction)imageEnlarge:(id)sender;
 

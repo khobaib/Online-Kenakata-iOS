@@ -7,6 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		141399661977FC0C00B8ACA9 /* DatabaseHandeler.m in Sources */ = {isa = PBXBuildFile; fileRef = 141399571977FC0C00B8ACA9 /* DatabaseHandeler.m */; };
+		141399671977FC0C00B8ACA9 /* database.sqlite3 in Resources */ = {isa = PBXBuildFile; fileRef = 141399581977FC0C00B8ACA9 /* database.sqlite3 */; };
+		141399681977FC0C00B8ACA9 /* Product.m in Sources */ = {isa = PBXBuildFile; fileRef = 1413995B1977FC0C00B8ACA9 /* Product.m */; };
+		141399691977FC0C00B8ACA9 /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 1413995D1977FC0C00B8ACA9 /* FMDatabase.m */; };
+		1413996A1977FC0C00B8ACA9 /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 1413995F1977FC0C00B8ACA9 /* FMDatabaseAdditions.m */; };
+		1413996B1977FC0C00B8ACA9 /* FMDatabaseQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 141399621977FC0C00B8ACA9 /* FMDatabaseQueue.m */; };
+		1413996C1977FC0C00B8ACA9 /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 141399651977FC0C00B8ACA9 /* FMResultSet.m */; };
+		1413996E1977FC2400B8ACA9 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1413996D1977FC2400B8ACA9 /* libsqlite3.0.dylib */; };
+		143644F21977D571008335D0 /* AddToCart.m in Sources */ = {isa = PBXBuildFile; fileRef = 143644F11977D571008335D0 /* AddToCart.m */; };
 		1478B4CF19752269002C79B0 /* mail.png in Resources */ = {isa = PBXBuildFile; fileRef = 1478B4CD19752269002C79B0 /* mail.png */; };
 		1478B4D31975241F002C79B0 /* share.m in Sources */ = {isa = PBXBuildFile; fileRef = 1478B4D21975241F002C79B0 /* share.m */; };
 		1478B4D519752E33002C79B0 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1478B4D419752E33002C79B0 /* QuartzCore.framework */; };
@@ -120,6 +129,24 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		141399571977FC0C00B8ACA9 /* DatabaseHandeler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DatabaseHandeler.m; sourceTree = "<group>"; };
+		141399581977FC0C00B8ACA9 /* database.sqlite3 */ = {isa = PBXFileReference; lastKnownFileType = file; path = database.sqlite3; sourceTree = "<group>"; };
+		141399591977FC0C00B8ACA9 /* Product.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Product.h; sourceTree = "<group>"; };
+		1413995A1977FC0C00B8ACA9 /* DatabaseHandeler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DatabaseHandeler.h; sourceTree = "<group>"; };
+		1413995B1977FC0C00B8ACA9 /* Product.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Product.m; sourceTree = "<group>"; };
+		1413995C1977FC0C00B8ACA9 /* FMDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabase.h; sourceTree = "<group>"; };
+		1413995D1977FC0C00B8ACA9 /* FMDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabase.m; sourceTree = "<group>"; };
+		1413995E1977FC0C00B8ACA9 /* FMDatabaseAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabaseAdditions.h; sourceTree = "<group>"; };
+		1413995F1977FC0C00B8ACA9 /* FMDatabaseAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabaseAdditions.m; sourceTree = "<group>"; };
+		141399601977FC0C00B8ACA9 /* FMDatabasePool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabasePool.h; sourceTree = "<group>"; };
+		141399611977FC0C00B8ACA9 /* FMDatabaseQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabaseQueue.h; sourceTree = "<group>"; };
+		141399621977FC0C00B8ACA9 /* FMDatabaseQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabaseQueue.m; sourceTree = "<group>"; };
+		141399631977FC0C00B8ACA9 /* FMDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDB.h; sourceTree = "<group>"; };
+		141399641977FC0C00B8ACA9 /* FMResultSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMResultSet.h; sourceTree = "<group>"; };
+		141399651977FC0C00B8ACA9 /* FMResultSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMResultSet.m; sourceTree = "<group>"; };
+		1413996D1977FC2400B8ACA9 /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
+		143644F01977D571008335D0 /* AddToCart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddToCart.h; sourceTree = "<group>"; };
+		143644F11977D571008335D0 /* AddToCart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddToCart.m; sourceTree = "<group>"; };
 		1478B4CD19752269002C79B0 /* mail.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mail.png; sourceTree = "<group>"; };
 		1478B4D11975241F002C79B0 /* share.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = share.h; sourceTree = "<group>"; };
 		1478B4D21975241F002C79B0 /* share.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = share.m; sourceTree = "<group>"; };
@@ -303,6 +330,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1413996E1977FC2400B8ACA9 /* libsqlite3.0.dylib in Frameworks */,
 				1486EE4B197651BE0036C159 /* MessageUI.framework in Frameworks */,
 				1478B4DD19752E7C002C79B0 /* Social.framework in Frameworks */,
 				1478B4DB19752E70002C79B0 /* AddressBook.framework in Frameworks */,
@@ -329,6 +357,28 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		141399561977FBCB00B8ACA9 /* database */ = {
+			isa = PBXGroup;
+			children = (
+				141399571977FC0C00B8ACA9 /* DatabaseHandeler.m */,
+				141399581977FC0C00B8ACA9 /* database.sqlite3 */,
+				141399591977FC0C00B8ACA9 /* Product.h */,
+				1413995A1977FC0C00B8ACA9 /* DatabaseHandeler.h */,
+				1413995B1977FC0C00B8ACA9 /* Product.m */,
+				1413995C1977FC0C00B8ACA9 /* FMDatabase.h */,
+				1413995D1977FC0C00B8ACA9 /* FMDatabase.m */,
+				1413995E1977FC0C00B8ACA9 /* FMDatabaseAdditions.h */,
+				1413995F1977FC0C00B8ACA9 /* FMDatabaseAdditions.m */,
+				141399601977FC0C00B8ACA9 /* FMDatabasePool.h */,
+				141399611977FC0C00B8ACA9 /* FMDatabaseQueue.h */,
+				141399621977FC0C00B8ACA9 /* FMDatabaseQueue.m */,
+				141399631977FC0C00B8ACA9 /* FMDB.h */,
+				141399641977FC0C00B8ACA9 /* FMResultSet.h */,
+				141399651977FC0C00B8ACA9 /* FMResultSet.m */,
+			);
+			name = database;
+			sourceTree = "<group>";
+		};
 		14D45A2D1974FC6800F677D0 = {
 			isa = PBXGroup;
 			children = (
@@ -351,6 +401,7 @@
 		14D45A381974FC6800F677D0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1413996D1977FC2400B8ACA9 /* libsqlite3.0.dylib */,
 				1486EE4A197651BE0036C159 /* MessageUI.framework */,
 				1478B4DE19752F7A002C79B0 /* FacebookSDK.framework */,
 				1478B4DC19752E7C002C79B0 /* Social.framework */,
@@ -382,6 +433,8 @@
 				14D45B241974FF4800F677D0 /* ProductList.m */,
 				14D45B2F1974FF4800F677D0 /* ProductDetails.h */,
 				14D45B171974FF4800F677D0 /* ProductDetails.m */,
+				143644F01977D571008335D0 /* AddToCart.h */,
+				143644F11977D571008335D0 /* AddToCart.m */,
 				14D45B2C1974FF4800F677D0 /* Offers.h */,
 				14D45B211974FF4800F677D0 /* Offers.m */,
 				14D45B2B1974FF4800F677D0 /* OfferDetail.h */,
@@ -445,6 +498,7 @@
 		14D45A6E1974FCA600F677D0 /* Lib */ = {
 			isa = PBXGroup;
 			children = (
+				141399561977FBCB00B8ACA9 /* database */,
 				14D45A701974FCB900F677D0 /* MWCaptionView.h */,
 				14D45A711974FCB900F677D0 /* MWCaptionView.m */,
 				14D45A721974FCB900F677D0 /* MWCommon.h */,
@@ -727,6 +781,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				141399671977FC0C00B8ACA9 /* database.sqlite3 in Resources */,
 				1478B4CF19752269002C79B0 /* mail.png in Resources */,
 				14D45B551974FFA500F677D0 /* tag_new.png in Resources */,
 				14D45B581974FFA500F677D0 /* twitter.png in Resources */,
@@ -765,7 +820,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				14D45AE11974FCB900F677D0 /* PSTGridLayoutItem.m in Sources */,
+				141399661977FC0C00B8ACA9 /* DatabaseHandeler.m in Sources */,
 				14D45B0B1974FD6B00F677D0 /* AFHTTPRequestOperationManager.m in Sources */,
+				141399691977FC0C00B8ACA9 /* FMDatabase.m in Sources */,
 				14D45B361974FF4800F677D0 /* ProductDetails.m in Sources */,
 				14D45B441974FF4800F677D0 /* navicationController.m in Sources */,
 				14D45B0E1974FD6B00F677D0 /* AFSecurityPolicy.m in Sources */,
@@ -779,6 +836,7 @@
 				14D45B3C1974FF4800F677D0 /* Offers.m in Sources */,
 				14D45AED1974FCB900F677D0 /* SDWebImageDownloaderOperation.m in Sources */,
 				14D45AEF1974FCB900F677D0 /* SDWebImagePrefetcher.m in Sources */,
+				1413996B1977FC0C00B8ACA9 /* FMDatabaseQueue.m in Sources */,
 				14D45ACD1974FCB900F677D0 /* MWGridCell.m in Sources */,
 				14D45B411974FF4800F677D0 /* LoadingView.m in Sources */,
 				14D45B3F1974FF4800F677D0 /* ProductList.m in Sources */,
@@ -790,6 +848,7 @@
 				14D45AE71974FCB900F677D0 /* NSData+GIF.m in Sources */,
 				14D45AD11974FCB900F677D0 /* MWTapDetectingImageView.m in Sources */,
 				14D45B431974FF4800F677D0 /* NewsDetail.m in Sources */,
+				141399681977FC0C00B8ACA9 /* Product.m in Sources */,
 				14D45AF01974FCB900F677D0 /* UIButton+WebCache.m in Sources */,
 				14D45B161974FDC800F677D0 /* RMPickerViewController.m in Sources */,
 				14D45B3B1974FF4800F677D0 /* PushPin.m in Sources */,
@@ -805,15 +864,18 @@
 				14D45AE61974FCB900F677D0 /* MKAnnotationView+WebCache.m in Sources */,
 				1478B4D31975241F002C79B0 /* share.m in Sources */,
 				14D45B371974FF4800F677D0 /* MapView.m in Sources */,
+				1413996A1977FC0C00B8ACA9 /* FMDatabaseAdditions.m in Sources */,
 				14D45B3A1974FF4800F677D0 /* WebBrowser.m in Sources */,
 				14D45AE91974FCB900F677D0 /* SDImageCache.m in Sources */,
 				14D45B0C1974FD6B00F677D0 /* AFHTTPSessionManager.m in Sources */,
 				14D45AD21974FCB900F677D0 /* MWTapDetectingView.m in Sources */,
 				14D45AEE1974FCB900F677D0 /* SDWebImageManager.m in Sources */,
+				1413996C1977FC0C00B8ACA9 /* FMResultSet.m in Sources */,
 				14D45AF31974FCB900F677D0 /* UIImage+WebP.m in Sources */,
 				14D45B111974FD6B00F677D0 /* AFURLResponseSerialization.m in Sources */,
 				14D45AD51974FCB900F677D0 /* MBProgressHUD.m in Sources */,
 				14D45B401974FF4800F677D0 /* FirstViewController.m in Sources */,
+				143644F21977D571008335D0 /* AddToCart.m in Sources */,
 				14D45AF41974FCB900F677D0 /* UIImageView+WebCache.m in Sources */,
 				14D45ADD1974FCB900F677D0 /* PSTCollectionViewItemKey.m in Sources */,
 				14D45AD01974FCB900F677D0 /* MWPhotoBrowser.m in Sources */,

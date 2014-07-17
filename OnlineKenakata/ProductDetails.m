@@ -9,6 +9,7 @@
 #import "ProductDetails.h"
 #import "UIImageView+WebCache.h"
 #import "share.h"
+#import "AddToCart.h"
 @interface ProductDetails ()
 
 @end
@@ -149,6 +150,15 @@
         self.itemCode.hidden=YES;
         self.itemCodeLable.hidden=YES;
     }
+    NSString *spclQus=[self.productData objectForKey:@"special_question"];
+    if([spclQus isEqualToString:@""]){
+        if(available==0){
+            self.cartBtn.hidden=YES;
+        }
+    }
+
+    
+    
 }
 
 - (void)initImageSlider
@@ -377,7 +387,7 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-/*
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -385,7 +395,10 @@
 {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    
+    AddToCart *cart=[segue destinationViewController];
+    cart.productData=self.productData;
 }
-*/
+
 
 @end
