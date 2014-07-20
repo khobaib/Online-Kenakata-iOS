@@ -65,14 +65,34 @@ NSString *const PRODUCT_TAG = @"tag";
     
 }
 
-+(Product *)getProduct{
++(void)deletItem:(int)_id{
+    
+    
+    NSString* homeDir = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
+    NSString *databasePath = [homeDir stringByAppendingPathComponent:@"database.sqlite3"];
+    
+    
+    
+    FMDatabase *database = [FMDatabase databaseWithPath:databasePath];
+    
+    
+    if (![database open]) {
+        
+        return ;
+    }
+    NSLog(@"can open");
+    
+    [database executeUpdate:@"DELETE FROM cart_product_table WHERE _id = ?", [NSNumber numberWithInt:_id]];
 
-    Product *product;
 
+}
++(NSMutableArray *)getProduct{
     
    // NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
    // NSString *docsPath = [paths objectAtIndex:0];
    // NSString *path = [docsPath stringByAppendingPathComponent:@"database"];
+    
+    NSMutableArray *array=[[NSMutableArray alloc]init];
 
     NSString* homeDir = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
     NSString *databasePath = [homeDir stringByAppendingPathComponent:@"database.sqlite3"];
@@ -85,21 +105,51 @@ NSString *const PRODUCT_TAG = @"tag";
     
     if (![database open]) {
         
-        return product;
+        return nil;
     }
     NSLog(@"can open");
     
     
-    FMResultSet *s = [database executeQuery:@"SELECT * FROM 'cart_product_table'"];
+    FMResultSet *s = [database executeQuery:@"SELECT * FROM 'cart_product_table' ORDER BY id"];
     while ([s next]) {
 
+        Product *var=[[Product alloc]init];
     
-        NSLog(@" value is %@",[s stringForColumn:name]);
+        
+        var=[var initProduct:[s stringForColumn:name] productId:[s stringForColumn:ID] Quantity:[s stringForColumn:QUANTITY] Weight:[s stringForColumn:WEIGHT] code:[s stringForColumn:ITEM_CODE] spclQusTxt:[s stringForColumn:SPECIAL_QUESTION_TEXT] spclAnsID:[s stringForColumn:SPECIAL_ANS_ID] spclAnsText:[s stringForColumn:SPECIAL_ANS_TEXT] spclAnsSubSku:[s stringForColumn:SPECIAL_ANS_SUB_SKU] imageURL:[s stringForColumn:IMAGE_URL] thumbImage:[s stringForColumn:THUMBNAIL_IMAGE_URL] price:[s stringForColumn:PRICE] oldPrice:[s stringForColumn:OLD_PRICE] availabl:[s intForColumn:AVAILABILITY] tag:[s stringForColumn:PRODUCT_TAG]];
+
+        var.TABLE_PRIMARY_KEY=[s intForColumn:TABLE_PRIMARY_KEY];
+        
+        [array addObject:var];
     }
     
     [database close];
     
-    return product;
+    return array;
+}
+
++(BOOL)updateQuantity:(int)quantity productID:(NSString *)row{
+    NSString* homeDir = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
+    NSString *databasePath = [homeDir stringByAppendingPathComponent:@"database.sqlite3"];
+    
+    
+    
+    FMDatabase *database = [FMDatabase databaseWithPath:databasePath];
+    
+    
+    
+    if (![database open]) {
+        
+        return nil;
+    }
+    NSLog(@"can open");
+    
+    NSString *qurrey=[NSString stringWithFormat:@"UPDATE 'cart_product_table' SET quantity=%d where id=%@",quantity,row];
+    bool ret=[database executeUpdate:qurrey];
+
+    NSLog(@"%d",ret);
+    [database close];
+    return ret;
 }
 
 @end

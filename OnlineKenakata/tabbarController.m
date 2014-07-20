@@ -7,6 +7,7 @@
 //
 
 #import "tabbarController.h"
+#import "MyCart.h"
 
 @interface tabbarController ()
 
@@ -26,10 +27,27 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    
     // Do any additional setup after loading the view.
     // Do any additional setup after loading the view.
-}
+    
+    
+    UIBarButtonItem *btnBranch = [[UIBarButtonItem alloc] initWithTitle:@"My Cart" style:UIBarButtonItemStylePlain target:self action:@selector(myCart)];
+    
+    [btnBranch setTitleTextAttributes:
+     [NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor], NSForegroundColorAttributeName,nil]
+                             forState:UIControlStateNormal];
+    
+    [self.navigationItem setRightBarButtonItem:btnBranch];
 
+}
+-(void)myCart{
+    MyCart *cart=[[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"MyCart"];
+    
+    [self.navigationController pushViewController:cart animated:YES];
+    
+}
 
 - (void)didReceiveMemoryWarning
 {

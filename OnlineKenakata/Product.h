@@ -15,7 +15,7 @@
 
 @property NSString *name;
 @property NSString *ID;
-@property NSString *TABLE_PRIMARY_KEY;
+@property int TABLE_PRIMARY_KEY;
 @property NSString *QUANTITY;
 @property NSString *WEIGHT;
 @property NSString *ITEM_CODE;
@@ -30,6 +30,6 @@
 @property int AVAILABILITY;
 @property NSString *PRODUCT_TAG;
 
-
+-(id)initProduct:(NSString *)name productId:(NSString *)ID Quantity:(NSString *)quantity Weight:(NSString *)weight code:(NSString*)item_code spclQusTxt:(NSString *)specialQusTxt spclAnsID:(NSString *)spclAnsID spclAnsText:(NSString *)spclAnsText spclAnsSubSku:(NSString *)spclAnsSubSku imageURL:(NSString *)imageUrl thumbImage:(NSString *)thumbImage price:(NSString *)price oldPrice:(NSString *)oldPrice availabl:(int )availablity tag:(NSString *)product_tag;
 
 @end

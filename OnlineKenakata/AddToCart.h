@@ -8,12 +8,17 @@
 
 #import <UIKit/UIKit.h>
 #import "RMPickerViewController.h"
+#import "LoadingView.h"
 
 @interface AddToCart : UIViewController<UIPickerViewDataSource,UIPickerViewDelegate,RMPickerViewControllerDelegate>{
     NSMutableArray *pickerData;
     bool flag;
     NSString *currency;
     int quantity;
+    NSMutableDictionary *specialAnsDic;
+    int availablity;
+    NSString * selectedQuantity;
+    LoadingView *loading;
 }
 
 

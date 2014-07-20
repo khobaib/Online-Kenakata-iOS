@@ -13,8 +13,28 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+    
+    [self checkAndCreateDatabase];
     return YES;
 }
+
+-(void) checkAndCreateDatabase{
+    BOOL success;
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSString* homeDir = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
+    NSString *databasePath = [homeDir stringByAppendingPathComponent:@"database.sqlite3"];
+    success = [fileManager fileExistsAtPath:databasePath];
+    if(success) {
+         NSLog(@"working");
+        return;}
+    else{
+        NSLog(@"notworking");
+        NSString *databasePathFromApp = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"database.sqlite3"];
+        [fileManager copyItemAtPath:databasePathFromApp toPath:databasePath error:nil];
+    }
+}
+
+
 							
 - (void)applicationWillResignActive:(UIApplication *)application
 {

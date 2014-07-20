@@ -13,7 +13,10 @@
 @interface DatabaseHandeler : NSObject
 
 
-+(Product *)getProduct;
++(NSMutableArray *)getProduct;
 +(void)myCartDataSave:(Product *)product;
++(void)deletItem:(int)_id;
+
++(BOOL)updateQuantity:(int)quantity productID:(NSString *)row;
 
 @end
