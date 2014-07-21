@@ -55,6 +55,7 @@
     [btnDirection setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor], NSForegroundColorAttributeName,nil]
                                 forState:UIControlStateNormal];
     
+    cart=self.tabBarController.navigationItem.rightBarButtonItem;
     [self.tabBarController.navigationItem setRightBarButtonItem:btnDirection];
     [self.tabBarController.navigationItem setLeftBarButtonItem:btnBranch];
     
@@ -73,7 +74,7 @@
     
     
     [super viewWillDisappear:animated];
-    [self.tabBarController.navigationItem setRightBarButtonItems:nil];
+    [self.tabBarController.navigationItem setRightBarButtonItem:cart];
     [self.tabBarController.navigationItem setLeftBarButtonItem:nil];
 
 }

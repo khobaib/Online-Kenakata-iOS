@@ -9,6 +9,7 @@
 #import "tabbarController.h"
 #import "MyCart.h"
 #import "DatabaseHandeler.h"
+#import "BBBadgeBarButtonItem.h"
 
 @interface tabbarController ()
 
@@ -33,14 +34,23 @@
     // Do any additional setup after loading the view.
     // Do any additional setup after loading the view.
     
+   
+}
+-(void)viewWillAppear:(BOOL)animated{
+    UIButton *btn=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 44, 44)];
+    [btn setBackgroundImage:[UIImage imageNamed:@"my_cart.png"] forState:UIControlStateNormal];
+    [btn setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
     
-    UIBarButtonItem *btnBranch = [[UIBarButtonItem alloc] initWithTitle:@"My Cart" style:UIBarButtonItemStylePlain target:self action:@selector(myCart)];
     
-    [btnBranch setTitleTextAttributes:
-     [NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor], NSForegroundColorAttributeName,nil]
-                             forState:UIControlStateNormal];
     
-    [self.navigationItem setRightBarButtonItem:btnBranch];
+    [btn addTarget:self action:@selector(myCart) forControlEvents:UIControlEventTouchUpInside];
+    BBBadgeBarButtonItem *barButton = [[BBBadgeBarButtonItem alloc] initWithCustomUIButton:btn];
+    
+    barButton.badgeBGColor=[UIColor redColor];
+    barButton.badgeOriginX+=10;
+    barButton.badgeValue=[NSString stringWithFormat:@"%d",[DatabaseHandeler totalProduct]];
+    
+    [self.navigationItem setRightBarButtonItem:barButton];
 
 }
 -(void)myCart{
@@ -48,7 +58,7 @@
     
     cart.productList=[DatabaseHandeler getProduct];
 
-    NSLog(@"log %d",cart.productList.count);
+ //   NSLog(@"log %d",cart.productList.count);
     if(cart.productList.count<1){
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error "
                                                             message:@"My Cart is empty"

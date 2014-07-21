@@ -37,4 +37,7 @@
 @property (strong,nonatomic) IBOutlet UITextView *details;
 @property (strong,nonatomic) IBOutlet UIView *specialQuestionView;
 
+
+@property (strong,nonatomic)IBOutlet UIView *quantityView;
+@property (strong,nonatomic)IBOutlet UIButton *confirmBtn;
 @end

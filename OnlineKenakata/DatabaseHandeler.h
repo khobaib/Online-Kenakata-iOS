@@ -21,5 +21,5 @@
 
 +(BOOL)deletAll;
 +(BOOL)isExist:(Product*) product;
-
++(int)totalProduct;
 @end

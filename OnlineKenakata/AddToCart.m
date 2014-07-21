@@ -81,9 +81,11 @@
     if([spclqus isEqualToString:@""]){
         self.specialQuestionView.hidden=YES;
         
+        [self.specialQuestionView removeFromSuperview];
        
         flag=true;
         
+        [self moveUP];
         
         NSString *string = [NSString stringWithFormat:@"http://online-kenakata.com/mobile_api/rest.php?method=check_stock&product_id=%@&is_special_question=false&special_answer_id=&application_code=1000",[self.productData objectForKey:@"product_id"]];
         
@@ -130,7 +132,20 @@
     }*/
 }
 
-
+-(void)moveUP{
+    CGRect f = self.quantityView.frame;
+    f.origin.y=140;  //set the -35.0f to your required value
+    NSLog(@"%f %f",self.quantityView.frame.origin.y,f.origin.y);
+    self.quantityView.frame = f;
+    
+    CGRect fb = self.quantitybtn.frame;
+    fb.origin.y-=50;
+    self.quantitybtn.frame=fb;
+    
+    CGRect fl=self.details.frame;
+    fl.origin.y-=50;
+    self.details.frame=fl;
+}
 
 -(void)checkQuantity:(NSString *)string{
     

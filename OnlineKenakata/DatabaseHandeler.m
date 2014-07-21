@@ -235,4 +235,16 @@ NSString *const PRODUCT_TAG = @"tag";
     return ret;
 }
 
++(int)totalProduct{
+    
+    NSMutableArray *arr=[self getProduct];
+    int total=0;
+    
+    for(int i=0;i<arr.count;i++){
+        Product *p=[arr objectAtIndex:i];
+        total+=[p.QUANTITY intValue];
+    }
+    return total;
+}
+
 @end
