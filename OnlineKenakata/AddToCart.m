@@ -11,6 +11,7 @@
 #import "Product.h"
 #import "DatabaseHandeler.h"
 #import "AFNetworking.h"
+#import "MyCart.h"
 
 @interface AddToCart ()
 
@@ -117,14 +118,16 @@
     }
     
         
-    int available =[[self.productData objectForKey:@"general_available_quantity"]intValue];
-    if(available>0){
+    //int available =[[self.productData objectForKey:@"general_available_quantity"]intValue];
+    self.itemCode.text=[self.productData objectForKey:@"sku"];
+
+   /* if(available>0){
         self.itemCode.text=[self.productData objectForKey:@"sku"];
         
     }else{
         self.itemCode.hidden=YES;
-        //self.itemCodeLable.hidden=YES;
-    }
+        self.itemCodeLable.hidden=YES;
+    }*/
 }
 
 
@@ -219,10 +222,39 @@
     
     product=[product initProduct:[self.productData objectForKey:@"name"] productId:[self.productData objectForKey:@"product_id"] Quantity:selectedQuantity Weight:[self.productData objectForKey:@"weight"] code:[self.productData objectForKey:@"sku"] spclQusTxt:[self.productData objectForKey:@"special_question"] spclAnsID:[specialAnsDic objectForKey:@"id"] spclAnsText:[specialAnsDic objectForKey:@"answer"] spclAnsSubSku:[specialAnsDic objectForKey:@"sub_sku"] imageURL:[image objectForKey:@"image_url"] thumbImage:[image objectForKey:@"thumbnail_image_url"] price:[self.productData objectForKey:@"price"] oldPrice:[self.productData objectForKey:@"old_price"] availabl:availablity tag:[self.productData objectForKey:@"tag"]];
     
-    [DatabaseHandeler myCartDataSave:product];
+    if([DatabaseHandeler myCartDataSave:product]){
+     
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Success"
+                                                            message:@"Product is added to your cart."                                                           delegate:self
+                                                  cancelButtonTitle:@"Ok"
+                                                  otherButtonTitles:@"MyCart",nil];
+        [alertView show];
+    }
     
     [DatabaseHandeler getProduct];
     
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+
+    if(buttonIndex==1){
+        
+        MyCart *cart=[[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"MyCart"];
+        
+        cart.productList=[DatabaseHandeler getProduct];
+        
+        NSLog(@"log %d",cart.productList.count);
+        if(cart.productList.count<1){
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error "
+                                                                message:@"My Cart is empty"
+                                                               delegate:nil
+                                                      cancelButtonTitle:@"Ok"
+                                                      otherButtonTitles:nil];
+            [alertView show];
+            return;
+        }
+        [self.navigationController pushViewController:cart animated:YES];
+    }
 }
 
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView{
@@ -233,7 +265,7 @@
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component{
     
     if(flag){
-        return quantity;
+        return MIN(30, quantity);
     }else{
      return pickerData.count;
     }
@@ -274,7 +306,7 @@
 }
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component{
     if(flag){
-        return [NSString stringWithFormat:@"%ld",row+1];
+        return [NSString stringWithFormat:@"%d",row+1];
     }else{
         NSString *str =[[pickerData objectAtIndex:row]objectForKey:@"answer"];
         return str;

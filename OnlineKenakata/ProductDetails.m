@@ -152,7 +152,7 @@
     }
     NSString *spclQus=[self.productData objectForKey:@"special_question"];
     if([spclQus isEqualToString:@""]){
-        if(available==0){
+        if(available<1){
             self.cartBtn.hidden=YES;
         }
     }

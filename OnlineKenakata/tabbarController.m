@@ -8,6 +8,7 @@
 
 #import "tabbarController.h"
 #import "MyCart.h"
+#import "DatabaseHandeler.h"
 
 @interface tabbarController ()
 
@@ -45,6 +46,18 @@
 -(void)myCart{
     MyCart *cart=[[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"MyCart"];
     
+    cart.productList=[DatabaseHandeler getProduct];
+
+    NSLog(@"log %d",cart.productList.count);
+    if(cart.productList.count<1){
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error "
+                                                            message:@"My Cart is empty"
+                                                           delegate:nil
+                                                  cancelButtonTitle:@"Ok"
+                                                  otherButtonTitles:nil];
+        [alertView show];
+        return;
+    }
     [self.navigationController pushViewController:cart animated:YES];
     
 }

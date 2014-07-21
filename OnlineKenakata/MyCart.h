@@ -12,14 +12,15 @@
 
 @interface MyCart : UIViewController<UITableViewDataSource,UITableViewDelegate,UIPickerViewDataSource,UIPickerViewDelegate,RMPickerViewControllerDelegate>
 {
-    NSMutableArray *productList;
     NSString *currency;
     NSIndexPath *quantity;
     LoadingView *loading;
     NSMutableArray *serverProductList;
     BOOL serverData;
     int editQuantity;
+    int counter;
 }
+@property (strong,nonatomic) NSMutableArray *productList;
 
 @property (strong,nonatomic) IBOutlet UITableView *tableview;
 @property (strong,nonatomic) IBOutlet UILabel *subTotal;

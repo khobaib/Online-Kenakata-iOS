@@ -117,6 +117,9 @@
 		14D45B591974FFA500F677D0 /* video.png in Resources */ = {isa = PBXBuildFile; fileRef = 14D45B4F1974FFA500F677D0 /* video.png */; };
 		14D79A61197A44A8006EBE8E /* database.sqlite3 in Resources */ = {isa = PBXBuildFile; fileRef = 14D79A60197A44A8006EBE8E /* database.sqlite3 */; };
 		14D95EFF19766F52001D6CB3 /* imessege.png in Resources */ = {isa = PBXBuildFile; fileRef = 14D95EFE19766F52001D6CB3 /* imessege.png */; };
+		14E0C0C2197BA25A0099A51F /* ProceedToCheckout.m in Sources */ = {isa = PBXBuildFile; fileRef = 14E0C0C1197BA25A0099A51F /* ProceedToCheckout.m */; };
+		14F87E81197BB53E00C0D11F /* SelfCollect.m in Sources */ = {isa = PBXBuildFile; fileRef = 14F87E80197BB53E00C0D11F /* SelfCollect.m */; };
+		14F87E84197BB55300C0D11F /* Delivery.m in Sources */ = {isa = PBXBuildFile; fileRef = 14F87E83197BB55300C0D11F /* Delivery.m */; };
 		14FB7FCB197B7D5C00E8BDF8 /* down_arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 14FB7FCA197B7D5C00E8BDF8 /* down_arrow.png */; };
 /* End PBXBuildFile section */
 
@@ -327,6 +330,12 @@
 		14D45B4F1974FFA500F677D0 /* video.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = video.png; sourceTree = "<group>"; };
 		14D79A60197A44A8006EBE8E /* database.sqlite3 */ = {isa = PBXFileReference; lastKnownFileType = file; path = database.sqlite3; sourceTree = "<group>"; };
 		14D95EFE19766F52001D6CB3 /* imessege.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = imessege.png; sourceTree = "<group>"; };
+		14E0C0C0197BA25A0099A51F /* ProceedToCheckout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProceedToCheckout.h; sourceTree = "<group>"; };
+		14E0C0C1197BA25A0099A51F /* ProceedToCheckout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProceedToCheckout.m; sourceTree = "<group>"; };
+		14F87E7F197BB53E00C0D11F /* SelfCollect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelfCollect.h; sourceTree = "<group>"; };
+		14F87E80197BB53E00C0D11F /* SelfCollect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelfCollect.m; sourceTree = "<group>"; };
+		14F87E82197BB55300C0D11F /* Delivery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Delivery.h; sourceTree = "<group>"; };
+		14F87E83197BB55300C0D11F /* Delivery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Delivery.m; sourceTree = "<group>"; };
 		14FB7FCA197B7D5C00E8BDF8 /* down_arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = down_arrow.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -438,6 +447,12 @@
 				143644F11977D571008335D0 /* AddToCart.m */,
 				1403D1FE197A50680074B61C /* MyCart.h */,
 				1403D1FF197A50680074B61C /* MyCart.m */,
+				14E0C0C0197BA25A0099A51F /* ProceedToCheckout.h */,
+				14E0C0C1197BA25A0099A51F /* ProceedToCheckout.m */,
+				14F87E7F197BB53E00C0D11F /* SelfCollect.h */,
+				14F87E80197BB53E00C0D11F /* SelfCollect.m */,
+				14F87E82197BB55300C0D11F /* Delivery.h */,
+				14F87E83197BB55300C0D11F /* Delivery.m */,
 				14D45B2C1974FF4800F677D0 /* Offers.h */,
 				14D45B211974FF4800F677D0 /* Offers.m */,
 				14D45B2B1974FF4800F677D0 /* OfferDetail.h */,
@@ -831,10 +846,13 @@
 				14D45AE11974FCB900F677D0 /* PSTGridLayoutItem.m in Sources */,
 				141399661977FC0C00B8ACA9 /* DatabaseHandeler.m in Sources */,
 				14D45B0B1974FD6B00F677D0 /* AFHTTPRequestOperationManager.m in Sources */,
+				14F87E84197BB55300C0D11F /* Delivery.m in Sources */,
 				141399691977FC0C00B8ACA9 /* FMDatabase.m in Sources */,
+				14F87E81197BB53E00C0D11F /* SelfCollect.m in Sources */,
 				14D45B361974FF4800F677D0 /* ProductDetails.m in Sources */,
 				14D45B441974FF4800F677D0 /* navicationController.m in Sources */,
 				14D45B0E1974FD6B00F677D0 /* AFSecurityPolicy.m in Sources */,
+				14E0C0C2197BA25A0099A51F /* ProceedToCheckout.m in Sources */,
 				14D45AD91974FCB900F677D0 /* PSTCollectionViewCell.m in Sources */,
 				14D45ADB1974FCB900F677D0 /* PSTCollectionViewData.m in Sources */,
 				14D45AD81974FCB900F677D0 /* PSTCollectionView.m in Sources */,

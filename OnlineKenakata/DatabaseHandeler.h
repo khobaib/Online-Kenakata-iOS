@@ -14,9 +14,12 @@
 
 
 +(NSMutableArray *)getProduct;
-+(void)myCartDataSave:(Product *)product;
-+(void)deletItem:(int)_id;
++(BOOL)myCartDataSave:(Product *)product;
++(BOOL)deletItem:(int)_id;
 
 +(BOOL)updateQuantity:(int)quantity productID:(NSString *)row;
+
++(BOOL)deletAll;
++(BOOL)isExist:(Product*) product;
 
 @end

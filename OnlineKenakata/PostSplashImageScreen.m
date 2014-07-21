@@ -13,6 +13,7 @@
 #import "tabbarController.h"
 #import "navicationController.h"
 #import "FirstViewController.h"
+#import "DatabaseHandeler.h"
 @interface PostSplashImageScreen ()
 
 @end
@@ -31,7 +32,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
     
     // Do any additional setup after loading the view.
     
