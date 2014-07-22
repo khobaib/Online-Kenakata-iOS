@@ -15,6 +15,7 @@
 #import "FirstViewController.h"
 #import "DatabaseHandeler.h"
 #import "Data.h"
+#import "DatabaseHandeler.h"
 @interface PostSplashImageScreen ()
 
 @end
@@ -73,9 +74,7 @@
     NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
    // NSData *data = [NSKeyedArchiver archivedDataWithRootObject:dic];
 
-  
-
-    
+        
     [ud setObject: dic forKey:@"get_user_data"];
     
     NSString *imageurl=[[[dic objectForKey:@"success"] objectForKey:@"user"]objectForKey:@"post_splash_image_url"];

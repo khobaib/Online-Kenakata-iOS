@@ -22,4 +22,7 @@
 +(BOOL)deletAll;
 +(BOOL)isExist:(Product*) product;
 +(int)totalProduct;
+
++(BOOL)setUserData:(NSString *)str;
++(NSString *)getUserData;
 @end

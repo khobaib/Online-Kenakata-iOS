@@ -28,6 +28,8 @@ NSString *const OLD_PRICE =@"old_price";
 NSString *const AVAILABILITY =@"availability";
 NSString *const PRODUCT_TAG = @"tag";
 
+NSString *const databaseFilename=@"databaseV1.sqlite3";
+
 
 @implementation DatabaseHandeler
 
@@ -44,7 +46,7 @@ NSString *const PRODUCT_TAG = @"tag";
    // NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
 
     NSString* homeDir = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
-    NSString *databasePath = [homeDir stringByAppendingPathComponent:@"database.sqlite3"];
+    NSString *databasePath = [homeDir stringByAppendingPathComponent:databaseFilename];
 
 
     FMDatabase *database = [FMDatabase databaseWithPath:databasePath];
@@ -86,7 +88,7 @@ NSString *const PRODUCT_TAG = @"tag";
 
 +(BOOL)isExist:(Product *)product{
     NSString* homeDir = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
-    NSString *databasePath = [homeDir stringByAppendingPathComponent:@"database.sqlite3"];
+    NSString *databasePath = [homeDir stringByAppendingPathComponent:databaseFilename];
     
     
     FMDatabase *database = [FMDatabase databaseWithPath:databasePath];
@@ -127,7 +129,7 @@ NSString *const PRODUCT_TAG = @"tag";
     
     
     NSString* homeDir = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
-    NSString *databasePath = [homeDir stringByAppendingPathComponent:@"database.sqlite3"];
+    NSString *databasePath = [homeDir stringByAppendingPathComponent:databaseFilename];
     
     
     
@@ -149,7 +151,7 @@ NSString *const PRODUCT_TAG = @"tag";
 
 +(BOOL)deletAll{
     NSString* homeDir = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
-    NSString *databasePath = [homeDir stringByAppendingPathComponent:@"database.sqlite3"];
+    NSString *databasePath = [homeDir stringByAppendingPathComponent:databaseFilename];
     
     
     
@@ -178,7 +180,7 @@ NSString *const PRODUCT_TAG = @"tag";
     NSMutableArray *array=[[NSMutableArray alloc]init];
 
     NSString* homeDir = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
-    NSString *databasePath = [homeDir stringByAppendingPathComponent:@"database.sqlite3"];
+    NSString *databasePath = [homeDir stringByAppendingPathComponent:databaseFilename];
     
 
     
@@ -213,7 +215,7 @@ NSString *const PRODUCT_TAG = @"tag";
 
 +(BOOL)updateQuantity:(int)quantity productID:(NSString *)row{
     NSString* homeDir = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
-    NSString *databasePath = [homeDir stringByAppendingPathComponent:@"database.sqlite3"];
+    NSString *databasePath = [homeDir stringByAppendingPathComponent:databaseFilename];
     
     
     
@@ -246,5 +248,32 @@ NSString *const PRODUCT_TAG = @"tag";
     }
     return total;
 }
+
+
+
++(BOOL)setUserData:(NSString *)str{
+    NSString *docPath = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/File"];
+    [str writeToFile:docPath
+               atomically:YES
+                 encoding:NSUTF8StringEncoding
+                    error:NULL];
+    
+    NSLog(@"%@",str);
+    return YES;
+}
+
++(NSString *)getUserData{
+    NSString *docPath = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/File"];
+    NSString *dataFile = [NSString stringWithContentsOfFile:docPath encoding:NSUTF8StringEncoding error:nil];
+    
+    NSError *er;
+    NSData *data = [dataFile dataUsingEncoding:NSUTF8StringEncoding];
+    NSMutableDictionary* json = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:&er];
+    
+   // NSLog(@"%@",dataFile);
+    NSLog(@"%@ err %@",json,er );
+    return dataFile;
+}
+
 
 @end
