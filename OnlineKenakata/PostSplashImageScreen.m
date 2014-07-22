@@ -71,9 +71,13 @@
 -(void)getUserData: (NSDictionary *) dic{
 
     NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
-  //  NSData *data = [NSKeyedArchiver archivedDataWithRootObject:dic];
+   // NSData *data = [NSKeyedArchiver archivedDataWithRootObject:dic];
+
+  
+
     
-    [ud setObject:dic forKey:@"get_user_data"];
+    [ud setObject: dic forKey:@"get_user_data"];
+    
     NSString *imageurl=[[[dic objectForKey:@"success"] objectForKey:@"user"]objectForKey:@"post_splash_image_url"];
     //NSLog(@"%@",imageurl);
     SDWebImageManager *manager = [SDWebImageManager sharedManager];
