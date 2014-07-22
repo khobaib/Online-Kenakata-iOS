@@ -9,7 +9,7 @@
 #import "NewsList.h"
 #import "AFNetworking.h"
 #import "NewsDetail.h"
-
+#import "Data.h"
 
 @interface NewsList ()
 
@@ -39,7 +39,7 @@
 
 -(void)getOffer{
     
-    NSString *string = [NSString stringWithFormat:@"http://online-kenakata.com/mobile_api/rest.php?method=get_news&application_code=1000"];
+    NSString *string = [NSString stringWithFormat:@"%@/rest.php?method=get_news&application_code=%@",[Data getBaseUrl],[Data getAppCode]];
     NSURL *url = [NSURL URLWithString:string];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     

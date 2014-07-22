@@ -9,6 +9,7 @@
 #import "Delivery.h"
 #import "Product.h"
 #import "AFNetworking.h"
+#import "Data.h"
 @interface Delivery ()
 
 @end
@@ -186,7 +187,9 @@
     
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
     
-    [manager POST:@"http://online-kenakata.com/mobile_api/rest.php?method=add_order_3&application_code=1000" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    NSString *str=[NSString stringWithFormat:@"%@/rest.php?method=add_order_3&application_code=%@",[Data getBaseUrl],[Data getAppCode]];
+    
+    [manager POST:str parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"JSON: %@", responseObject);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);

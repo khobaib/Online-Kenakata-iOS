@@ -10,6 +10,7 @@
 #import "UIImageView+WebCache.h"
 #import "AFNetworking/AFNetworking.h"
 #import  "ProductList.h"
+#import "Data.h"
 //#import "Constant.h"
 
 
@@ -119,7 +120,7 @@
 
 -(void)get_categories_by_parent_cateogory_id{
     
-    NSString *string = [NSString stringWithFormat:@"http://online-kenakata.com/mobile_api/rest.php?method=get_categories_by_parent_cateogory_id&parent_category_id=0&application_code=1000"];
+    NSString *string = [NSString stringWithFormat:@"%@/rest.php?method=get_categories_by_parent_cateogory_id&parent_category_id=0&application_code=%@",[Data getBaseUrl],[Data getAppCode]];
     NSURL *url = [NSURL URLWithString:string];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     

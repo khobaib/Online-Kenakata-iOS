@@ -12,6 +12,7 @@
 #import "UIImageView+WebCache.h"
 #import "AFNetworking.h"
 #import "ProceedToCheckout.h"
+#import "Data.h"
 
 @interface MyCart ()
 
@@ -81,7 +82,7 @@
 
 -(void)checkAvailablity:(NSString *)str{
     
-    NSString *string = [NSString stringWithFormat:@"http://online-kenakata.com/mobile_api/rest.php?method=get_products_by_productids&product_ids=%@&application_code=1000",str];
+    NSString *string = [NSString stringWithFormat:@"%@/rest.php?method=get_products_by_productids&product_ids=%@&application_code=%@",[Data getBaseUrl],str,[Data getAppCode]];
     NSURL *url = [NSURL URLWithString:string];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
    //  NSLog(@"%@",string);

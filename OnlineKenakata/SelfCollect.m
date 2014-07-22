@@ -10,6 +10,7 @@
 #import "Product.h"
 #import "AFNetworking.h"
 #import "DatabaseHandeler.h"
+#import "Data.h"
 @interface SelfCollect ()
 
 @end
@@ -216,7 +217,9 @@
     
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
 
-    [manager POST:@"http://online-kenakata.com/mobile_api/rest.php?method=add_order_3&application_code=1000" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    NSString *str=[NSString stringWithFormat:@"%@/rest.php?method=add_order_3&application_code=%@",[Data getBaseUrl],[Data getAppCode]];
+    
+    [manager POST:str parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSDictionary *dic=(NSDictionary *)responseObject;
         if([[dic objectForKey:@"ok"] isEqualToString:@"success"]){
             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Success"

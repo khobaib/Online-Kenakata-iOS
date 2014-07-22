@@ -14,6 +14,7 @@
 #import "navicationController.h"
 #import "FirstViewController.h"
 #import "DatabaseHandeler.h"
+#import "Data.h"
 @interface PostSplashImageScreen ()
 
 @end
@@ -38,7 +39,7 @@
 
    // self.navigationController.navigationBar.hidden=YES;
     
-    NSString *string = [NSString stringWithFormat:@"http://online-kenakata.com/mobile_api/rest.php?method=get_user_data&application_code=%@",AppCode];
+    NSString *string = [NSString stringWithFormat:@"%@/rest.php?method=get_user_data&application_code=%@",[Data getBaseUrl],[Data getAppCode]];
     NSURL *url = [NSURL URLWithString:string];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     

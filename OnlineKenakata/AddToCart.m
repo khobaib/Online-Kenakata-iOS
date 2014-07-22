@@ -12,6 +12,7 @@
 #import "DatabaseHandeler.h"
 #import "AFNetworking.h"
 #import "MyCart.h"
+#import "Data.h"
 
 @interface AddToCart ()
 
@@ -87,7 +88,7 @@
         
         [self moveUP];
         
-        NSString *string = [NSString stringWithFormat:@"http://online-kenakata.com/mobile_api/rest.php?method=check_stock&product_id=%@&is_special_question=false&special_answer_id=&application_code=1000",[self.productData objectForKey:@"product_id"]];
+        NSString *string = [NSString stringWithFormat:@"%@/rest.php?method=check_stock&product_id=%@&is_special_question=false&special_answer_id=&application_code=%@",[Data getBaseUrl],[self.productData objectForKey:@"product_id"],[Data getAppCode]];
         
         [self checkQuantity:string];
 
@@ -311,7 +312,7 @@
         self.quantitybtn.enabled=YES;
         
         
-        NSString *string = [NSString stringWithFormat:@"http://online-kenakata.com/mobile_api/rest.php?method=check_stock&product_id=%@&is_special_question=true&special_answer_id=%@&application_code=1000",[self.productData objectForKey:@"product_id"],[specialAnsDic objectForKey:@"id"]];
+        NSString *string = [NSString stringWithFormat:@"%@/rest.php?method=check_stock&product_id=%@&is_special_question=true&special_answer_id=%@&application_code=%@",[Data getBaseUrl],[self.productData objectForKey:@"product_id"],[specialAnsDic objectForKey:@"id"],[Data getAppCode]];
         
         [self checkQuantity:string];
 

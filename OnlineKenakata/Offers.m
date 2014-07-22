@@ -11,6 +11,7 @@
 #import "UIImageView+WebCache.h"
 #import "OfferDetail.h"
 #import "NewsDetail.h"
+#import "Data.h"
 
 
 @interface Offers ()
@@ -51,7 +52,7 @@
 
 -(void)getOffer{
  
-    NSString *string = [NSString stringWithFormat:@"http://online-kenakata.com/mobile_api/rest.php?method=get_offers&application_code=1000"];
+    NSString *string = [NSString stringWithFormat:@"%@/rest.php?method=get_offers&application_code=%@",[Data getBaseUrl],[Data getAppCode]];
     NSURL *url = [NSURL URLWithString:string];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     
