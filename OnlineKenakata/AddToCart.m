@@ -258,7 +258,7 @@
         
         cart.productList=[DatabaseHandeler getProduct];
         
-        NSLog(@"log %d",cart.productList.count);
+        NSLog(@"log %lu",(unsigned long)cart.productList.count);
         if(cart.productList.count<1){
             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error "
                                                                 message:@"My Cart is empty"
@@ -321,7 +321,7 @@
 }
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component{
     if(flag){
-        return [NSString stringWithFormat:@"%d",row+1];
+        return [NSString stringWithFormat:@"%d",(row+1)];
     }else{
         NSString *str =[[pickerData objectAtIndex:row]objectForKey:@"answer"];
         return str;

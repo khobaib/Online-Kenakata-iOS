@@ -14,8 +14,56 @@
 {
     // Override point for customization after application launch.
     
+    [[UIApplication sharedApplication] registerForRemoteNotificationTypes:
+     (UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeAlert)];
+    
     [self checkAndCreateDatabase];
+    
+    if (launchOptions != nil)
+	{
+		NSDictionary *dictionary = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
+		if (dictionary != nil)
+		{
+			NSLog(@"Launched from push notification: %@", dictionary);
+			[self addMessageFromRemoteNotification:dictionary updateUI:NO];
+		}
+	}
+    
     return YES;
+}
+
+- (void)application:(UIApplication*)application didReceiveRemoteNotification:(NSDictionary*)userInfo
+{
+
+    NSString *str=[[userInfo objectForKey:@"aps"]objectForKey:@"alert"];
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Did receive notification"
+                                                        message:str
+                                                       delegate:nil
+                                              cancelButtonTitle:@"Ok"
+                                              otherButtonTitles:nil];
+    [alertView show];
+
+    [UIApplication sharedApplication].applicationIconBadgeNumber =0;
+	//[self addMessageFromRemoteNotification:userInfo updateUI:YES];
+}
+
+
+- (void)addMessageFromRemoteNotification:(NSDictionary*)userInfo updateUI:(BOOL)updateUI
+{
+    
+	NSString *alertValue = [[userInfo valueForKey:@"aps"] valueForKey:@"alert"];
+    
+	NSMutableArray *parts = [NSMutableArray arrayWithArray:[alertValue componentsSeparatedByString:@": "]];
+	
+    NSLog(@"%@ %@",alertValue,parts);
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"app launch"
+                                                        message:alertValue
+                                                       delegate:nil
+                                              cancelButtonTitle:@"Ok"
+                                              otherButtonTitles:nil];
+    [alertView show];
+    
+    
 }
 
 -(void) checkAndCreateDatabase{
@@ -35,7 +83,24 @@
 }
 
 
-							
+
+- (void)application:(UIApplication*)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData*)deviceToken
+{
+    
+	NSString *newToken = [deviceToken description];
+	newToken = [newToken stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"<>"]];
+	newToken = [newToken stringByReplacingOccurrencesOfString:@" " withString:@""];
+    
+	NSLog(@"My token is: %@", newToken);
+    
+	
+}
+
+- (void)application:(UIApplication*)application didFailToRegisterForRemoteNotificationsWithError:(NSError*)error
+{
+	NSLog(@"Failed to get token, error: %@", error);
+}
+
 - (void)applicationWillResignActive:(UIApplication *)application
 {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
