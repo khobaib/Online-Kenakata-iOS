@@ -214,7 +214,25 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     NSMutableDictionary *dic = [tableData objectAtIndex:indexPath.row];
-    ProductDetails *prdtails = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"productdetails"];
+    
+    ProductDetails *prdtails;
+    NSString *spclQus=[dic objectForKey:@"special_question"];
+    int available =[[dic objectForKey:@"general_available_quantity"]intValue];
+
+    if([spclQus isEqualToString:@""]){
+        if(available<1){
+            prdtails= [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"ProductDetails2"];
+            NSLog(@"in no button");
+
+        }else{
+            prdtails= [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"productdetails"];
+
+        }
+    }else{
+        prdtails= [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"productdetails"];
+
+    }
+
     
     prdtails.productData=dic;
     

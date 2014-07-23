@@ -34,7 +34,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+    [self initLoading];
+
     // Do any additional setup after loading the view.
     
 
@@ -54,7 +55,8 @@
         
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        
+        [loading StopAnimating];
+        loading.hidden=YES;
         // 4
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error Retrieving Data"
                                                             message:[error localizedDescription]
@@ -65,12 +67,23 @@
     }];
     
     // 5
-    [self.indecator startAnimating];
+    loading.hidden=NO;
+    [loading StartAnimating];
     [operation start];
+}
+-(void)initLoading{
+    CGFloat x= self.view.frame.size.width/2-65;
+    CGFloat y =(self.view.frame.size.height-self.navigationController.navigationBar.frame.size.height-self.tabBarController.tabBar.frame.size.height)/2-25;
+    
+    loading=[[LoadingView alloc]initWithFrame:CGRectMake(x, y, 130, 50)];
+    loading.hidden=YES;
+    [self.view addSubview:loading];
 }
 
 -(void)getUserData: (NSDictionary *) dic{
 
+    [loading StopAnimating];
+    loading.hidden=YES;
     NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
     NSData *data = [NSKeyedArchiver archivedDataWithRootObject:dic];
 
@@ -95,8 +108,6 @@
              if (image && finished)
              {
                 
-                 [self.indecator stopAnimating];
-                 self.indecator.hidden=YES;
                  navicationController *nav=[[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"navigationController"];
                  
                  tabbarController *tbc=[nav.viewControllers objectAtIndex:0];

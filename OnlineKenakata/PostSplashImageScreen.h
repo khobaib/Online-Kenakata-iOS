@@ -7,9 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "LoadingView.h"
 
 @interface PostSplashImageScreen : UIViewController
-@property (strong,nonatomic) IBOutlet UIActivityIndicatorView *indecator;
+{
+    LoadingView *loading;
+}
 @property IBOutlet UIScrollView *scrollView;
 @property IBOutlet UIImageView *imageView;
 

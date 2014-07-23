@@ -140,6 +140,8 @@
     
     CGRect rect = [string boundingRectWithSize:CGSizeMake(self.productDetails.frame.size.width, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:attributes context:nil];
     
+    
+    
     [self.productDetails setFrame:rect];
     self.productDetails.text=string;
     int available =[[self.productData objectForKey:@"general_available_quantity"]intValue];
@@ -154,10 +156,19 @@
     if([spclQus isEqualToString:@""]){
         if(available<1){
             self.cartBtn.hidden=YES;
+            
+            
+            
+            [UIView animateWithDuration:0.1 animations:^{
+                CGRect f = self.scrl.frame;
+                f.size.height = 350;//0.0f+self.navigationController.navigationBar.frame.size.height+20;
+                self.scrl.frame = f;
+            }];
+            
         }
     }
 
-    
+   // NSLog(@"item code %f  detail %f",self.itemCode.frame.origin.y,self.productDetails.frame.origin.y);
     
 }
 
@@ -393,9 +404,25 @@
 }
 
 
+-(IBAction)AddTocart:(id)sender{
+
+    NSString *spclQus=[self.productData objectForKey:@"special_question"];
+
+    AddToCart *cart;
+    if([spclQus isEqualToString:@""]){
+        cart=[[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"addToCart2"];
+
+    }else{
+       cart=[[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"AddToCart"];
+
+    }
+    cart.productData=self.productData;
+    [self.navigationController pushViewController:cart animated:YES];
+}
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
+/*
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     // Get the new view controller using [segue destinationViewController].
@@ -405,5 +432,5 @@
     cart.productData=self.productData;
 }
 
-
+*/
 @end
