@@ -486,15 +486,15 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalCompressionResistancePriority="900" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RGk-Mm-21M">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalCompressionResistancePriority="900" translatesAutoresizingMaskIntoConstraints="NO" id="RGk-Mm-21M">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AU9-rm-vAZ">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="900"/>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AU9-rm-vAZ">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         <subviews>
-                                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lxg-dA-Axs">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lxg-dA-Axs">
                                                 <rect key="frame" x="5" y="7" width="310" height="105"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <subviews>
@@ -543,8 +543,11 @@
                                                     </label>
                                                 </subviews>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="105" id="Ajp-4S-Jlc"/>
+                                                </constraints>
                                             </view>
-                                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NGq-TN-t4k">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NGq-TN-t4k">
                                                 <rect key="frame" x="5" y="137" width="310" height="50"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <subviews>
@@ -568,19 +571,25 @@
                                                     </button>
                                                 </subviews>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="50" id="asS-ev-grt"/>
+                                                </constraints>
                                             </view>
-                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" scrollEnabled="NO" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nfV-5R-N6m">
-                                                <rect key="frame" x="5" y="253" width="310" height="578"/>
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nfV-5R-N6m">
+                                                <rect key="frame" x="5" y="253" width="310" height="306"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                             </textView>
-                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dea-b7-V0m">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dea-b7-V0m">
                                                 <rect key="frame" x="5" y="201" width="310" height="44"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <color key="backgroundColor" red="0.30170207259999998" green="0.62670436149999997" blue="0.78780995239999996" alpha="1" colorSpace="calibratedRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="44" id="ASv-Jq-o5r"/>
+                                                </constraints>
                                                 <state key="normal" title="Confirm">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
@@ -591,11 +600,40 @@
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" red="0.91353935330000002" green="0.90692937780000005" blue="0.93459024229999998" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstItem="nfV-5R-N6m" firstAttribute="leading" secondItem="AU9-rm-vAZ" secondAttribute="leading" constant="5" id="01p-QL-MnJ"/>
+                                            <constraint firstItem="NGq-TN-t4k" firstAttribute="leading" secondItem="AU9-rm-vAZ" secondAttribute="leading" constant="5" id="7UA-fY-QLF"/>
+                                            <constraint firstAttribute="height" constant="568" id="GXc-Rj-hZW"/>
+                                            <constraint firstItem="dea-b7-V0m" firstAttribute="leading" secondItem="AU9-rm-vAZ" secondAttribute="leading" constant="5" id="QxW-BF-Vfk"/>
+                                            <constraint firstItem="dea-b7-V0m" firstAttribute="top" secondItem="NGq-TN-t4k" secondAttribute="bottom" constant="14" id="TGc-DN-h7e"/>
+                                            <constraint firstAttribute="trailing" secondItem="nfV-5R-N6m" secondAttribute="trailing" constant="5" id="VbB-98-gix"/>
+                                            <constraint firstItem="lxg-dA-Axs" firstAttribute="top" secondItem="AU9-rm-vAZ" secondAttribute="top" constant="7" id="WnL-Vv-dzF"/>
+                                            <constraint firstItem="lxg-dA-Axs" firstAttribute="leading" secondItem="AU9-rm-vAZ" secondAttribute="leading" constant="5" id="fHT-8R-3e7"/>
+                                            <constraint firstAttribute="width" constant="320" id="lU0-Ae-hxQ"/>
+                                            <constraint firstAttribute="trailing" secondItem="dea-b7-V0m" secondAttribute="trailing" constant="5" id="nQe-BQ-3H5"/>
+                                            <constraint firstItem="nfV-5R-N6m" firstAttribute="top" secondItem="dea-b7-V0m" secondAttribute="bottom" constant="8" id="nk4-q2-YoY"/>
+                                            <constraint firstAttribute="bottom" secondItem="nfV-5R-N6m" secondAttribute="bottom" constant="9" id="nti-oK-fZS"/>
+                                            <constraint firstItem="NGq-TN-t4k" firstAttribute="top" secondItem="lxg-dA-Axs" secondAttribute="bottom" constant="25" id="nyY-ui-HaP"/>
+                                            <constraint firstAttribute="trailing" secondItem="lxg-dA-Axs" secondAttribute="trailing" constant="5" id="oDK-7m-5kp"/>
+                                            <constraint firstAttribute="trailing" secondItem="NGq-TN-t4k" secondAttribute="trailing" constant="5" id="y9x-Bj-x2h"/>
+                                        </constraints>
                                     </view>
                                 </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="AU9-rm-vAZ" secondAttribute="trailing" id="GUN-xh-aug"/>
+                                    <constraint firstItem="AU9-rm-vAZ" firstAttribute="centerY" secondItem="RGk-Mm-21M" secondAttribute="centerY" id="YQR-N6-hrG"/>
+                                    <constraint firstItem="AU9-rm-vAZ" firstAttribute="top" secondItem="RGk-Mm-21M" secondAttribute="top" id="aub-ef-VQK"/>
+                                    <constraint firstItem="AU9-rm-vAZ" firstAttribute="centerX" secondItem="RGk-Mm-21M" secondAttribute="centerX" id="fKG-r5-gep"/>
+                                    <constraint firstItem="AU9-rm-vAZ" firstAttribute="leading" secondItem="RGk-Mm-21M" secondAttribute="leading" id="lcY-Oc-WvT"/>
+                                    <constraint firstAttribute="bottom" secondItem="AU9-rm-vAZ" secondAttribute="bottom" id="mgr-PK-jRb"/>
+                                </constraints>
                             </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="RGk-Mm-21M" firstAttribute="leading" secondItem="XCn-a0-vB1" secondAttribute="leading" id="X3f-WW-pEZ"/>
+                            <constraint firstItem="RGk-Mm-21M" firstAttribute="top" secondItem="XCn-a0-vB1" secondAttribute="top" id="svm-WX-C9c"/>
+                        </constraints>
                     </view>
                     <connections>
                         <outlet property="confirmBtn" destination="dea-b7-V0m" id="3CT-ei-9Qq"/>

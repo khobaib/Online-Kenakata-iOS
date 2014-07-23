@@ -82,8 +82,7 @@
 
 -(void)getUserData: (NSDictionary *) dic{
 
-    [loading StopAnimating];
-    loading.hidden=YES;
+    
     NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
     NSData *data = [NSKeyedArchiver archivedDataWithRootObject:dic];
 
@@ -107,7 +106,8 @@
          {
              if (image && finished)
              {
-                
+                 [loading StopAnimating];
+                 loading.hidden=YES;
                  navicationController *nav=[[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"navigationController"];
                  
                  tabbarController *tbc=[nav.viewControllers objectAtIndex:0];

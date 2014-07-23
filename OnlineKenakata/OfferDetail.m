@@ -8,6 +8,7 @@
 
 #import "OfferDetail.h"
 #import "UIImageView+WebCache.h"
+#import "Libraries/MBProgressHUD/MBProgressHUD.h"
 
 
 @interface OfferDetail ()
@@ -43,8 +44,20 @@
         UIImageView *newPageView = [[UIImageView alloc] init];
         [newPageView setFrame:CGRectMake(10, 10, frame.size.width-30, frame.size.height-30)];
         
+        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:newPageView animated:YES];
+        hud.labelText = @"Loading";
+        
+        
+        
         [newPageView setImageWithURL:[NSURL URLWithString:[self.pageImages objectAtIndex:page]]
-                    placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
+                    placeholderImage:[UIImage imageNamed:@"placeholder.png"]
+                           completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
+                               
+                               [hud hide:YES];
+                               
+                               
+                           }];
+        
         
         //newPageView.contentMode = UIViewContentModeScaleAspectFit;
         
