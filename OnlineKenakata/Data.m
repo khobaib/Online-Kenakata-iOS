@@ -8,7 +8,7 @@
 
 #import "Data.h"
 
-NSString * const baseurl=@"http://online-kenakata.com/mobile_api";
+NSString * const baseurl=@"http://zenapp.my/starfish/";
 NSString * const appcode=@"1000";
 @implementation Data
 
