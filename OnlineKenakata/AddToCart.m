@@ -41,7 +41,7 @@
     
     NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
     
-    NSMutableDictionary *dic = [ud objectForKey:@"get_user_data"];
+    NSMutableDictionary *dic = [NSKeyedUnarchiver unarchiveObjectWithData:[ud objectForKey:@"get_user_data"]];;
     
     currency=[[[dic objectForKey:@"success"]objectForKey:@"user"]objectForKey:@"currency"];
     
@@ -60,7 +60,9 @@
     
     
     NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
-    NSMutableDictionary *dic=[[[ud objectForKey:@"get_user_data"]objectForKey:@"success"]objectForKey:@"user"];
+    
+    NSMutableDictionary *dic1=[NSKeyedUnarchiver unarchiveObjectWithData:[ud objectForKey:@"get_user_data"]];;
+    NSMutableDictionary *dic=[[dic1 objectForKey:@"success"]objectForKey:@"user"];
     
     NSString *addToCartMEssage=[dic objectForKey:@"add_to_cart_message"];
     

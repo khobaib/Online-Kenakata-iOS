@@ -31,8 +31,9 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+    NSMutableDictionary *dic1=[NSKeyedUnarchiver unarchiveObjectWithData:[ud objectForKey:@"get_user_data"]];
     
-    NSMutableDictionary *dic = [[[ud objectForKey:@"get_user_data"]objectForKey:@"success"]objectForKey:@"user"];
+    NSMutableDictionary *dic = [[dic1 objectForKey:@"success"]objectForKey:@"user"];
     
     currency=[dic objectForKey:@"currency"];
     [self setValueOntop];

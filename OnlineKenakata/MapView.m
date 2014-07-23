@@ -31,7 +31,11 @@
 {
 
     NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
-    NSDictionary *dic=[ud objectForKey:@"get_user_data"];
+    
+   // NSDictionary *retrievedDictionary = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+
+    NSDictionary *dic = [NSKeyedUnarchiver unarchiveObjectWithData:[ud objectForKey:@"get_user_data"]];
+
     
 
     branches=[[[dic objectForKey:@"success"]objectForKey:@"user"]objectForKey:@"branches"];

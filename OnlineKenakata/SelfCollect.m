@@ -32,7 +32,8 @@
 
     NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
     
-    NSMutableDictionary *dic = [[[ud objectForKey:@"get_user_data"]objectForKey:@"success"]objectForKey:@"user"];
+    NSMutableDictionary *dic1=[NSKeyedUnarchiver unarchiveObjectWithData:[ud objectForKey:@"get_user_data"]];
+    NSMutableDictionary *dic = [[dic1 objectForKey:@"success"]objectForKey:@"user"];
     
     currency=[dic objectForKey:@"currency"];
     branchID=@"0";

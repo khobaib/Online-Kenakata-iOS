@@ -118,7 +118,8 @@
 {
     [super viewDidLoad];
     NSUserDefaults *ud =[NSUserDefaults standardUserDefaults];
-    dic=[[[ud objectForKey:@"get_user_data"]objectForKey:@"success"]objectForKey:@"user"];
+    NSMutableDictionary *dic1=[NSKeyedUnarchiver unarchiveObjectWithData:[ud objectForKey:@"get_user_data"]];
+    dic=[[dic1 objectForKey:@"success"]objectForKey:@"user"];
     
     [self initImageSlider];
     [self initOntap];
@@ -498,7 +499,9 @@
     share *background = [[share alloc]initWithFrame:CGRectMake(0, 0, 320, 150) actionSheet:action];
     
     NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
-    NSMutableDictionary *dic1=[[[ud objectForKey:@"get_user_data"]objectForKey:@"success"]objectForKey:@"user"];
+    NSMutableDictionary *dic2=[NSKeyedUnarchiver unarchiveObjectWithData:[ud objectForKey:@"get_user_data"]];
+    
+    NSMutableDictionary *dic1=[[dic2 objectForKey:@"success"]objectForKey:@"user"];
     
     
     //fb twitter
@@ -535,7 +538,8 @@
 
 -(void)setMessanger{
     NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
-    NSMutableDictionary *dic1=[[[ud objectForKey:@"get_user_data"]objectForKey:@"success"]objectForKey:@"user"];
+    NSMutableDictionary *dic2=[NSKeyedUnarchiver unarchiveObjectWithData:[ud objectForKey:@"get_user_data"]];
+    NSMutableDictionary *dic1=[[dic2 objectForKey:@"success"]objectForKey:@"user"];
     
     NSLog(@"protocall");
     if(![MFMessageComposeViewController canSendText]) {
