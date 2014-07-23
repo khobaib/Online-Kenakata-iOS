@@ -42,13 +42,25 @@
         
         // 3
         UIImageView *newPageView = [[UIImageView alloc] init];
+        [newPageView setFrame:CGRectMake(10, 10, frame.size.width-30, frame.size.height-30)];
+
         [newPageView setImageWithURL:[NSURL URLWithString:[self.pageImages objectAtIndex:page]]
                     placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
         
         //newPageView.contentMode = UIViewContentModeScaleAspectFit;
-        newPageView.frame = frame;
         
-        [self.scrollView addSubview:newPageView];
+        
+        
+        
+        UIView *view=[[UIView alloc]initWithFrame:CGRectMake(frame.origin.x+5, frame.origin.y+5, frame.size.width-10, frame.size.height-10)];
+        UIColor *color= [UIColor colorWithRed:0.75f  green:0.75f blue:0.75f alpha:1.0f];
+
+
+        
+        [view setBackgroundColor:color];
+
+        [view addSubview:newPageView];
+        [self.scrollView addSubview:view];
         // 4
         [self.pageViews replaceObjectAtIndex:page withObject:newPageView];
     }
