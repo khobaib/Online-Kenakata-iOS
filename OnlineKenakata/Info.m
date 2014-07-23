@@ -10,6 +10,7 @@
 #import "WebBrowser.h"
 #import "UIImageView+WebCache.h"
 #import <AddressBook/AddressBook.h>
+#import <QuartzCore/QuartzCore.h>
 @interface Info ()
 
 @end
@@ -146,7 +147,7 @@
         [self.pageViews addObject:[NSNull null]];
     }
     
-    
+    self.pageControl.layer.cornerRadius=7;
     
     [self.pageControl addTarget:self action:@selector(changePage:) forControlEvents:UIControlEventValueChanged];
 }

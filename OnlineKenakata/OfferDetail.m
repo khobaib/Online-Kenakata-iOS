@@ -116,6 +116,7 @@
     
     self.pageImages=[[NSMutableArray alloc]init];
     
+    self.pageControl.layer.cornerRadius=7;
     NSMutableArray *images=[self.offerData objectForKey:@"images"];
     
     for(int i=0;i<images.count;i++){

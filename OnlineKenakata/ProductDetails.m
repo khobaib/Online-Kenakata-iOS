@@ -176,7 +176,7 @@
 {
     [self.scrl setContentSize:CGSizeMake(320, 600)];
     [self.scrl setScrollEnabled:YES];
-    
+    self.pageControl.layer.cornerRadius=7;
     self.pageImages=[[NSMutableArray alloc]init];
     
     NSMutableArray *images=[self.productData objectForKey:@"images"];
