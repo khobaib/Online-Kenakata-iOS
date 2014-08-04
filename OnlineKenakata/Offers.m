@@ -69,6 +69,8 @@
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
         // 4
+        loading.hidden=YES;
+        [loading StopAnimating];
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error catagory List"
                                                             message:[error localizedDescription]
                                                            delegate:nil

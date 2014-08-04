@@ -137,6 +137,9 @@
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
         // 4
+        
+        loading.hidden=YES;
+        [loading StopAnimating];
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error catagory List"
                                                             message:[error localizedDescription]
                                                            delegate:nil
@@ -158,11 +161,9 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if(tableData.count==0){
-        return 1;
-    }else{
+    
         return tableData.count;
-    }
+    
 
 }
 

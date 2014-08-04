@@ -16,6 +16,10 @@
 #import "DatabaseHandeler.h"
 #import "Data.h"
 #import "DatabaseHandeler.h"
+#import "Reachability.h"
+#import "SDWebImageManager.h"
+
+
 @interface PostSplashImageScreen ()
 
 @end
@@ -31,15 +35,81 @@
     return self;
 }
 
+- (void)InternetUnavailable
+{
+    NSLog(@"There IS NO internet connection");
+    
+    SDWebImageManager *manager=[[SDWebImageManager alloc]init];
+    NSUserDefaults *ud =[NSUserDefaults standardUserDefaults];
+    NSMutableDictionary *dic1=[NSKeyedUnarchiver unarchiveObjectWithData:[ud objectForKey:@"get_user_data"]];
+    NSMutableDictionary* dic=[[dic1 objectForKey:@"success"]objectForKey:@"user"];
+    
+    NSString *url=[dic objectForKey:@"post_splash_image_url"];
+    
+    if([manager diskImageExistsForURL:[NSURL URLWithString:url]]){
+        
+        NSLog(@"present");
+        [loading StopAnimating];
+        loading.hidden=YES;
+        navicationController *nav=[[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"navigationController"];
+        
+        tabbarController *tbc=[nav.viewControllers objectAtIndex:0];
+        
+        
+        FirstViewController *frst = [tbc.viewControllers objectAtIndex:0];
+        frst.image=[[manager imageCache]imageFromDiskCacheForKey:url];
+        
+        
+        [self presentViewController:nav animated:YES completion:nil];
+        
+    }else{
+        
+        [loading StopAnimating];
+        loading.hidden=YES;
+        navicationController *nav=[[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"navigationController"];
+        
+        tabbarController *tbc=[nav.viewControllers objectAtIndex:0];
+        
+        
+        FirstViewController *frst = [tbc.viewControllers objectAtIndex:0];
+        frst.image=[UIImage imageNamed:@"PostSplash.png"];
+        
+        [self presentViewController:nav animated:YES completion:nil];
+        
+        
+        NSLog(@"not present");
+        
+    }
+}
+
 - (void)viewDidLoad
 {
-    [super viewDidLoad];
+    int height=[UIScreen mainScreen].bounds.size.height;
+    if(height==480){
+        [self.imageView setImage:[UIImage imageNamed:@"splash002.png"]];
+        NSLog(@"%d",height);
+        
+    }else{
+        
+        [self.imageView setImage:[UIImage imageNamed:@"splash001.png"]];
+        
+    }
     [self initLoading];
+}
 
+
+-(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    
+    [super viewDidLoad];
+    [[AFNetworkReachabilityManager sharedManager] startMonitoring];
+    
+   
+    
     // Do any additional setup after loading the view.
     
-
-   // self.navigationController.navigationBar.hidden=YES;
+    
+    // self.navigationController.navigationBar.hidden=YES;
     
     NSString *string = [NSString stringWithFormat:@"%@/rest.php?method=get_user_data&application_code=%@",[Data getBaseUrl],[Data getAppCode]];
     NSURL *url = [NSURL URLWithString:string];
@@ -49,6 +119,7 @@
     AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
     operation.responseSerializer = [AFJSONResponseSerializer serializer];
     
+    
     [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         [self getUserData:(NSDictionary *)responseObject];
@@ -57,6 +128,8 @@
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [loading StopAnimating];
         loading.hidden=YES;
+        
+        
         // 4
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error Retrieving Data"
                                                             message:[error localizedDescription]
@@ -67,9 +140,27 @@
     }];
     
     // 5
-    loading.hidden=NO;
-    [loading StartAnimating];
-    [operation start];
+    
+    
+    Reachability *networkReachability = [Reachability reachabilityForInternetConnection];
+    NetworkStatus networkStatus = [networkReachability currentReachabilityStatus];
+    if (networkStatus == NotReachable) {
+        [self InternetUnavailable];
+        
+    } else {
+        loading.hidden=NO;
+        
+        [loading StartAnimating];
+        [operation start];
+        
+    }
+    
+    
+}
+
+
+- (BOOL)connected {
+    return [AFNetworkReachabilityManager sharedManager].reachable;
 }
 -(void)initLoading{
     CGFloat x= self.view.frame.size.width/2-65;
