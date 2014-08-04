@@ -18,6 +18,7 @@
 #import "DatabaseHandeler.h"
 #import "Reachability.h"
 #import "SDWebImageManager.h"
+#import <AddressBook/AddressBook.h>
 
 
 @interface PostSplashImageScreen ()
@@ -35,6 +36,29 @@
     return self;
 }
 
+-(void)askContactsPermission{
+  ABAddressBookRef  addressBook_ = ABAddressBookCreateWithOptions(NULL, NULL);
+    
+    if (ABAddressBookGetAuthorizationStatus() == kABAuthorizationStatusNotDetermined)
+    {
+        ABAddressBookRequestAccessWithCompletion(addressBook_, ^(bool granted, CFErrorRef error)
+                                                 {
+                                                     if (granted == NO)
+                                                     {
+                                                         // Show an alert for no contact Access
+                                                     }
+                                                 });
+    }
+    else if (ABAddressBookGetAuthorizationStatus() == kABAuthorizationStatusAuthorized)
+    {
+        // The user has previously given access, good to go
+    }
+    else
+    {
+        // The user has previously denied access
+        // Send an alert telling user to change privacy setting in settings app
+    }
+}
 - (void)InternetUnavailable
 {
     NSLog(@"There IS NO internet connection");
@@ -95,6 +119,7 @@
         
     }
     [self initLoading];
+    [self askContactsPermission];
 }
 
 

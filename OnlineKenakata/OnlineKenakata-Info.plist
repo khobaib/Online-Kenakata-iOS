@@ -47,6 +47,10 @@
 	<array>
 		<string>armv7</string>
 	</array>
+	<key>NSLocationUsageDescription</key>
+	<string>This app will use your location</string>
+	<key>NSContactsUsageDescription</key>
+	<string>This app will use addressbook </string>
 	<key>UIStatusBarHidden</key>
 	<true/>
 	<key>UISupportedInterfaceOrientations</key>
