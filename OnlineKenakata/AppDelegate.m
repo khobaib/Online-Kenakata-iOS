@@ -7,6 +7,8 @@
 //
 
 #import "AppDelegate.h"
+#import "Data.h"
+#import "AFNetworking.h"
 
 @implementation AppDelegate
 
@@ -92,7 +94,27 @@
 	newToken = [newToken stringByReplacingOccurrencesOfString:@" " withString:@""];
     
 	NSLog(@"My token is: %@", newToken);
+    NSString *string = [NSString stringWithFormat:@"%@/rest.php?method=adddevicetoken&dt=%@&unread=0&application_code=%@",[Data getBaseUrl],newToken,[Data getAppCode]];
+    NSURL *url = [NSURL URLWithString:string];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
     
+    // 2
+    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    operation.responseSerializer = [AFJSONResponseSerializer serializer];
+    
+    
+    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+      
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        
+      
+    }];
+    
+
+    [operation start];
 	
 }
 
