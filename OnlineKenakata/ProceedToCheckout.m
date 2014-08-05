@@ -10,6 +10,8 @@
 #import "Product.h"
 #import "SelfCollect.h"
 #import "Delivery.h"
+#import "UserData.h"
+#import "DatabaseHandeler.h"
 
 @interface ProceedToCheckout ()
 
@@ -73,15 +75,13 @@
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
 
-    if(buttonIndex==1){
-        SelfCollect *vc=[[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"selfCollect"];
+    if(buttonIndex==1 || buttonIndex==2){
+        UserData *vc=[[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"userData"];
         vc.productList=self.productList;
+        vc.type=buttonIndex;
+        vc.tableData=[DatabaseHandeler getDeleveryMethods:buttonIndex];
         [self.navigationController pushViewController:vc animated:YES];
-    }else if(buttonIndex==2){
-        Delivery *vc=[[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"delivery"];
-        vc.productList=self.productList;
-        [self.navigationController pushViewController:vc animated:YES];
-    }
+   }
 }
 
 - (void)didReceiveMemoryWarning

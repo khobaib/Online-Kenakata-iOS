@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "Product.h"
+#import "DeleveryMethod.h"
 
 
 @interface DatabaseHandeler : NSObject
@@ -25,4 +26,10 @@
 
 +(BOOL)setUserData:(NSString *)str;
 +(NSString *)getUserData;
+
+
+//customer data;
+
++(BOOL)insertDeleveryMethodData:(DeleveryMethod *)deleveryMethod;
++(NSMutableArray *)getDeleveryMethods:(int) type;
 @end

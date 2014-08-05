@@ -41,16 +41,16 @@
 	<string>Online Kenakata</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSContactsUsageDescription</key>
+	<string>This app will use addressbook </string>
+	<key>NSLocationUsageDescription</key>
+	<string>This app will use your location</string>
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>
 	</array>
-	<key>NSLocationUsageDescription</key>
-	<string>This app will use your location</string>
-	<key>NSContactsUsageDescription</key>
-	<string>This app will use addressbook </string>
 	<key>UIStatusBarHidden</key>
 	<true/>
 	<key>UISupportedInterfaceOrientations</key>

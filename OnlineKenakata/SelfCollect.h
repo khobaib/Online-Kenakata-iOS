@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DeleveryMethod.h"
 
 @interface SelfCollect : UIViewController<UITextFieldDelegate,UIPickerViewDataSource,UIPickerViewDelegate>{
     UIPickerView *namePicker;
@@ -31,5 +32,7 @@
 @property (strong,nonatomic) IBOutlet UILabel *subtotalLable;
 @property (strong,nonatomic) IBOutlet UILabel *subtotal;
 @property (strong,nonatomic) IBOutlet UILabel *total;
+
+@property (strong,nonatomic) DeleveryMethod *method;
 
 @end

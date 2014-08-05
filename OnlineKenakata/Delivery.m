@@ -10,6 +10,7 @@
 #import "Product.h"
 #import "AFNetworking.h"
 #import "Data.h"
+#import "DatabaseHandeler.h"
 @interface Delivery ()
 
 @end
@@ -41,6 +42,9 @@
     
     [self initPaymentMethod];
     
+    if(self.method!=nil){
+        [self initFields];
+    }
     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Required"
                                                         message:@"Please provide all the following information and double check your information for accuracy."
                                                        delegate:nil
@@ -49,6 +53,30 @@
     [alertView show];
 
     // Do any additional setup after loading the view.
+}
+
+
+-(void)initFields{
+    self.nameFild.text=self.method.name;
+    self.emailFild.text=self.method.email;
+    self.phoneFild.text=self.method.phone;
+    self.commentFild.text=self.method.comment;
+    self.address.text=self.method.address;
+    paymentID=[NSString stringWithFormat:@"%d",self.method.paymentMethod];
+    
+    self.paymentMethod.text=[self getPaymentMethodName:self.method.paymentMethod];
+    
+}
+-(NSString *)getPaymentMethodName:(int)methodID{
+    NSString *str=@"";
+    for (int i=0; paymentMethodList.count; i++) {
+        int _id=[[[paymentMethodList objectAtIndex:i]objectForKey:@"id"]intValue];
+        if(_id==methodID){
+            str=[[paymentMethodList objectAtIndex:i]objectForKey:@"name"];
+            break;
+        }
+    }
+    return str;
 }
 
 -(void)setValueOntop{
@@ -163,7 +191,8 @@
         
     }
     
-    
+    [self setMethod];
+
     NSMutableDictionary *customer=[[NSMutableDictionary alloc]init];
     
     [customer setObject:name forKey:@"customer_name"];
@@ -192,12 +221,44 @@
     NSString *str=[NSString stringWithFormat:@"%@/rest.php?method=add_order_3&application_code=%@",[Data getBaseUrl],[Data getAppCode]];
     
     [manager POST:str parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSDictionary *dic=(NSDictionary *)responseObject;
+        if([[dic objectForKey:@"ok"] isEqualToString:@"success"]){
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Success"
+                                                                message:@"Please check your mail for details."
+                                                               delegate:nil
+                                                      cancelButtonTitle:@"Ok"
+                                                      otherButtonTitles:nil];
+            [alertView show];
+            
+            if ([DatabaseHandeler deletAll]) {
+                NSLog(@"clear");
+            }
+            [self.navigationController popToRootViewControllerAnimated:YES];
+
+        }
+
+        
         NSLog(@"JSON: %@", responseObject);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);
     }];
     
     
+}
+
+
+-(void)setMethod{
+    
+    DeleveryMethod *obj=[[DeleveryMethod alloc]init];
+    if(self.method==nil){
+        [obj initDeleveryMethod:0 name:self.nameFild.text email:self.emailFild.text phone:self.phoneFild.text branchName:@"" address:self.address.text comment:self.commentFild.text payment:[paymentID intValue] type:2];
+        
+    }else{
+        [obj initDeleveryMethod:self.method._id name:self.nameFild.text email:self.emailFild.text phone:self.phoneFild.text branchName:@"" address:self.address.text comment:self.commentFild.text payment:[paymentID intValue] type:2];
+        
+    }
+    
+    [DatabaseHandeler insertDeleveryMethodData:obj];
 }
 -(NSMutableArray *)productData{
     NSMutableArray *arraylist=[[NSMutableArray alloc]init];

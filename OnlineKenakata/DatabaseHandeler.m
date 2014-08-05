@@ -11,6 +11,7 @@
 
 NSString *const name = @"name";
 
+NSString *const customerTable=@"customer_data_table";
 NSString *const tableNAme=@"cart_product_table";
 NSString *const TABLE_PRIMARY_KEY =@"_id";
 NSString *const ID =@"id";
@@ -28,7 +29,7 @@ NSString *const OLD_PRICE =@"old_price";
 NSString *const AVAILABILITY =@"availability";
 NSString *const PRODUCT_TAG = @"tag";
 
-NSString *const databaseFilename=@"databaseV1.sqlite3";
+NSString *const databaseFilename=@"databaseV3.sqlite3";
 
 
 @implementation DatabaseHandeler
@@ -273,6 +274,79 @@ NSString *const databaseFilename=@"databaseV1.sqlite3";
    // NSLog(@"%@",dataFile);
     NSLog(@"%@ err %@",json,er );
     return dataFile;
+}
+
+
++(BOOL)insertDeleveryMethodData:(DeleveryMethod *)deleveryMethod{
+    
+    NSString* homeDir = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
+    NSString *databasePath = [homeDir stringByAppendingPathComponent:databaseFilename];
+    
+    
+    FMDatabase *database = [FMDatabase databaseWithPath:databasePath];
+    
+    if (![database open]) {
+        
+        NSLog(@"cant open");
+        
+        return NO;
+    }
+    NSLog(@"can open");
+    
+    NSString *query;
+    if(deleveryMethod._id==0){
+        query = [NSString stringWithFormat:@"INSERT INTO 'customer_data_table' VALUES (NULL,'%@','%@','%@','%@','%@','%@','%d' ,'%d');",deleveryMethod.name,deleveryMethod.email,deleveryMethod.phone,deleveryMethod.branchName,deleveryMethod.address,deleveryMethod.comment,deleveryMethod.paymentMethod,deleveryMethod.type];
+        
+
+    }else{
+     
+        query=[NSString stringWithFormat:@"UPDATE 'customer_data_table' SET name='%@' , email='%@' , phone='%@' , branch='%@' , address='%@' , comment='%@' , paymentMethod=%d , collectMethod=%d where id=%d",deleveryMethod.name,deleveryMethod.email,deleveryMethod.phone,deleveryMethod.branchName,deleveryMethod.address,deleveryMethod.comment,deleveryMethod.paymentMethod,deleveryMethod.type,deleveryMethod._id];
+    }
+    
+    
+    BOOL b=[database executeUpdate:query];
+    
+    
+    
+    [database close];
+    return b;
+}
++(NSMutableArray *)getDeleveryMethods:(int) type{
+ 
+    
+    NSMutableArray *array=[[NSMutableArray alloc]init];
+    
+    NSString* homeDir = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
+    NSString *databasePath = [homeDir stringByAppendingPathComponent:databaseFilename];
+    
+    
+    
+    FMDatabase *database = [FMDatabase databaseWithPath:databasePath];
+    
+    
+    
+    if (![database open]) {
+        
+        return nil;
+    }
+    NSLog(@"can open %d",type);
+
+    NSString *querry = [NSString stringWithFormat:@"SELECT * FROM 'customer_data_table' where collectMethod=%d",type];
+    
+    FMResultSet *s = [database executeQuery:querry];
+    NSLog(@"querry done");
+    while ([s next]) {
+        DeleveryMethod *obj=[[DeleveryMethod alloc]init];
+        [obj initDeleveryMethod:[s intForColumn:@"id"] name:[s stringForColumn:@"name"] email:[s stringForColumn:@"email"] phone:[s stringForColumn:@"phone"] branchName:[s stringForColumn:@"branch"] address:[s stringForColumn:@"address"] comment:[s stringForColumn:@"comment"]
+            payment:[s intForColumn:@"paymentMethod"] type:[s intForColumn:@"collectMethod"]];
+        
+        [array addObject:obj];
+
+    }
+    
+    [database close];
+    
+    return array;
 }
 
 

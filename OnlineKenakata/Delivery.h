@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DeleveryMethod.h"
 
 @interface Delivery : UIViewController<UITextFieldDelegate,UIPickerViewDataSource,UIPickerViewDelegate>{
 
@@ -33,6 +34,7 @@
 @property (strong,nonatomic) IBOutlet UILabel *total;
 @property (strong,nonatomic) IBOutlet UILabel *deleveryChargeLable;
 
+@property (strong,nonatomic) DeleveryMethod *method;
 
 @end
 

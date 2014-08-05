@@ -11,6 +11,7 @@
 #import "AFNetworking.h"
 #import "DatabaseHandeler.h"
 #import "Data.h"
+#import "DeleveryMethod.h"
 @interface SelfCollect ()
 
 @end
@@ -45,6 +46,9 @@
     [self initPickerView];
     [self initPaymentMethod];
     
+    if(self.method!=nil){
+        [self initFields];
+    }
     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Required"
                                                         message:@"Please provide all the following information and double check your information for accuracy."
                                                        delegate:nil
@@ -70,7 +74,45 @@
     self.subtotal.text=[NSString stringWithFormat:@"%@%d",currency,total];
 }
 
+-(void)initFields{
+    self.nameFild.text=self.method.name;
+    self.emailFild.text=self.method.email;
+    self.phoneFild.text=self.method.phone;
+    self.commentFild.text=self.method.comment;
+    self.textFild.text=[self getBranchName:self.method.branchName];
+    paymentID=[NSString stringWithFormat:@"%d",self.method.paymentMethod];
+    branchID=self.method.branchName;
+    self.paymentMethod.text=[self getPaymentMethodName:self.method.paymentMethod];
+    
+}
 
+-(NSString *)getBranchName:(NSString *)LbranchID{
+    NSString *str=@"";
+    
+    for (int i=0; i<branches.count; i++) {
+        
+        NSString *name= [[branches objectAtIndex:i]objectForKey:@"branch_id"];
+        if([name isEqualToString:LbranchID]){
+            str=[[branches objectAtIndex:i]objectForKey:@"branch_address"];
+        
+            break;
+        }
+    }
+    
+    return str;
+}
+
+-(NSString *)getPaymentMethodName:(int)methodID{
+    NSString *str=@"";
+    for (int i=0; paymentMethodList.count; i++) {
+        int _id=[[[paymentMethodList objectAtIndex:i]objectForKey:@"id"]intValue];
+        if(_id==methodID){
+            str=[[paymentMethodList objectAtIndex:i]objectForKey:@"name"];
+            break;
+        }
+    }
+    return str;
+}
 
 -(void)initPickerView{
     namePicker = [[UIPickerView alloc] init];
@@ -192,6 +234,7 @@
 
     }
     
+    [self setMethod];
     
     NSMutableDictionary *customer=[[NSMutableDictionary alloc]init];
     
@@ -233,6 +276,8 @@
             if ([DatabaseHandeler deletAll]) {
                 NSLog(@"clear");
             }
+            
+            [self.navigationController popToRootViewControllerAnimated:YES];
         }
         NSLog(@"JSON: %@", responseObject);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -240,6 +285,21 @@
     }];
     
     
+}
+
+
+-(void)setMethod{
+    
+    DeleveryMethod *obj=[[DeleveryMethod alloc]init];
+    if(self.method==nil){
+        [obj initDeleveryMethod:0 name:self.nameFild.text email:self.emailFild.text phone:self.phoneFild.text branchName:branchID address:@"" comment:self.commentFild.text payment:[paymentID intValue] type:1];
+        
+    }else{
+        [obj initDeleveryMethod:self.method._id name:self.nameFild.text email:self.emailFild.text phone:self.phoneFild.text branchName:branchID address:@"" comment:self.commentFild.text payment:[paymentID intValue] type:1];
+        
+    }
+    
+    [DatabaseHandeler insertDeleveryMethodData:obj];
 }
 -(NSMutableArray *)productData{
     NSMutableArray *arraylist=[[NSMutableArray alloc]init];
