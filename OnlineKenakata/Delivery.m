@@ -33,7 +33,7 @@
     NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
     
     NSMutableDictionary *dic1=[NSKeyedUnarchiver unarchiveObjectWithData:[ud objectForKey:@"get_user_data"]];
-    NSMutableDictionary *dic = [[dic1 objectForKey:@"success"]objectForKey:@"user"];
+    dic = [[dic1 objectForKey:@"success"]objectForKey:@"user"];
     
     currency=[dic objectForKey:@"currency"];
     
@@ -62,9 +62,9 @@
     self.phoneFild.text=self.method.phone;
     self.commentFild.text=self.method.comment;
     self.address.text=self.method.address;
-    paymentID=[NSString stringWithFormat:@"%d",self.method.paymentMethod];
+    //paymentID=[NSString stringWithFormat:@"%d",self.method.paymentMethod];
     
-    self.paymentMethod.text=[self getPaymentMethodName:self.method.paymentMethod];
+   // self.paymentMethod.text=[self getPaymentMethodName:self.method.paymentMethod];
     
 }
 -(NSString *)getPaymentMethodName:(int)methodID{
@@ -80,11 +80,7 @@
 }
 
 -(void)setValueOntop{
-    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
-    
-    NSMutableDictionary *dic1=[NSKeyedUnarchiver unarchiveObjectWithData:[ud objectForKey:@"get_user_data"]];
-    NSMutableDictionary *dic = [[dic1 objectForKey:@"success"]objectForKey:@"user"];
-    
+   
     int charge=[[dic objectForKey:@"delivery_charge"]intValue];
     self.deleveryChargeLable.text=[NSString stringWithFormat:@"%@ %@",currency,[dic objectForKey:@"delivery_charge"]];
     self.subtotalLable.text=[NSString stringWithFormat:@"Sub total (%luitems):",(unsigned long)self.productList.count];
@@ -192,6 +188,22 @@
     }
     
     [self setMethod];
+    
+    if([self isfood]){
+        NSLog(@"food");
+        if(![self isInsideOpeningTime]){
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error"
+                                                                message:@"Currently the store is closed.Do you want to set an alert for letter?"
+                                                               delegate:self
+                                                      cancelButtonTitle:@"Calcle"
+                                                      otherButtonTitles:@"Set Alert",nil];
+            [alertView show];
+            return;
+            //NSLog(@"inside");
+        }
+        
+    }
+    
 
     NSMutableDictionary *customer=[[NSMutableDictionary alloc]init];
     
@@ -221,8 +233,8 @@
     NSString *str=[NSString stringWithFormat:@"%@/rest.php?method=add_order_3&application_code=%@",[Data getBaseUrl],[Data getAppCode]];
     
     [manager POST:str parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSDictionary *dic=(NSDictionary *)responseObject;
-        if([[dic objectForKey:@"ok"] isEqualToString:@"success"]){
+        NSDictionary *dic1=(NSDictionary *)responseObject;
+        if([[dic1 objectForKey:@"ok"] isEqualToString:@"success"]){
             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Success"
                                                                 message:@"Please check your mail for details."
                                                                delegate:nil
@@ -247,6 +259,160 @@
 }
 
 
+-(BOOL)isfood{
+    NSString *food=[dic objectForKey:@"is_food"];
+    return [food isEqualToString:@"1"];
+    
+}
+- (NSDate *)dateToGMT:(NSDate *)sourceDate {
+    NSTimeZone* destinationTimeZone = [NSTimeZone systemTimeZone];
+    NSInteger destinationGMTOffset = [destinationTimeZone secondsFromGMTForDate:sourceDate];
+    NSDate* destinationDate = [[NSDate alloc] initWithTimeInterval:destinationGMTOffset sinceDate:sourceDate];
+    return destinationDate;
+}
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    
+    if(alertView.tag==1 && buttonIndex==1){
+        
+        NSDateFormatter *dateFormatter;
+        [dateFormatter setDateFormat:@"hh:mm"];
+        NSLog(@"%@",[self dateToGMT:alermTime]);
+        
+        return;
+    }
+    if(buttonIndex==1){
+        NSLog(@"settings");
+        
+        NSDateFormatter* dateFormatter = [[NSDateFormatter alloc]init] ;
+        [dateFormatter setDateFormat:@"HH:mm"];
+        NSDate *from = [dateFormatter dateFromString:[dic objectForKey:@"opening_time"]];
+        
+        NSDate *to =[dateFormatter dateFromString:[dic objectForKey:@"closing_time"]];
+        
+        NSDate *currentTime = [NSDate date];
+        
+        
+        NSCalendar *calendar = [NSCalendar currentCalendar];
+        NSDateComponents *componentsTo = [calendar components:(NSHourCalendarUnit | NSMinuteCalendarUnit |NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit) fromDate:to];
+        
+        NSDateComponents *componentsCurent=[calendar components:NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit|NSHourCalendarUnit|NSMinuteCalendarUnit fromDate:currentTime];
+        NSDateComponents *componentsFrom =[calendar components:(NSHourCalendarUnit | NSMinuteCalendarUnit |NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit) fromDate:from];
+        
+        [componentsFrom setYear:[componentsCurent year]];
+        [componentsFrom setMonth:[componentsCurent month]];
+        [componentsFrom setTimeZone:[calendar timeZone]];
+        
+        NSLog(@"to %d  current %d",[componentsTo hour],[componentsCurent hour]);
+        if([componentsTo hour]<[componentsCurent hour]){
+            [componentsFrom setDay:[componentsCurent day]+1];
+            
+            
+            NSLog(@"more day");
+        }else{
+            
+            [componentsFrom setDay:[componentsCurent day]];
+            
+        }
+        alermTime=[calendar dateFromComponents:componentsFrom];
+        
+        NSLog(@"%@",componentsFrom);
+        UILocalNotification *localNotification = [[UILocalNotification alloc] init];
+        localNotification.fireDate = alermTime;
+        localNotification.alertBody = [NSString stringWithFormat:@"Alert Fired at %@", alermTime];
+        localNotification.soundName = UILocalNotificationDefaultSoundName;
+        
+        [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
+        
+        [self.navigationController popToRootViewControllerAnimated:YES];
+        /*
+         UIDatePicker *datePicker;
+         UIAlertView *setDate;
+         
+         //create the alertview
+         setDate = [[UIAlertView alloc] initWithTitle:@"Set Alert Time:"
+         message:nil
+         delegate:self
+         cancelButtonTitle:@"Cancel"
+         otherButtonTitles:@"OK", nil];
+         
+         //create the datepicker
+         
+         [setDate setTag:1];
+         datePicker = [[UIDatePicker alloc] init];
+         [datePicker addTarget:self action:@selector(dateChanged:) forControlEvents:UIControlEventValueChanged];
+         datePicker.date = [NSDate date];
+         
+         NSDateFormatter* dateFormatter = [[NSDateFormatter alloc]init] ;
+         [dateFormatter setDateFormat:@"HH:mm"];
+         NSDate *from = [dateFormatter dateFromString:[dic objectForKey:@"opening_time"]];
+         
+         NSDate *to =[dateFormatter dateFromString:[dic objectForKey:@"closing_time"]];
+         
+         
+         //  NSDate *currentTime = [NSDate date];
+         [datePicker setMinimumDate:from];
+         [datePicker setMaximumDate:to];
+         datePicker.datePickerMode = UIDatePickerModeTime;
+         
+         [setDate setValue:datePicker forKey:@"accessoryView"];
+         alermTime=datePicker.date;
+         // [setDate show];*/
+        
+    }
+}
+- (void) dateChanged:(id)sender
+{
+    
+    UIDatePicker *datePicker = (UIDatePicker *)sender;
+    alermTime=datePicker.date;
+}
+
+
+-(BOOL)isInsideOpeningTime{
+    NSDateFormatter* dateFormatter = [[NSDateFormatter alloc]init] ;
+    [dateFormatter setDateFormat:@"HH:mm"];
+    NSDate *from = [dateFormatter dateFromString:[dic objectForKey:@"opening_time"]];
+    
+    NSDate *to =[dateFormatter dateFromString:[dic objectForKey:@"closing_time"]];
+    
+    NSDate *currentTime = [NSDate date];
+    
+    
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSDateComponents *componentsTo = [calendar components:(NSHourCalendarUnit | NSMinuteCalendarUnit |NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit) fromDate:to];
+    
+    NSDateComponents *componentsCurent=[calendar components:NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit|NSHourCalendarUnit|NSMinuteCalendarUnit fromDate:currentTime];
+    
+    NSComparisonResult result=[from compare:to];
+    
+    if(result==NSOrderedDescending){
+        [componentsTo setDay:[componentsCurent day]+1];
+        
+    }else{
+        [componentsTo setDay:[componentsCurent day]];
+        
+    }
+    [componentsTo setYear:[componentsCurent year]];
+    [componentsTo setMonth:[componentsCurent month]];
+    [componentsTo setTimeZone:[calendar timeZone]];
+    
+    
+    NSDateComponents *componentsFrom =[calendar components:(NSHourCalendarUnit | NSMinuteCalendarUnit |NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit) fromDate:from];
+    
+    [componentsFrom setYear:[componentsCurent year]];
+    [componentsFrom setMonth:[componentsCurent month]];
+    [componentsFrom setDay:[componentsCurent day]];
+    [componentsFrom setTimeZone:[calendar timeZone]];
+    
+    NSComparisonResult result1=[[calendar dateFromComponents:componentsFrom] compare:currentTime];
+    NSComparisonResult result2=[[calendar dateFromComponents:componentsTo] compare:currentTime];
+    
+    
+    return (result1==NSOrderedAscending && result2==NSOrderedDescending);
+    
+}
+
+
 -(void)setMethod{
     
     DeleveryMethod *obj=[[DeleveryMethod alloc]init];
@@ -266,10 +432,10 @@
     for (int i=0; i<self.productList.count; i++) {
         Product *product=[self.productList objectAtIndex:i];
         
-        NSMutableDictionary *dic=[[NSMutableDictionary alloc]init];
-        [dic setObject:product.ID forKey:@"product_id"];
-        [dic setObject:product.QUANTITY forKey:@"quantity"];
-        [dic setObject:[NSString stringWithFormat:@"%d",i] forKey:@"record_id"];
+        NSMutableDictionary *dic1=[[NSMutableDictionary alloc]init];
+        [dic1 setObject:product.ID forKey:@"product_id"];
+        [dic1 setObject:product.QUANTITY forKey:@"quantity"];
+        [dic1 setObject:[NSString stringWithFormat:@"%d",i] forKey:@"record_id"];
         
         NSMutableDictionary *qus=[[NSMutableDictionary alloc]init];
         NSString *TF;
@@ -285,9 +451,9 @@
         [qus setObject:TF forKey:@"is_special_question"];
         [qus setObject:ans forKey:@"special_answer_id"];
         
-        [dic setObject:qus forKey:@"special_question"];
+        [dic1 setObject:qus forKey:@"special_question"];
         
-        [arraylist addObject:dic];
+        [arraylist addObject:dic1];
         
         
         

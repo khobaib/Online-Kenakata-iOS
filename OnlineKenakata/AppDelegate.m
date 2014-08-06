@@ -33,10 +33,24 @@
 			[self addMessageFromRemoteNotification:dictionary updateUI:NO];
 		}
 	}
+    UILocalNotification *notification = [launchOptions objectForKey:UIApplicationLaunchOptionsLocalNotificationKey];
     
+    if (notification)
+    {
+        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"Launch options" message:@"alerm set" delegate:nil cancelButtonTitle:@"cancle" otherButtonTitles: nil];
+        
+        [alert show];
+        // application launched due to notification
+    }
     return YES;
 }
 
+-(void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification {
+    UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"Alerm" message:@"alerm set" delegate:nil cancelButtonTitle:@"cancle" otherButtonTitles: nil];
+    
+    NSLog(@"log log");
+    [alert show];
+}
 - (void)application:(UIApplication*)application didReceiveRemoteNotification:(NSDictionary*)userInfo
 {
 

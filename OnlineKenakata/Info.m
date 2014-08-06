@@ -273,10 +273,21 @@
             title.text=@"Phone";
             description.text=[dic objectForKey:@"user_phone"];
             break;
-        case 2:
+        case 2:{
             title.text=@"Hours";
-            description.text=[dic objectForKey:@"hours"];
+            
+            
+            NSDateFormatter* dateFormatter = [[NSDateFormatter alloc]init] ;
+            [dateFormatter setDateFormat:@"HH:mm"];
+            NSDate *from = [dateFormatter dateFromString:[dic objectForKey:@"opening_time"]];
+
+            NSDate *to =[dateFormatter dateFromString:[dic objectForKey:@"closing_time"]];
+
+            [dateFormatter setDateFormat:@"hh:mm a"];
+            
+            description.text=[NSString stringWithFormat:@"%@   to   %@",[dateFormatter stringFromDate:from],[dateFormatter stringFromDate:to]];
             break;
+        }
         case 3:
             title.text=@"Email";
             description.text=[dic objectForKey:@"email_address"];

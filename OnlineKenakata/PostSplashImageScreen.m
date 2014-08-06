@@ -243,7 +243,24 @@
                  
                  */
              }
+         }else{
+             [loading StopAnimating];
+             loading.hidden=YES;
+             navicationController *nav=[[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"navigationController"];
+             
+             tabbarController *tbc=[nav.viewControllers objectAtIndex:0];
+             
+             
+             FirstViewController *frst = [tbc.viewControllers objectAtIndex:0];
+             frst.image=[UIImage imageNamed:@"PostSplash.png"];
+             
+             [self presentViewController:nav animated:YES completion:nil];
+             
+             
+             NSLog(@"not present");
+
          }
+         
      }];
     
     

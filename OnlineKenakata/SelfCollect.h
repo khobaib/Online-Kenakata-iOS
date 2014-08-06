@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "DeleveryMethod.h"
 
-@interface SelfCollect : UIViewController<UITextFieldDelegate,UIPickerViewDataSource,UIPickerViewDelegate>{
+@interface SelfCollect : UIViewController<UITextFieldDelegate,UIPickerViewDataSource,UIPickerViewDelegate,UIAlertViewDelegate>{
     UIPickerView *namePicker;
     UIPickerView *paymentMethodPicker;
     NSString *currency;
@@ -18,6 +18,8 @@
     
     NSString *branchID;
     NSString *paymentID;
+    NSMutableDictionary *dic;
+    NSDate *alermTime;
 
 }
 

@@ -16,6 +16,9 @@
 
     NSString *paymentID;
     NSMutableArray *paymentMethodList;
+    NSMutableDictionary *dic;
+    NSDate *alermTime;
+
 }
 
 @property (strong,nonatomic) NSMutableArray *productList;
