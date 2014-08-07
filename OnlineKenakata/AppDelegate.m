@@ -37,6 +37,8 @@
     
     if (notification)
     {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"localNotification" object:nil userInfo:notification.userInfo];
+
         UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"Launch options" message:@"alerm set" delegate:nil cancelButtonTitle:@"cancle" otherButtonTitles: nil];
         
         [alert show];
@@ -45,7 +47,10 @@
     return YES;
 }
 
--(void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification {
+-(void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"localNotification" object:nil userInfo:notification.userInfo];
+
     UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"Alerm" message:@"alerm set" delegate:nil cancelButtonTitle:@"cancle" otherButtonTitles: nil];
     
     NSLog(@"log log");

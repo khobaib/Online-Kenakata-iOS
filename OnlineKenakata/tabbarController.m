@@ -29,12 +29,18 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(localNotificationReceived) name:@"localNotification" object:nil];
+
     
     // Do any additional setup after loading the view.
     // Do any additional setup after loading the view.
     
    
+}
+
+-(void)localNotificationReceived{
+    
+    [self myCart];
 }
 -(void)viewWillAppear:(BOOL)animated{
     UIButton *btn=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 44, 44)];
@@ -77,7 +83,10 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+-(void)dealloc{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 
+}
 /*
 #pragma mark - Navigation
 
