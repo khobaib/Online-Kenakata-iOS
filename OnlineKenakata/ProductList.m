@@ -177,7 +177,11 @@
     UILabel *oldPrice =(UILabel *)[cell viewWithTag:305];
     UILabel *newPrice=(UILabel *) [cell viewWithTag:306];
     //
-    
+    productName.text=@"";
+    thumbnil.image=nil;
+    toping.image=nil;
+    oldPrice.text=@"";
+    newPrice.text=@"";
     NSString * imgurl = [[[dic objectForKey:@"images"] objectAtIndex:0]objectForKey:@"thumbnail_image_url"];
     
     productName.text=[NSString stringWithFormat:@"%@",[dic objectForKey:@"name"]];

@@ -182,6 +182,8 @@
     }
     UILabel * title=(UILabel *)[cell viewWithTag:202];
     UIImageView *thumbnil=(UIImageView* )[cell viewWithTag:201];
+    title.text=@"";
+    thumbnil.image=nil;
     
     NSMutableDictionary *dic=[tableData objectAtIndex:indexPath.row];
     title.text=[dic objectForKey:@"cat_name"];
@@ -200,6 +202,8 @@
     ProductList *prdtList=[[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"productList"];
     prdtList.productId=[NSString stringWithFormat:@"%@",[dic objectForKey:@"cat_id"]];
     
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+
     [self.navigationController pushViewController:prdtList animated:YES];
     
 }

@@ -150,13 +150,18 @@
         UILabel *offer=(UILabel *)[cell viewWithTag:402];
     UILabel *detail=(UILabel *)[cell viewWithTag:403];
     UIImageView *thumbnil=(UIImageView *)[cell viewWithTag:401];
+    
+    offer.text=@"";
+    detail.text=@"";
+    thumbnil.image=nil;
+    
     offer.text=[[tableData objectAtIndex:indexPath.row]objectForKey:@"name"];
     
     detail.text=[[tableData objectAtIndex:indexPath.row]objectForKey:@"description"];
     
     NSArray *imgArray=[[tableData objectAtIndex:indexPath.row]objectForKey:@"images"];
 
-    thumbnil.image=nil;
+
     if(imgArray.count!=0){
         NSString *imgurl=[[imgArray objectAtIndex:0]objectForKey:@"thumbnail_image_url"];
         
@@ -194,6 +199,8 @@
         ofrdtls.offerData=dic;
         [self.navigationController pushViewController:ofrdtls animated:YES];
     }
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+
 }
 
 /*

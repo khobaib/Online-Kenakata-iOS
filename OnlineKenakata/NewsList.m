@@ -155,6 +155,9 @@
     UILabel *title=(UILabel *)[cell viewWithTag:501];
     UILabel *description=(UILabel *)[cell viewWithTag:502];
     
+    title.text=@"";
+    description.text=@"";
+    
     title.text=[[newsData objectAtIndex:indexPath.row]objectForKey:@"news_title"];
     description.text=[[newsData objectAtIndex:indexPath.row]objectForKey:@"news_contents"];
     
@@ -171,6 +174,8 @@
 
     
     [self.navigationController pushViewController:newsDtl animated:YES];
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+
 }
 /*
 // Override to support conditional editing of the table view.
