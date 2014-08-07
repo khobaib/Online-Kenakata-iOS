@@ -43,18 +43,29 @@
     [self myCart];
 }
 -(void)viewWillAppear:(BOOL)animated{
+    
+
+  //    UIBarButtonItem *button=[[UIBarButtonItem alloc]initWithTitle:@"" style:UIBarButtonItemStylePlain target:self action:@selector(myCart)];
+ //   [button setImage:[UIImage imageNamed:@"my_cart.png"]];
+    
+ //   button.imageInsets = UIEdgeInsetsMake(0.0, 0, 0, 10);
+    
     UIButton *btn=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 44, 44)];
-    [btn setBackgroundImage:[UIImage imageNamed:@"my_cart.png"] forState:UIControlStateNormal];
-    [btn setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
-    
-    
-    
+    [btn setImage:[UIImage imageNamed:@"my_cart.png"] forState:UIControlStateNormal];
     [btn addTarget:self action:@selector(myCart) forControlEvents:UIControlEventTouchUpInside];
-    BBBadgeBarButtonItem *barButton = [[BBBadgeBarButtonItem alloc] initWithCustomUIButton:btn];
+   // btn.imageEdgeInsets= UIEdgeInsetsMake(0.0, 0, 0, 10);
     
+    BBBadgeBarButtonItem *barButton = [[BBBadgeBarButtonItem alloc] initWithCustomUIButton:btn];
+    [barButton setImageInsets:UIEdgeInsetsMake(0.0, 0, 0, 10)];
+
+  
     barButton.badgeBGColor=[UIColor redColor];
-    barButton.badgeOriginX+=10;
     barButton.badgeValue=[NSString stringWithFormat:@"%d",[DatabaseHandeler totalProduct]];
+    [barButton setBadgeValue:[NSString stringWithFormat:@"%d",[DatabaseHandeler totalProduct]]];
+    NSLog(@" badge%@",barButton.badgeValue);
+    barButton.badgeOriginX=10;
+    barButton.badgeOriginY=0;
+
     
     [self.navigationItem setRightBarButtonItem:barButton];
 
