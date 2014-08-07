@@ -21,7 +21,8 @@
     
     [self checkAndCreateDatabase];
     
-    
+    [UIApplication sharedApplication].applicationIconBadgeNumber =0;
+
     [AddStyle buttonColor];
     
     if (launchOptions != nil)
