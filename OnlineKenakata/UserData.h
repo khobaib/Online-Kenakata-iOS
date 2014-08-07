@@ -13,6 +13,7 @@
 
 @property (strong,nonatomic) NSMutableArray *productList;
 @property (strong,nonatomic) NSMutableArray *tableData;
+@property (strong,nonatomic) IBOutlet UIButton *addNew;
 
 @property int type;
 

@@ -18,4 +18,5 @@
 @property (strong,nonatomic) IBOutlet UILabel *subtotal;
 @property (strong,nonatomic) IBOutlet UILabel *total;
 @property (strong,nonatomic) IBOutlet UITextView *terms;
+@property (strong,nonatomic) IBOutlet UIButton *agreeBtn;
 @end

@@ -13,6 +13,7 @@
 #import "AFNetworking.h"
 #import "MyCart.h"
 #import "Data.h"
+#import "TextStyling.h"
 
 @interface AddToCart ()
 
@@ -56,7 +57,11 @@
 
 - (void)setValueOnUI
 {
-    self.name.text=[self.productData objectForKey:@"name"];
+    [self.quantitybtn setTitleColor:[TextStyling appColor] forState:UIControlStateNormal];
+    [self.specialQuestion setTitleColor:[TextStyling appColor] forState:UIControlStateNormal];
+    [self.confirmBtn setBackgroundColor:[TextStyling appColor]];
+    
+    self.name.attributedText=[TextStyling AttributForTitle:[self.productData objectForKey:@"name"]];
     
     
     NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
@@ -81,6 +86,7 @@
     int tag = (int)[[self.productData objectForKey:@"tag"] integerValue];
     
     NSString *spclqus=[self.productData objectForKey:@"special_question"];
+    
     if([spclqus isEqualToString:@""]){
         self.specialQuestionView.hidden=YES;
         
@@ -96,29 +102,28 @@
 
     }else{
         
-        self.quantitybtn.enabled=NO;
         self.specialQuestionLable.text=spclqus;
         
         pickerData=[self.productData objectForKey:@"special_answers"];
         flag=false;
     }
     if(tag==1){
-        self.oldPrice.text=[NSString stringWithFormat:@"%@ %@",currency,[self.productData objectForKey:@"price"]];
+        
+        self.oldPrice.attributedText=[TextStyling AttributForPrice:[NSString stringWithFormat:@"%@ %@",currency,[self.productData objectForKey:@"price"]]];
+        
         self.tooping.image=[UIImage imageNamed:@"tag_new.png"];
 
     }else if (tag==2){
         self.tooping.image=[UIImage imageNamed:@"tag_sale.png"];
 
-        NSMutableAttributedString *attString=[[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"%@ %@",currency,[self.productData objectForKey:@"old_price"]]];
+        self.oldPrice.attributedText = [TextStyling AttributForPriceStrickThrough:[NSString stringWithFormat:@"%@ %@",currency,[self.productData objectForKey:@"old_price"]]];
         
-        [attString addAttribute:NSStrikethroughStyleAttributeName value:[NSNumber numberWithInt:1] range:NSMakeRange(0,[attString length])];
-        self.oldPrice.attributedText = attString;
-        
-        
-        self.priceNew.text=[NSString stringWithFormat:@"%@ %@",currency,[self.productData objectForKey:@"price"]];
+      
+        self.priceNew.attributedText=[TextStyling AttributForPrice:[NSString stringWithFormat:@"%@ %@",currency,[self.productData objectForKey:@"price"]]];
         
     }else{
-        self.oldPrice.text=[NSString stringWithFormat:@"%@ %@",currency,[self.productData objectForKey:@"price"]];
+        
+        self.oldPrice.attributedText=[TextStyling AttributForPrice:[NSString stringWithFormat:@"%@ %@",currency,[self.productData objectForKey:@"price"]]];
         
     }
     
@@ -205,6 +210,9 @@
 
 -(IBAction)quantity:(id)sender{
     if(!flag){
+        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"Error" message:[NSString stringWithFormat:@"Please select %@ first",[self.productData objectForKey:@"special_question"]] delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles: nil];
+        
+        [alert show];
         return;
     }
     RMPickerViewController *pickerVC = [RMPickerViewController pickerController];

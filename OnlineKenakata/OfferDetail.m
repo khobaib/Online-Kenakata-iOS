@@ -9,6 +9,7 @@
 #import "OfferDetail.h"
 #import "UIImageView+WebCache.h"
 #import "Libraries/MBProgressHUD/MBProgressHUD.h"
+#import "TextStyling.h"
 
 
 @interface OfferDetail ()
@@ -176,8 +177,11 @@
 {
     [super viewDidLoad];
     
-    self.name.text=[self.offerData objectForKey:@"name"];
-    self.description.text=[self.offerData objectForKey:@"description"];
+
+    self.name.attributedText=[TextStyling AttributForOfferNewsTitle:[self.offerData objectForKey:@"name"]];
+    
+
+    self.description.attributedText=[TextStyling AttributForOfferNewsDescription:[self.offerData objectForKey:@"description"]];
     [self initImageSlider];
     [self initOntap];
 
@@ -248,10 +252,8 @@
 }
 
 -(void)addShareButton{
-    UIButton *sharebtn=[[UIButton alloc]initWithFrame:CGRectMake(110, 10, 100, 30)];
-    sharebtn.titleLabel.textColor=[UIColor whiteColor];
-    [sharebtn setTitle:@"Share" forState:UIControlStateNormal];
-    [sharebtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    UIButton *sharebtn=[TextStyling sharebutton];
+
     [sharebtn addTarget:self action:@selector(shareButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     
     sharebtn.hidden=NO;

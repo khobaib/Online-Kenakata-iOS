@@ -9,6 +9,7 @@
 #import "MapView.h"
 #import "PushPin.h"
 #import <AddressBook/AddressBook.h>
+#import "TextStyling.h"
 
 @interface MapView ()
 
@@ -51,12 +52,12 @@
     UIBarButtonItem *btnBranch = [[UIBarButtonItem alloc] initWithTitle:@"Branches" style:UIBarButtonItemStylePlain target:self action:@selector(branches)];
     
     [btnBranch setTitleTextAttributes:
-     [NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor], NSForegroundColorAttributeName,nil]
+     [NSDictionary dictionaryWithObjectsAndKeys:[TextStyling barbuttonColor], NSForegroundColorAttributeName,nil]
                              forState:UIControlStateNormal];
     
     UIBarButtonItem *btnDirection = [[UIBarButtonItem alloc] initWithTitle:@"Direction" style:UIBarButtonItemStylePlain target:self action:@selector(direction)];
     
-    [btnDirection setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor], NSForegroundColorAttributeName,nil]
+    [btnDirection setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[TextStyling barbuttonColor], NSForegroundColorAttributeName,nil]
                                 forState:UIControlStateNormal];
     
     cart=self.tabBarController.navigationItem.rightBarButtonItem;

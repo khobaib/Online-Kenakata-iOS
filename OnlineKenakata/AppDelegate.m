@@ -9,7 +9,7 @@
 #import "AppDelegate.h"
 #import "Data.h"
 #import "AFNetworking.h"
-#import "AddStyle.h"
+#import "TextStyling.h"
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -23,7 +23,6 @@
     
     [UIApplication sharedApplication].applicationIconBadgeNumber =0;
 
-    [AddStyle buttonColor];
     
     if (launchOptions != nil)
 	{
@@ -45,6 +44,9 @@
         [alert show];
         // application launched due to notification
     }
+    
+    [TextStyling changeAppearance];
+
     return YES;
 }
 

@@ -11,6 +11,7 @@
 #import "AFNetworking/AFNetworking.h"
 #import "ProductDetails.h"
 #import "Data.h"
+#import "TextStyling.h"
 @interface ProductList ()
 
 @end
@@ -184,28 +185,30 @@
     newPrice.text=@"";
     NSString * imgurl = [[[dic objectForKey:@"images"] objectAtIndex:0]objectForKey:@"thumbnail_image_url"];
     
-    productName.text=[NSString stringWithFormat:@"%@",[dic objectForKey:@"name"]];
+    
+    productName.attributedText=[TextStyling AttributForTitle:[NSString stringWithFormat:@"%@",[dic objectForKey:@"name"]]];
+    
     [thumbnil setImageWithURL:[NSURL URLWithString:imgurl]
              placeholderImage:[UIImage imageNamed:@"placeholder.gif"]];
     
     int tag = (int)[[dic objectForKey:@"tag"] integerValue];
     if(tag==1){
         toping.image=[UIImage imageNamed:@"tag_new.png"];
-        oldPrice.text=[NSString stringWithFormat:@"%@ %@",currency,[dic objectForKey:@"price"]];
+
+        oldPrice.attributedText=[TextStyling AttributForPrice:[NSString stringWithFormat:@"%@ %@",currency,[dic objectForKey:@"price"]]];
     }else if (tag==2){
         toping.image=[UIImage imageNamed:@"tag_sale.png"];
         
         
-        NSMutableAttributedString *attString=[[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"%@ %@",currency,[dic objectForKey:@"old_price"]]];
-        
-        [attString addAttribute:NSStrikethroughStyleAttributeName value:[NSNumber numberWithInt:1] range:NSMakeRange(0,[attString length])];
-        oldPrice.attributedText = attString;
+        oldPrice.attributedText = [TextStyling AttributForPriceStrickThrough:[NSString stringWithFormat:@"%@ %@",currency,[dic objectForKey:@"old_price"]]];
         
 
-        newPrice.text=[NSString stringWithFormat:@"%@ %@",currency,[dic objectForKey:@"price"]];
+
+        newPrice.attributedText=[TextStyling AttributForPrice:[NSString stringWithFormat:@"%@ %@",currency,[dic objectForKey:@"price"]]];
         
     }else{
-        oldPrice.text=[NSString stringWithFormat:@"%@ %@",currency,[dic objectForKey:@"price"]];
+
+        oldPrice.attributedText=[TextStyling AttributForPrice:[NSString stringWithFormat:@"%@ %@",currency,[dic objectForKey:@"price"]]];
 
     }
     

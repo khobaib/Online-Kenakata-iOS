@@ -12,6 +12,7 @@
 #import "Delivery.h"
 #import "UserData.h"
 #import "DatabaseHandeler.h"
+#import "TextStyling.h"
 
 @interface ProceedToCheckout ()
 
@@ -43,7 +44,7 @@
     
     NSAttributedString *attributedString = [[NSAttributedString alloc] initWithData:[addToCartMEssage dataUsingEncoding:NSUnicodeStringEncoding] options:@{ NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType } documentAttributes:nil error:nil];
     
-    
+    [self.agreeBtn setBackgroundColor:[TextStyling appColor]];
     
     [self.terms setAttributedText:attributedString];
 }

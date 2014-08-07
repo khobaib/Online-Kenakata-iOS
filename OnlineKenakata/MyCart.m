@@ -13,6 +13,7 @@
 #import "AFNetworking.h"
 #import "ProceedToCheckout.h"
 #import "Data.h"
+#import "TextStyling.h"
 
 @interface MyCart ()
 
@@ -45,8 +46,16 @@
     
     currency=[[[dic objectForKey:@"success"]objectForKey:@"user"]objectForKey:@"currency"];
     [self setValueOntop];
+    [self.checkoutBtn setBackgroundColor:[TextStyling appColor]];
+    
+    UIBarButtonItem *newBackButton = [[UIBarButtonItem alloc] initWithTitle:@"< Back" style:UIBarButtonItemStyleBordered target:self action:@selector(home:)];
+    [newBackButton setTintColor:[TextStyling barbuttonColor]];
+    self.navigationItem.leftBarButtonItem=newBackButton;
 }
 
+-(void)home:(UIBarButtonItem *)sender {
+    [self.navigationController popToRootViewControllerAnimated:YES];
+}
 
 -(void)initLoading{
     CGFloat x= self.view.frame.size.width/2-65;
@@ -78,6 +87,15 @@
     self.total.text=[NSString stringWithFormat:@"%@%d",currency,total];
     self.subTotal.text=[NSString stringWithFormat:@"%@%d",currency,total];
     [self checkAvailablity:str];
+}
+
+-(void) viewWillDisappear:(BOOL)animated {
+    if ([self.navigationController.viewControllers indexOfObject:self]==NSNotFound) {
+        // back button was pressed.  We know this is true because self is no longer
+        // in the navigation stack.
+        [self.navigationController popToRootViewControllerAnimated:YES];
+    }
+    [super viewWillDisappear:animated];
 }
 
 -(void)checkAvailablity:(NSString *)str{
@@ -168,7 +186,8 @@
         if(serverData){
             NSMutableDictionary *data=[self getProduct:product.ID];
             
-            name.text=[data objectForKey:@"name"];
+            name.attributedText=[TextStyling AttributForTitle:[data objectForKey:@"name"]];
+            
             itemCode.text=[NSString stringWithFormat:@"Item Code %@",[data objectForKey:@"sku"]];
             NSString *spclQusText =[data objectForKey:@"special_question" ];
 
@@ -227,8 +246,8 @@
 
                 }
             }
-            price.text=[NSString stringWithFormat:@"%@:%@",currency, [data objectForKey:@"price"]];
-            
+
+            price.attributedText=[TextStyling AttributForPrice:[NSString stringWithFormat:@"%@:%@",currency, [data objectForKey:@"price"]]];
             
             int x=[[data objectForKey:@"price"] intValue]*[product.QUANTITY intValue];
             
@@ -248,7 +267,7 @@
             
             
         }else{
-            name.text=product.name;
+            name.attributedText=[TextStyling AttributForTitle:product.name];
             itemCode.text=[NSString stringWithFormat:@"Item Code %@",product.ITEM_CODE];
             if([product.SPECIAL_QUESTION_TEXT isEqualToString:@""]){
                 spcl.hidden=YES;
@@ -256,7 +275,8 @@
                 spcl.text=[NSString stringWithFormat:@"%@: %@",product.SPECIAL_QUESTION_TEXT,product.SPECIAL_ANS_TEXT];
                 
             }
-            price.text=[NSString stringWithFormat:@"%@:%@",currency, product.PRICE];
+
+            price.attributedText=[TextStyling AttributForPrice:[NSString stringWithFormat:@"%@:%@",currency, product.PRICE]];
             
             quantityLable.text= [NSString stringWithFormat:@"Quantity #%@",product.QUANTITY];
             

@@ -11,6 +11,7 @@
 #import "AFNetworking/AFNetworking.h"
 #import  "ProductList.h"
 #import "Data.h"
+#import "TextStyling.h"
 //#import "Constant.h"
 
 
@@ -186,7 +187,10 @@
     thumbnil.image=nil;
     
     NSMutableDictionary *dic=[tableData objectAtIndex:indexPath.row];
-    title.text=[dic objectForKey:@"cat_name"];
+    
+    
+  //  title.text=[dic objectForKey:@"cat_name"];
+    title.attributedText=[TextStyling AttributForTitle:[dic objectForKey:@"cat_name"]];
     NSString *imgurl=[NSString stringWithFormat:@"%@",[dic objectForKey:@"thumb_image_url"]];
     
     

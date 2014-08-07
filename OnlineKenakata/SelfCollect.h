@@ -34,7 +34,7 @@
 @property (strong,nonatomic) IBOutlet UILabel *subtotalLable;
 @property (strong,nonatomic) IBOutlet UILabel *subtotal;
 @property (strong,nonatomic) IBOutlet UILabel *total;
-
+@property (strong,nonatomic) IBOutlet UIButton *payment;
 @property (strong,nonatomic) DeleveryMethod *method;
 
 @end

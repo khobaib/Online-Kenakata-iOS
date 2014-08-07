@@ -37,6 +37,8 @@
 @property (strong,nonatomic) IBOutlet UILabel *total;
 @property (strong,nonatomic) IBOutlet UILabel *deleveryChargeLable;
 
+@property (strong,nonatomic) IBOutlet UIButton *payment;
+
 @property (strong,nonatomic) DeleveryMethod *method;
 
 @end

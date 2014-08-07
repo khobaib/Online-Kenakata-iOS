@@ -7,7 +7,7 @@
 //
 
 #import "NewsDetail.h"
-
+#import "TextStyling.h"
 @interface NewsDetail ()
 
 @end
@@ -26,9 +26,12 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.name.text=self.nameString;
-    self.description.text=self.descriptionString;
 
+    self.name.attributedText=[TextStyling AttributForOfferNewsTitle:self.nameString];
+
+    self.description.attributedText=[TextStyling AttributForOfferNewsDescription:self.descriptionString];
+
+    
     // Do any additional setup after loading the view.
 }
 
@@ -42,10 +45,8 @@
     [self addShareButton];
 }
 -(void)addShareButton{
-    UIButton *sharebtn=[[UIButton alloc]initWithFrame:CGRectMake(110, 10, 100, 30)];
-    sharebtn.titleLabel.textColor=[UIColor whiteColor];
-    [sharebtn setTitle:@"Share" forState:UIControlStateNormal];
-    [sharebtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    UIButton *sharebtn=[TextStyling sharebutton];
+
     [sharebtn addTarget:self action:@selector(shareButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     
     sharebtn.hidden=NO;

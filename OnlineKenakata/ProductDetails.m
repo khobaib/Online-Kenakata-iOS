@@ -11,6 +11,7 @@
 #import "share.h"
 #import "AddToCart.h"
 #import "Libraries/MBProgressHUD/MBProgressHUD.h"
+#import "TextStyling.h"
 @interface ProductDetails ()
 
 @end
@@ -138,23 +139,26 @@
 
 - (void)setValueOnUI
 {
-    self.name.text=[self.productData objectForKey:@"name"];
+    self.name.attributedText=[TextStyling AttributForTitle:[self.productData objectForKey:@"name"]];
+    
+    [self.cartBtn setBackgroundColor:[TextStyling appColor]];
     
     int tag = (int)[[self.productData objectForKey:@"tag"] integerValue];
     if(tag==1){
-        self.oldPrice.text=[NSString stringWithFormat:@"%@ %@",currency,[self.productData objectForKey:@"price"]];
+        
+        
+        self.oldPrice.attributedText=[TextStyling AttributForPrice:[NSString stringWithFormat:@"%@ %@",currency,[self.productData objectForKey:@"price"]]];
     }else if (tag==2){
         
-        NSMutableAttributedString *attString=[[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"%@ %@",currency,[self.productData objectForKey:@"old_price"]]];
+      
         
-        [attString addAttribute:NSStrikethroughStyleAttributeName value:[NSNumber numberWithInt:1] range:NSMakeRange(0,[attString length])];
-        self.oldPrice.attributedText = attString;
+        self.oldPrice.attributedText = [TextStyling AttributForPriceStrickThrough:[NSString stringWithFormat:@"%@ %@",currency,[self.productData objectForKey:@"old_price"]]];
         
         
-        self.priceNew.text=[NSString stringWithFormat:@"%@ %@",currency,[self.productData objectForKey:@"price"]];
-        
+        self.priceNew.attributedText=[TextStyling AttributForPrice:[NSString stringWithFormat:@"%@ %@",currency,[self.productData objectForKey:@"price"]]];
     }else{
-        self.oldPrice.text=[NSString stringWithFormat:@"%@ %@",currency,[self.productData objectForKey:@"price"]];
+        
+        self.oldPrice.attributedText=[TextStyling AttributForPrice:[NSString stringWithFormat:@"%@ %@",currency,[self.productData objectForKey:@"price"]]];
         
     }
     
@@ -167,7 +171,8 @@
     
     
     [self.productDetails setFrame:rect];
-    self.productDetails.text=string;
+    self.productDetails.attributedText=[TextStyling AttributForDescription:string];
+    
     int available =[[self.productData objectForKey:@"general_available_quantity"]intValue];
     if(available>0){
         self.itemCode.text=[self.productData objectForKey:@"sku"];
@@ -319,10 +324,8 @@
 
 
 -(void)addShareButton{
-    UIButton *sharebtn=[[UIButton alloc]initWithFrame:CGRectMake(110, 10, 100, 30)];
-    sharebtn.titleLabel.textColor=[UIColor whiteColor];
-    [sharebtn setTitle:@"Share" forState:UIControlStateNormal];
-    [sharebtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    UIButton *sharebtn=[TextStyling sharebutton];
+
     [sharebtn addTarget:self action:@selector(shareButtonClick:) forControlEvents:UIControlEventTouchUpInside];
 
     sharebtn.hidden=NO;

@@ -11,6 +11,7 @@
 #import "AFNetworking.h"
 #import "Data.h"
 #import "DatabaseHandeler.h"
+#import "TextStyling.h"
 @interface Delivery ()
 
 @end
@@ -52,6 +53,7 @@
                                               otherButtonTitles:nil];
     [alertView show];
 
+    [self.payment setBackgroundColor:[TextStyling appColor]];
     // Do any additional setup after loading the view.
 }
 

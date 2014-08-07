@@ -373,11 +373,10 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RcT-sM-qcU">
-                                                        <rect key="frame" x="191" y="10" width="98" height="30"/>
+                                                        <rect key="frame" x="140" y="10" width="149" height="30"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <state key="normal" title="Please Select">
                                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                         </state>
                                                         <connections>
                                                             <action selector="spclQus:" destination="dHF-5D-K7r" eventType="touchUpInside" id="784-T2-dgn"/>
@@ -397,7 +396,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8V9-nV-635">
-                                                        <rect key="frame" x="191" y="10" width="98" height="30"/>
+                                                        <rect key="frame" x="140" y="10" width="149" height="30"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <state key="normal" title="Please Select">
                                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
@@ -1338,6 +1337,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="checkoutBtn" destination="TYt-Zb-gVI" id="3qu-nX-n74"/>
                         <outlet property="subTotal" destination="oh3-2K-tDW" id="sjf-kI-O84"/>
                         <outlet property="subTotalLable" destination="Tme-ot-PiD" id="ka3-rK-nK6"/>
                         <outlet property="tableview" destination="9aq-ec-85u" id="vKF-rK-vMh"/>
@@ -1471,6 +1471,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="dpy-Yc-H9e"/>
                     <connections>
+                        <outlet property="agreeBtn" destination="fxv-Sn-twI" id="Gdj-ve-O9J"/>
                         <outlet property="subtotal" destination="VMU-7H-uzM" id="Fr3-he-KZv"/>
                         <outlet property="subtotalLable" destination="r7Q-PA-9j1" id="oos-Vs-l7a"/>
                         <outlet property="terms" destination="R5i-p5-bvU" id="xXI-yw-JCC"/>
@@ -1562,6 +1563,9 @@
                             <constraint firstItem="odf-Tr-EzS" firstAttribute="leading" secondItem="W09-5k-Jqc" secondAttribute="leading" constant="5" id="i16-lU-zFt"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="addNew" destination="odf-Tr-EzS" id="1ai-wO-tGC"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cOQ-j8-VPQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1637,7 +1641,7 @@
                                 </constraints>
                             </view>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7X4-0U-D2X">
-                                <rect key="frame" x="6" y="127" width="310" height="393"/>
+                                <rect key="frame" x="6" y="127" width="310" height="378"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LZ8-Tm-Qea">
@@ -1714,11 +1718,11 @@
                                 </constraints>
                             </scrollView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g6z-J5-lkq">
-                                <rect key="frame" x="5" y="528" width="310" height="35"/>
+                                <rect key="frame" x="5" y="513" width="310" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.30170207259999998" green="0.62670436149999997" blue="0.78780995239999996" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="35" id="Dld-E8-y64"/>
+                                    <constraint firstAttribute="height" constant="50" id="Dld-E8-y64"/>
                                 </constraints>
                                 <state key="normal" title="Proceed to payment">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1749,6 +1753,7 @@
                         <outlet property="deleveryChargeLable" destination="GFK-H7-bcl" id="U7V-3k-Zl2"/>
                         <outlet property="emailFild" destination="VY1-9e-qg4" id="x2D-P7-Z09"/>
                         <outlet property="nameFild" destination="ZbN-XG-Xka" id="e50-lj-G34"/>
+                        <outlet property="payment" destination="g6z-J5-lkq" id="1PA-2i-mJ9"/>
                         <outlet property="paymentMethod" destination="DQd-F5-cW2" id="ivK-Hj-IKa"/>
                         <outlet property="phoneFild" destination="GmS-Xb-g7X" id="bqy-87-Lzx"/>
                         <outlet property="subtotal" destination="CQ8-oa-rpC" id="JdT-yp-udI"/>
@@ -1830,7 +1835,7 @@
                                 </constraints>
                             </view>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="b17-NV-M7L">
-                                <rect key="frame" x="5" y="131" width="310" height="393"/>
+                                <rect key="frame" x="5" y="131" width="310" height="378"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GC5-Z7-Kc6">
@@ -1907,11 +1912,11 @@
                                 </constraints>
                             </scrollView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F2t-hk-bF2">
-                                <rect key="frame" x="4" y="532" width="310" height="35"/>
+                                <rect key="frame" x="4" y="517" width="310" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.30170207259999998" green="0.62670436149999997" blue="0.78780995239999996" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="35" id="Zrg-wc-5vs"/>
+                                    <constraint firstAttribute="height" constant="50" id="Zrg-wc-5vs"/>
                                 </constraints>
                                 <state key="normal" title="Proceed to payment">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1940,6 +1945,7 @@
                         <outlet property="commentFild" destination="NDk-BJ-WJc" id="ptz-PM-QnX"/>
                         <outlet property="emailFild" destination="g1T-R4-dK7" id="EaT-ub-73d"/>
                         <outlet property="nameFild" destination="zRO-LY-dxf" id="LBq-vY-c6J"/>
+                        <outlet property="payment" destination="F2t-hk-bF2" id="hUJ-a9-YND"/>
                         <outlet property="paymentMethod" destination="kYV-d6-Og0" id="dnY-xy-Ueg"/>
                         <outlet property="phoneFild" destination="15g-Vi-nR9" id="5ez-wA-Kpf"/>
                         <outlet property="subtotal" destination="vNg-Eu-ofb" id="NSL-gm-gje"/>

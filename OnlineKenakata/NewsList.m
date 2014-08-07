@@ -10,6 +10,7 @@
 #import "AFNetworking.h"
 #import "NewsDetail.h"
 #import "Data.h"
+#import "TextStyling.h"
 
 @interface NewsList ()
 
@@ -158,9 +159,11 @@
     title.text=@"";
     description.text=@"";
     
-    title.text=[[newsData objectAtIndex:indexPath.row]objectForKey:@"news_title"];
-    description.text=[[newsData objectAtIndex:indexPath.row]objectForKey:@"news_contents"];
+
+    title.attributedText=[TextStyling AttributForOfferNewsTitle:[[newsData objectAtIndex:indexPath.row]objectForKey:@"news_title"]];
     
+
+    description.attributedText=[TextStyling AttributForOfferNewsDescription:[[newsData objectAtIndex:indexPath.row]objectForKey:@"news_contents"]];
     return cell;
 }
 

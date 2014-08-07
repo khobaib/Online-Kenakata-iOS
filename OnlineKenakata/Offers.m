@@ -12,6 +12,7 @@
 #import "OfferDetail.h"
 #import "NewsDetail.h"
 #import "Data.h"
+#import "TextStyling.h"
 
 
 @interface Offers ()
@@ -155,9 +156,12 @@
     detail.text=@"";
     thumbnil.image=nil;
     
-    offer.text=[[tableData objectAtIndex:indexPath.row]objectForKey:@"name"];
+
+    offer.attributedText=[TextStyling AttributForOfferNewsTitle:[[tableData objectAtIndex:indexPath.row]objectForKey:@"name"]];
     
-    detail.text=[[tableData objectAtIndex:indexPath.row]objectForKey:@"description"];
+
+    detail.attributedText=[TextStyling AttributForOfferNewsDescription:[[tableData objectAtIndex:indexPath.row]objectForKey:@"description"]];
+    
     
     NSArray *imgArray=[[tableData objectAtIndex:indexPath.row]objectForKey:@"images"];
 

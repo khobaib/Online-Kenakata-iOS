@@ -10,6 +10,7 @@
 #import "DeleveryMethod.h"
 #import "SelfCollect.h"
 #import "Delivery.h"
+#import "TextStyling.h"
 
 @interface UserData ()
 
@@ -29,6 +30,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self.addNew setBackgroundColor:[TextStyling appColor]];
     // Do any additional setup after loading the view.
 }
 
