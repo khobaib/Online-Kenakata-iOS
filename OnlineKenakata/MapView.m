@@ -10,6 +10,7 @@
 #import "PushPin.h"
 #import <AddressBook/AddressBook.h>
 #import "TextStyling.h"
+#import "tabbarController.h"
 
 @interface MapView ()
 
@@ -59,8 +60,11 @@
     
     [btnDirection setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[TextStyling barbuttonColor], NSForegroundColorAttributeName,nil]
                                 forState:UIControlStateNormal];
+   
     
-    cart=self.tabBarController.navigationItem.rightBarButtonItem;
+    tabbarController *tab=(tabbarController *)self.tabBarController;
+   tab.barBtn.hidden=YES;
+
     [self.tabBarController.navigationItem setRightBarButtonItem:btnDirection];
     [self.tabBarController.navigationItem setLeftBarButtonItem:btnBranch];
     
@@ -79,8 +83,12 @@
     
     
     [super viewWillDisappear:animated];
-    [self.tabBarController.navigationItem setRightBarButtonItem:cart];
+
+    tabbarController *tab=(tabbarController *)self.tabBarController;
+    tab.barBtn.hidden=NO;
+
     [self.tabBarController.navigationItem setLeftBarButtonItem:nil];
+    [self.tabBarController.navigationItem setRightBarButtonItem:nil];
 
 }
 

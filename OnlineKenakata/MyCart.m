@@ -14,6 +14,7 @@
 #import "ProceedToCheckout.h"
 #import "Data.h"
 #import "TextStyling.h"
+#import "AddToCart.h"
 
 @interface MyCart ()
 
@@ -37,7 +38,24 @@
     // Do any additional setup after loading the view.
     counter=0;
     [self initLoading];
+    for(UIView* view in self.navigationController.navigationBar.subviews)
+    {
+        if(view.tag ==1)
+        {
+            [view removeFromSuperview];
+        }
+    }
     
+   
+/*
+    if(cartbtn!=nil){
+        [cartbtn removeFromSuperview];
+        NSLog(@"index 2");
+    }else{
+        [[self.navigationController.navigationBar.subviews objectAtIndex:2] removeFromSuperview];
+        NSLog(@"index 1");
+    }*/
+
     serverData=NO;
     
     NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
@@ -54,9 +72,14 @@
 }
 
 -(void)home:(UIBarButtonItem *)sender {
+    
     [self.navigationController popToRootViewControllerAnimated:YES];
+    
 }
-
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+   
+}
 -(void)initLoading{
     CGFloat x= self.view.frame.size.width/2-65;
     CGFloat y =(self.view.frame.size.height-self.navigationController.navigationBar.frame.size.height-self.tabBarController.tabBar.frame.size.height)/2-25;

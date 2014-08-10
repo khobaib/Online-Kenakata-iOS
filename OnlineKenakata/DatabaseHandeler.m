@@ -58,7 +58,7 @@ NSString *const databaseFilename=@"databaseV3.sqlite3";
 
         return NO;
     }
-    NSLog(@"can open");
+   // NSLog(@"can open");
     
     if([self isExist:product]){
         NSLog(@" exist kore ");
@@ -100,9 +100,9 @@ NSString *const databaseFilename=@"databaseV3.sqlite3";
         
         //return NO;
     }
-    NSLog(@"can open");
+   // NSLog(@"can open");
     FMResultSet *result;
-    NSLog(@"%@",product.SPECIAL_QUESTION_TEXT);
+  //  NSLog(@"%@",product.SPECIAL_QUESTION_TEXT);
 
     if([product.SPECIAL_QUESTION_TEXT isEqualToString:@""]){
         result=[database executeQuery:@"SELECT * FROM 'cart_product_table' where id=?",product.ID];
@@ -115,7 +115,7 @@ NSString *const databaseFilename=@"databaseV3.sqlite3";
     
     if([result next])
     {
-        NSLog(@"%@",[result stringForColumnIndex:2]);
+       // NSLog(@"%@",[result stringForColumnIndex:2]);
         [database close];
 
         return YES;
@@ -141,7 +141,7 @@ NSString *const databaseFilename=@"databaseV3.sqlite3";
         
         return NO;
     }
-    NSLog(@"can open");
+   // NSLog(@"can open");
     
    BOOL b= [database executeUpdate:@"DELETE FROM cart_product_table WHERE _id = ?", [NSNumber numberWithInt:_id]];
 
@@ -163,7 +163,7 @@ NSString *const databaseFilename=@"databaseV3.sqlite3";
         
         return NO;
     }
-    NSLog(@"can open");
+   // NSLog(@"can open");
     
     BOOL b= [database executeUpdate:@"DELETE FROM cart_product_table "];
     
@@ -193,7 +193,7 @@ NSString *const databaseFilename=@"databaseV3.sqlite3";
         
         return nil;
     }
-    NSLog(@"can open");
+   // NSLog(@"can open");
     
     
     FMResultSet *s = [database executeQuery:@"SELECT * FROM 'cart_product_table' ORDER BY id"];
@@ -228,12 +228,12 @@ NSString *const databaseFilename=@"databaseV3.sqlite3";
         
         return NO;
     }
-    NSLog(@"can open");
+   // NSLog(@"can open");
     
     NSString *qurrey=[NSString stringWithFormat:@"UPDATE 'cart_product_table' SET quantity=%d where id=%@",quantity,row];
     bool ret=[database executeUpdate:qurrey];
 
-    NSLog(@"%d",ret);
+ //   NSLog(@"%d",ret);
     [database close];
     return ret;
 }
@@ -259,7 +259,7 @@ NSString *const databaseFilename=@"databaseV3.sqlite3";
                  encoding:NSUTF8StringEncoding
                     error:NULL];
     
-    NSLog(@"%@",str);
+  //  NSLog(@"%@",str);
     return YES;
 }
 
@@ -291,7 +291,7 @@ NSString *const databaseFilename=@"databaseV3.sqlite3";
         
         return NO;
     }
-    NSLog(@"can open");
+   // NSLog(@"can open");
     
     NSString *query;
     if(deleveryMethod._id==0){
@@ -329,7 +329,7 @@ NSString *const databaseFilename=@"databaseV3.sqlite3";
         
         return nil;
     }
-    NSLog(@"can open %d",type);
+   // NSLog(@"can open %d",type);
 
     NSString *querry = [NSString stringWithFormat:@"SELECT * FROM 'customer_data_table' where collectMethod=%d",type];
     

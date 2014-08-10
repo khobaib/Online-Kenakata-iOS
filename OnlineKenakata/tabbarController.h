@@ -10,4 +10,6 @@
 
 @interface tabbarController : UITabBarController
 
+@property (nonatomic,strong) UIButton *barBtn;
+
 @end

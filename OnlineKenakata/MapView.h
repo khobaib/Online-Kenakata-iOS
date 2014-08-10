@@ -16,7 +16,7 @@
     NSMutableArray *branches;
     
     NSMutableDictionary *selectedBranch;
-    UIBarButtonItem *cart;
+    UIButton *cart;
 }
 
 @property (strong,nonatomic) IBOutlet UIPickerView *pickerView;

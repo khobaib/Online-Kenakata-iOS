@@ -10,6 +10,7 @@
 #import "MyCart.h"
 #import "DatabaseHandeler.h"
 #import "BBBadgeBarButtonItem.h"
+#import "TextStyling.h"
 
 @interface tabbarController ()
 
@@ -31,7 +32,7 @@
     [super viewDidLoad];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(localNotificationReceived) name:@"localNotification" object:nil];
 
-    
+    NSLog(@"tab bar loded");
     // Do any additional setup after loading the view.
     // Do any additional setup after loading the view.
     
@@ -44,31 +45,34 @@
 }
 -(void)viewWillAppear:(BOOL)animated{
     
+    
+    UIButton *btn=[[UIButton alloc]initWithFrame:CGRectMake(275, -6, 50, 50)];
 
-  //    UIBarButtonItem *button=[[UIBarButtonItem alloc]initWithTitle:@"" style:UIBarButtonItemStylePlain target:self action:@selector(myCart)];
- //   [button setImage:[UIImage imageNamed:@"my_cart.png"]];
+    [btn setBackgroundImage:[UIImage imageNamed:@"my_cart.png"] forState:UIControlStateNormal];
+    btn.titleLabel.font = [UIFont systemFontOfSize:10];
+
+   // [btn setBackgroundImage:[self imageWithColor:[UIColor blueColor]] forState:UIControlStateHighlighted];
     
- //   button.imageInsets = UIEdgeInsetsMake(0.0, 0, 0, 10);
-    
-    UIButton *btn=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 44, 44)];
-    [btn setImage:[UIImage imageNamed:@"my_cart.png"] forState:UIControlStateNormal];
+   // [btn setBackgroundColor:[UIColor whiteColor]];
     [btn addTarget:self action:@selector(myCart) forControlEvents:UIControlEventTouchUpInside];
    // btn.imageEdgeInsets= UIEdgeInsetsMake(0.0, 0, 0, 10);
     
     BBBadgeBarButtonItem *barButton = [[BBBadgeBarButtonItem alloc] initWithCustomUIButton:btn];
-    [barButton setImageInsets:UIEdgeInsetsMake(0.0, 0, 0, 10)];
+   // [barButton setImageInsets:UIEdgeInsetsMake(0.0, 0, 0, 10)];
 
   
     barButton.badgeBGColor=[UIColor redColor];
-    barButton.badgeValue=[NSString stringWithFormat:@"%d",[DatabaseHandeler totalProduct]];
     [barButton setBadgeValue:[NSString stringWithFormat:@"%d",[DatabaseHandeler totalProduct]]];
-    NSLog(@" badge%@",barButton.badgeValue);
-    barButton.badgeOriginX=10;
-    barButton.badgeOriginY=0;
+    barButton.badgeOriginX=16;
+    barButton.badgeOriginY=4;
+    [barButton setBadgePadding:3];
 
-    
-    [self.navigationItem setRightBarButtonItem:barButton];
+   // [self.navigationItem setRightBarButtonItem:button];
+    self.barBtn=btn;
+    self.barBtn.tag=1;
+    [self.navigationController.navigationBar addSubview:self.barBtn];
 
+    btn=nil;
 }
 -(void)myCart{
     MyCart *cart=[[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"MyCart"];
@@ -87,6 +91,19 @@
     }
     [self.navigationController pushViewController:cart animated:YES];
     
+}
+- (UIImage *)imageWithColor:(UIColor *)color {
+    CGRect rect = CGRectMake(0.0f, 0.0f, 5.0f, 5.0f);
+    UIGraphicsBeginImageContext(rect.size);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    
+    CGContextSetFillColorWithColor(context, [color CGColor]);
+    CGContextFillRect(context, rect);
+    
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return image;
 }
 
 - (void)didReceiveMemoryWarning
