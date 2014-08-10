@@ -13,6 +13,7 @@
 #import "Data.h"
 #import "DeleveryMethod.h"
 #import "TextStyling.h"
+#import "bKashViewController.h"
 @interface SelfCollect ()
 
 @end
@@ -264,7 +265,6 @@
     [customer setObject:branchID forKey:@"branch_id"];
     NSMutableArray *arr=[self productData];
     
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     NSDictionary *params = @{@"customer": customer,
                              @"options": arr,
                              @"remark":comment,
@@ -275,33 +275,47 @@
                              @"transaction_id":@"0"};
     
     
- //   NSLog(@"%@",params);
     
-    manager.requestSerializer = [AFJSONRequestSerializer serializer];
-
-    NSString *str=[NSString stringWithFormat:@"%@/rest.php?method=add_order_3&application_code=%@",[Data getBaseUrl],[Data getAppCode]];
     
-    [manager POST:str parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSDictionary *dic1=(NSDictionary *)responseObject;
-        if([[dic1 objectForKey:@"ok"] isEqualToString:@"success"]){
-            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Success"
-                                                                message:@"Please check your mail for details."
-                                                               delegate:nil
-                                                      cancelButtonTitle:@"Ok"
-                                                      otherButtonTitles:nil];
-            [alertView show];
-
-            if ([DatabaseHandeler deletAll]) {
-                NSLog(@"clear");
+    if([paymentMethod isEqualToString:@"bKash"]){
+     
+        bKashViewController *bvc=[[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"bKash"];
+        bvc.params=[params mutableCopy];
+        [self.navigationController pushViewController:bvc animated:YES];
+        
+    }else{
+        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+        
+        manager.requestSerializer = [AFJSONRequestSerializer serializer];
+        
+        NSString *str=[NSString stringWithFormat:@"%@/rest.php?method=add_order_3&application_code=%@",[Data getBaseUrl],[Data getAppCode]];
+        
+        [manager POST:str parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            NSDictionary *dic1=(NSDictionary *)responseObject;
+            if([[dic1 objectForKey:@"ok"] isEqualToString:@"success"]){
+                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Success"
+                                                                    message:@"Please check your mail for details."
+                                                                   delegate:nil
+                                                          cancelButtonTitle:@"Ok"
+                                                          otherButtonTitles:nil];
+                [alertView show];
+                
+                if ([DatabaseHandeler deletAll]) {
+                    NSLog(@"clear");
+                }
+                
+                [self.navigationController popToRootViewControllerAnimated:YES];
             }
-            
-            [self.navigationController popToRootViewControllerAnimated:YES];
-        }
-        NSLog(@"JSON: %@", responseObject);
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"Error: %@", error);
-    }];
+            NSLog(@"JSON: %@", responseObject);
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            NSLog(@"Error: %@", error);
+        }];
+        
+
+    }
+
     
+ //   NSLog(@"%@",params);
     
 }
 

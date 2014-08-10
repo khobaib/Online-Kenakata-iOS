@@ -127,6 +127,8 @@
 		14F87E81197BB53E00C0D11F /* SelfCollect.m in Sources */ = {isa = PBXBuildFile; fileRef = 14F87E80197BB53E00C0D11F /* SelfCollect.m */; };
 		14F87E84197BB55300C0D11F /* Delivery.m in Sources */ = {isa = PBXBuildFile; fileRef = 14F87E83197BB55300C0D11F /* Delivery.m */; };
 		14FB7FCB197B7D5C00E8BDF8 /* down_arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 14FB7FCA197B7D5C00E8BDF8 /* down_arrow.png */; };
+		182B9BE01997934400AF6709 /* bKashViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 182B9BDF1997934400AF6709 /* bKashViewController.m */; };
+		182B9BE21997980E00AF6709 /* bkashicon.png in Resources */ = {isa = PBXBuildFile; fileRef = 182B9BE11997980E00AF6709 /* bkashicon.png */; };
 		183A936C1993518A0097B2F1 /* TextStyling.m in Sources */ = {isa = PBXBuildFile; fileRef = 183A936B1993518A0097B2F1 /* TextStyling.m */; };
 		1848A321198F557600684602 /* splash002.png in Resources */ = {isa = PBXBuildFile; fileRef = 1848A320198F557600684602 /* splash002.png */; };
 		1848A324198F5F1700684602 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 1848A323198F5F1700684602 /* Reachability.m */; };
@@ -358,6 +360,9 @@
 		14F87E82197BB55300C0D11F /* Delivery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Delivery.h; sourceTree = "<group>"; };
 		14F87E83197BB55300C0D11F /* Delivery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Delivery.m; sourceTree = "<group>"; };
 		14FB7FCA197B7D5C00E8BDF8 /* down_arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = down_arrow.png; sourceTree = "<group>"; };
+		182B9BDE1997934400AF6709 /* bKashViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = bKashViewController.h; sourceTree = "<group>"; };
+		182B9BDF1997934400AF6709 /* bKashViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = bKashViewController.m; sourceTree = "<group>"; };
+		182B9BE11997980E00AF6709 /* bkashicon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bkashicon.png; sourceTree = "<group>"; };
 		183A936A1993518A0097B2F1 /* TextStyling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextStyling.h; sourceTree = "<group>"; };
 		183A936B1993518A0097B2F1 /* TextStyling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextStyling.m; sourceTree = "<group>"; };
 		1848A320198F557600684602 /* splash002.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = splash002.png; sourceTree = "<group>"; };
@@ -710,6 +715,7 @@
 		14D45B451974FF7900F677D0 /* img */ = {
 			isa = PBXGroup;
 			children = (
+				182B9BE11997980E00AF6709 /* bkashicon.png */,
 				1848A329198F8E8100684602 /* icon_58.png */,
 				1848A328198F8E5100684602 /* icon_80.png */,
 				1848A327198F8E1C00684602 /* icon_120.png */,
@@ -760,6 +766,8 @@
 				14F87E80197BB53E00C0D11F /* SelfCollect.m */,
 				14F87E82197BB55300C0D11F /* Delivery.h */,
 				14F87E83197BB55300C0D11F /* Delivery.m */,
+				182B9BDE1997934400AF6709 /* bKashViewController.h */,
+				182B9BDF1997934400AF6709 /* bKashViewController.m */,
 				14D45B2C1974FF4800F677D0 /* Offers.h */,
 				14D45B211974FF4800F677D0 /* Offers.m */,
 				14D45B2B1974FF4800F677D0 /* OfferDetail.h */,
@@ -895,6 +903,7 @@
 			files = (
 				14F05AF5197D0C2600188C54 /* menu_icn_location.png in Resources */,
 				1478B4CF19752269002C79B0 /* mail.png in Resources */,
+				182B9BE21997980E00AF6709 /* bkashicon.png in Resources */,
 				14D45B551974FFA500F677D0 /* tag_new.png in Resources */,
 				185E2AFA1990CF86008D741C /* databaseV3.sqlite3 in Resources */,
 				14D45B581974FFA500F677D0 /* twitter.png in Resources */,
@@ -951,6 +960,7 @@
 				14E0C0C2197BA25A0099A51F /* ProceedToCheckout.m in Sources */,
 				14D45AD91974FCB900F677D0 /* PSTCollectionViewCell.m in Sources */,
 				14D45ADB1974FCB900F677D0 /* PSTCollectionViewData.m in Sources */,
+				182B9BE01997934400AF6709 /* bKashViewController.m in Sources */,
 				14D45AD81974FCB900F677D0 /* PSTCollectionView.m in Sources */,
 				14D45ADF1974FCB900F677D0 /* PSTCollectionViewUpdateItem.m in Sources */,
 				14D45B0A1974FD6B00F677D0 /* AFHTTPRequestOperation.m in Sources */,
