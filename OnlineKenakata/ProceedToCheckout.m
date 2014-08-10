@@ -79,8 +79,8 @@
     if(buttonIndex==1 || buttonIndex==2){
         UserData *vc=[[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"userData"];
         vc.productList=self.productList;
-        vc.type=buttonIndex;
-        vc.tableData=[DatabaseHandeler getDeleveryMethods:buttonIndex];
+        vc.type=(int)buttonIndex;
+        vc.tableData=[DatabaseHandeler getDeleveryMethods:(int)buttonIndex];
         [self.navigationController pushViewController:vc animated:YES];
    }
 }

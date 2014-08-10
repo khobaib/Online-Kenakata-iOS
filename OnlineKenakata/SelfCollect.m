@@ -349,7 +349,7 @@
         [componentsFrom setMonth:[componentsCurent month]];
         [componentsFrom setTimeZone:[calendar timeZone]];
         
-        NSLog(@"to %d  current %d",[componentsTo hour],[componentsCurent hour]);
+        NSLog(@"to %ld  current %ld",(long)[componentsTo hour],(long)[componentsCurent hour]);
         if([componentsTo hour]<[componentsCurent hour]){
             [componentsFrom setDay:[componentsCurent day]+1];
             

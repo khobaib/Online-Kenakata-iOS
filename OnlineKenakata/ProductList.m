@@ -31,8 +31,9 @@
 {
     [super viewDidLoad];
     
-    tableData=[[NSMutableArray alloc]init];
-   
+    productList=[[NSMutableArray alloc]init];
+    catagoryList=[[NSMutableArray alloc]init];
+
     
     if(loading==nil){
         [self initLoading];
@@ -123,7 +124,7 @@
 
 -(void)parsProductList:(id) respons{
     NSMutableDictionary *dic=(NSMutableDictionary *)respons;
-    tableData=[[dic objectForKey:@"success"]objectForKey:@"products"];
+    productList=[[dic objectForKey:@"success"]objectForKey:@"products"];
 
     [self.tableView reloadData];
     [self.refreshControl endRefreshing];
@@ -148,72 +149,93 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if(tableData.count==0){
-        return 1;
-    }else{
-        return tableData.count;
-    }
+   
+    
+    
+    return productList.count+catagoryList.count;
+    
 
 
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CellProdect" forIndexPath:indexPath];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CellCat"];
     
-    // Configure the cell...
-    if(tableData.count==0){
+    if(catagoryList.count+productList.count==0){
+        return cell;
         
+    }
+    
+    if(indexPath.row>=catagoryList.count){
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CellProdect" forIndexPath:indexPath];
+        
+        // Configure the cell...
+        
+        
+        NSMutableDictionary *dic=[productList objectAtIndex:indexPath.row];
+        
+        UILabel* productName=(UILabel *)[cell viewWithTag:304];
+        UIImageView *thumbnil=(UIImageView *)[cell viewWithTag:301];
+        UIImageView *toping=(UIImageView *) [cell viewWithTag:302];
+        
+        UILabel *oldPrice =(UILabel *)[cell viewWithTag:305];
+        UILabel *newPrice=(UILabel *) [cell viewWithTag:306];
+        //
+        productName.text=@"";
+        thumbnil.image=nil;
+        toping.image=nil;
+        oldPrice.text=@"";
+        newPrice.text=@"";
+        NSString * imgurl = [[[dic objectForKey:@"images"] objectAtIndex:0]objectForKey:@"thumbnail_image_url"];
+        
+        
+        productName.attributedText=[TextStyling AttributForTitle:[NSString stringWithFormat:@"%@",[dic objectForKey:@"name"]]];
+        
+        [thumbnil setImageWithURL:[NSURL URLWithString:imgurl]
+                 placeholderImage:[UIImage imageNamed:@"placeholder.gif"]];
+        
+        int tag = (int)[[dic objectForKey:@"tag"] integerValue];
+        if(tag==1){
+            toping.image=[UIImage imageNamed:@"tag_new.png"];
+            
+            oldPrice.attributedText=[TextStyling AttributForPrice:[NSString stringWithFormat:@"%@ %@",currency,[dic objectForKey:@"price"]]];
+        }else if (tag==2){
+            toping.image=[UIImage imageNamed:@"tag_sale.png"];
+            
+            
+            oldPrice.attributedText = [TextStyling AttributForPriceStrickThrough:[NSString stringWithFormat:@"%@ %@",currency,[dic objectForKey:@"old_price"]]];
+            
+            
+            
+            newPrice.attributedText=[TextStyling AttributForPrice:[NSString stringWithFormat:@"%@ %@",currency,[dic objectForKey:@"price"]]];
+            
+        }else{
+            
+            oldPrice.attributedText=[TextStyling AttributForPrice:[NSString stringWithFormat:@"%@ %@",currency,[dic objectForKey:@"price"]]];
+            
+        }
+        
+        
+        // NSLog(@"%@",[NSString stringWithFormat:@"%@",[dic objectForKey:@"name"]]);
         
         return cell;
     }
-    
-    
-    NSMutableDictionary *dic=[tableData objectAtIndex:indexPath.row];
-    
-    UILabel* productName=(UILabel *)[cell viewWithTag:304];
-    UIImageView *thumbnil=(UIImageView *)[cell viewWithTag:301];
-    UIImageView *toping=(UIImageView *) [cell viewWithTag:302];
-    
-    UILabel *oldPrice =(UILabel *)[cell viewWithTag:305];
-    UILabel *newPrice=(UILabel *) [cell viewWithTag:306];
-    //
-    productName.text=@"";
+    UILabel * title=(UILabel *)[cell viewWithTag:202];
+    UIImageView *thumbnil=(UIImageView* )[cell viewWithTag:201];
+    title.text=@"";
     thumbnil.image=nil;
-    toping.image=nil;
-    oldPrice.text=@"";
-    newPrice.text=@"";
-    NSString * imgurl = [[[dic objectForKey:@"images"] objectAtIndex:0]objectForKey:@"thumbnail_image_url"];
+    
+    NSMutableDictionary *dic=[catagoryList objectAtIndex:indexPath.row];
     
     
-    productName.attributedText=[TextStyling AttributForTitle:[NSString stringWithFormat:@"%@",[dic objectForKey:@"name"]]];
+    //  title.text=[dic objectForKey:@"cat_name"];
+    title.attributedText=[TextStyling AttributForTitle:[dic objectForKey:@"cat_name"]];
+    NSString *imgurl=[NSString stringWithFormat:@"%@",[dic objectForKey:@"thumb_image_url"]];
+    
     
     [thumbnil setImageWithURL:[NSURL URLWithString:imgurl]
-             placeholderImage:[UIImage imageNamed:@"placeholder.gif"]];
-    
-    int tag = (int)[[dic objectForKey:@"tag"] integerValue];
-    if(tag==1){
-        toping.image=[UIImage imageNamed:@"tag_new.png"];
-
-        oldPrice.attributedText=[TextStyling AttributForPrice:[NSString stringWithFormat:@"%@ %@",currency,[dic objectForKey:@"price"]]];
-    }else if (tag==2){
-        toping.image=[UIImage imageNamed:@"tag_sale.png"];
-        
-        
-        oldPrice.attributedText = [TextStyling AttributForPriceStrickThrough:[NSString stringWithFormat:@"%@ %@",currency,[dic objectForKey:@"old_price"]]];
-        
-
-
-        newPrice.attributedText=[TextStyling AttributForPrice:[NSString stringWithFormat:@"%@ %@",currency,[dic objectForKey:@"price"]]];
-        
-    }else{
-
-        oldPrice.attributedText=[TextStyling AttributForPrice:[NSString stringWithFormat:@"%@ %@",currency,[dic objectForKey:@"price"]]];
-
-    }
-    
-
-   // NSLog(@"%@",[NSString stringWithFormat:@"%@",[dic objectForKey:@"name"]]);
+             placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
     
     return cell;
 }
@@ -222,30 +244,45 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    NSMutableDictionary *dic = [tableData objectAtIndex:indexPath.row];
-    
-    ProductDetails *prdtails;
-    NSString *spclQus=[dic objectForKey:@"special_question"];
-    int available =[[dic objectForKey:@"general_available_quantity"]intValue];
-
-    if([spclQus isEqualToString:@""]){
-        if(available<1){
-            prdtails= [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"ProductDetails2"];
-            NSLog(@"in no button");
-
+    if(catagoryList.count<=indexPath.row){
+        
+        NSMutableDictionary *dic = [productList objectAtIndex:indexPath.row];
+        
+        ProductDetails *prdtails;
+        NSString *spclQus=[dic objectForKey:@"special_question"];
+        int available =[[dic objectForKey:@"general_available_quantity"]intValue];
+        
+        if([spclQus isEqualToString:@""]){
+            if(available<1){
+                prdtails= [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"ProductDetails2"];
+                NSLog(@"in no button");
+                
+            }else{
+                prdtails= [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"productdetails"];
+                
+            }
         }else{
             prdtails= [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"productdetails"];
-
+            
         }
+        
+        
+        prdtails.productData=dic;
+        
+        [self.navigationController pushViewController:prdtails animated:YES];
+        
+        
     }else{
-        prdtails= [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"productdetails"];
-
+        ProductList *pList=[[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"productList"];
+        NSString *str = [[catagoryList objectAtIndex:indexPath.row]objectForKey:@"cat_id"];
+        
+        pList.productId=str;
+        [self.navigationController pushViewController:pList animated:YES];
     }
-
     
-    prdtails.productData=dic;
     
-    [self.navigationController pushViewController:prdtails animated:YES];
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
 }
 
 

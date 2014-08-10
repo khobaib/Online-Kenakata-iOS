@@ -11,10 +11,11 @@
 
 @interface FirstViewController : UIViewController<UITableViewDataSource,UITableViewDelegate>
 {
-    NSMutableArray *tableData;
+    NSMutableArray *catagoryList;
+    NSMutableArray *productList;
     UIRefreshControl *refreshControl;
     LoadingView *loading;
-    
+    NSString *currency;
     
 }
 @property UIImage *image;

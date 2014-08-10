@@ -11,8 +11,9 @@
 
 
 @interface ProductList : UITableViewController{
-   
-    NSMutableArray *tableData;
+
+    NSMutableArray *catagoryList;
+    NSMutableArray *productList;
     NSString *currency;
     LoadingView *loading;
 }
