@@ -21,7 +21,7 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </scrollView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="90" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="xhy-Jo-Cjp">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="457"/>
+                                <rect key="frame" x="0.0" y="44" width="320" height="413"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -52,19 +52,32 @@
                                     <outlet property="delegate" destination="CZ4-MO-1fc" id="Rd9-mj-eaM"/>
                                 </connections>
                             </tableView>
+                            <searchBar contentMode="redraw" fixedFrame="YES" placeholder="Search" translatesAutoresizingMaskIntoConstraints="NO" id="Or7-6l-6Vx">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <scopeButtonTitles>
+                                    <string>Title</string>
+                                    <string>Title</string>
+                                </scopeButtonTitles>
+                                <connections>
+                                    <outlet property="delegate" destination="CZ4-MO-1fc" id="FyL-jN-KCD"/>
+                                </connections>
+                            </searchBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="xhy-Jo-Cjp" secondAttribute="bottom" constant="47" id="LTZ-gv-Bs9"/>
                             <constraint firstItem="xhy-Jo-Cjp" firstAttribute="leading" secondItem="2VE-Yg-loa" secondAttribute="leading" id="Wrz-IP-Trt"/>
                             <constraint firstAttribute="trailing" secondItem="xhy-Jo-Cjp" secondAttribute="trailing" id="mXT-36-awd"/>
-                            <constraint firstItem="xhy-Jo-Cjp" firstAttribute="top" secondItem="TMc-De-i0g" secondAttribute="bottom" id="xuu-ey-ywq"/>
+                            <constraint firstItem="xhy-Jo-Cjp" firstAttribute="top" secondItem="TMc-De-i0g" secondAttribute="bottom" constant="44" id="xuu-ey-ywq"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Catalogue" image="menu_icn_catalogue.png" id="u1e-5L-l1D"/>
                     <navigationItem key="navigationItem" id="nLq-yo-L2i"/>
                     <connections>
                         <outlet property="scrollView" destination="2gB-bq-9Pd" id="gso-I9-v7Q"/>
+                        <outlet property="searchBar" destination="Or7-6l-6Vx" id="Wvw-Lr-KiS"/>
                         <outlet property="tableView" destination="xhy-Jo-Cjp" id="635-19-UNf"/>
                     </connections>
                 </viewController>

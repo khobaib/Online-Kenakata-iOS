@@ -31,14 +31,13 @@
     catagoryList=[[NSMutableArray alloc]init];
     productList=[[NSMutableArray alloc]init];
     self.tableView.hidden=YES;
-    
+    self.searchBar.hidden=YES;
     if(loading==nil){
         [self initLoading];
 
     }
     
     [self initScroller];
-    
     NSLog(@"%f",_image.size.width);
 
     [self addPullToRefresh];
@@ -51,8 +50,9 @@
 
     currency=[[[dic objectForKey:@"success"]objectForKey:@"user"]objectForKey:@"currency"];
 
-    
+    isSearched=NO;
 }
+
 -(void)initLoading{
     CGFloat x= self.view.frame.size.width/2-65;
     CGFloat y =(self.view.frame.size.height-self.navigationController.navigationBar.frame.size.height-self.tabBarController.tabBar.frame.size.height)/2-25;
@@ -94,6 +94,7 @@
 -(void)tapOnScroll{
     
     self.tableView.hidden=NO;
+    self.searchBar.hidden=NO;
     self.scrollView.hidden=YES;
     
 }
@@ -308,6 +309,15 @@
 
     
 }
+
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText{
+
+    if([searchText isEqualToString:@""]){
+        [self endSearch];
+    }
+    
+    
+}
 -(void)get_products_by_parent_cateogory_id:(NSString *)product{
     
     NSString *string = [NSString stringWithFormat:@"%@/rest.php?method=get_categories_by_parent_cateogory_id&parent_category_id=%@&application_code=%@",[Data getBaseUrl],product,[Data getAppCode]];
@@ -347,6 +357,73 @@
     
 }
 
+- (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar{
+  
+}
+
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar{
+    UITextField *searchField = [searchBar valueForKey:@"_searchField"];
+    
+    [searchField resignFirstResponder];
+    [overlayButton removeFromSuperview];
+    
+    
+    NSString *string = [NSString stringWithFormat:@"%@/rest.php?method=get_prod_cat_by_search&search_value=%@&application_code=%@",[Data getBaseUrl],searchField.text,[Data getAppCode]];
+    NSURL *url = [NSURL URLWithString:string];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    
+    // 2
+    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    operation.responseSerializer = [AFJSONResponseSerializer serializer];
+    
+    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        [self parsForSearch:responseObject];
+        
+        
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        // 4
+        
+        loading.hidden=YES;
+        [loading StopAnimating];
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error catagory List"
+                                                            message:[error localizedDescription]
+                                                           delegate:nil
+                                                  cancelButtonTitle:@"Ok"
+                                                  otherButtonTitles:nil];
+        [alertView show];
+    }];
+    
+    // 5
+    //  [self.indecator startAnimating];
+    
+    loading.hidden=NO;
+    [loading StartAnimating];
+    [operation start];
+    
+    
+
+
+}
+- (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar
+{
+    float y=searchBar.frame.origin.y+searchBar.frame.size.height;
+   overlayButton = [[UIButton alloc] initWithFrame:CGRectMake(0, y, 320, self.view.frame.size.height-y)];
+    
+    overlayButton.backgroundColor = [UIColor colorWithWhite:0 alpha:0.3f];
+    
+    [overlayButton addTarget:self action:@selector(hideKeyboard:) forControlEvents:UIControlEventTouchUpInside];
+    
+    [self.view addSubview:overlayButton];
+}
+
+- (void)hideKeyboard:(UIButton *)sender
+{
+    [self.searchBar resignFirstResponder];
+    [sender removeFromSuperview];
+}
 -(void)parsProductList:(id) respons{
     NSMutableDictionary *dic=(NSMutableDictionary *)respons;
     
@@ -356,12 +433,46 @@
 
     [self.tableView reloadData];
 
+    isSearched=YES;
     [loading StopAnimating];
     loading.hidden=YES;
     
 }
+-(void)parsForSearch:(id) respons{
+    NSMutableDictionary *dic=(NSMutableDictionary *)respons;
+    backupCatList=[[NSMutableArray alloc]initWithArray:catagoryList];
+    backupproDuctList=[[NSMutableArray alloc]initWithArray:productList];
+    
+    catagoryList=[[dic objectForKey:@"success"]objectForKey:@"categories"];
+    productList=[[dic objectForKey:@"success"]objectForKey:@"products"];
+    [refreshControl endRefreshing];
+    
+    if(catagoryList.count==0&&productList.count==0){
+        UIAlertView *alertView=[[UIAlertView alloc]initWithTitle:@"Not Found" message:@"Nothing foud " delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        [alertView show];
+        [self endSearch];
+        
+        
+    }else{
+        [self.tableView reloadData];
+    }
 
-
+    
+    [loading StopAnimating];
+    loading.hidden=YES;
+}
+-(void)endSearch{
+    if(backupproDuctList==nil && backupCatList==nil){
+        return;
+    }
+    
+    productList=backupproDuctList;
+    catagoryList=backupCatList;
+    [self.tableView reloadData];
+    backupCatList=nil;
+    backupproDuctList=nil;
+    isSearched=NO;
+}
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];

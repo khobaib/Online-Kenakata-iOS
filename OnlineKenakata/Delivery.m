@@ -490,7 +490,7 @@
 {
     [UIView animateWithDuration:0.3 animations:^{
         CGRect f = self.view.frame;
-        f.origin.y = -20.0f ; //set the -35.0f to your required value
+        f.origin.y = -20.0f ;
         self.view.frame = f;
     }];
 }
