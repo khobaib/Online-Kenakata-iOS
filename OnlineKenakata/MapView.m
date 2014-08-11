@@ -62,8 +62,13 @@
                                 forState:UIControlStateNormal];
    
     
-    tabbarController *tab=(tabbarController *)self.tabBarController;
-   tab.barBtn.hidden=YES;
+    for(UIView* view in self.tabBarController.navigationController.navigationBar.subviews)
+    {
+        if(view.tag ==1)
+        {
+            view.hidden=YES;
+        }
+    }
 
     [self.tabBarController.navigationItem setRightBarButtonItem:btnDirection];
     [self.tabBarController.navigationItem setLeftBarButtonItem:btnBranch];
@@ -84,8 +89,13 @@
     
     [super viewWillDisappear:animated];
 
-    tabbarController *tab=(tabbarController *)self.tabBarController;
-    tab.barBtn.hidden=NO;
+    for(UIView* view in self.tabBarController.navigationController.navigationBar.subviews)
+    {
+        if(view.tag ==1)
+        {
+            view.hidden=NO;
+        }
+    }
 
     [self.tabBarController.navigationItem setLeftBarButtonItem:nil];
     [self.tabBarController.navigationItem setRightBarButtonItem:nil];

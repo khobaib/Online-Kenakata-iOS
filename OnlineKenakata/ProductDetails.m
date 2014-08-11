@@ -44,7 +44,7 @@
         
         // 3
         UIImageView *newPageView = [[UIImageView alloc] init];
-        [newPageView setFrame:CGRectMake(10, 10, frame.size.width-30, frame.size.height-30)];
+        [newPageView setFrame:CGRectMake(4, 4, frame.size.width-18, frame.size.height-18)];
         
         MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:newPageView animated:YES];
         hud.labelText = @"Loading";
@@ -430,6 +430,30 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
+-(IBAction)callButton:(id)sender{
+    NSUserDefaults *ud =[NSUserDefaults standardUserDefaults];
+    NSMutableDictionary *dic1=[NSKeyedUnarchiver unarchiveObjectWithData:[ud objectForKey:@"get_user_data"]];
+   NSMutableDictionary *dic=[[dic1 objectForKey:@"success"]objectForKey:@"user"];
+    
+    NSString *phoneNumber = [@"telprompt://" stringByAppendingString:[dic objectForKey:@"user_phone"]];
+    NSString *deviceType = [UIDevice currentDevice].model;
+    //  NSLog(@"%@",deviceType);
+    
+    
+    if([deviceType isEqualToString:@"iPhone"]){
+        
+        NSLog(@"make call");
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:phoneNumber]];
+    }else{
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error"
+                                                            message:@"your device doesnt support calling"
+                                                           delegate:nil
+                                                  cancelButtonTitle:@"Ok"
+                                                  otherButtonTitles:nil];
+        [alertView show];
+    }
+
+}
 
 -(IBAction)AddTocart:(id)sender{
 

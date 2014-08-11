@@ -440,6 +440,7 @@
 }
 -(void)parsForSearch:(id) respons{
     NSMutableDictionary *dic=(NSMutableDictionary *)respons;
+
     backupCatList=[[NSMutableArray alloc]initWithArray:catagoryList];
     backupproDuctList=[[NSMutableArray alloc]initWithArray:productList];
     

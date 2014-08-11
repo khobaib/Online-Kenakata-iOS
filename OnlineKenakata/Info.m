@@ -44,7 +44,7 @@
         
         // 3
         UIImageView *newPageView = [[UIImageView alloc] init];
-               [newPageView setFrame:CGRectMake(10, 10, frame.size.width-30, frame.size.height-30)];
+        [newPageView setFrame:CGRectMake(4, 4, frame.size.width-18, frame.size.height-18)];
 
         
         MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:newPageView animated:YES];
