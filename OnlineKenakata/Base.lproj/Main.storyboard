@@ -1695,7 +1695,7 @@
                                                 <rect key="frame" x="0.0" y="57" width="310" height="30"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits" keyboardType="namePhonePad"/>
+                                                <textInputTraits key="textInputTraits" keyboardType="numbersAndPunctuation"/>
                                                 <connections>
                                                     <outlet property="delegate" destination="L8S-bY-67S" id="MKy-3l-EL9"/>
                                                 </connections>
@@ -1957,7 +1957,7 @@
                                                 <rect key="frame" x="0.0" y="57" width="310" height="30"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits" keyboardType="namePhonePad"/>
+                                                <textInputTraits key="textInputTraits" keyboardType="numbersAndPunctuation"/>
                                                 <connections>
                                                     <outlet property="delegate" destination="JNf-69-MUK" id="Qjh-Ms-Y0K"/>
                                                 </connections>

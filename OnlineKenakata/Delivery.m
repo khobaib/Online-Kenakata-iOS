@@ -191,7 +191,7 @@
     }
     
     [self setMethod];
-  /*
+  
     if([self isfood]){
         NSLog(@"food");
         if(![self isInsideOpeningTime]){
@@ -205,9 +205,19 @@
             //NSLog(@"inside");
         }
         
-    }*/
+    }
     
+    if(![self validatePhoneNumber:self.phoneFild.text]){
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"ERROR"
+                                                            message:@"Please Enter a valid phone number."
+                                                           delegate:nil
+                                                  cancelButtonTitle:@"Calcle"
+                                                  otherButtonTitles:nil];
+        [alertView show];
+        return;
 
+    }
+    
     NSMutableDictionary *customer=[[NSMutableDictionary alloc]init];
     
     [customer setObject:name forKey:@"customer_name"];
@@ -489,6 +499,26 @@
     return [emailTest evaluateWithObject:checkString];
 }
 
+-(BOOL)validatePhoneNumber:(NSString *)phoneNumber{
+    
+    NSString *phoneRegex = @"^01[0-9]{9}$";
+    NSPredicate *phoneTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", phoneRegex];
+    BOOL test1=  [phoneTest evaluateWithObject:phoneNumber];
+    
+    NSString *phoneRegex2=@"^\\+8801[0-9]{9}$";
+    NSPredicate *phoneTest2=[NSPredicate predicateWithFormat:@"SELF MATCHES %@",phoneRegex2];
+    BOOL test2=[phoneTest2 evaluateWithObject:phoneNumber];
+    
+    NSString *phoneRegex3=@"^01[1-9]-[0-9]{3}-[0-9]{5}";
+    NSPredicate *phoneTest3=[NSPredicate predicateWithFormat:@"SELF MATCHES %@",phoneRegex3];
+    BOOL test3=[phoneTest3 evaluateWithObject:phoneNumber];
+    
+    NSString *phoneRegex4=@"^\\+8801[1-9]-[0-9]{3}-[0-9]{5}";
+    NSPredicate *phoneTest4=[NSPredicate predicateWithFormat:@"SELF MATCHES %@",phoneRegex4];
+    BOOL test4=[phoneTest4 evaluateWithObject:phoneNumber];
+    
+    return test1|test2|test4|test3;
+}
 
 - (void)viewWillAppear:(BOOL)animated {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
@@ -517,6 +547,46 @@
         f.origin.y = 0.0f+self.navigationController.navigationBar.frame.size.height+20;
         self.view.frame = f;
     }];
+}
+
+-(void)checkAvailablity:(NSString *)str{
+    
+    NSString *string = [NSString stringWithFormat:@"%@/rest.php?method=get_products_by_productids&product_ids=%@&application_code=%@",[Data getBaseUrl],str,[Data getAppCode]];
+    NSURL *url = [NSURL URLWithString:string];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    //  NSLog(@"%@",string);
+    // 2
+    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    operation.responseSerializer = [AFJSONResponseSerializer serializer];
+    
+    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        [self checkStockNumber:responseObject];
+        
+        
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        // 4
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error catagory List"
+                                                            message:[error localizedDescription]
+                                                           delegate:nil
+                                                  cancelButtonTitle:@"Ok"
+                                                  otherButtonTitles:nil];
+        [alertView show];
+    }];
+    
+    // 5
+    //  [self.indecator startAnimating];
+    loading.hidden=NO;
+    [loading StartAnimating];
+    [operation start];
+    
+    
+    
+}
+-(void)checkStockNumber:(id)resposns{
+    
 }
 
 

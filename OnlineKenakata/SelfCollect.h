@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "DeleveryMethod.h"
+#import "LoadingView.h"
 
 @interface SelfCollect : UIViewController<UITextFieldDelegate,UIPickerViewDataSource,UIPickerViewDelegate,UIAlertViewDelegate>{
     UIPickerView *namePicker;
@@ -20,6 +21,8 @@
     NSString *paymentID;
     NSMutableDictionary *dic;
     NSDate *alermTime;
+    LoadingView *loading;
+
 
 }
 

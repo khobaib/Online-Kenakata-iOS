@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "DeleveryMethod.h"
+#import "LoadingView.h"
 
 @interface Delivery : UIViewController<UITextFieldDelegate,UIPickerViewDataSource,UIPickerViewDelegate>{
 
@@ -18,6 +19,8 @@
     NSMutableArray *paymentMethodList;
     NSMutableDictionary *dic;
     NSDate *alermTime;
+    LoadingView *loading;
+
 
 }
 
