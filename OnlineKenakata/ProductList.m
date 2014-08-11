@@ -272,7 +272,7 @@
         [self.navigationController pushViewController:prdtails animated:YES];
         
         
-    }else{
+    }else{//productDetails3
         ProductList *pList=[[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"productList"];
         NSString *str = [[catagoryList objectAtIndex:indexPath.row]objectForKey:@"cat_id"];
         
