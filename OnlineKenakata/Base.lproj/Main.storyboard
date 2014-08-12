@@ -1241,6 +1241,7 @@
                                 </state>
                                 <connections>
                                     <action selector="AddTocart:" destination="B9g-LK-8jH" eventType="touchUpInside" id="jVc-B4-TfP"/>
+                                    <action selector="AddTocart:" destination="HIZ-c4-20c" eventType="touchUpInside" id="r3a-Og-nth"/>
                                 </connections>
                             </button>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zXt-m0-3DO">
@@ -1251,11 +1252,14 @@
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="750"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         <subviews>
-                                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" pagingEnabled="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Tjj-or-hVW">
+                                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" tag="2" contentMode="scaleToFill" pagingEnabled="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Tjj-or-hVW">
                                                 <rect key="frame" x="10" y="8" width="300" height="215"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="215" id="TAG-f4-EQp"/>
+                                                </constraints>
                                                 <connections>
-                                                    <outlet property="delegate" destination="B9g-LK-8jH" id="QZA-ra-DxN"/>
+                                                    <outlet property="delegate" destination="HIZ-c4-20c" id="Tk4-Sy-tv9"/>
                                                 </connections>
                                             </scrollView>
                                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I1w-wQ-gkB">
@@ -1266,14 +1270,18 @@
                                                 </state>
                                                 <connections>
                                                     <action selector="imageEnlarge:" destination="B9g-LK-8jH" eventType="touchUpInside" id="XYz-LW-pMF"/>
+                                                    <action selector="imageEnlarge:" destination="HIZ-c4-20c" eventType="touchUpInside" id="ehd-nl-gQj"/>
                                                 </connections>
                                             </button>
-                                            <pageControl contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="UAE-fl-mss">
+                                            <pageControl contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="UAE-fl-mss">
                                                 <rect key="frame" x="90" y="231" width="140" height="14"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="14" id="v1D-Ax-9ht"/>
+                                                </constraints>
                                             </pageControl>
-                                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oLQ-ZN-wsU">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oLQ-ZN-wsU">
                                                 <rect key="frame" x="0.0" y="251" width="320" height="564"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
@@ -1330,16 +1338,43 @@
                                                         </state>
                                                         <connections>
                                                             <action selector="callButton:" destination="B9g-LK-8jH" eventType="touchUpInside" id="VY7-29-5cR"/>
+                                                            <action selector="callButton:" destination="HIZ-c4-20c" eventType="touchUpInside" id="wbN-16-Ibs"/>
                                                         </connections>
                                                     </button>
+                                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hb6-3j-eLO">
+                                                        <rect key="frame" x="8" y="325" width="306" height="140"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                        <connections>
+                                                            <outlet property="delegate" destination="HIZ-c4-20c" id="Fie-AB-Stn"/>
+                                                        </connections>
+                                                    </scrollView>
+                                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Similar Products" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W8h-Yd-KzL">
+                                                        <rect key="frame" x="20" y="300" width="138" height="21"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
                                                 </subviews>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="564" id="BGg-YC-yIK"/>
+                                                </constraints>
                                             </view>
                                         </subviews>
                                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                         <constraints>
+                                            <constraint firstItem="UAE-fl-mss" firstAttribute="leading" secondItem="iTu-Vv-wLC" secondAttribute="leading" constant="90" id="0aT-DA-kYh"/>
+                                            <constraint firstAttribute="trailing" secondItem="Tjj-or-hVW" secondAttribute="trailing" constant="10" id="5BX-Ql-qQx"/>
                                             <constraint firstAttribute="width" constant="320" id="8Jd-Xs-GbT"/>
+                                            <constraint firstAttribute="trailing" secondItem="UAE-fl-mss" secondAttribute="trailing" constant="90" id="8Nb-J9-iHc"/>
                                             <constraint firstAttribute="height" constant="750" id="9ha-bB-guE"/>
+                                            <constraint firstItem="oLQ-ZN-wsU" firstAttribute="top" secondItem="UAE-fl-mss" secondAttribute="bottom" constant="6" id="F4w-L5-QIO"/>
+                                            <constraint firstItem="Tjj-or-hVW" firstAttribute="top" secondItem="iTu-Vv-wLC" secondAttribute="top" constant="8" id="HjG-Wv-hG5"/>
+                                            <constraint firstItem="Tjj-or-hVW" firstAttribute="leading" secondItem="iTu-Vv-wLC" secondAttribute="leading" constant="10" id="LL0-9k-chd"/>
+                                            <constraint firstItem="oLQ-ZN-wsU" firstAttribute="leading" secondItem="iTu-Vv-wLC" secondAttribute="leading" id="LvX-cG-Bjr"/>
+                                            <constraint firstItem="UAE-fl-mss" firstAttribute="top" secondItem="Tjj-or-hVW" secondAttribute="bottom" constant="8" id="P1X-LF-egT"/>
+                                            <constraint firstAttribute="trailing" secondItem="oLQ-ZN-wsU" secondAttribute="trailing" id="vB3-wD-Eu7"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -1362,6 +1397,18 @@
                             <constraint firstItem="zXt-m0-3DO" firstAttribute="leading" secondItem="tJL-TG-nPk" secondAttribute="leading" id="mag-dl-La9"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="cartBtn" destination="1ur-h1-vXc" id="Y5p-ir-fZF"/>
+                        <outlet property="horizontalScroller" destination="hb6-3j-eLO" id="e2Y-b5-2wv"/>
+                        <outlet property="itemCode" destination="wEd-8X-CJC" id="C3I-wd-PRC"/>
+                        <outlet property="itemCodeLable" destination="NKa-w2-9RP" id="pZU-fl-so2"/>
+                        <outlet property="name" destination="r1f-81-N5p" id="oJ0-f0-Kas"/>
+                        <outlet property="oldPrice" destination="N4r-g7-TC9" id="WKY-Mz-NsM"/>
+                        <outlet property="pageControl" destination="UAE-fl-mss" id="hV4-9m-5m3"/>
+                        <outlet property="priceNew" destination="URb-JQ-EWe" id="8xb-LC-et0"/>
+                        <outlet property="productDetails" destination="FGH-xd-Kzr" id="mSK-A7-wtX"/>
+                        <outlet property="scrollView" destination="Tjj-or-hVW" id="oQx-Ce-608"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pxX-lV-hB4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

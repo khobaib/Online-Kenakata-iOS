@@ -136,6 +136,7 @@
 		185E2AF51990C2CA008D741C /* DeleveryMethod.m in Sources */ = {isa = PBXBuildFile; fileRef = 185E2AF41990C2CA008D741C /* DeleveryMethod.m */; };
 		185E2AFA1990CF86008D741C /* databaseV3.sqlite3 in Resources */ = {isa = PBXBuildFile; fileRef = 185E2AF91990CF86008D741C /* databaseV3.sqlite3 */; };
 		185E2AFD1990D96E008D741C /* UserData.m in Sources */ = {isa = PBXBuildFile; fileRef = 185E2AFC1990D96E008D741C /* UserData.m */; };
+		1873F1F31999D9CB00989E12 /* no_photo.png in Resources */ = {isa = PBXBuildFile; fileRef = 1873F1F21999D9CB00989E12 /* no_photo.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -377,6 +378,7 @@
 		185E2AF91990CF86008D741C /* databaseV3.sqlite3 */ = {isa = PBXFileReference; lastKnownFileType = file; path = databaseV3.sqlite3; sourceTree = "<group>"; };
 		185E2AFB1990D96E008D741C /* UserData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserData.h; sourceTree = "<group>"; };
 		185E2AFC1990D96E008D741C /* UserData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserData.m; sourceTree = "<group>"; };
+		1873F1F21999D9CB00989E12 /* no_photo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = no_photo.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -715,6 +717,7 @@
 		14D45B451974FF7900F677D0 /* img */ = {
 			isa = PBXGroup;
 			children = (
+				1873F1F21999D9CB00989E12 /* no_photo.png */,
 				182B9BE11997980E00AF6709 /* bkashicon.png */,
 				1848A329198F8E8100684602 /* icon_58.png */,
 				1848A328198F8E5100684602 /* icon_80.png */,
@@ -914,6 +917,7 @@
 				14D45A521974FC6800F677D0 /* Images.xcassets in Resources */,
 				14D45B531974FFA500F677D0 /* facebook.png in Resources */,
 				14D45AD61974FCB900F677D0 /* README.mdown in Resources */,
+				1873F1F31999D9CB00989E12 /* no_photo.png in Resources */,
 				14D45AF51974FCB900F677D0 /* MWPhotoBrowser.bundle in Resources */,
 				14D45B591974FFA500F677D0 /* video.png in Resources */,
 				14D45A441974FC6800F677D0 /* InfoPlist.strings in Resources */,

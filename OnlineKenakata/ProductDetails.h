@@ -16,6 +16,8 @@
 }
 
 @property NSMutableDictionary *productData;
+@property NSMutableArray *similarProducrsData;
+@property NSMutableArray *similarProductPage;
 
 @property (nonatomic, strong) NSMutableArray *pageImages;
 @property (nonatomic, strong) NSMutableArray *pageViews;
@@ -30,6 +32,7 @@
 @property(strong,nonatomic) IBOutlet UILabel *itemCode;
 @property (strong,nonatomic) IBOutlet UILabel *itemCodeLable;
 @property (strong,nonatomic) IBOutlet UIButton *cartBtn;
+@property (strong,nonatomic) IBOutlet UIScrollView *horizontalScroller;
 
 -(IBAction)imageEnlarge:(id)sender;
 
