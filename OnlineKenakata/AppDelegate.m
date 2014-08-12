@@ -10,6 +10,7 @@
 #import "Data.h"
 #import "AFNetworking.h"
 #import "TextStyling.h"
+#import "EDStarRating/EDStarRating.h"
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -47,6 +48,7 @@
     
     [TextStyling changeAppearance];
 
+    [EDStarRating class];
     return YES;
 }
 

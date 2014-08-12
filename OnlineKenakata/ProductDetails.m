@@ -12,6 +12,7 @@
 #import "AddToCart.h"
 #import "Libraries/MBProgressHUD/MBProgressHUD.h"
 #import "TextStyling.h"
+#import "Review.h"
 @interface ProductDetails ()
 
 @end
@@ -262,9 +263,50 @@
     [self initImageSlider];
     
     [self initOntap];
+    [self starRaterShow];
 
     // NSLog(@"%@",self.pageImages);
     // Do any additional setup after loading the view.
+}
+
+-(void)starRaterShow{
+    self.starRater.starImage=[UIImage imageNamed:@"star.png"];
+    self.starRater.starHighlightedImage=[UIImage imageNamed:@"starhighlighted.png"];
+    
+    self.starRater.maxRating = 5.0;
+    
+   self.starRater.horizontalMargin = 12;
+    self.starRater.editable=NO;
+    self.starRater.rating= 3.6;
+
+    
+    self.starRater.displayMode=EDStarRatingDisplayAccurate;
+    [self.starRater setNeedsDisplay];
+    
+    UITapGestureRecognizer *tap=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(ratingShow)];
+    tap.numberOfTapsRequired=1;
+    [self.starRater addGestureRecognizer:tap];
+    [self.starRaterBack setAlpha:0.20];
+    
+    [self.starRaterBack.layer setCornerRadius:5.0f];
+    
+    // border
+    [self.starRaterBack.layer setBorderColor:[UIColor lightGrayColor].CGColor];
+    [self.starRaterBack.layer setBorderWidth:1.5f];
+    
+    // drop shadow
+    [self.starRaterBack.layer setShadowColor:[UIColor blackColor].CGColor];
+    [self.starRaterBack.layer setShadowOpacity:0.4];
+    [self.starRaterBack.layer setShadowRadius:3.0];
+    [self.starRaterBack.layer setShadowOffset:CGSizeMake(2.0, 2.0)];
+    
+
+}
+-(void)ratingShow{
+
+    Review *review=[[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"CustomerReviews"];
+    
+    [self.navigationController pushViewController:review animated:YES];
 }
 
 - (IBAction)changePage:(id)sender {

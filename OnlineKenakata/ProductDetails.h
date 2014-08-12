@@ -10,6 +10,7 @@
 #import "MWPhotoBrowser.h"
 #import <MessageUI/MessageUI.h>
 #import "share.h"
+#import "EDStarRating.h"
 @interface ProductDetails : UIViewController<UIScrollViewDelegate,MWPhotoBrowserDelegate,shareDelegate,MFMessageComposeViewControllerDelegate>{
     NSString *currency;
     NSMutableArray *photos;
@@ -33,6 +34,10 @@
 @property (strong,nonatomic) IBOutlet UILabel *itemCodeLable;
 @property (strong,nonatomic) IBOutlet UIButton *cartBtn;
 @property (strong,nonatomic) IBOutlet UIScrollView *horizontalScroller;
+@property (strong,nonatomic) IBOutlet EDStarRating *starRater;
+@property (strong,nonatomic) IBOutlet UIView *starRaterBack;
+
+
 
 -(IBAction)imageEnlarge:(id)sender;
 
