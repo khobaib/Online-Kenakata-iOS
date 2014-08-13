@@ -332,7 +332,7 @@
 }
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component{
     if(flag){
-        return [NSString stringWithFormat:@"%ld",(row+1)];
+        return [NSString stringWithFormat:@"%d",(int)(row+1)];
     }else{
         NSString *str =[[pickerData objectAtIndex:row]objectForKey:@"answer"];
         return str;
