@@ -136,6 +136,9 @@
 		185E2AF51990C2CA008D741C /* DeleveryMethod.m in Sources */ = {isa = PBXBuildFile; fileRef = 185E2AF41990C2CA008D741C /* DeleveryMethod.m */; };
 		185E2AFA1990CF86008D741C /* databaseV3.sqlite3 in Resources */ = {isa = PBXBuildFile; fileRef = 185E2AF91990CF86008D741C /* databaseV3.sqlite3 */; };
 		185E2AFD1990D96E008D741C /* UserData.m in Sources */ = {isa = PBXBuildFile; fileRef = 185E2AFC1990D96E008D741C /* UserData.m */; };
+		18AB773C199CB58000364FA6 /* icon3.png in Resources */ = {isa = PBXBuildFile; fileRef = 18AB7739199CB58000364FA6 /* icon3.png */; };
+		18AB773D199CB58000364FA6 /* icon2.png in Resources */ = {isa = PBXBuildFile; fileRef = 18AB773A199CB58000364FA6 /* icon2.png */; };
+		18AB773E199CB58000364FA6 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 18AB773B199CB58000364FA6 /* icon.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -369,14 +372,14 @@
 		1848A322198F5F1700684602 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		1848A323198F5F1700684602 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		1848A325198F654500684602 /* PostSplash.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PostSplash.png; sourceTree = "<group>"; };
-		1848A327198F8E1C00684602 /* icon_120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon_120.png; path = ../icon_120.png; sourceTree = "<group>"; };
-		1848A328198F8E5100684602 /* icon_80.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon_80.png; path = ../icon_80.png; sourceTree = "<group>"; };
-		1848A329198F8E8100684602 /* icon_58.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon_58.png; path = ../icon_58.png; sourceTree = "<group>"; };
 		185E2AF31990C2CA008D741C /* DeleveryMethod.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeleveryMethod.h; sourceTree = "<group>"; };
 		185E2AF41990C2CA008D741C /* DeleveryMethod.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeleveryMethod.m; sourceTree = "<group>"; };
 		185E2AF91990CF86008D741C /* databaseV3.sqlite3 */ = {isa = PBXFileReference; lastKnownFileType = file; path = databaseV3.sqlite3; sourceTree = "<group>"; };
 		185E2AFB1990D96E008D741C /* UserData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserData.h; sourceTree = "<group>"; };
 		185E2AFC1990D96E008D741C /* UserData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserData.m; sourceTree = "<group>"; };
+		18AB7739199CB58000364FA6 /* icon3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon3.png; sourceTree = "<group>"; };
+		18AB773A199CB58000364FA6 /* icon2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon2.png; sourceTree = "<group>"; };
+		18AB773B199CB58000364FA6 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -715,10 +718,10 @@
 		14D45B451974FF7900F677D0 /* img */ = {
 			isa = PBXGroup;
 			children = (
+				18AB7739199CB58000364FA6 /* icon3.png */,
+				18AB773A199CB58000364FA6 /* icon2.png */,
+				18AB773B199CB58000364FA6 /* icon.png */,
 				182B9BE11997980E00AF6709 /* bkashicon.png */,
-				1848A329198F8E8100684602 /* icon_58.png */,
-				1848A328198F8E5100684602 /* icon_80.png */,
-				1848A327198F8E1C00684602 /* icon_120.png */,
 				1848A325198F654500684602 /* PostSplash.png */,
 				1848A320198F557600684602 /* splash002.png */,
 				1481856D197D2EFA007E0734 /* my_cart.png */,
@@ -905,6 +908,7 @@
 				1478B4CF19752269002C79B0 /* mail.png in Resources */,
 				182B9BE21997980E00AF6709 /* bkashicon.png in Resources */,
 				14D45B551974FFA500F677D0 /* tag_new.png in Resources */,
+				18AB773E199CB58000364FA6 /* icon.png in Resources */,
 				185E2AFA1990CF86008D741C /* databaseV3.sqlite3 in Resources */,
 				14D45B581974FFA500F677D0 /* twitter.png in Resources */,
 				14D45AE51974FCB900F677D0 /* README.md in Resources */,
@@ -914,7 +918,9 @@
 				14D45A521974FC6800F677D0 /* Images.xcassets in Resources */,
 				14D45B531974FFA500F677D0 /* facebook.png in Resources */,
 				14D45AD61974FCB900F677D0 /* README.mdown in Resources */,
+				18AB773D199CB58000364FA6 /* icon2.png in Resources */,
 				14D45AF51974FCB900F677D0 /* MWPhotoBrowser.bundle in Resources */,
+				18AB773C199CB58000364FA6 /* icon3.png in Resources */,
 				14D45B591974FFA500F677D0 /* video.png in Resources */,
 				14D45A441974FC6800F677D0 /* InfoPlist.strings in Resources */,
 				14F05AF3197D0A8600188C54 /* menu_icn_offers.png in Resources */,
@@ -1154,8 +1160,8 @@
 		14D45A691974FC6900F677D0 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-4";
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "LaunchImage-5";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1175,8 +1181,8 @@
 		14D45A6A1974FC6900F677D0 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-4";
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "LaunchImage-5";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (

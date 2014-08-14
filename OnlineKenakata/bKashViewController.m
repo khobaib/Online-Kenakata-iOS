@@ -137,7 +137,7 @@
     
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
     
-    NSString *str=[NSString stringWithFormat:@"%@/rest.php?method=add_order_3&application_code=%@",[Data getBaseUrl],[Data getAppCode]];
+    NSString *str=[NSString stringWithFormat:@"%@/rest.php?method=add_order_4&application_code=%@",[Data getBaseUrl],[Data getAppCode]];
     
     [manager POST:str parameters:self.params success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSDictionary *dic1=(NSDictionary *)responseObject;

@@ -13,8 +13,8 @@
 //styling in navigation bar : from storyboard , navigation bar color ar navigation bar back button
 
 +(UIColor *)appColor{
-    //return [UIColor colorWithRed:(78.0/255.0) green:(46.0/255.0) blue:(40.0/255.0) alpha:1.0];
-    return [UIColor blackColor];//[UIColor colorWithRed:(.0/255.0) green:(160.0/255.0) blue:(221.0/255.0) alpha:1.0];
+    return [UIColor colorWithRed:(90.0/255.0) green:(74.0/255.0) blue:(66.0/255.0) alpha:1.0];
+   // return [UIColor blackColor];//[UIColor colorWithRed:(.0/255.0) green:(160.0/255.0) blue:(221.0/255.0) alpha:1.0];
 }
 +(UIColor *)barbuttonColor{
     return [UIColor whiteColor];

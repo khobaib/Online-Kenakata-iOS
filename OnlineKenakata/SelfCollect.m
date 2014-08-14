@@ -277,7 +277,8 @@
     [customer setObject:branchID forKey:@"branch_id"];
     NSMutableArray *arr=[self productData];
     
-    NSDictionary *params = @{@"customer": customer,
+    NSDictionary *params = @{@"token":@"",
+                             @"customer": customer,
                              @"options": arr,
                              @"remark":comment,
                              @"amount_paid":@"0",
@@ -300,7 +301,7 @@
         
         manager.requestSerializer = [AFJSONRequestSerializer serializer];
         
-        NSString *str=[NSString stringWithFormat:@"%@/rest.php?method=add_order_3&application_code=%@",[Data getBaseUrl],[Data getAppCode]];
+        NSString *str=[NSString stringWithFormat:@"%@/rest.php?method=add_order_4&application_code=%@",[Data getBaseUrl],[Data getAppCode]];
         
         [manager POST:str parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
             NSDictionary *dic1=(NSDictionary *)responseObject;
