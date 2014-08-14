@@ -15,6 +15,8 @@
 #import "ProductDetails.h"
 //#import "Constant.h"
 
+#import "LoginViewController.h"
+#import "SignupViewController.h"
 
 @interface FirstViewController ()
 
@@ -473,6 +475,18 @@
     backupCatList=nil;
     backupproDuctList=nil;
     isSearched=NO;
+}
+
+-(IBAction)loginBtn:(id)sender{
+    LoginViewController *lvc=[[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"loginScreen"];
+    [self presentViewController:lvc animated:YES completion:^{}];
+    
+}
+-(IBAction)signupBtn:(id)sender{
+    
+    SignupViewController *svc=[[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"Signup"];
+    [self presentViewController:svc animated:YES completion:^{}];
+    
 }
 - (void)didReceiveMemoryWarning
 {

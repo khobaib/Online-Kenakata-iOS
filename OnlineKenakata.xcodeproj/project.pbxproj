@@ -133,6 +133,8 @@
 		1848A321198F557600684602 /* splash002.png in Resources */ = {isa = PBXBuildFile; fileRef = 1848A320198F557600684602 /* splash002.png */; };
 		1848A324198F5F1700684602 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 1848A323198F5F1700684602 /* Reachability.m */; };
 		1848A326198F654500684602 /* PostSplash.png in Resources */ = {isa = PBXBuildFile; fileRef = 1848A325198F654500684602 /* PostSplash.png */; };
+		1853DFB4199B841300C3D5ED /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1853DFB3199B841300C3D5ED /* LoginViewController.m */; };
+		1853DFB7199B842300C3D5ED /* SignupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1853DFB6199B842300C3D5ED /* SignupViewController.m */; };
 		185E2AF51990C2CA008D741C /* DeleveryMethod.m in Sources */ = {isa = PBXBuildFile; fileRef = 185E2AF41990C2CA008D741C /* DeleveryMethod.m */; };
 		185E2AFA1990CF86008D741C /* databaseV3.sqlite3 in Resources */ = {isa = PBXBuildFile; fileRef = 185E2AF91990CF86008D741C /* databaseV3.sqlite3 */; };
 		185E2AFD1990D96E008D741C /* UserData.m in Sources */ = {isa = PBXBuildFile; fileRef = 185E2AFC1990D96E008D741C /* UserData.m */; };
@@ -377,6 +379,10 @@
 		1848A327198F8E1C00684602 /* icon_120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon_120.png; path = ../icon_120.png; sourceTree = "<group>"; };
 		1848A328198F8E5100684602 /* icon_80.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon_80.png; path = ../icon_80.png; sourceTree = "<group>"; };
 		1848A329198F8E8100684602 /* icon_58.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon_58.png; path = ../icon_58.png; sourceTree = "<group>"; };
+		1853DFB2199B841300C3D5ED /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		1853DFB3199B841300C3D5ED /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		1853DFB5199B842300C3D5ED /* SignupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignupViewController.h; sourceTree = "<group>"; };
+		1853DFB6199B842300C3D5ED /* SignupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignupViewController.m; sourceTree = "<group>"; };
 		185E2AF31990C2CA008D741C /* DeleveryMethod.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeleveryMethod.h; sourceTree = "<group>"; };
 		185E2AF41990C2CA008D741C /* DeleveryMethod.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeleveryMethod.m; sourceTree = "<group>"; };
 		185E2AF91990CF86008D741C /* databaseV3.sqlite3 */ = {isa = PBXFileReference; lastKnownFileType = file; path = databaseV3.sqlite3; sourceTree = "<group>"; };
@@ -804,6 +810,10 @@
 				14D45B231974FF4800F677D0 /* tabbarController.m */,
 				14D45B321974FF4800F677D0 /* navicationController.h */,
 				14D45B331974FF4800F677D0 /* navicationController.m */,
+				1853DFB2199B841300C3D5ED /* LoginViewController.h */,
+				1853DFB3199B841300C3D5ED /* LoginViewController.m */,
+				1853DFB5199B842300C3D5ED /* SignupViewController.h */,
+				1853DFB6199B842300C3D5ED /* SignupViewController.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -1007,6 +1017,7 @@
 				14D45B3D1974FF4800F677D0 /* OfferDetail.m in Sources */,
 				14D45AE31974FCB900F677D0 /* PSTGridLayoutSection.m in Sources */,
 				14D45A4A1974FC6800F677D0 /* AppDelegate.m in Sources */,
+				1853DFB4199B841300C3D5ED /* LoginViewController.m in Sources */,
 				14D45B0F1974FD6B00F677D0 /* AFURLConnectionOperation.m in Sources */,
 				14D45AF21974FCB900F677D0 /* UIImage+MultiFormat.m in Sources */,
 				14D45AE71974FCB900F677D0 /* NSData+GIF.m in Sources */,
@@ -1047,6 +1058,7 @@
 				14D45AD01974FCB900F677D0 /* MWPhotoBrowser.m in Sources */,
 				14D45ACE1974FCB900F677D0 /* MWGridViewController.m in Sources */,
 				183A936C1993518A0097B2F1 /* TextStyling.m in Sources */,
+				1853DFB7199B842300C3D5ED /* SignupViewController.m in Sources */,
 				185E2AFD1990D96E008D741C /* UserData.m in Sources */,
 				14D45AEC1974FCB900F677D0 /* SDWebImageDownloader.m in Sources */,
 				14D45B101974FD6B00F677D0 /* AFURLRequestSerialization.m in Sources */,
