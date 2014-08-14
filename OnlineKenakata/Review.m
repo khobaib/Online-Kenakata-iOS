@@ -8,8 +8,12 @@
 
 #import "Review.h"
 #import "TextStyling.h"
+#import "AFNetworking/AFNetworking.h"
+#import "Data.h"
 
-#define rowHeight 130;
+#define rowHeight 150;
+#define descriptionWidth 283;
+#define descriptionHeight 60;
 
 @interface Review ()
 
@@ -30,21 +34,94 @@ int indexOfReadMoreButton;
 
 
 -(void)viewWillAppear:(BOOL)animated{
+
+    [self initLoading];
+    [self loadData];
+    
+    
+    
     [super viewWillAppear:animated];
-    float height=30+192+5*rowHeight;
-    if(isReadMoreButtonTouched [0]){
-        NSLog(@"true :(");
-    }
-    [self updateHeight:height];
+   
+
 }
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self setValueOntop];
-    [self statBar];
+   // [self setValueOntop];
+   // [self statBar];
     
    
 }
+
+-(void)loadData{
+    
+    NSString *string = [NSString stringWithFormat:@"%@/rest.php?method=get_products_by_productids&product_ids=%@&application_code=%@",[Data getBaseUrl],self.productID,[Data getAppCode]];
+
+    NSURL *url = [NSURL URLWithString:string];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    // NSLog(@"%@",string);
+    // 2
+    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    operation.responseSerializer = [AFJSONResponseSerializer serializer];
+    
+    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        [self parsReview:responseObject];
+        
+        
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        // 4
+        loading.hidden=YES;
+        [loading StopAnimating];
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error catagory List"
+                                                            message:[error localizedDescription]
+                                                           delegate:nil
+                                                  cancelButtonTitle:@"Ok"
+                                                  otherButtonTitles:nil];
+        [alertView show];
+    }];
+    
+    // 5
+    //  [self.indecator startAnimating];
+    loading.hidden=NO;
+    [loading StartAnimating];
+    [operation start];
+
+    
+    
+}
+
+-(void)parsReview:(id)respons{
+    [loading StopAnimating];
+    loading.hidden=YES;
+    NSMutableDictionary *dic1=(NSMutableDictionary *)respons;
+    NSMutableDictionary *dic=[[[dic1 objectForKey:@"success"]objectForKey:@"products"]objectAtIndex:0];
+    reviews=[[dic objectForKey:@"review_detail"]objectForKey:@"reviews"];
+    averageRating=[[dic objectForKey:@"review_detail"]objectForKey:@"average_rating"];
+    distribution=[[dic objectForKey:@"review_detail"]objectForKey:@"distribution"];
+    
+    
+    [self StarSetter:self.TotalRating number:[averageRating floatValue]];
+    
+
+    [self starBar];   // NSLog(@"%@",dic);
+    float height=30+192+reviews.count*rowHeight;
+    
+    [self updateHeight:height];
+    [self.tableview reloadData];
+    
+}
+-(void)initLoading{
+    CGFloat x= self.view.frame.size.width/2-65;
+    CGFloat y =(self.view.frame.size.height-self.navigationController.navigationBar.frame.size.height-self.tabBarController.tabBar.frame.size.height)/2-25;
+    
+    loading=[[LoadingView alloc]initWithFrame:CGRectMake(x, y, 130, 50)];
+    loading.hidden=YES;
+    [self.view addSubview:loading];
+}
+
 
 -(void)updateHeight:(int)height{
     self.heightConstraint.constant =height; //self.description.contentSize.height;
@@ -63,98 +140,101 @@ int indexOfReadMoreButton;
     // Dispose of any resources that can be recreated.
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 5;
+    return reviews.count;
 }
 
 // Row display. Implementers should *always* try to reuse cells by setting each cell's reuseIdentifier and querying for available reusable cells with dequeueReusableCellWithIdentifier:
 // Cell gets various attributes set automatically based on table (separators) and data source (accessory views, editing controls)
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    NSMutableDictionary *dic=[reviews objectAtIndex:indexPath.row];
     UITableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:@"reviewCell" forIndexPath:indexPath];
     
     UILabel *titile=(UILabel *)[cell viewWithTag:901];
-    titile.text=@"This product is very good , i am in love with this product";
+    titile.text=[dic objectForKey:@"title"];//@"This product is very good , i am in love with this product";
     UITextView *description=(UITextView *)[cell viewWithTag:904];
 
     UIButton *btn=(UIButton *)[cell viewWithTag:905];
    
 
-    if(indexPath.row==3){
-        description.text=@"good";
-    }
-    
-    NSString *string =description.text;//[self.productData objectForKey:@"description"];
-    NSDictionary *attributes = @{NSFontAttributeName:[UIFont systemFontOfSize:12]};
-    NSString *str=@"kfhkjfhkf kfhkf sfkh kfshksfg skfh skfskfhskfhskfhksfhkfshksfhksfhskfhskf ksfhsfkh skfhsdkfh skf hk skfhksfhg sfkhgsdfiugs sfhsiusiruh sifh shishfvsuhviusfhgurruh ifhfurhrufh aeuhfurh rufhufurfhur irfhrif ";
-    CGRect rect = [string boundingRectWithSize:CGSizeMake(description.frame.size.width, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:attributes context:nil];
-    
-    if(isReadMoreButtonTouched[indexOfReadMoreButton] && [indexPath row]== indexOfReadMoreButton)
-    {
-        NSDictionary *attributes = @{NSFontAttributeName:[UIFont systemFontOfSize:12]};
-        
-        CGRect rect = [str boundingRectWithSize:CGSizeMake(description.frame.size.width, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:attributes context:nil];
-        
-   
-    
-        [description setFrame:rect];
-        description.attributedText=[TextStyling AttributForDescription:str];
 
-    }else{
-        
-        if(rect.size.height<=description.frame.size.height){
-            
-            btn.hidden=YES;
-            
-        }
-        
-        
-    }
+    
+    NSString *string =[dic objectForKey:@"detail"];//description.text;//[self.productData objectForKey:@"description"];
+    NSDictionary *attributes = @{NSFontAttributeName:[UIFont systemFontOfSize:12]};
    
+    CGRect rect = [string boundingRectWithSize:CGSizeMake(283, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:attributes context:nil];
   
-   
+    if(rect.size.height>63){
+        UIButton *btn=[[UIButton alloc]initWithFrame:CGRectMake(0, 150, 290, 20)];
+        [btn setTitle:@"Read More" forState:UIControlStateNormal];
+        btn.titleLabel.font = [UIFont systemFontOfSize:12];
+        btn.contentHorizontalAlignment=UIControlContentHorizontalAlignmentRight;
+
+        [btn setBackgroundColor:[UIColor colorWithRed:(205.0f/255.0f) green:(201.0f/255.0f) blue:(201.0f/255.0f) alpha:1]];
+        [btn addTarget:self action:@selector(readmoreButtonClicked:) forControlEvents:UIControlEventTouchDragInside];
+        btn.tag=indexPath.row;
+        [cell addSubview:btn];
+    }
+    
+    [description setScrollEnabled:YES];
+    [description setText:string];
+    
+    [description sizeToFit];
     
     
+    [description setScrollEnabled:NO];
+ 
     EDStarRating *star=(EDStarRating *)[cell viewWithTag:902];
-    [self StarSetter:star number:(float)indexPath.row];
+    [self StarSetter:star number:[[dic objectForKey:@"rating"] floatValue]];
     
     btn.tag=indexPath.row;
     
-    isReadMoreButtonTouched[indexPath.row]=NO;
     return cell;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    if(isReadMoreButtonTouched[indexOfReadMoreButton] && [indexPath row]== indexOfReadMoreButton){
-        [self updateHeight: self.heightConstraint.constant+130];
-        return 300.0f;
+    NSMutableDictionary *dic=[reviews objectAtIndex:indexPath.row];
+    NSString *string =[dic objectForKey:@"detail"];//description.text;//[self.productData objectForKey:@"description"];
+    NSDictionary *attributes = @{NSFontAttributeName:[UIFont systemFontOfSize:12]};
+    
+    CGRect rect = [string boundingRectWithSize:CGSizeMake(283, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:attributes context:nil];
+    
+    if(rect.size.height>63){
+     
+        float result=rect.size.height-63+rowHeight;
+       // NSLog(@"%f",result);
+        [self updateHeight:self.heightConstraint.constant+result];
+        
+        return 30+rowHeight;
     }
-    else return rowHeight;
+
+    return rowHeight;
 }
 
--(IBAction)remoreButtonClicked:(id)sender{
+-(IBAction)readmoreButtonClicked:(id)sender{
+    NSLog(@"tapped");
     UIButton *readMoreButton = (UIButton *)sender;
     indexOfReadMoreButton=[readMoreButton tag];
-    isReadMoreButtonTouched[indexOfReadMoreButton]=!isReadMoreButtonTouched[indexOfReadMoreButton];
     
     [[self tableview] beginUpdates];
     [[self tableview] reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForItem: indexOfReadMoreButton inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
     [[self tableview] endUpdates];
 }
 
--(void)statBar{
+-(void)starBar{
     int x =0;
     int y=5;
     int diffY=20;
     float totalWidth=self.barContainer.frame.size.width;
-    int totalVote=1854;
-    float x5=720.0;
-    float x4=410.0;
-    float x3=12;
-    float x2=346.0;
-    float x1=366;
-    
+    //int totalVote=1854;
+    float x5=[[distribution objectForKey:@"5"] floatValue];
+    float x4=[[distribution objectForKey:@"4"] floatValue];
+    float x3=[[distribution objectForKey:@"3"] floatValue];
+    float x2=[[distribution objectForKey:@"2"] floatValue];
+    float x1=[[distribution objectForKey:@"1"] floatValue];
+    float totalVote=x5+x4+x3+x2+x1;
     float ratio=totalWidth/totalVote;
     
-    NSLog(@"%f   ,%f",ratio,totalWidth);
 
     UIView *bar11=[[UIView alloc]initWithFrame:CGRectMake(x, y, ratio*x5, 10)];
     [bar11 setBackgroundColor:[UIColor orangeColor]];

@@ -306,6 +306,7 @@
 
     Review *review=[[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"CustomerReviews"];
     
+    review.productID=[self.productData objectForKey:@"product_id"];
     [self.navigationController pushViewController:review animated:YES];
 }
 

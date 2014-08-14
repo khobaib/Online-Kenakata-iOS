@@ -143,6 +143,9 @@
 		1895D59F1999F05D00713916 /* star.png in Resources */ = {isa = PBXBuildFile; fileRef = 1895D59D1999F05D00713916 /* star.png */; };
 		1895D5A01999F05D00713916 /* starhighlighted.png in Resources */ = {isa = PBXBuildFile; fileRef = 1895D59E1999F05D00713916 /* starhighlighted.png */; };
 		1895D5A3199A1CA200713916 /* Review.m in Sources */ = {isa = PBXBuildFile; fileRef = 1895D5A2199A1CA200713916 /* Review.m */; };
+		18C1370B199CB2C000121F18 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 18C13708199CB2C000121F18 /* icon.png */; };
+		18C1370C199CB2C000121F18 /* icon1.png in Resources */ = {isa = PBXBuildFile; fileRef = 18C13709199CB2C000121F18 /* icon1.png */; };
+		18C1370D199CB2C000121F18 /* icon2.png in Resources */ = {isa = PBXBuildFile; fileRef = 18C1370A199CB2C000121F18 /* icon2.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -376,9 +379,6 @@
 		1848A322198F5F1700684602 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		1848A323198F5F1700684602 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		1848A325198F654500684602 /* PostSplash.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PostSplash.png; sourceTree = "<group>"; };
-		1848A327198F8E1C00684602 /* icon_120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon_120.png; path = ../icon_120.png; sourceTree = "<group>"; };
-		1848A328198F8E5100684602 /* icon_80.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon_80.png; path = ../icon_80.png; sourceTree = "<group>"; };
-		1848A329198F8E8100684602 /* icon_58.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon_58.png; path = ../icon_58.png; sourceTree = "<group>"; };
 		1853DFB2199B841300C3D5ED /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		1853DFB3199B841300C3D5ED /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		1853DFB5199B842300C3D5ED /* SignupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignupViewController.h; sourceTree = "<group>"; };
@@ -395,6 +395,9 @@
 		1895D59E1999F05D00713916 /* starhighlighted.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = starhighlighted.png; sourceTree = "<group>"; };
 		1895D5A1199A1CA200713916 /* Review.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Review.h; sourceTree = "<group>"; };
 		1895D5A2199A1CA200713916 /* Review.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Review.m; sourceTree = "<group>"; };
+		18C13708199CB2C000121F18 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
+		18C13709199CB2C000121F18 /* icon1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon1.png; sourceTree = "<group>"; };
+		18C1370A199CB2C000121F18 /* icon2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon2.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -734,13 +737,13 @@
 		14D45B451974FF7900F677D0 /* img */ = {
 			isa = PBXGroup;
 			children = (
+				18C13708199CB2C000121F18 /* icon.png */,
+				18C13709199CB2C000121F18 /* icon1.png */,
+				18C1370A199CB2C000121F18 /* icon2.png */,
 				1895D59D1999F05D00713916 /* star.png */,
 				1895D59E1999F05D00713916 /* starhighlighted.png */,
 				1873F1F21999D9CB00989E12 /* no_photo.png */,
 				182B9BE11997980E00AF6709 /* bkashicon.png */,
-				1848A329198F8E8100684602 /* icon_58.png */,
-				1848A328198F8E5100684602 /* icon_80.png */,
-				1848A327198F8E1C00684602 /* icon_120.png */,
 				1848A325198F654500684602 /* PostSplash.png */,
 				1848A320198F557600684602 /* splash002.png */,
 				1481856D197D2EFA007E0734 /* my_cart.png */,
@@ -942,6 +945,7 @@
 				1895D5A01999F05D00713916 /* starhighlighted.png in Resources */,
 				1478B4CF19752269002C79B0 /* mail.png in Resources */,
 				182B9BE21997980E00AF6709 /* bkashicon.png in Resources */,
+				18C1370C199CB2C000121F18 /* icon1.png in Resources */,
 				14D45B551974FFA500F677D0 /* tag_new.png in Resources */,
 				185E2AFA1990CF86008D741C /* databaseV3.sqlite3 in Resources */,
 				1895D59F1999F05D00713916 /* star.png in Resources */,
@@ -955,6 +959,7 @@
 				14D45AD61974FCB900F677D0 /* README.mdown in Resources */,
 				1873F1F31999D9CB00989E12 /* no_photo.png in Resources */,
 				14D45AF51974FCB900F677D0 /* MWPhotoBrowser.bundle in Resources */,
+				18C1370B199CB2C000121F18 /* icon.png in Resources */,
 				14D45B591974FFA500F677D0 /* video.png in Resources */,
 				14D45A441974FC6800F677D0 /* InfoPlist.strings in Resources */,
 				14F05AF3197D0A8600188C54 /* menu_icn_offers.png in Resources */,
@@ -962,6 +967,7 @@
 				14F05AF1197D0A8600188C54 /* menu_icn_info.png in Resources */,
 				14FB7FCB197B7D5C00E8BDF8 /* down_arrow.png in Resources */,
 				14D45A4D1974FC6800F677D0 /* Main.storyboard in Resources */,
+				18C1370D199CB2C000121F18 /* icon2.png in Resources */,
 				1481856E197D2EFA007E0734 /* my_cart.png in Resources */,
 				14D95EFF19766F52001D6CB3 /* imessege.png in Resources */,
 				1848A321198F557600684602 /* splash002.png in Resources */,
@@ -1198,8 +1204,7 @@
 		14D45A691974FC6900F677D0 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-4";
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "LaunchImage-5";
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1219,8 +1224,7 @@
 		14D45A6A1974FC6900F677D0 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-4";
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "LaunchImage-5";
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (

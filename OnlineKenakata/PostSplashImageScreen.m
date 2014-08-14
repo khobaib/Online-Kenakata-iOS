@@ -163,6 +163,7 @@
                                                   cancelButtonTitle:@"Ok"
                                                   otherButtonTitles:nil];
         [alertView show];
+        NSLog(@"%@",url);
     }];
     
     // 5

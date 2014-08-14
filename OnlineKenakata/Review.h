@@ -8,11 +8,18 @@
 
 #import <UIKit/UIKit.h>
 #import "EDStarRating.h"
+#import "LoadingView.h"
 
 @interface Review : UIViewController<UITableViewDataSource,UITableViewDelegate>{
-    BOOL isReadMoreButtonTouched[5];
 
+    LoadingView *loading;
+    NSMutableArray *reviews;
+    NSString *averageRating;
+    NSMutableDictionary *distribution;
 }
+
+@property (strong,nonatomic) NSString *productID;
+
 @property (strong,nonatomic)IBOutlet EDStarRating *TotalRating;
 @property (strong,nonatomic) IBOutlet UILabel *reviewCount;
 @property (strong,nonatomic) IBOutlet UILabel *numberOfStar;
