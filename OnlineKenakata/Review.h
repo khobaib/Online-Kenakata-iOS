@@ -16,6 +16,8 @@
     NSMutableArray *reviews;
     NSString *averageRating;
     NSMutableDictionary *distribution;
+    NSMutableArray *isSelected;
+    BOOL isdataloaded;
 }
 
 @property (strong,nonatomic) NSString *productID;

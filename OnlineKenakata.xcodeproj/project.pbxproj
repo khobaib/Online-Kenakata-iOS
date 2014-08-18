@@ -146,6 +146,7 @@
 		18C1370B199CB2C000121F18 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 18C13708199CB2C000121F18 /* icon.png */; };
 		18C1370C199CB2C000121F18 /* icon1.png in Resources */ = {isa = PBXBuildFile; fileRef = 18C13709199CB2C000121F18 /* icon1.png */; };
 		18C1370D199CB2C000121F18 /* icon2.png in Resources */ = {isa = PBXBuildFile; fileRef = 18C1370A199CB2C000121F18 /* icon2.png */; };
+		9AE0DAE719A2074A003F1D74 /* WriteReviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AE0DAE619A2074A003F1D74 /* WriteReviewViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -398,6 +399,8 @@
 		18C13708199CB2C000121F18 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 		18C13709199CB2C000121F18 /* icon1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon1.png; sourceTree = "<group>"; };
 		18C1370A199CB2C000121F18 /* icon2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon2.png; sourceTree = "<group>"; };
+		9AE0DAE519A2074A003F1D74 /* WriteReviewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WriteReviewViewController.h; sourceTree = "<group>"; };
+		9AE0DAE619A2074A003F1D74 /* WriteReviewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WriteReviewViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -785,6 +788,8 @@
 				1403D1FF197A50680074B61C /* MyCart.m */,
 				1895D5A1199A1CA200713916 /* Review.h */,
 				1895D5A2199A1CA200713916 /* Review.m */,
+				9AE0DAE519A2074A003F1D74 /* WriteReviewViewController.h */,
+				9AE0DAE619A2074A003F1D74 /* WriteReviewViewController.m */,
 				14E0C0C0197BA25A0099A51F /* ProceedToCheckout.h */,
 				14E0C0C1197BA25A0099A51F /* ProceedToCheckout.m */,
 				185E2AFB1990D96E008D741C /* UserData.h */,
@@ -1006,6 +1011,7 @@
 				14E0C0C2197BA25A0099A51F /* ProceedToCheckout.m in Sources */,
 				14D45AD91974FCB900F677D0 /* PSTCollectionViewCell.m in Sources */,
 				14D45ADB1974FCB900F677D0 /* PSTCollectionViewData.m in Sources */,
+				9AE0DAE719A2074A003F1D74 /* WriteReviewViewController.m in Sources */,
 				182B9BE01997934400AF6709 /* bKashViewController.m in Sources */,
 				14D45AD81974FCB900F677D0 /* PSTCollectionView.m in Sources */,
 				14D45ADF1974FCB900F677D0 /* PSTCollectionViewUpdateItem.m in Sources */,

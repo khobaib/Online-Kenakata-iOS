@@ -10,6 +10,7 @@
 #import "TextStyling.h"
 #import "AFNetworking/AFNetworking.h"
 #import "Data.h"
+#import "WriteReviewViewController.h"
 
 #define rowHeight 150;
 #define descriptionWidth 283;
@@ -38,7 +39,7 @@ int indexOfReadMoreButton;
     [self initLoading];
     [self loadData];
     
-    
+    isdataloaded=NO;
     
     [super viewWillAppear:animated];
    
@@ -111,7 +112,12 @@ int indexOfReadMoreButton;
     
     [self updateHeight:height];
     [self.tableview reloadData];
+    isSelected=[[NSMutableArray alloc]init];
     
+    for (int i=0; i<reviews.count;i++) {
+        [isSelected addObject:[NSNumber numberWithBool:NO]];
+    }
+    isdataloaded=YES;
 }
 -(void)initLoading{
     CGFloat x= self.view.frame.size.width/2-65;
@@ -155,9 +161,7 @@ int indexOfReadMoreButton;
     titile.text=[dic objectForKey:@"title"];//@"This product is very good , i am in love with this product";
     UITextView *description=(UITextView *)[cell viewWithTag:904];
 
-    UIButton *btn=(UIButton *)[cell viewWithTag:905];
    
-
 
     
     NSString *string =[dic objectForKey:@"detail"];//description.text;//[self.productData objectForKey:@"description"];
@@ -165,30 +169,48 @@ int indexOfReadMoreButton;
    
     CGRect rect = [string boundingRectWithSize:CGSizeMake(283, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:attributes context:nil];
   
+       if(isdataloaded){
+        if ([[isSelected objectAtIndex:indexPath.row]boolValue]) {
+            NSLog(@"now true");
+            
+            
+            UIButton *btn=(UIButton *)[cell viewWithTag:indexPath.row];
+            [btn removeFromSuperview];
+            [description setScrollEnabled:YES];
+            [description setText:string];
+            
+            [description sizeToFit];
+            
+            
+            [description setScrollEnabled:NO];
+            [isSelected replaceObjectAtIndex:indexPath.row withObject:[NSNumber numberWithBool:NO]];
+        }else{
+            [description setText:string];
+        }
+        
+    }
+    
     if(rect.size.height>63){
-        UIButton *btn=[[UIButton alloc]initWithFrame:CGRectMake(0, 150, 290, 20)];
+        //float y=description.frame.origin.y+description.frame.size.height+5;
+       UIButton *btn=[[UIButton alloc]initWithFrame:CGRectMake(0, cell.frame.size.height-20, 290, 20)];
         [btn setTitle:@"Read More" forState:UIControlStateNormal];
         btn.titleLabel.font = [UIFont systemFontOfSize:12];
         btn.contentHorizontalAlignment=UIControlContentHorizontalAlignmentRight;
-
+        
         [btn setBackgroundColor:[UIColor colorWithRed:(205.0f/255.0f) green:(201.0f/255.0f) blue:(201.0f/255.0f) alpha:1]];
-        [btn addTarget:self action:@selector(readmoreButtonClicked:) forControlEvents:UIControlEventTouchDragInside];
+        [btn addTarget:self action:@selector(readmoreButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
         btn.tag=indexPath.row;
         [cell addSubview:btn];
+        
     }
     
-    [description setScrollEnabled:YES];
-    [description setText:string];
+
     
-    [description sizeToFit];
-    
-    
-    [description setScrollEnabled:NO];
+
  
     EDStarRating *star=(EDStarRating *)[cell viewWithTag:902];
     [self StarSetter:star number:[[dic objectForKey:@"rating"] floatValue]];
     
-    btn.tag=indexPath.row;
     
     return cell;
 }
@@ -199,26 +221,27 @@ int indexOfReadMoreButton;
     
     CGRect rect = [string boundingRectWithSize:CGSizeMake(283, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:attributes context:nil];
     
-    if(rect.size.height>63){
+    if(rect.size.height>63 && [[isSelected objectAtIndex:indexPath.row]boolValue]){
      
-        float result=rect.size.height-63+rowHeight;
+        NSLog(@"update hight FOR index %d",indexPath.row);
+        float result=rect.size.height+rowHeight;
        // NSLog(@"%f",result);
         [self updateHeight:self.heightConstraint.constant+result];
         
-        return 30+rowHeight;
+        return result;
+    }else if (rect.size.height>63 ){
+        return 25+rowHeight;
     }
 
     return rowHeight;
 }
 
 -(IBAction)readmoreButtonClicked:(id)sender{
-    NSLog(@"tapped");
     UIButton *readMoreButton = (UIButton *)sender;
     indexOfReadMoreButton=[readMoreButton tag];
-    
-    [[self tableview] beginUpdates];
+    [isSelected replaceObjectAtIndex:indexOfReadMoreButton withObject:[NSNumber numberWithBool:YES]];
     [[self tableview] reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForItem: indexOfReadMoreButton inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
-    [[self tableview] endUpdates];
+    //[self.tableview reloadData];
 }
 
 -(void)starBar{
@@ -308,15 +331,18 @@ int indexOfReadMoreButton;
 
 }
 
-/*
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
+    
+    WriteReviewViewController *wrvc=(WriteReviewViewController *)[segue destinationViewController];
+    wrvc.productID=self.productID;
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
 }
-*/
+
 
 @end

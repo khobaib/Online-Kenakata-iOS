@@ -11,9 +11,12 @@
 #import <MessageUI/MessageUI.h>
 #import "share.h"
 #import "EDStarRating.h"
+#import "LoadingView.h"
 @interface ProductDetails : UIViewController<UIScrollViewDelegate,MWPhotoBrowserDelegate,shareDelegate,MFMessageComposeViewControllerDelegate>{
     NSString *currency;
     NSMutableArray *photos;
+     LoadingView *loading;
+    
 }
 
 @property NSMutableDictionary *productData;

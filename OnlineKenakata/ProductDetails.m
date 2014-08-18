@@ -13,6 +13,8 @@
 #import "Libraries/MBProgressHUD/MBProgressHUD.h"
 #import "TextStyling.h"
 #import "Review.h"
+#import "AFNetworking.h"
+#import "Data.h"
 @interface ProductDetails ()
 
 @end
@@ -128,18 +130,9 @@
     [super viewWillAppear:animated];
     
     // 4
-    CGSize pagesScrollViewSize = self.scrollView.frame.size;
-    self.scrollView.contentSize = CGSizeMake(pagesScrollViewSize.width * self.pageImages.count, pagesScrollViewSize.height);
+ 
 
-    
-    self.horizontalScroller.contentSize=CGSizeMake(120*self.similarProducrsData.count, self.horizontalScroller.frame.size.height);
-    
-    // 5
-    [self loadVisiblePages];
     [self addShareButton];
-    [self loadVisibleSimilarProduct];
-
-    
     
 }
 
@@ -170,14 +163,25 @@
     
     
     NSString *string =[self.productData objectForKey:@"description"];
-    NSDictionary *attributes = @{NSFontAttributeName:[UIFont systemFontOfSize:14]};
+   // NSDictionary *attributes = @{NSFontAttributeName:[UIFont systemFontOfSize:14]};
     
-    CGRect rect = [string boundingRectWithSize:CGSizeMake(self.productDetails.frame.size.width, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:attributes context:nil];
+   // CGRect rect = [string boundingRectWithSize:CGSizeMake(self.productDetails.frame.size.width, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:attributes context:nil];
     
     
     
-    [self.productDetails setFrame:rect];
+   // [self.productDetails setFrame:rect];
+    
+    
+    [ self.productDetails setScrollEnabled:YES];
+   
+    
+   
     self.productDetails.attributedText=[TextStyling AttributForDescription:string];
+    
+    [ self.productDetails sizeToFit];
+    
+    
+    [ self.productDetails setScrollEnabled:NO];
     
     int available =[[self.productData objectForKey:@"general_available_quantity"]intValue];
     if(available>0){
@@ -258,16 +262,89 @@
     
 
    
-    [self setValueOnUI];
+    
+    
+    
+  
+    [self initLoading];
+
+    [self loadData];
+    // NSLog(@"%@",self.pageImages);
+    // Do any additional setup after loading the view.
+}
+
+-(void)loadData{
+    
+    NSString *string = [NSString stringWithFormat:@"%@/rest.php?method=get_products_by_productids&product_ids=%@&application_code=%@",[Data getBaseUrl],[self.productData objectForKey:@"product_id"],[Data getAppCode]];
+    
+    NSURL *url = [NSURL URLWithString:string];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    // NSLog(@"%@",string);
+    // 2
+    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    operation.responseSerializer = [AFJSONResponseSerializer serializer];
+    
+    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        [self parsProducts:responseObject];
+        
+        
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        // 4
+        loading.hidden=YES;
+        [loading StopAnimating];
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error catagory List"
+                                                            message:[error localizedDescription]
+                                                           delegate:nil
+                                                  cancelButtonTitle:@"Ok"
+                                                  otherButtonTitles:nil];
+        [alertView show];
+    }];
+    
+    // 5
+    //  [self.indecator startAnimating];
+    loading.hidden=NO;
+    [loading StartAnimating];
+    [operation start];
+    
+    
+    
+}
+-(void)parsProducts:(id)respons{
+    [loading StopAnimating];
+    loading.hidden=YES;
+    NSMutableDictionary *dic1=(NSMutableDictionary *)respons;
+    self.productData=[[[dic1 objectForKey:@"success"]objectForKey:@"products"]objectAtIndex:0];
+    self.similarProducrsData=[self.productData objectForKey:@"similar_products"];
+    
+  
+      [self starRaterShow];
+    
+   // NSLog(@"%@",self.productData);
+    // 5
+    
     
     [self initImageSlider];
     
     [self initOntap];
-    [self starRaterShow];
+    
+    CGSize pagesScrollViewSize = self.scrollView.frame.size;
+    self.scrollView.contentSize = CGSizeMake(pagesScrollViewSize.width * self.pageImages.count, pagesScrollViewSize.height);
+    
+    
+    self.horizontalScroller.contentSize=CGSizeMake(120*self.similarProducrsData.count, self.horizontalScroller.frame.size.height);
 
-    // NSLog(@"%@",self.pageImages);
-    // Do any additional setup after loading the view.
+    [self loadVisiblePages];
+    
+    [self loadVisibleSimilarProduct];
+    [self setValueOnUI];
+    
 }
+
+
+
 
 -(void)starRaterShow{
     self.starRater.starImage=[UIImage imageNamed:@"star.png"];
@@ -443,7 +520,7 @@
     NSMutableDictionary *dic1=[NSKeyedUnarchiver unarchiveObjectWithData:[ud objectForKey:@"get_user_data"]];
     NSMutableDictionary *dic=[[dic1 objectForKey:@"success"]objectForKey:@"user"];
     
-    NSLog(@"protocall");
+   // NSLog(@"protocall");
     if(![MFMessageComposeViewController canSendText]) {
         UIAlertView *warningAlert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Your device doesn't support SMS!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [warningAlert show];
@@ -543,6 +620,17 @@
 
 #pragma mark -HorizentalSlider
 
+
+-(void)initLoading{
+    CGFloat x= self.view.frame.size.width/2-65;
+    CGFloat y =(self.view.frame.size.height-self.navigationController.navigationBar.frame.size.height-self.tabBarController.tabBar.frame.size.height)/2-25;
+    
+    loading=[[LoadingView alloc]initWithFrame:CGRectMake(x, y, 130, 50)];
+    loading.hidden=YES;
+    [self.view addSubview:loading];
+}
+
+
 - (void)loadSimilarProduct:(NSInteger)page {
     if (page < 0 || page >= self.similarProducrsData.count) {
         // If it's outside the range of what you have to display, then do nothing
@@ -563,9 +651,10 @@
         MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:newPageView animated:YES];
         hud.labelText = @"Loading";
         
-        NSMutableDictionary *dic=[[[self.similarProducrsData objectAtIndex:page]objectForKey:@"images"]objectAtIndex:0];
+        NSString *string=[[self.similarProducrsData objectAtIndex:page]objectForKey:@"thumbnail_image_url"];
         
-        [newPageView setImageWithURL:[NSURL URLWithString:[dic objectForKey:@"thumbnail_image_url"]]
+
+        [newPageView setImageWithURL:[NSURL URLWithString:string]
                     placeholderImage:[UIImage imageNamed:@"placeholder.png"]
                            completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
                                
@@ -617,23 +706,8 @@
     NSMutableDictionary *dic = [self.similarProducrsData objectAtIndex:view.tag];
     
     ProductDetails *prdtails;
-    NSString *spclQus=[dic objectForKey:@"special_question"];
-    int available =[[dic objectForKey:@"general_available_quantity"]intValue];
-    
-    if([spclQus isEqualToString:@""]){
-        if(available<1){
             prdtails= [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"productDetails3"];
-            prdtails.cartBtn.hidden=YES;
-            NSLog(@"in no button");
-            //productDetails3
-        }else{
-            prdtails= [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"productDetails3"];
-            
-        }
-    }else{
-        prdtails= [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"productDetails3"];
         
-    }
     
     
     prdtails.productData=dic;
