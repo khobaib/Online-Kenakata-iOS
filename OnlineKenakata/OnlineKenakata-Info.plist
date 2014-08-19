@@ -45,6 +45,11 @@
 	<string>This app will use addressbook </string>
 	<key>NSLocationUsageDescription</key>
 	<string>This app will use your location</string>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>location</string>
+		<string>remote-notification</string>
+	</array>
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
 	<key>UIRequiredDeviceCapabilities</key>

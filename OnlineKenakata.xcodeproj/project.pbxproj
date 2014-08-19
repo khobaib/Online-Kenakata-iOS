@@ -107,7 +107,6 @@
 		14D45B421974FF4800F677D0 /* NewsList.m in Sources */ = {isa = PBXBuildFile; fileRef = 14D45B271974FF4800F677D0 /* NewsList.m */; };
 		14D45B431974FF4800F677D0 /* NewsDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = 14D45B281974FF4800F677D0 /* NewsDetail.m */; };
 		14D45B441974FF4800F677D0 /* navicationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14D45B331974FF4800F677D0 /* navicationController.m */; };
-		14D45B511974FFA500F677D0 /* splash001.png in Resources */ = {isa = PBXBuildFile; fileRef = 14D45B471974FFA400F677D0 /* splash001.png */; };
 		14D45B521974FFA500F677D0 /* a2mc_pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 14D45B481974FFA400F677D0 /* a2mc_pressed.png */; };
 		14D45B531974FFA500F677D0 /* facebook.png in Resources */ = {isa = PBXBuildFile; fileRef = 14D45B491974FFA400F677D0 /* facebook.png */; };
 		14D45B541974FFA500F677D0 /* icon_image_enlarge.png in Resources */ = {isa = PBXBuildFile; fileRef = 14D45B4A1974FFA400F677D0 /* icon_image_enlarge.png */; };
@@ -139,6 +138,7 @@
 		18AB773C199CB58000364FA6 /* icon3.png in Resources */ = {isa = PBXBuildFile; fileRef = 18AB7739199CB58000364FA6 /* icon3.png */; };
 		18AB773D199CB58000364FA6 /* icon2.png in Resources */ = {isa = PBXBuildFile; fileRef = 18AB773A199CB58000364FA6 /* icon2.png */; };
 		18AB773E199CB58000364FA6 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 18AB773B199CB58000364FA6 /* icon.png */; };
+		9A5C07A719A22D9000F02FF7 /* splash001.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A5C07A619A22D9000F02FF7 /* splash001.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -184,7 +184,7 @@
 		14818570197D3C6E007E0734 /* BBBadgeBarButtonItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBBadgeBarButtonItem.h; sourceTree = "<group>"; };
 		14818571197D3C6E007E0734 /* BBBadgeBarButtonItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBBadgeBarButtonItem.m; sourceTree = "<group>"; };
 		1486EE4A197651BE0036C159 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
-		14D45A361974FC6800F677D0 /* OnlineKenakata.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OnlineKenakata.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		14D45A361974FC6800F677D0 /* Sigma Branded Shop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Sigma Branded Shop.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		14D45A391974FC6800F677D0 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		14D45A3B1974FC6800F677D0 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		14D45A3D1974FC6800F677D0 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -339,7 +339,6 @@
 		14D45B331974FF4800F677D0 /* navicationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = navicationController.m; sourceTree = "<group>"; };
 		14D45B341974FF4800F677D0 /* tabbarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tabbarController.h; sourceTree = "<group>"; };
 		14D45B351974FF4800F677D0 /* Constant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constant.h; sourceTree = "<group>"; };
-		14D45B471974FFA400F677D0 /* splash001.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = splash001.png; sourceTree = "<group>"; };
 		14D45B481974FFA400F677D0 /* a2mc_pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = a2mc_pressed.png; sourceTree = "<group>"; };
 		14D45B491974FFA400F677D0 /* facebook.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = facebook.png; sourceTree = "<group>"; };
 		14D45B4A1974FFA400F677D0 /* icon_image_enlarge.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_image_enlarge.png; sourceTree = "<group>"; };
@@ -380,6 +379,7 @@
 		18AB7739199CB58000364FA6 /* icon3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon3.png; sourceTree = "<group>"; };
 		18AB773A199CB58000364FA6 /* icon2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon2.png; sourceTree = "<group>"; };
 		18AB773B199CB58000364FA6 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
+		9A5C07A619A22D9000F02FF7 /* splash001.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = splash001.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -453,7 +453,7 @@
 		14D45A371974FC6800F677D0 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				14D45A361974FC6800F677D0 /* OnlineKenakata.app */,
+				14D45A361974FC6800F677D0 /* Sigma Branded Shop.app */,
 				14D45A571974FC6900F677D0 /* OnlineKenakataTests.xctest */,
 			);
 			name = Products;
@@ -718,6 +718,7 @@
 		14D45B451974FF7900F677D0 /* img */ = {
 			isa = PBXGroup;
 			children = (
+				9A5C07A619A22D9000F02FF7 /* splash001.png */,
 				18AB7739199CB58000364FA6 /* icon3.png */,
 				18AB773A199CB58000364FA6 /* icon2.png */,
 				18AB773B199CB58000364FA6 /* icon.png */,
@@ -733,7 +734,6 @@
 				14FB7FCA197B7D5C00E8BDF8 /* down_arrow.png */,
 				1478B4CD19752269002C79B0 /* mail.png */,
 				14D95EFE19766F52001D6CB3 /* imessege.png */,
-				14D45B471974FFA400F677D0 /* splash001.png */,
 				14D45B481974FFA400F677D0 /* a2mc_pressed.png */,
 				14D45B491974FFA400F677D0 /* facebook.png */,
 				14D45B4A1974FFA400F677D0 /* icon_image_enlarge.png */,
@@ -828,9 +828,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		14D45A351974FC6800F677D0 /* OnlineKenakata */ = {
+		14D45A351974FC6800F677D0 /* Sigma */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 14D45A681974FC6900F677D0 /* Build configuration list for PBXNativeTarget "OnlineKenakata" */;
+			buildConfigurationList = 14D45A681974FC6900F677D0 /* Build configuration list for PBXNativeTarget "Sigma" */;
 			buildPhases = (
 				14D45A321974FC6800F677D0 /* Sources */,
 				14D45A331974FC6800F677D0 /* Frameworks */,
@@ -840,9 +840,9 @@
 			);
 			dependencies = (
 			);
-			name = OnlineKenakata;
+			name = Sigma;
 			productName = OnlineKenakata;
-			productReference = 14D45A361974FC6800F677D0 /* OnlineKenakata.app */;
+			productReference = 14D45A361974FC6800F677D0 /* Sigma Branded Shop.app */;
 			productType = "com.apple.product-type.application";
 		};
 		14D45A561974FC6900F677D0 /* OnlineKenakataTests */ = {
@@ -874,6 +874,11 @@
 				TargetAttributes = {
 					14D45A351974FC6800F677D0 = {
 						DevelopmentTeam = V39QP9S6S6;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
 					};
 					14D45A561974FC6900F677D0 = {
 						TestTargetID = 14D45A351974FC6800F677D0;
@@ -893,7 +898,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				14D45A351974FC6800F677D0 /* OnlineKenakata */,
+				14D45A351974FC6800F677D0 /* Sigma */,
 				14D45A561974FC6900F677D0 /* OnlineKenakataTests */,
 			);
 		};
@@ -913,7 +918,6 @@
 				14D45B581974FFA500F677D0 /* twitter.png in Resources */,
 				14D45AE51974FCB900F677D0 /* README.md in Resources */,
 				14D45B541974FFA500F677D0 /* icon_image_enlarge.png in Resources */,
-				14D45B511974FFA500F677D0 /* splash001.png in Resources */,
 				14D45B561974FFA500F677D0 /* tag_none.png in Resources */,
 				14D45A521974FC6800F677D0 /* Images.xcassets in Resources */,
 				14D45B531974FFA500F677D0 /* facebook.png in Resources */,
@@ -933,6 +937,7 @@
 				1848A321198F557600684602 /* splash002.png in Resources */,
 				14D45AE41974FCB900F677D0 /* LICENSE in Resources */,
 				14F05AF0197D0A8600188C54 /* menu_icn_catalogue.png in Resources */,
+				9A5C07A719A22D9000F02FF7 /* splash001.png in Resources */,
 				14D45B521974FFA500F677D0 /* a2mc_pressed.png in Resources */,
 				1848A326198F654500684602 /* PostSplash.png in Resources */,
 				14D45B571974FFA500F677D0 /* tag_sale.png in Resources */,
@@ -1054,7 +1059,7 @@
 /* Begin PBXTargetDependency section */
 		14D45A5D1974FC6900F677D0 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 14D45A351974FC6800F677D0 /* OnlineKenakata */;
+			target = 14D45A351974FC6800F677D0 /* Sigma */;
 			targetProxy = 14D45A5C1974FC6900F677D0 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -1160,8 +1165,8 @@
 		14D45A691974FC6900F677D0 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-2";
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "LaunchImage-2";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1172,7 +1177,7 @@
 				GCC_PREFIX_HEADER = "OnlineKenakata/OnlineKenakata-Prefix.pch";
 				INFOPLIST_FILE = "OnlineKenakata/OnlineKenakata-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Sigma Branded Shop";
 				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
@@ -1181,8 +1186,8 @@
 		14D45A6A1974FC6900F677D0 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-2";
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "LaunchImage-2";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1193,7 +1198,7 @@
 				GCC_PREFIX_HEADER = "OnlineKenakata/OnlineKenakata-Prefix.pch";
 				INFOPLIST_FILE = "OnlineKenakata/OnlineKenakata-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Sigma Branded Shop";
 				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
@@ -1251,7 +1256,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		14D45A681974FC6900F677D0 /* Build configuration list for PBXNativeTarget "OnlineKenakata" */ = {
+		14D45A681974FC6900F677D0 /* Build configuration list for PBXNativeTarget "Sigma" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				14D45A691974FC6900F677D0 /* Debug */,

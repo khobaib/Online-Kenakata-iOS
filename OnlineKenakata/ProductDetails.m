@@ -171,7 +171,12 @@
     
     
     [self.productDetails setFrame:rect];
-    self.productDetails.attributedText=[TextStyling AttributForDescription:string];
+    
+    
+    NSAttributedString *attributedString = [[NSAttributedString alloc] initWithData:[string dataUsingEncoding:NSUnicodeStringEncoding] options:@{ NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType } documentAttributes:nil error:nil];
+    
+
+    self.productDetails.attributedText=attributedString;//[TextStyling AttributForDescription:string];
     
     int available =[[self.productData objectForKey:@"general_available_quantity"]intValue];
     if(available>0){
