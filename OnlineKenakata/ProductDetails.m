@@ -164,14 +164,20 @@
     
     
     NSString *string =[self.productData objectForKey:@"description"];
-    NSDictionary *attributes = @{NSFontAttributeName:[UIFont systemFontOfSize:14]};
+    //NSDictionary *attributes = @{NSFontAttributeName:[UIFont systemFontOfSize:14]};
     
-    CGRect rect = [string boundingRectWithSize:CGSizeMake(self.productDetails.frame.size.width, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:attributes context:nil];
+    //CGRect rect = [string boundingRectWithSize:CGSizeMake(self.productDetails.frame.size.width, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:attributes context:nil];
     
     
     
-    [self.productDetails setFrame:rect];
-    self.productDetails.attributedText=[TextStyling AttributForDescription:string];
+    //[self.productDetails setFrame:rect];
+    
+   // self.productDetails.attributedText=[TextStyling AttributForDescription:string];
+    
+    [self.productDetails setScrollEnabled:YES];
+    [self.productDetails setAttributedText:[TextStyling AttributForDescription:string]];
+    [self.productDetails sizeToFit];
+    [self.productDetails setScrollEnabled:NO];
     
     int available =[[self.productData objectForKey:@"general_available_quantity"]intValue];
     if(available>0){

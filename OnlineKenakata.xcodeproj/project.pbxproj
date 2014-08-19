@@ -139,6 +139,7 @@
 		18AB773C199CB58000364FA6 /* icon3.png in Resources */ = {isa = PBXBuildFile; fileRef = 18AB7739199CB58000364FA6 /* icon3.png */; };
 		18AB773D199CB58000364FA6 /* icon2.png in Resources */ = {isa = PBXBuildFile; fileRef = 18AB773A199CB58000364FA6 /* icon2.png */; };
 		18AB773E199CB58000364FA6 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 18AB773B199CB58000364FA6 /* icon.png */; };
+		9A7F131919A35347002F2526 /* phone.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A7F131819A35347002F2526 /* phone.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -380,6 +381,7 @@
 		18AB7739199CB58000364FA6 /* icon3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon3.png; sourceTree = "<group>"; };
 		18AB773A199CB58000364FA6 /* icon2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon2.png; sourceTree = "<group>"; };
 		18AB773B199CB58000364FA6 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
+		9A7F131819A35347002F2526 /* phone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = phone.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -718,6 +720,7 @@
 		14D45B451974FF7900F677D0 /* img */ = {
 			isa = PBXGroup;
 			children = (
+				9A7F131819A35347002F2526 /* phone.png */,
 				18AB7739199CB58000364FA6 /* icon3.png */,
 				18AB773A199CB58000364FA6 /* icon2.png */,
 				18AB773B199CB58000364FA6 /* icon.png */,
@@ -927,6 +930,7 @@
 				14F05AF2197D0A8600188C54 /* menu_icn_news.png in Resources */,
 				14F05AF1197D0A8600188C54 /* menu_icn_info.png in Resources */,
 				14FB7FCB197B7D5C00E8BDF8 /* down_arrow.png in Resources */,
+				9A7F131919A35347002F2526 /* phone.png in Resources */,
 				14D45A4D1974FC6800F677D0 /* Main.storyboard in Resources */,
 				1481856E197D2EFA007E0734 /* my_cart.png in Resources */,
 				14D95EFF19766F52001D6CB3 /* imessege.png in Resources */,
