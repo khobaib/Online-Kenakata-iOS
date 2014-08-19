@@ -354,7 +354,7 @@
     
    self.starRater.horizontalMargin = 12;
     self.starRater.editable=NO;
-    self.starRater.rating= 3.6;
+    self.starRater.rating= [[[self.productData objectForKey:@"review_detail"]objectForKey:@"average_rating"] floatValue];
 
     
     self.starRater.displayMode=EDStarRatingDisplayAccurate;
@@ -363,21 +363,31 @@
     UITapGestureRecognizer *tap=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(ratingShow)];
     tap.numberOfTapsRequired=1;
     [self.starRater addGestureRecognizer:tap];
-    [self.starRaterBack setAlpha:0.20];
+    [self.starRaterBack setAlpha:0.40];
     
     [self.starRaterBack.layer setCornerRadius:5.0f];
     
     // border
-    [self.starRaterBack.layer setBorderColor:[UIColor lightGrayColor].CGColor];
+    [self.starRaterBack.layer setBorderColor:[UIColor grayColor].CGColor];
     [self.starRaterBack.layer setBorderWidth:1.5f];
     
     // drop shadow
     [self.starRaterBack.layer setShadowColor:[UIColor blackColor].CGColor];
-    [self.starRaterBack.layer setShadowOpacity:0.4];
+    [self.starRaterBack.layer setShadowOpacity:0.6];
     [self.starRaterBack.layer setShadowRadius:3.0];
     [self.starRaterBack.layer setShadowOffset:CGSizeMake(2.0, 2.0)];
     
 
+    NSMutableDictionary *arr=[[self.productData objectForKey:@"review_detail"]objectForKey:@"distribution"];
+    int total=0;
+    
+    if(arr==nil){
+        return;
+    }
+    for(int i=0;i<arr.count;i++){
+        total+=[[arr objectForKey:[NSString stringWithFormat:@"%d",i]]intValue];
+    }
+    self.reviewNumber.text=[NSString stringWithFormat:@"%d Reviews",total];
 }
 -(void)ratingShow{
 

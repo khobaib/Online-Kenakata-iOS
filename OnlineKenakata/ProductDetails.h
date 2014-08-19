@@ -39,6 +39,7 @@
 @property (strong,nonatomic) IBOutlet UIScrollView *horizontalScroller;
 @property (strong,nonatomic) IBOutlet EDStarRating *starRater;
 @property (strong,nonatomic) IBOutlet UIView *starRaterBack;
+@property (strong,nonatomic) IBOutlet UILabel *reviewNumber;
 
 
 
