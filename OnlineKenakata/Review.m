@@ -169,7 +169,7 @@ int indexOfReadMoreButton;
    
     CGRect rect = [string boundingRectWithSize:CGSizeMake(283, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:attributes context:nil];
   
-       if(isdataloaded){
+      /* if(isdataloaded){
         if ([[isSelected objectAtIndex:indexPath.row]boolValue]) {
             NSLog(@"now true");
             
@@ -189,7 +189,8 @@ int indexOfReadMoreButton;
         }
         
     }
-    
+    */
+    description.text=string;
     if(rect.size.height>63){
         //float y=description.frame.origin.y+description.frame.size.height+5;
        UIButton *btn=[[UIButton alloc]initWithFrame:CGRectMake(0, cell.frame.size.height-20, 290, 20)];

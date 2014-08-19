@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13C64" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="j53-nq-UdI">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="j53-nq-UdI">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
@@ -1888,7 +1888,7 @@
                                                                     <color key="textColor" red="0.33039700259999999" green="0.33039700259999999" blue="0.33039700259999999" alpha="1" colorSpace="calibratedRGB"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" tag="904" contentMode="scaleToFill" fixedFrame="YES" scrollEnabled="NO" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Abf-ia-oKy">
+                                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" tag="904" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Abf-ia-oKy">
                                                                     <rect key="frame" x="4" y="83" width="283" height="63"/>
                                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -1898,6 +1898,12 @@
                                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                                 </textView>
                                                             </subviews>
+                                                            <constraints>
+                                                                <constraint firstItem="Abf-ia-oKy" firstAttribute="top" secondItem="C1v-3j-55O" secondAttribute="top" constant="83" id="8OC-1i-few"/>
+                                                                <constraint firstAttribute="bottom" secondItem="Abf-ia-oKy" secondAttribute="bottom" constant="4" id="iuL-ef-9O6"/>
+                                                                <constraint firstAttribute="trailing" secondItem="Abf-ia-oKy" secondAttribute="trailing" constant="4" id="sDI-Q1-NPb"/>
+                                                                <constraint firstItem="Abf-ia-oKy" firstAttribute="leading" secondItem="C1v-3j-55O" secondAttribute="leading" constant="4" id="yyt-Y6-cFZ"/>
+                                                            </constraints>
                                                         </tableViewCellContentView>
                                                     </tableViewCell>
                                                 </prototypes>
