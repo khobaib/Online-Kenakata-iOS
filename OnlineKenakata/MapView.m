@@ -81,6 +81,8 @@
     
     [self initBarbutton];
     [self goTolocation:0];
+    self.tabBarController.navigationItem.title=@"Location";
+
     
    
 }

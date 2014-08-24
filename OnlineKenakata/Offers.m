@@ -38,7 +38,13 @@
     [self initLoading];
     [self addPullToRefresh];
     [self getOffer];
+   
     
+}
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    
+     self.tabBarController.navigationItem.title=@"Offers";
 }
 -(void)initLoading{
     CGFloat x= self.view.frame.size.width/2-65;

@@ -14,6 +14,7 @@
 #import "MyCart.h"
 #import "Data.h"
 #import "TextStyling.h"
+#import "BBBadgeBarButtonItem.h"
 
 @interface AddToCart ()
 
@@ -52,6 +53,7 @@
     [self initLoading];
 
     [self setValueOnUI];
+    selectedQuantity=@"";
 
 }
 
@@ -235,7 +237,7 @@
  
     Product* product=[[Product alloc]init];
     
-    if(quantity<1){
+    if([selectedQuantity isEqualToString:@""]){
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error"
                                                             message:@"Please select quantity"                                                           delegate:nil
                                                   cancelButtonTitle:@"Ok"
@@ -280,7 +282,57 @@
             return;
         }
         [self.navigationController pushViewController:cart animated:YES];
+        
+        
+    }else if (buttonIndex==0){
+        NSLog(@"%d",buttonIndex);
+        UIButton *btn=[[UIButton alloc]initWithFrame:CGRectMake(275, -6, 50, 50)];
+        
+        [btn setBackgroundImage:[UIImage imageNamed:@"my_cart.png"] forState:UIControlStateNormal];
+        btn.titleLabel.font = [UIFont systemFontOfSize:10];
+        
+        // [btn setBackgroundImage:[self imageWithColor:[UIColor blueColor]] forState:UIControlStateHighlighted];
+        
+        // [btn setBackgroundColor:[UIColor whiteColor]];
+        [btn addTarget:self action:@selector(myCart) forControlEvents:UIControlEventTouchUpInside];
+        // btn.imageEdgeInsets= UIEdgeInsetsMake(0.0, 0, 0, 10);
+        
+        BBBadgeBarButtonItem *barButton = [[BBBadgeBarButtonItem alloc] initWithCustomUIButton:btn];
+        // [barButton setImageInsets:UIEdgeInsetsMake(0.0, 0, 0, 10)];
+        
+        
+        barButton.badgeBGColor=[UIColor redColor];
+        [barButton setBadgeValue:[NSString stringWithFormat:@"%d",[DatabaseHandeler totalProduct]]];
+        barButton.badgeOriginX=16;
+        barButton.badgeOriginY=4;
+        [barButton setBadgePadding:3];
+        
+        // [self.navigationItem setRightBarButtonItem:button];
+        btn.tag=1;
+        [self.navigationController.navigationBar addSubview:btn];
+        
+        btn=nil;
+
     }
+}
+
+-(void)myCart{
+    MyCart *cart=[[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"MyCart"];
+    
+    cart.productList=[DatabaseHandeler getProduct];
+    
+    //   NSLog(@"log %d",cart.productList.count);
+    if(cart.productList.count<1){
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error "
+                                                            message:@"My Cart is empty"
+                                                           delegate:nil
+                                                  cancelButtonTitle:@"Ok"
+                                                  otherButtonTitles:nil];
+        [alertView show];
+        return;
+    }
+    [self.navigationController pushViewController:cart animated:YES];
+    
 }
 
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView{

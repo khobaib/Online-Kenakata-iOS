@@ -37,7 +37,11 @@
     [self.view addSubview:loading];
 }
 
-
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    
+    self.tabBarController.navigationItem.title=@"News";
+}
 -(void)getOffer{
     
     NSString *string = [NSString stringWithFormat:@"%@/rest.php?method=get_news&application_code=%@",[Data getBaseUrl],[Data getAppCode]];

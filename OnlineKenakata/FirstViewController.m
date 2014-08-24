@@ -96,7 +96,8 @@
     self.tableView.hidden=NO;
     self.searchBar.hidden=NO;
     self.scrollView.hidden=YES;
-    
+   
+    self.tabBarController.navigationItem.title=@"Catalogue";
 }
 
 
@@ -118,6 +119,8 @@
 -(void)parsCatagoryList:(id)data{
 
     NSMutableDictionary *dic = (NSMutableDictionary *)data;
+    
+   
     catagoryList=[[dic objectForKey:@"success"]objectForKey:@"categories"];
     productList=[[dic objectForKey:@"success"]objectForKey:@"products"];
     [refreshControl endRefreshing];
@@ -180,6 +183,8 @@
 
 -(void)viewWillAppear:(BOOL)animated{
    [super viewWillAppear:animated];
+    
+    self.tabBarController.navigationItem.title=@"Catalogue";
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -190,14 +195,16 @@
         return cell;
 
     }
-    
+
     if(indexPath.row>=catagoryList.count){
+        
+
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"productCell" forIndexPath:indexPath];
         
         // Configure the cell...
         
-        
-        NSMutableDictionary *dic=[productList objectAtIndex:indexPath.row];
+        NSLog(@"%@",productList);
+        NSMutableDictionary *dic=[productList objectAtIndex:indexPath.row-catagoryList.count];
         
         UILabel* productName=(UILabel *)[cell viewWithTag:304];
         UIImageView *thumbnil=(UIImageView *)[cell viewWithTag:301];
@@ -211,6 +218,7 @@
         toping.image=nil;
         oldPrice.text=@"";
         newPrice.text=@"";
+       
         NSString * imgurl = [[[dic objectForKey:@"images"] objectAtIndex:0]objectForKey:@"thumbnail_image_url"];
         
         
@@ -299,6 +307,7 @@
         NSString *str = [[catagoryList objectAtIndex:indexPath.row]objectForKey:@"cat_id"];
         
         pList.productId=str;
+        pList.catagoryName=[[catagoryList objectAtIndex:indexPath.row]objectForKey:@"cat_name"];
         [self.navigationController pushViewController:pList animated:YES];
 
 
@@ -369,7 +378,7 @@
     
     
     NSString *string = [NSString stringWithFormat:@"%@/rest.php?method=get_prod_cat_by_search&search_value=%@&application_code=%@",[Data getBaseUrl],searchField.text,[Data getAppCode]];
-    NSURL *url = [NSURL URLWithString:string];
+    NSURL *url = [NSURL URLWithString:[string stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     
     // 2
@@ -447,7 +456,7 @@
     catagoryList=[[dic objectForKey:@"success"]objectForKey:@"categories"];
     productList=[[dic objectForKey:@"success"]objectForKey:@"products"];
     [refreshControl endRefreshing];
-    
+
     if(catagoryList.count==0&&productList.count==0){
         UIAlertView *alertView=[[UIAlertView alloc]initWithTitle:@"Not Found" message:@"Nothing foud " delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
         [alertView show];

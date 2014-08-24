@@ -18,6 +18,7 @@
     LoadingView *loading;
 }
 @property NSString *productId;
+@property NSString *catagoryName;
 @property (strong,nonatomic) IBOutlet UITableView *tableView;
 
 

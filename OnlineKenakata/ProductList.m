@@ -26,7 +26,11 @@
     }
     return self;
 }
-
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    self.navigationItem.title=self.catagoryName;
+    
+}
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -166,14 +170,14 @@
         return cell;
         
     }
-    
+
     if(indexPath.row>=catagoryList.count){
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CellProdect" forIndexPath:indexPath];
         
         // Configure the cell...
         
         
-        NSMutableDictionary *dic=[productList objectAtIndex:indexPath.row];
+        NSMutableDictionary *dic=[productList objectAtIndex:indexPath.row-catagoryList.count];
         
         UILabel* productName=(UILabel *)[cell viewWithTag:304];
         UIImageView *thumbnil=(UIImageView *)[cell viewWithTag:301];
@@ -244,7 +248,7 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    if(catagoryList.count<=indexPath.row){
+    if(catagoryList.count<indexPath.row){
         
         NSMutableDictionary *dic = [productList objectAtIndex:indexPath.row];
         

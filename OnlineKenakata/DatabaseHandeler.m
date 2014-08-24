@@ -78,10 +78,12 @@ NSString *const databaseFilename=@"databaseV3.sqlite3";
         }
     }else{
     
-        NSString *query = [NSString stringWithFormat:@"INSERT INTO 'cart_product_table' VALUES (NULL,'%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@',%d,'%@');",product.ID,product.name,product.QUANTITY,product.WEIGHT,product.ITEM_CODE,product.SPECIAL_QUESTION_TEXT,product.SPECIAL_ANS_ID,product.SPECIAL_ANS_TEXT,product.SPECIAL_ANS_SUB_SKU,product.IMAGE_URL,product.THUMBNAIL_IMAGE_URL,product.PRICE,product.OLD_PRICE,product.AVAILABILITY,product.PRODUCT_TAG];
     
-        BOOL b=[database executeUpdate:query];
+       
     
+        BOOL b=[database executeUpdate:@"INSERT INTO 'cart_product_table' VALUES (NULL,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);",product.ID,product.name,product.QUANTITY,product.WEIGHT,product.ITEM_CODE,product.SPECIAL_QUESTION_TEXT,product.SPECIAL_ANS_ID,product.SPECIAL_ANS_TEXT,product.SPECIAL_ANS_SUB_SKU,product.IMAGE_URL,product.THUMBNAIL_IMAGE_URL,product.PRICE,product.OLD_PRICE,product.AVAILABILITY,product.PRODUCT_TAG];
+    
+        
         [database close];
         return b;
     }

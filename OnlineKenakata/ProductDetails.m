@@ -66,7 +66,7 @@
         
         
         UIView *view=[[UIView alloc]initWithFrame:CGRectMake(frame.origin.x+5, frame.origin.y+5, frame.size.width-10, frame.size.height-10)];
-        UIColor *color= [UIColor colorWithRed:0.75f  green:0.75f blue:0.75f alpha:1.0f];
+        UIColor *color=[UIColor whiteColor]; //[UIColor colorWithRed:0.75f  green:0.75f blue:0.75f alpha:1.0f];
         
         
         
@@ -162,6 +162,7 @@
         
     }
     
+
     
     NSString *string =[self.productData objectForKey:@"description"];
     //NSDictionary *attributes = @{NSFontAttributeName:[UIFont systemFontOfSize:14]};
@@ -172,13 +173,13 @@
     
     //[self.productDetails setFrame:rect];
     
-   // self.productDetails.attributedText=[TextStyling AttributForDescription:string];
     
     [self.productDetails setScrollEnabled:YES];
     [self.productDetails setAttributedText:[TextStyling AttributForDescription:string]];
     [self.productDetails sizeToFit];
     [self.productDetails setScrollEnabled:NO];
     
+   
     int available =[[self.productData objectForKey:@"general_available_quantity"]intValue];
     if(available>0){
         self.itemCode.text=[self.productData objectForKey:@"sku"];
@@ -293,7 +294,7 @@
     MWPhotoBrowser *browser = [[MWPhotoBrowser alloc] initWithDelegate:self];
     
     // Set options
-    browser.displayActionButton = YES; // Show action button to allow sharing, copying, etc (defaults to YES)
+    browser.displayActionButton = NO; // Show action button to allow sharing, copying, etc (defaults to YES)
     browser.displayNavArrows = YES; // Whether to display left and right nav arrows on toolbar (defaults to NO)
     browser.displaySelectionButtons = NO; // Whether selection buttons are shown on each image (defaults to NO)
     browser.zoomPhotosToFill = YES; // Images that almost fill the screen will be initially zoomed to fill (defaults to YES)

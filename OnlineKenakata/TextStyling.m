@@ -73,12 +73,12 @@
 }
 
 +(NSMutableAttributedString *)AttributForDescription:(NSString *)text{
-    NSMutableAttributedString *attString=[[NSMutableAttributedString alloc]initWithString:text];
+   // NSMutableAttributedString *attString=[[NSMutableAttributedString alloc]initWithString:text];
+      NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithData:[text dataUsingEncoding:NSUnicodeStringEncoding] options:@{ NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType } documentAttributes:nil error:nil];
     
+    [attributedString addAttribute:NSForegroundColorAttributeName value:[UIColor grayColor] range:NSMakeRange(0,[attributedString length])];
     
-    [attString addAttribute:NSForegroundColorAttributeName value:[UIColor grayColor] range:NSMakeRange(0,[attString length])];
-    
-    return attString;
+    return attributedString;
 }
 
 +(NSMutableAttributedString *)AttributForOfferNewsTitle:(NSString *)text{

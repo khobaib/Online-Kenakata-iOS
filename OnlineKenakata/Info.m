@@ -67,7 +67,7 @@
         
         
         UIView *view=[[UIView alloc]initWithFrame:CGRectMake(frame.origin.x+5, frame.origin.y+5, frame.size.width-10, frame.size.height-10)];
-        UIColor *color= [UIColor colorWithRed:0.75f  green:0.75f blue:0.75f alpha:1.0f];
+        UIColor *color= [UIColor whiteColor];//[UIColor colorWithRed:0.75f  green:0.75f blue:0.75f alpha:1.0f];
 
 
         
