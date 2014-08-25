@@ -10,6 +10,7 @@
 #import "Data.h"
 #import "AFNetworking.h"
 #import "TextStyling.h"
+#import "PayPalMobile.h"
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -46,6 +47,10 @@
     }
     
     [TextStyling changeAppearance];
+    
+    [PayPalMobile initializeWithClientIdsForEnvironments:@{PayPalEnvironmentProduction : @"AcJUjBDW5AV-JYiLjQ1XQ5aMNuMKdQBSGmBsPeZZBYZ1sT_EYXmjW10FLAFd",
+                                                           PayPalEnvironmentSandbox : @"AegrCxDTXOKmIww9Dp-XGCjXPWf3kL8ESGQW_3eOBozHZMOeZmZOZXAhMAeF"}];
+
 
     return YES;
 }

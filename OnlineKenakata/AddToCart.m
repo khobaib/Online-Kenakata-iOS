@@ -285,7 +285,7 @@
         
         
     }else if (buttonIndex==0){
-        NSLog(@"%d",buttonIndex);
+        NSLog(@"%ld",(long)buttonIndex);
         UIButton *btn=[[UIButton alloc]initWithFrame:CGRectMake(275, -6, 50, 50)];
         
         [btn setBackgroundImage:[UIImage imageNamed:@"my_cart.png"] forState:UIControlStateNormal];

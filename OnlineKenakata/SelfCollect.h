@@ -9,8 +9,10 @@
 #import <UIKit/UIKit.h>
 #import "DeleveryMethod.h"
 #import "LoadingView.h"
+#import "PayPalMobile.h"
+#import "STPView.h"
 
-@interface SelfCollect : UIViewController<UITextFieldDelegate,UIPickerViewDataSource,UIPickerViewDelegate,UIAlertViewDelegate>{
+@interface SelfCollect : UIViewController<UITextFieldDelegate,UIPickerViewDataSource,UIPickerViewDelegate,UIAlertViewDelegate,PayPalPaymentDelegate,STPViewDelegate>{
     UIPickerView *namePicker;
     UIPickerView *paymentMethodPicker;
     NSString *currency;
@@ -22,9 +24,18 @@
     NSMutableDictionary *dic;
     NSDate *alermTime;
     LoadingView *loading;
+    
+    UIAlertView *stripeAlertView;
 
 
 }
+
+@property(nonatomic, strong, readwrite) PayPalConfiguration *payPalConfig;
+
+@property(nonatomic, strong, readwrite) NSString *environment;
+
+@property STPView* stripeView;
+
 
 @property (strong,nonatomic) NSMutableArray *productList;
 @property (strong,nonatomic) IBOutlet UITextField *textFild;

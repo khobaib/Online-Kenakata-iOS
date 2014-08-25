@@ -14,6 +14,15 @@
 #import "DeleveryMethod.h"
 #import "TextStyling.h"
 #import "bKashViewController.h"
+
+
+
+
+// Set the environment:
+// - For live charges, use PayPalEnvironmentProduction (default).
+// - To use the PayPal sandbox, use PayPalEnvironmentSandbox.
+// - For testing, use PayPalEnvironmentNoNetwork.
+#define kPayPalEnvironment PayPalEnvironmentSandbox
 @interface SelfCollect ()
 
 @end
@@ -88,6 +97,12 @@
    // self.paymentMethod.text=[self getPaymentMethodName:self.method.paymentMethod];
     
 }
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+#pragma mark -PcikerView methods for branch and payment methods
 
 -(NSString *)getBranchName:(NSString *)LbranchID{
     NSString *str=@"";
@@ -162,6 +177,18 @@
  
     NSInteger row = [paymentMethodPicker selectedRowInComponent:0];
     
+    if(row==paymentMethodList.count+1){
+         self.paymentMethod.text=@"Paypal";
+        paymentID=@"69";
+        [self.paymentMethod resignFirstResponder];
+
+        return ;
+    }else if(row==paymentMethodList.count){
+         self.paymentMethod.text=@"Stripe";
+        paymentID=@"169";
+        [self.paymentMethod resignFirstResponder];
+        return ;
+    }
     self.paymentMethod.text =[[paymentMethodList objectAtIndex:row]objectForKey:@"name"]; //[self.citys objectAtIndex:row];
     [self.paymentMethod resignFirstResponder];
     
@@ -169,11 +196,7 @@
 
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
+
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView{
     
     return 1;
@@ -186,15 +209,23 @@
 
     }
     
-    return paymentMethodList.count;
+    return paymentMethodList.count+2;
 }
 
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component{
     if(pickerView.tag==1){
+       
         return [[branches objectAtIndex:row]objectForKey:@"branch_address"];
         
     }
 
+   
+    if(row==paymentMethodList.count+1){
+        return @"Paypal";
+    }else if(row==paymentMethodList.count){
+        return @"Stripe";
+    }
+    
     return [[paymentMethodList objectAtIndex:row]objectForKey:@"name"];
 
 }
@@ -204,6 +235,7 @@
     return [textField resignFirstResponder];
 }
 
+#pragma mark -PaymentFunction
 
 -(IBAction)Payment:(id)sender{
  
@@ -296,7 +328,17 @@
         bvc.params=[params mutableCopy];
         [self.navigationController pushViewController:bvc animated:YES];
         
-    }else{
+    }else if([paymentMethod isEqualToString:@"Paypal"]){
+        
+        [self configWithVC];
+        [self payment:arr];
+        
+    } else if ([paymentMethod isEqualToString:@"Stripe"]){
+        [self stpPayment];
+    }
+    
+    
+    else{
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
         
         manager.requestSerializer = [AFJSONRequestSerializer serializer];
@@ -333,6 +375,7 @@
 }
 
 
+#pragma mark -FoorStoreHandle
 -(BOOL)isfood{
     NSString *food=[dic objectForKey:@"is_food"];
     return [food isEqualToString:@"1"];
@@ -346,6 +389,25 @@
 }
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     
+    if(alertView.tag==2 && buttonIndex==1){
+        
+        [self.stripeView createToken:^(STPToken *token, NSError *error) {
+            if (error) {
+                
+                NSLog(@"%@",[error description]);
+                // Handle error
+                [self handleError:error];
+            } else {
+                
+                NSLog(@"%@",token);
+                // Send off token to your server
+                // [self handleToken:token];
+            }
+        }];
+
+        
+        return;
+    }
     if(alertView.tag==1 && buttonIndex==1){
 
         NSDateFormatter *dateFormatter;
@@ -485,6 +547,8 @@
     return (result1==NSOrderedAscending && result2==NSOrderedDescending);
     
 }
+
+#pragma mark-prepare for payment
 -(void)setMethod{
     
     DeleveryMethod *obj=[[DeleveryMethod alloc]init];
@@ -534,8 +598,11 @@
     return arraylist;
 }
 
+#pragma mark - main use keyboard movements
 
 - (void)viewWillAppear:(BOOL)animated {
+     self.environment = kPayPalEnvironment;
+     [PayPalMobile preconnectWithEnvironment:self.environment];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
 }
@@ -545,7 +612,7 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
 }
 
-#pragma mark - keyboard movements
+
 - (void)keyboardWillShow:(NSNotification *)notification
 {
     [UIView animateWithDuration:0.3 animations:^{
@@ -563,7 +630,7 @@
         self.view.frame = f;
     }];
 }
-
+#pragma mark - validation
 -(BOOL) NSStringIsValidEmail:(NSString *)checkString
 {
     BOOL stricterFilter = YES; // Discussion http://blog.logichigh.com/2010/09/02/validating-an-e-mail-address/
@@ -647,5 +714,113 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+#pragma mark - Paypal Payment
+
+-(void)configWithVC{
+    _payPalConfig = [[PayPalConfiguration alloc] init];
+    _payPalConfig.acceptCreditCards = YES;
+    _payPalConfig.languageOrLocale = @"en";
+    _payPalConfig.merchantName = @"Awesome Shirts, Inc.";
+    _payPalConfig.merchantPrivacyPolicyURL = [NSURL URLWithString:@"http://online-kenakata.com/legal/terms.php"];
+    _payPalConfig.merchantUserAgreementURL = [NSURL URLWithString:@"http://online-kenakata.com/legal/terms.php"];
+    
+    _payPalConfig.languageOrLocale = [NSLocale preferredLanguages][0];
+    
+    _payPalConfig.payPalShippingAddressOption = PayPalShippingAddressOptionPayPal;
+    
+    
+   
+    
+    NSLog(@"PayPal iOS SDK version: %@", [PayPalMobile libraryVersion]);
+    
+  
+    
+}
+
+-(void)payment:(NSArray *)products{
+    PayPalItem *item1 = [PayPalItem itemWithName:@"Old jeans with holes"
+                                    withQuantity:1
+                                       withPrice:[NSDecimalNumber decimalNumberWithString:@"84.99"]
+                                    withCurrency:@"USD"
+                                         withSku:@"Hip-00037"];
+    
+    NSArray *items = @[item1];
+    NSDecimalNumber *subtotal = [PayPalItem totalPriceForItems:items];
+    
+    // Optional: include payment details
+    NSDecimalNumber *shipping = [[NSDecimalNumber alloc] initWithString:@"5.99"];
+    NSDecimalNumber *tax = [[NSDecimalNumber alloc] initWithString:@"2.50"];
+    PayPalPaymentDetails *paymentDetails = [PayPalPaymentDetails paymentDetailsWithSubtotal:subtotal
+                                                                               withShipping:shipping
+                                                                                    withTax:tax];
+    
+    NSDecimalNumber *total = [[subtotal decimalNumberByAdding:shipping] decimalNumberByAdding:tax];
+    
+    PayPalPayment *payment = [[PayPalPayment alloc] init];
+    payment.amount = total;
+    payment.currencyCode = @"USD";
+    payment.shortDescription = @"Good";
+    payment.items = nil;//items;  // if not including multiple items, then leave payment.items as nil
+    payment.paymentDetails =paymentDetails; // if not including payment details, then leave payment.paymentDetails as nil
+    
+    if (!payment.processable) {
+        // This particular payment will always be processable. If, for
+        // example, the amount was negative or the shortDescription was
+        // empty, this payment wouldn't be processable, and you'd want
+        // to handle that here.
+    }
+    
+    // Update payPalConfig re accepting credit cards.
+    self.payPalConfig.acceptCreditCards = YES;
+    PayPalPaymentViewController *paymentViewController = [[PayPalPaymentViewController alloc] initWithPayment:payment
+                                                                                                configuration:self.payPalConfig
+                                                                                                     delegate:self];
+    [self presentViewController:paymentViewController animated:YES completion:nil];
+    
+}
+
+
+- (void)payPalPaymentDidCancel:(PayPalPaymentViewController *)paymentViewController{
+    NSLog(@"cancle");
+    [self dismissViewControllerAnimated:YES completion:nil];
+    
+}
+
+- (void)payPalPaymentViewController:(PayPalPaymentViewController *)paymentViewController
+                 didCompletePayment:(PayPalPayment *)completedPayment{
+    
+    
+    NSLog(@"payment %@",completedPayment.confirmation);
+   
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+#pragma mark - StripePayment
+
+-(void)stpPayment{
+    
+    stripeAlertView=[[UIAlertView alloc]initWithTitle:@"Your cart information" message:@"" delegate:self cancelButtonTitle:@"Cancle" otherButtonTitles:@"Done", nil];
+    self.stripeView = [[STPView alloc] initWithFrame:CGRectMake(0,0,290,55) andKey:@"pk_test_hlpADPUOWaxn6uN0aATgLivW"];
+   
+    stripeAlertView.tag=2;
+    
+   [stripeAlertView setValue: self.stripeView forKey:@"accessoryView"];
+    [stripeAlertView show];
+   
+
+}
+
+
+- (void)handleError:(NSError *)error
+{
+    UIAlertView *message = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", @"Error")
+                                                      message:[error localizedDescription]
+                                                     delegate:nil
+                                            cancelButtonTitle:NSLocalizedString(@"OK", @"OK")
+                                            otherButtonTitles:nil];
+    [message show];
+}
+
 
 @end
