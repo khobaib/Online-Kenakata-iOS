@@ -248,8 +248,8 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    if(catagoryList.count<indexPath.row){
-        
+    if(catagoryList.count<=indexPath.row){
+    
         NSMutableDictionary *dic = [productList objectAtIndex:indexPath.row];
         
         ProductDetails *prdtails;
