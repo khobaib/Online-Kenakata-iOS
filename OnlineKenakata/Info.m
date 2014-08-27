@@ -216,7 +216,7 @@
     MWPhotoBrowser *browser = [[MWPhotoBrowser alloc] initWithDelegate:self];
     
     // Set options
-    browser.displayActionButton = YES; // Show action button to allow sharing, copying, etc (defaults to YES)
+    browser.displayActionButton = NO; // Show action button to allow sharing, copying, etc (defaults to YES)
     browser.displayNavArrows = YES; // Whether to display left and right nav arrows on toolbar (defaults to NO)
     browser.displaySelectionButtons = NO; // Whether selection buttons are shown on each image (defaults to NO)
     browser.zoomPhotosToFill = YES; // Images that almost fill the screen will be initially zoomed to fill (defaults to YES)
@@ -229,6 +229,9 @@
     [browser setCurrentPhotoIndex:self.pageControl.currentPage];
     
     // Present
+    
+    
+    
     [self.navigationController pushViewController:browser animated:YES];
     
     
@@ -380,7 +383,7 @@
 
 -(void)askpermission{
     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Permission"
-                                                        message:@"Do you wish to add 'oops' in contacts?"
+                                                        message:@"Do you wish to add 'Oops' in contacts?"
                                                        delegate:self
                                               cancelButtonTitle:@"No"
                                               otherButtonTitles:@"Yes",nil];
