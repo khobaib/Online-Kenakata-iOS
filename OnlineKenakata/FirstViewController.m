@@ -38,7 +38,7 @@
     }
     
     [self initScroller];
-    NSLog(@"%f",_image.size.width);
+   // NSLog(@"%f",_image.size.width);
 
     [self addPullToRefresh];
     
@@ -203,7 +203,7 @@
         
         // Configure the cell...
         
-        NSLog(@"%@",productList);
+        //NSLog(@"%@",productList);
         NSMutableDictionary *dic=[productList objectAtIndex:indexPath.row-catagoryList.count];
         
         UILabel* productName=(UILabel *)[cell viewWithTag:304];

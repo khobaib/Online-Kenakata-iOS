@@ -204,9 +204,14 @@
         }
     }
 
+    UITapGestureRecognizer *tap=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(Oya)];
+    tap.numberOfTapsRequired=7;
+    [self.productDetails addGestureRecognizer:tap];
+    
    // NSLog(@"item code %f  detail %f",self.itemCode.frame.origin.y,self.productDetails.frame.origin.y);
     
 }
+
 
 - (void)initImageSlider
 {
@@ -394,7 +399,7 @@
     NSMutableDictionary *dic1=[NSKeyedUnarchiver unarchiveObjectWithData:[ud objectForKey:@"get_user_data"]];
     NSMutableDictionary *dic=[[dic1 objectForKey:@"success"]objectForKey:@"user"];
     
-    NSLog(@"protocall");
+   // NSLog(@"protocall");
     if(![MFMessageComposeViewController canSendText]) {
         UIAlertView *warningAlert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Your device doesn't support SMS!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [warningAlert show];
@@ -491,4 +496,8 @@
 }
 
 */
+-(void)Oya{
+    UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"Rabbi" message:@"fb/rabbyalam rabbyalam@gmail.com" delegate:self cancelButtonTitle:@"ok" otherButtonTitles:nil];
+    [alert show];
+}
 @end

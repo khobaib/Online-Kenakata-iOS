@@ -9,7 +9,7 @@
 #import "Data.h"
 
 NSString * const baseurl=@"http://online-kenakata.com/mobile_api";
-NSString * const appcode=@"1000";
+NSString * const appcode=@"1024";
 @implementation Data
 
 +(NSString *)getAppCode{

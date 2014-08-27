@@ -380,7 +380,7 @@
 
 -(void)askpermission{
     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Permission"
-                                                        message:@"Do you wish to add Online Kenakata in contacts?"
+                                                        message:@"Do you wish to add T-Zone in contacts?"
                                                        delegate:self
                                               cancelButtonTitle:@"No"
                                               otherButtonTitles:@"Yes",nil];
