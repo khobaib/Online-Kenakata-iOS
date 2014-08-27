@@ -67,6 +67,8 @@
     barButton.badgeOriginY=4;
     [barButton setBadgePadding:3];
 
+    barButton.badgeBGColor=[UIColor whiteColor];
+    barButton.badgeTextColor=[TextStyling appColor];
    // [self.navigationItem setRightBarButtonItem:button];
     self.barBtn=btn;
     self.barBtn.tag=1;

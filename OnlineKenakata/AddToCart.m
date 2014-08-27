@@ -306,7 +306,8 @@
         barButton.badgeOriginX=16;
         barButton.badgeOriginY=4;
         [barButton setBadgePadding:3];
-        
+        barButton.badgeBGColor=[UIColor whiteColor];
+        barButton.badgeTextColor=[TextStyling appColor];
         // [self.navigationItem setRightBarButtonItem:button];
         btn.tag=1;
         [self.navigationController.navigationBar addSubview:btn];
