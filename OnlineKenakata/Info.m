@@ -619,7 +619,41 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-
+-(IBAction)openYoutube:(id)sender{
+    
+    NSString *url=[dic objectForKey:@"video_url"];
+    
+    if([url isEqualToString:@""]){
+        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"" message:@"No video found" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+        [alert show];
+        
+        return;
+    }
+    
+    NSURL *linkToAppURL = [NSURL URLWithString:[NSString stringWithFormat:@"youtube://%@",[self extractString:url toLookFor:@"watch"]]];
+    NSURL *linkToWebURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@",[dic objectForKey:@"video_url"]]];
+    
+    if ([[UIApplication sharedApplication] canOpenURL:linkToAppURL]) {
+        // Can open the youtube app URL so launch the youTube app with this URL
+        [[UIApplication sharedApplication] openURL:linkToAppURL];
+        
+    }
+    else{
+        // Can't open the youtube app URL so launch Safari instead
+        
+        [[UIApplication sharedApplication] openURL:linkToWebURL];
+    }
+}
+- (NSString *)extractString:(NSString *)fullString toLookFor:(NSString *)lookFor
+{
+    
+    NSRange firstRange = [fullString rangeOfString:lookFor];
+    
+    NSRange finalRange = NSMakeRange(firstRange.location , [fullString length]-firstRange.location);
+    
+    
+    return [fullString substringWithRange:finalRange];
+}
 
 #pragma mark - Navigation
 
