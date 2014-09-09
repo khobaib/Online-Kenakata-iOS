@@ -129,6 +129,7 @@
 -(void)parsProductList:(id) respons{
     NSMutableDictionary *dic=(NSMutableDictionary *)respons;
     productList=[[dic objectForKey:@"success"]objectForKey:@"products"];
+    catagoryList=[[dic objectForKey:@"success"]objectForKey:@"categories"];
 
     [self.tableView reloadData];
     [self.refreshControl endRefreshing];
@@ -164,7 +165,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CellCat"];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cellCat"];
     
     if(catagoryList.count+productList.count==0){
         return cell;
