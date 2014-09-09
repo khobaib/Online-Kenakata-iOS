@@ -90,6 +90,7 @@
 -(void)get_categories_by_parent_cateogory_id{
     
     NSString *string = [NSString stringWithFormat:@"%@/rest.php?method=get_categories_by_parent_cateogory_id&parent_category_id=%@&application_code=%@",[Data getBaseUrl],self.productId,[Data getAppCode]];
+
     NSURL *url = [NSURL URLWithString:string];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
    // NSLog(@"%@",string);
@@ -130,6 +131,7 @@
     NSMutableDictionary *dic=(NSMutableDictionary *)respons;
     productList=[[dic objectForKey:@"success"]objectForKey:@"products"];
 
+    catagoryList=[[dic objectForKey:@"success"]objectForKey:@"categories"];
     [self.tableView reloadData];
     [self.refreshControl endRefreshing];
     [loading StopAnimating];
@@ -164,19 +166,22 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CellCat"];
+    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cellCat"];
     
     if(catagoryList.count+productList.count==0){
         return cell;
         
     }
-
+    
     if(indexPath.row>=catagoryList.count){
+        
+        
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CellProdect" forIndexPath:indexPath];
         
         // Configure the cell...
         
-        
+       // NSLog(@"%@",productList);
         NSMutableDictionary *dic=[productList objectAtIndex:indexPath.row-catagoryList.count];
         
         UILabel* productName=(UILabel *)[cell viewWithTag:304];
@@ -191,6 +196,7 @@
         toping.image=nil;
         oldPrice.text=@"";
         newPrice.text=@"";
+        
         NSString * imgurl = [[[dic objectForKey:@"images"] objectAtIndex:0]objectForKey:@"thumbnail_image_url"];
         
         
@@ -229,6 +235,7 @@
     UIImageView *thumbnil=(UIImageView* )[cell viewWithTag:201];
     title.text=@"";
     thumbnil.image=nil;
+    //NSLog(@"row %ld",(long)indexPath.row);
     
     NSMutableDictionary *dic=[catagoryList objectAtIndex:indexPath.row];
     
@@ -259,7 +266,7 @@
         if([spclQus isEqualToString:@""]){
             if(available<1){
                 prdtails= [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"ProductDetails2"];
-                NSLog(@"in no button");
+               // NSLog(@"in no button");
                 
             }else{
                 prdtails= [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"productdetails"];

@@ -997,7 +997,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="fAc-n7-5nQ" kind="push" id="KvA-vH-yh5"/>
+                                    <action selector="openYoutube:" destination="QG7-GT-yMz" eventType="touchUpInside" id="UrK-x3-h7m"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" restorationIdentifier="fb_profileurl" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hzv-vh-Hvg">
