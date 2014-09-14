@@ -512,12 +512,12 @@
         NSMutableDictionary *qus=[[NSMutableDictionary alloc]init];
         NSString *TF;
         NSString *ans;
-        if([product.SPECIAL_QUESTION_TEXT isEqualToString:@""]){
+        if([product.varientID isEqualToString:@""]){
             TF=@"FALSE";
             ans=@"0";
         }else{
             TF=@"TRUE";
-            ans=product.SPECIAL_ANS_ID;
+            ans=product.varientID;
         }
         
         [qus setObject:TF forKey:@"is_special_question"];

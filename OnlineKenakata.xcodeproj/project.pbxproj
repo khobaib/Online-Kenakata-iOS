@@ -139,6 +139,7 @@
 		18AB773C199CB58000364FA6 /* icon3.png in Resources */ = {isa = PBXBuildFile; fileRef = 18AB7739199CB58000364FA6 /* icon3.png */; };
 		18AB773D199CB58000364FA6 /* icon2.png in Resources */ = {isa = PBXBuildFile; fileRef = 18AB773A199CB58000364FA6 /* icon2.png */; };
 		18AB773E199CB58000364FA6 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 18AB773B199CB58000364FA6 /* icon.png */; };
+		9A592D4F19C59EF80042E42A /* databaseV4.sqlite3 in Resources */ = {isa = PBXBuildFile; fileRef = 9A592D4E19C59EF80042E42A /* databaseV4.sqlite3 */; };
 		9A7F131919A35347002F2526 /* phone.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A7F131819A35347002F2526 /* phone.png */; };
 /* End PBXBuildFile section */
 
@@ -381,6 +382,7 @@
 		18AB7739199CB58000364FA6 /* icon3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon3.png; sourceTree = "<group>"; };
 		18AB773A199CB58000364FA6 /* icon2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon2.png; sourceTree = "<group>"; };
 		18AB773B199CB58000364FA6 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
+		9A592D4E19C59EF80042E42A /* databaseV4.sqlite3 */ = {isa = PBXFileReference; lastKnownFileType = file; path = databaseV4.sqlite3; sourceTree = "<group>"; };
 		9A7F131819A35347002F2526 /* phone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = phone.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -799,6 +801,7 @@
 		185E2AF71990C330008D741C /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				9A592D4E19C59EF80042E42A /* databaseV4.sqlite3 */,
 				185E2AF91990CF86008D741C /* databaseV3.sqlite3 */,
 				14DE1D31197E4DD2002D4DAA /* Data.h */,
 				14DE1D32197E4DD2002D4DAA /* Data.m */,
@@ -917,6 +920,7 @@
 				14D45AE51974FCB900F677D0 /* README.md in Resources */,
 				14D45B541974FFA500F677D0 /* icon_image_enlarge.png in Resources */,
 				14D45B511974FFA500F677D0 /* splash001.png in Resources */,
+				9A592D4F19C59EF80042E42A /* databaseV4.sqlite3 in Resources */,
 				14D45B561974FFA500F677D0 /* tag_none.png in Resources */,
 				14D45A521974FC6800F677D0 /* Images.xcassets in Resources */,
 				14D45B531974FFA500F677D0 /* facebook.png in Resources */,

@@ -10,15 +10,21 @@
 #import "RMPickerViewController.h"
 #import "LoadingView.h"
 
-@interface AddToCart : UIViewController<UIPickerViewDataSource,UIPickerViewDelegate,RMPickerViewControllerDelegate,UIAlertViewDelegate>{
+@interface AddToCart : UIViewController<UIPickerViewDataSource,UIPickerViewDelegate,RMPickerViewControllerDelegate,UIAlertViewDelegate,UITableViewDataSource,UITableViewDelegate>{
     NSMutableArray *pickerData;
-    bool flag;
     NSString *currency;
     int quantity;
     NSMutableDictionary *specialAnsDic;
     int availablity;
     NSString * selectedQuantity;
     LoadingView *loading;
+    
+    NSMutableArray *attributeList;
+    NSMutableArray *attribute_values;
+    
+    NSMutableArray *attributeIdList;
+    
+    int attribute_index;
 }
 
 
@@ -37,6 +43,8 @@
 @property (strong,nonatomic) IBOutlet UITextView *details;
 @property (strong,nonatomic) IBOutlet UIView *specialQuestionView;
 
+@property (strong,nonatomic) IBOutlet UITableView *tableView;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *attributeTableHeight;
 
 @property (strong,nonatomic)IBOutlet UIView *quantityView;
 @property (strong,nonatomic)IBOutlet UIButton *confirmBtn;

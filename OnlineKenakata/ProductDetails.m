@@ -180,7 +180,7 @@
     [self.productDetails setScrollEnabled:NO];
     
    
-    int available =[[self.productData objectForKey:@"general_available_quantity"]intValue];
+    int available =[[self.productData objectForKey:@"add_to_cart"]intValue];
     if(available>0){
         self.itemCode.text=[self.productData objectForKey:@"sku"];
         
@@ -468,10 +468,10 @@
 
     AddToCart *cart;
     if([spclQus isEqualToString:@""]){
-        cart=[[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"addToCart2"];
+        cart=[[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"addToCart4"];
 
     }else{
-       cart=[[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"AddToCart"];
+       cart=[[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"addToCart4"];
 
     }
     cart.productData=self.productData;

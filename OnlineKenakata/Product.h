@@ -19,10 +19,8 @@
 @property NSString *QUANTITY;
 @property NSString *WEIGHT;
 @property NSString *ITEM_CODE;
-@property NSString *SPECIAL_QUESTION_TEXT;
-@property NSString *SPECIAL_ANS_ID;
-@property NSString *SPECIAL_ANS_TEXT;
-@property NSString *SPECIAL_ANS_SUB_SKU;
+@property NSString *attributs;
+@property NSString *varientID;
 @property NSString *IMAGE_URL;
 @property NSString *THUMBNAIL_IMAGE_URL;
 @property NSString *PRICE;
@@ -30,6 +28,6 @@
 @property int AVAILABILITY;
 @property NSString *PRODUCT_TAG;
 
--(id)initProduct:(NSString *)name productId:(NSString *)ID Quantity:(NSString *)quantity Weight:(NSString *)weight code:(NSString*)item_code spclQusTxt:(NSString *)specialQusTxt spclAnsID:(NSString *)spclAnsID spclAnsText:(NSString *)spclAnsText spclAnsSubSku:(NSString *)spclAnsSubSku imageURL:(NSString *)imageUrl thumbImage:(NSString *)thumbImage price:(NSString *)price oldPrice:(NSString *)oldPrice availabl:(int )availablity tag:(NSString *)product_tag;
+-(id)initProduct:(NSString *)name productId:(NSString *)ID Quantity:(NSString *)quantity Weight:(NSString *)weight code:(NSString*)item_code attributs:(NSString *)attributs varient:(NSString*)varientID imageURL:(NSString *)imageUrl thumbImage:(NSString *)thumbImage price:(NSString *)price oldPrice:(NSString *)oldPrice availabl:(int )availablity tag:(NSString *)product_tag;
 
 @end

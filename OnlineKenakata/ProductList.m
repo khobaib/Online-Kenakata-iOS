@@ -254,10 +254,10 @@
         NSMutableDictionary *dic = [productList objectAtIndex:indexPath.row];
         
         ProductDetails *prdtails;
-        NSString *spclQus=[dic objectForKey:@"special_question"];
-        int available =[[dic objectForKey:@"general_available_quantity"]intValue];
+       
+        int available =[[dic objectForKey:@"add_to_cart"]intValue];
         
-        if([spclQus isEqualToString:@""]){
+       
             if(available<1){
                 prdtails= [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"ProductDetails2"];
                 NSLog(@"in no button");
@@ -266,10 +266,7 @@
                 prdtails= [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"productdetails"];
                 
             }
-        }else{
-            prdtails= [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"productdetails"];
-            
-        }
+      
         
         
         prdtails.productData=dic;
