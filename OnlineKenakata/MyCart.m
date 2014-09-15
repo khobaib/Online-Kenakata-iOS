@@ -213,6 +213,7 @@
             
             itemCode.text=[NSString stringWithFormat:@"Item Code %@",[data objectForKey:@"sku"]];
            
+           
             if([product.varientID  isEqualToString:@""]){
                 spcl.hidden=YES;
                 int GAQ=[[data objectForKey:@"general_available_quantity"]intValue];
@@ -237,16 +238,21 @@
                 }
             }else{
                 spcl.text=[NSString stringWithFormat:@"%@",product.attributs];//product.SPECIAL_QUESTION_TEXT,product.SPECIAL_ANS_TEXT];
-                int gaq;
+                int gaq=0;
                 NSArray *arr=[data objectForKey:@"variants"];
+               
+                
+               
                 for(int i=0;i<arr.count;i++){
                     NSString *txt=[[arr objectAtIndex:i]objectForKey:@"id"];
+            
                     if([product.varientID isEqualToString:txt]){
                         gaq=[[[arr objectAtIndex:i]objectForKey:@"quantity"]intValue];
-
+                        
                         break;
                     }
                 }
+               
                 
                 if(gaq<1){
                     stocIndicator.text=@"Out of stock";
@@ -259,6 +265,7 @@
                     stocIndicator.text=[NSString stringWithFormat:@"Only %d left",gaq];
                     [stocIndicator setTextColor:[UIColor orangeColor]];
                     quantityLable.text= [NSString stringWithFormat:@"Quantity #%d",gaq];
+                    product.QUANTITY=[NSString stringWithFormat:@"%d",gaq];
 
 
                 }else {
@@ -337,7 +344,7 @@
         editQuantity=[[dic objectForKey:@"general_available_quantity"]intValue];
 
     }else{
-      NSArray *arr=[dic objectForKey:@"special_answers"];
+      NSArray *arr=[dic objectForKey:@"variants"];
         for(int i=0;i<arr.count;i++){
             NSString *txt=[[arr objectAtIndex:i]objectForKey:@"id"];
             if([product.varientID isEqualToString:txt]){
