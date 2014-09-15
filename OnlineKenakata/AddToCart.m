@@ -34,6 +34,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+   
     
     
     // Do any additional setup after loading the view.
@@ -56,7 +57,14 @@
 
     [self setValueOnUI];
     selectedQuantity=@"";
-    attributeIdList=[[NSMutableArray alloc]init];
+    
+    attributeIdList=[[NSMutableArray alloc]initWithCapacity:attributeList.count];
+    
+    for(int i=0;i<attributeList.count;i++){
+       
+        [attributeIdList addObject:[NSNull null]];
+    }
+    
 
 }
 
@@ -143,20 +151,6 @@
     }*/
 }
 
--(void)moveUP{
-    CGRect f = self.quantityView.frame;
-    f.origin.y=140;  //set the -35.0f to your required value
-    NSLog(@"%f %f",self.quantityView.frame.origin.y,f.origin.y);
-    self.quantityView.frame = f;
-    
-    CGRect fb = self.quantitybtn.frame;
-    fb.origin.y-=50;
-    self.quantitybtn.frame=fb;
-    
-    CGRect fl=self.details.frame;
-    fl.origin.y-=50;
-    self.details.frame=fl;
-}
 
 -(void)checkQuantity:(NSString *)string{
     
@@ -229,10 +223,23 @@
     
     NSMutableDictionary *image=[[self.productData objectForKey:@"images"]objectAtIndex:0];
     
-    NSString *attributes=@"color: red Size:M";
-    NSString *varient=@"166";
+    NSString *attributes=@"";
     
-    product=[product initProduct:[self.productData objectForKey:@"name"] productId:[self.productData objectForKey:@"product_id"] Quantity:selectedQuantity Weight:[self.productData objectForKey:@"weight"] code:[self.productData objectForKey:@"sku"] attributs:attributes varient:varient imageURL:[image objectForKey:@"image_url"] thumbImage:[image objectForKey:@"thumbnail_image_url"] price:[self.productData objectForKey:@"price"] oldPrice:[self.productData objectForKey:@"old_price"] availabl:availablity tag:[self.productData objectForKey:@"tag"]];
+    for(int i=0;i<attributeIdList.count;i++){
+        NSString *str=[[attributeList objectAtIndex:i]objectForKey:@"name"];
+        attributes=[attributes stringByAppendingFormat:@"%@:",str];
+        
+        NSArray *array=[[attributeList objectAtIndex:i]objectForKey:@"attribute_values"];
+        for(int j=0;j<[array count];j++){
+            if([[attributeIdList objectAtIndex:i]isEqualToString:[[array objectAtIndex:j]objectForKey:@"id"]]){
+                  attributes=[attributes stringByAppendingFormat:@"%@ ",[[array objectAtIndex:j]objectForKey:@"name"]];
+            }
+        }
+        
+    }
+    NSLog(@"%@",attributes);
+    
+    product=[product initProduct:[self.productData objectForKey:@"name"] productId:[self.productData objectForKey:@"product_id"] Quantity:selectedQuantity Weight:[self.productData objectForKey:@"weight"] code:[self.productData objectForKey:@"sku"] attributs:attributes varient:varientID imageURL:[image objectForKey:@"image_url"] thumbImage:[image objectForKey:@"thumbnail_image_url"] price:[self.productData objectForKey:@"price"] oldPrice:[self.productData objectForKey:@"old_price"] availabl:availablity tag:[self.productData objectForKey:@"tag"]];
     
     if([DatabaseHandeler myCartDataSave:product]){
      
@@ -243,7 +250,7 @@
         [alertView show];
     }
     
-    [DatabaseHandeler getProduct];
+    //[DatabaseHandeler getProduct];
     
 }
 
@@ -255,7 +262,7 @@
         
         cart.productList=[DatabaseHandeler getProduct];
         
-        NSLog(@"log %lu",(unsigned long)cart.productList.count);
+       // NSLog(@"log %lu",(unsigned long)cart.productList.count);
         if(cart.productList.count<1){
             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error "
                                                                 message:@"My Cart is empty"
@@ -269,7 +276,7 @@
         
         
     }else if (buttonIndex==0){
-        NSLog(@"%ld",(long)buttonIndex);
+      //  NSLog(@"%ld",(long)buttonIndex);
         UIButton *btn=[[UIButton alloc]initWithFrame:CGRectMake(275, -6, 50, 50)];
         
         [btn setBackgroundImage:[UIImage imageNamed:@"my_cart.png"] forState:UIControlStateNormal];
@@ -340,7 +347,14 @@
 
         NSString *str=[NSString stringWithFormat:@"%d",[[selectedRows objectAtIndex:selectedRows.count-1]intValue]+1];
         
-        [self.quantitybtn setTitle:str forState:UIControlStateNormal];
+        NSIndexPath *indexPath=[NSIndexPath indexPathForRow:(attributeIdList.count) inSection:0];
+        
+        UITableViewCell *cell=[self.tableView cellForRowAtIndexPath:indexPath];
+        
+        UIButton *btn=(UIButton*)[cell viewWithTag:42];
+
+
+        [btn setTitle:str forState:UIControlStateNormal];
         selectedQuantity=str;
         
     }else{
@@ -348,7 +362,9 @@
        int i=[[selectedRows objectAtIndex:selectedRows.count-1]intValue];
         NSString *str=[[pickerData objectAtIndex:i]objectForKey:@"id"];
         
-        [attributeIdList addObject:str];
+
+        [attributeIdList replaceObjectAtIndex:attribute_index withObject:str];
+
         NSString *name=[[pickerData objectAtIndex:i]objectForKey:@"name"];
         
        // specialAnsDic=[pickerData objectAtIndex:i];
@@ -365,6 +381,7 @@
         
         self.quantitybtn.enabled=YES;
         
+      
         
        // NSString *string = [NSString stringWithFormat:@"%@/rest.php?method=check_stock&product_id=%@&is_special_question=true&special_answer_id=%@&application_code=%@",[Data getBaseUrl],[self.productData objectForKey:@"product_id"],[specialAnsDic objectForKey:@"id"],[Data getAppCode]];
         
@@ -404,13 +421,53 @@
 -(IBAction)selectAttribute:(id)sender{
     CGPoint buttonPosition = [sender convertPoint:CGPointZero toView:self.tableView];
     NSIndexPath *indexPath = [self.tableView indexPathForRowAtPoint:buttonPosition];
+    
+    
     if(indexPath.row>=attributeList.count){
-        attribute_index=-1;
         
-        RMPickerViewController *pickerVC = [RMPickerViewController pickerController];
-        pickerVC.delegate = self;
+        if(attributeList.count==0){
+             attribute_index=-1;
+            quantity=[[self.productData objectForKey:@"general_available_quantity"]intValue];
+            RMPickerViewController *pickerVC = [RMPickerViewController pickerController];
+            pickerVC.delegate = self;
+            
+            [pickerVC show];
+            return;
+        }
         
-        [pickerVC show];
+        if(![self isEmptyArray]){
+            attribute_index=-1;
+            
+            quantity=[self getQuantity];
+            if(quantity==0){
+                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error"
+                                                                    message:@"Sorry.Product with this attribute is not available Right now.you can try other attributes"
+                                                                   delegate:nil
+                                                          cancelButtonTitle:@"Ok"
+                                                          otherButtonTitles:nil];
+                [alertView show];
+                return;
+
+            }
+             RMPickerViewController *pickerVC = [RMPickerViewController pickerController];
+             pickerVC.delegate = self;
+                
+             [pickerVC show];
+            
+            
+            
+            
+        }else{
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error"
+                                                                message:@"Please select all the attributs first."                                                           delegate:nil
+                                                      cancelButtonTitle:@"Ok"
+                                                      otherButtonTitles:nil];
+            [alertView show];
+            return;
+
+        }
+        
+       
         
     }else{
         
@@ -444,11 +501,52 @@
         type.text=@"Quantity";
         return cell;
     }
-    NSLog(@"index %d AList%d",indexPath.row,attributeList.count);
+   // NSLog(@"index %d AList%d",indexPath.row,attributeList.count);
     type.text=[[attributeList objectAtIndex:indexPath.row]objectForKey:@"name"];
     return cell;
 }
 
+-(BOOL)isEmptyArray{
+    
+    for(int i=0;i<attributeIdList.count;i++){
+        if([attributeIdList objectAtIndex:i]==[NSNull null]){
+            return YES;
+        }
+    }
+    
+    
+    return NO;
+}
+
+-(int)getQuantity{
+    NSString *str=@"";
+    for(int i=0;i<attributeIdList.count;i++){
+        
+        
+       str=[str stringByAppendingString:[attributeIdList objectAtIndex:i]];
+        if(i<attributeIdList.count-1){
+             str=[str stringByAppendingString:@","];
+        }
+        
+            }
+    
+
+    
+    NSMutableArray *varients=[self.productData objectForKey:@"variants"];
+    
+    for(int i=0;i<varients.count;i++){
+        NSMutableDictionary *dic=[varients objectAtIndex:i];
+        
+        if([str isEqualToString:[dic objectForKey:@"attribute_value_set"]]){
+            
+            varientID=[dic objectForKey:@"id"];
+           
+            return  [[dic objectForKey:@"quantity"]intValue];
+        }
+    }
+    
+    return 0;
+}
 
 /*
 #pragma mark - Navigation

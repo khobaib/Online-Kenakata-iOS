@@ -23,6 +23,7 @@
     NSMutableArray *attribute_values;
     
     NSMutableArray *attributeIdList;
+    NSString *varientID;
     
     int attribute_index;
 }
