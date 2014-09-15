@@ -319,6 +319,7 @@
                 }
                 
                 [self.navigationController popToRootViewControllerAnimated:YES];
+                return ;
             }
             NSLog(@"JSON: %@", responseObject);
             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error"
@@ -327,6 +328,7 @@
                                                       cancelButtonTitle:@"Ok"
                                                       otherButtonTitles:nil];
             [alertView show];
+            
 
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error"

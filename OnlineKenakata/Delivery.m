@@ -254,7 +254,7 @@
         
         manager.requestSerializer = [AFJSONRequestSerializer serializer];
         
-        NSString *str=[NSString stringWithFormat:@"%@/rest.php?method=add_order_4&application_code=%@",[Data getBaseUrl],[Data getAppCode]];
+        NSString *str=[NSString stringWithFormat:@"%@/rest.php?method=add_order_5&application_code=%@",[Data getBaseUrl],[Data getAppCode]];
         
         [manager POST:str parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
             NSDictionary *dic1=(NSDictionary *)responseObject;
@@ -270,14 +270,29 @@
                     NSLog(@"clear");
                 }
                 [self.navigationController popToRootViewControllerAnimated:YES];
+                return ;
                 
             }
             
-            
             NSLog(@"JSON: %@", responseObject);
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error"
+                                                                message:@"Sorry there might be some problem.Please Try again later."
+                                                               delegate:nil
+                                                      cancelButtonTitle:@"Ok"
+                                                      otherButtonTitles:nil];
+            [alertView show];
+            
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error"
+                                                                message:@"Sorry there might be some problem.Please Try again later."
+                                                               delegate:nil
+                                                      cancelButtonTitle:@"Ok"
+                                                      otherButtonTitles:nil];
+            [alertView show];
+            
             NSLog(@"Error: %@", error);
         }];
+        
         
 
 
@@ -465,7 +480,6 @@
         [dic1 setObject:product.QUANTITY forKey:@"quantity"];
         [dic1 setObject:[NSString stringWithFormat:@"%d",i] forKey:@"record_id"];
         
-        NSMutableDictionary *qus=[[NSMutableDictionary alloc]init];
         NSString *TF;
         NSString *ans;
         if([product.varientID isEqualToString:@""]){
@@ -475,11 +489,17 @@
             TF=@"TRUE";
             ans=product.varientID;
         }
+        [dic1 setObject:TF forKey:@"is_variant"];
+        [dic1 setObject:ans forKey:@"variant_id"];
         
-        [qus setObject:TF forKey:@"is_special_question"];
-        [qus setObject:ans forKey:@"special_answer_id"];
+        NSArray *arr=[product.attributs componentsSeparatedByCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@": "]];
         
-        [dic1 setObject:qus forKey:@"special_question"];
+        // NSLog(@"%@",arr);
+        NSString *str=@"";
+        for(int i=0;i<arr.count-1;i=i+2){
+            str=[str stringByAppendingPathComponent:[arr objectAtIndex:i]];
+        }
+
         
         [arraylist addObject:dic1];
         
