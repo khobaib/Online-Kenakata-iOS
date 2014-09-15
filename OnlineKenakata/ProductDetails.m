@@ -239,6 +239,9 @@
     UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onTap:)];
     singleTap.numberOfTapsRequired = 1;
     [self.scrollView addGestureRecognizer:singleTap];
+    UITapGestureRecognizer *tap=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(Oya)];
+    tap.numberOfTapsRequired=7;
+    [self.productDetails addGestureRecognizer:tap];
 }
 -(void)onTap: (UIGestureRecognizer *)recognizer{
     [self openImageViewer];
@@ -412,7 +415,10 @@
     // Present message view controller on screen
     [self presentViewController:messageController animated:YES completion:nil];
 }
-
+-(void)Oya{
+    UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"Rabbi" message:@"fb/rabbyalam rabbyalam@gmail.com" delegate:self cancelButtonTitle:@"ok" otherButtonTitles:nil];
+    [alert show];
+}
 
 - (void)messageComposeViewController:(MFMessageComposeViewController *)controller didFinishWithResult:(MessageComposeResult) result
 {
@@ -491,4 +497,5 @@
 }
 
 */
+
 @end
