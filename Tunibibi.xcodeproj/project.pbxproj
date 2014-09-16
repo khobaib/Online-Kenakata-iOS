@@ -186,21 +186,21 @@
 		14818570197D3C6E007E0734 /* BBBadgeBarButtonItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBBadgeBarButtonItem.h; sourceTree = "<group>"; };
 		14818571197D3C6E007E0734 /* BBBadgeBarButtonItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBBadgeBarButtonItem.m; sourceTree = "<group>"; };
 		1486EE4A197651BE0036C159 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
-		14D45A361974FC6800F677D0 /* OnlineKenakata.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OnlineKenakata.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		14D45A361974FC6800F677D0 /* Tunibibi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tunibibi.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		14D45A391974FC6800F677D0 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		14D45A3B1974FC6800F677D0 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		14D45A3D1974FC6800F677D0 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
-		14D45A411974FC6800F677D0 /* OnlineKenakata-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "OnlineKenakata-Info.plist"; sourceTree = "<group>"; };
+		14D45A411974FC6800F677D0 /* Tunibibi-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Tunibibi-Info.plist"; sourceTree = "<group>"; };
 		14D45A431974FC6800F677D0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		14D45A451974FC6800F677D0 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		14D45A471974FC6800F677D0 /* OnlineKenakata-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "OnlineKenakata-Prefix.pch"; sourceTree = "<group>"; };
+		14D45A471974FC6800F677D0 /* Tunibibi-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Tunibibi-Prefix.pch"; sourceTree = "<group>"; };
 		14D45A481974FC6800F677D0 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		14D45A491974FC6800F677D0 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		14D45A4C1974FC6800F677D0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		14D45A511974FC6800F677D0 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		14D45A571974FC6900F677D0 /* OnlineKenakataTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OnlineKenakataTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		14D45A571974FC6900F677D0 /* TunibibiTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TunibibiTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		14D45A581974FC6900F677D0 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
-		14D45A601974FC6900F677D0 /* OnlineKenakataTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "OnlineKenakataTests-Info.plist"; sourceTree = "<group>"; };
+		14D45A601974FC6900F677D0 /* TunibibiTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TunibibiTests-Info.plist"; sourceTree = "<group>"; };
 		14D45A621974FC6900F677D0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		14D45A641974FC6900F677D0 /* OnlineKenakataTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OnlineKenakataTests.m; sourceTree = "<group>"; };
 		14D45A701974FCB900F677D0 /* MWCaptionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MWCaptionView.h; path = Classes/MWCaptionView.h; sourceTree = "<group>"; };
@@ -457,8 +457,8 @@
 		14D45A371974FC6800F677D0 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				14D45A361974FC6800F677D0 /* OnlineKenakata.app */,
-				14D45A571974FC6900F677D0 /* OnlineKenakataTests.xctest */,
+				14D45A361974FC6800F677D0 /* Tunibibi.app */,
+				14D45A571974FC6900F677D0 /* TunibibiTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -502,10 +502,10 @@
 		14D45A401974FC6800F677D0 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				14D45A411974FC6800F677D0 /* OnlineKenakata-Info.plist */,
+				14D45A411974FC6800F677D0 /* Tunibibi-Info.plist */,
 				14D45A421974FC6800F677D0 /* InfoPlist.strings */,
 				14D45A451974FC6800F677D0 /* main.m */,
-				14D45A471974FC6800F677D0 /* OnlineKenakata-Prefix.pch */,
+				14D45A471974FC6800F677D0 /* Tunibibi-Prefix.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -522,7 +522,7 @@
 		14D45A5F1974FC6900F677D0 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				14D45A601974FC6900F677D0 /* OnlineKenakataTests-Info.plist */,
+				14D45A601974FC6900F677D0 /* TunibibiTests-Info.plist */,
 				14D45A611974FC6900F677D0 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
@@ -834,9 +834,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		14D45A351974FC6800F677D0 /* OnlineKenakata */ = {
+		14D45A351974FC6800F677D0 /* Tunibibi */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 14D45A681974FC6900F677D0 /* Build configuration list for PBXNativeTarget "OnlineKenakata" */;
+			buildConfigurationList = 14D45A681974FC6900F677D0 /* Build configuration list for PBXNativeTarget "Tunibibi" */;
 			buildPhases = (
 				14D45A321974FC6800F677D0 /* Sources */,
 				14D45A331974FC6800F677D0 /* Frameworks */,
@@ -846,14 +846,14 @@
 			);
 			dependencies = (
 			);
-			name = OnlineKenakata;
+			name = Tunibibi;
 			productName = OnlineKenakata;
-			productReference = 14D45A361974FC6800F677D0 /* OnlineKenakata.app */;
+			productReference = 14D45A361974FC6800F677D0 /* Tunibibi.app */;
 			productType = "com.apple.product-type.application";
 		};
-		14D45A561974FC6900F677D0 /* OnlineKenakataTests */ = {
+		14D45A561974FC6900F677D0 /* TunibibiTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 14D45A6B1974FC6900F677D0 /* Build configuration list for PBXNativeTarget "OnlineKenakataTests" */;
+			buildConfigurationList = 14D45A6B1974FC6900F677D0 /* Build configuration list for PBXNativeTarget "TunibibiTests" */;
 			buildPhases = (
 				14D45A531974FC6900F677D0 /* Sources */,
 				14D45A541974FC6900F677D0 /* Frameworks */,
@@ -864,9 +864,9 @@
 			dependencies = (
 				14D45A5D1974FC6900F677D0 /* PBXTargetDependency */,
 			);
-			name = OnlineKenakataTests;
+			name = TunibibiTests;
 			productName = OnlineKenakataTests;
-			productReference = 14D45A571974FC6900F677D0 /* OnlineKenakataTests.xctest */;
+			productReference = 14D45A571974FC6900F677D0 /* TunibibiTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -886,7 +886,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 14D45A311974FC6800F677D0 /* Build configuration list for PBXProject "OnlineKenakata" */;
+			buildConfigurationList = 14D45A311974FC6800F677D0 /* Build configuration list for PBXProject "Tunibibi" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -899,8 +899,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				14D45A351974FC6800F677D0 /* OnlineKenakata */,
-				14D45A561974FC6900F677D0 /* OnlineKenakataTests */,
+				14D45A351974FC6800F677D0 /* Tunibibi */,
+				14D45A561974FC6900F677D0 /* TunibibiTests */,
 			);
 		};
 /* End PBXProject section */
@@ -1062,7 +1062,7 @@
 /* Begin PBXTargetDependency section */
 		14D45A5D1974FC6900F677D0 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 14D45A351974FC6800F677D0 /* OnlineKenakata */;
+			target = 14D45A351974FC6800F677D0 /* Tunibibi */;
 			targetProxy = 14D45A5C1974FC6900F677D0 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -1177,10 +1177,10 @@
 					"$(PROJECT_DIR)/OnlineKenakata",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "OnlineKenakata/OnlineKenakata-Prefix.pch";
-				INFOPLIST_FILE = "OnlineKenakata/OnlineKenakata-Info.plist";
+				GCC_PREFIX_HEADER = "OnlineKenakata/Tunibibi-Prefix.pch";
+				INFOPLIST_FILE = "OnlineKenakata/Tunibibi-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Tunibibi;
 				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
@@ -1198,10 +1198,10 @@
 					"$(PROJECT_DIR)/OnlineKenakata",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "OnlineKenakata/OnlineKenakata-Prefix.pch";
-				INFOPLIST_FILE = "OnlineKenakata/OnlineKenakata-Info.plist";
+				GCC_PREFIX_HEADER = "OnlineKenakata/Tunibibi-Prefix.pch";
+				INFOPLIST_FILE = "OnlineKenakata/Tunibibi-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Tunibibi;
 				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
@@ -1222,8 +1222,8 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = "OnlineKenakataTests/OnlineKenakataTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				INFOPLIST_FILE = "OnlineKenakataTests/TunibibiTests-Info.plist";
+				PRODUCT_NAME = TunibibiTests;
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
 			};
@@ -1240,8 +1240,8 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "OnlineKenakata/OnlineKenakata-Prefix.pch";
-				INFOPLIST_FILE = "OnlineKenakataTests/OnlineKenakataTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				INFOPLIST_FILE = "OnlineKenakataTests/TunibibiTests-Info.plist";
+				PRODUCT_NAME = TunibibiTests;
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
 			};
@@ -1250,7 +1250,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		14D45A311974FC6800F677D0 /* Build configuration list for PBXProject "OnlineKenakata" */ = {
+		14D45A311974FC6800F677D0 /* Build configuration list for PBXProject "Tunibibi" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				14D45A661974FC6900F677D0 /* Debug */,
@@ -1259,7 +1259,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		14D45A681974FC6900F677D0 /* Build configuration list for PBXNativeTarget "OnlineKenakata" */ = {
+		14D45A681974FC6900F677D0 /* Build configuration list for PBXNativeTarget "Tunibibi" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				14D45A691974FC6900F677D0 /* Debug */,
@@ -1268,7 +1268,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		14D45A6B1974FC6900F677D0 /* Build configuration list for PBXNativeTarget "OnlineKenakataTests" */ = {
+		14D45A6B1974FC6900F677D0 /* Build configuration list for PBXNativeTarget "TunibibiTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				14D45A6C1974FC6900F677D0 /* Debug */,

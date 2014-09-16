@@ -74,7 +74,7 @@
 {
     [self.quantitybtn setTitleColor:[TextStyling appColor] forState:UIControlStateNormal];
     [self.specialQuestion setTitleColor:[TextStyling appColor] forState:UIControlStateNormal];
-    [self.confirmBtn setBackgroundColor:[TextStyling appColor]];
+    //[self.confirmBtn setBackgroundColor:[TextStyling appColor]];
     
     self.name.attributedText=[TextStyling AttributForTitle:[self.productData objectForKey:@"name"]];
     

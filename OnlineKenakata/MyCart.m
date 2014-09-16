@@ -64,7 +64,7 @@
     
     currency=[[[dic objectForKey:@"success"]objectForKey:@"user"]objectForKey:@"currency"];
     [self setValueOntop];
-    [self.checkoutBtn setBackgroundColor:[TextStyling appColor]];
+    //[self.checkoutBtn setBackgroundColor:[TextStyling appColor]];
     
     UIBarButtonItem *newBackButton = [[UIBarButtonItem alloc] initWithTitle:@"< Back" style:UIBarButtonItemStyleBordered target:self action:@selector(home:)];
     [newBackButton setTintColor:[TextStyling barbuttonColor]];

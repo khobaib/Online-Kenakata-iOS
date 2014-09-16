@@ -141,7 +141,7 @@
 {
     self.name.attributedText=[TextStyling AttributForTitle:[self.productData objectForKey:@"name"]];
     
-    [self.cartBtn setBackgroundColor:[TextStyling appColor]];
+    //[self.cartBtn setBackgroundColor:[TextStyling appColor]];
     
     int tag = (int)[[self.productData objectForKey:@"tag"] integerValue];
     if(tag==1){
