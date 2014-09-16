@@ -140,7 +140,6 @@
 		18AB773D199CB58000364FA6 /* icon2.png in Resources */ = {isa = PBXBuildFile; fileRef = 18AB773A199CB58000364FA6 /* icon2.png */; };
 		18AB773E199CB58000364FA6 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 18AB773B199CB58000364FA6 /* icon.png */; };
 		9A592D4F19C59EF80042E42A /* databaseV4.sqlite3 in Resources */ = {isa = PBXBuildFile; fileRef = 9A592D4E19C59EF80042E42A /* databaseV4.sqlite3 */; };
-		9A5D259819C6FE370038995B /* AddToCart2.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A5D259719C6FE370038995B /* AddToCart2.m */; };
 		9A7F131919A35347002F2526 /* phone.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A7F131819A35347002F2526 /* phone.png */; };
 /* End PBXBuildFile section */
 
@@ -384,8 +383,6 @@
 		18AB773A199CB58000364FA6 /* icon2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon2.png; sourceTree = "<group>"; };
 		18AB773B199CB58000364FA6 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 		9A592D4E19C59EF80042E42A /* databaseV4.sqlite3 */ = {isa = PBXFileReference; lastKnownFileType = file; path = databaseV4.sqlite3; sourceTree = "<group>"; };
-		9A5D259619C6FE370038995B /* AddToCart2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddToCart2.h; sourceTree = "<group>"; };
-		9A5D259719C6FE370038995B /* AddToCart2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddToCart2.m; sourceTree = "<group>"; };
 		9A7F131819A35347002F2526 /* phone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = phone.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -767,8 +764,6 @@
 				14D45B171974FF4800F677D0 /* ProductDetails.m */,
 				143644F01977D571008335D0 /* AddToCart.h */,
 				143644F11977D571008335D0 /* AddToCart.m */,
-				9A5D259619C6FE370038995B /* AddToCart2.h */,
-				9A5D259719C6FE370038995B /* AddToCart2.m */,
 				1403D1FE197A50680074B61C /* MyCart.h */,
 				1403D1FF197A50680074B61C /* MyCart.m */,
 				14E0C0C0197BA25A0099A51F /* ProceedToCheckout.h */,
@@ -1028,7 +1023,6 @@
 				14D45AF31974FCB900F677D0 /* UIImage+WebP.m in Sources */,
 				14D45B111974FD6B00F677D0 /* AFURLResponseSerialization.m in Sources */,
 				14D45AD51974FCB900F677D0 /* MBProgressHUD.m in Sources */,
-				9A5D259819C6FE370038995B /* AddToCart2.m in Sources */,
 				14D45B401974FF4800F677D0 /* FirstViewController.m in Sources */,
 				143644F21977D571008335D0 /* AddToCart.m in Sources */,
 				14D45AF41974FCB900F677D0 /* UIImageView+WebCache.m in Sources */,
