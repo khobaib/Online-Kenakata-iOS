@@ -54,7 +54,7 @@
                                               otherButtonTitles:nil];
     [alertView show];
 
-    [self.payment setBackgroundColor:[TextStyling appColor]];
+  //  [self.payment setBackgroundColor:[TextStyling appColor]];
     // Do any additional setup after loading the view.
 }
 

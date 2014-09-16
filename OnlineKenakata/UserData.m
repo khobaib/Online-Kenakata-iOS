@@ -30,7 +30,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self.addNew setBackgroundColor:[TextStyling appColor]];
+   // [self.addNew setBackgroundColor:[TextStyling appColor]];
     // Do any additional setup after loading the view.
 }
 

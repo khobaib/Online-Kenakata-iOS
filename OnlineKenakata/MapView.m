@@ -42,10 +42,18 @@
 
     branches=[[[dic objectForKey:@"success"]objectForKey:@"user"]objectForKey:@"branches"];
     //selectedBranch=[branches objectAtIndex:0];
+    NSLog(@"branches %@",branches);
+    if(branches.count==0){
+        UIAlertView *alertView=[[UIAlertView alloc]initWithTitle:@"Error" message:@"Shop has no branch" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles: nil];
+        
+        [alertView show];
+        
+    }else{
+        [self plotPushPin];
+        
+        [self branches];
+    }
     
-    [self plotPushPin];
-    
-    [self branches];
 }
 
 - (void)initBarbutton {
@@ -78,9 +86,12 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    if(!branches.count==0){
+        
+        [self initBarbutton];
+        [self goTolocation:0];
+    }
     
-    [self initBarbutton];
-    [self goTolocation:0];
     self.tabBarController.navigationItem.title=@"Location";
 
     
@@ -160,6 +171,7 @@
 
 -(void)branches{
 
+    
     RMPickerViewController *pickerVC = [RMPickerViewController pickerController];
     pickerVC.delegate = self;
     

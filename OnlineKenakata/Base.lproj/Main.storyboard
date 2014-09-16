@@ -1205,7 +1205,7 @@
                                 </constraints>
                             </pageControl>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" sectionIndexMinimumDisplayRowCount="5" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="oQS-RT-pSC">
-                                <rect key="frame" x="5" y="218" width="305" height="199"/>
+                                <rect key="frame" x="5" y="218" width="305" height="237"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -1249,7 +1249,7 @@
                             <constraint firstAttribute="trailing" secondItem="oQS-RT-pSC" secondAttribute="trailing" constant="10" id="KTc-2B-Mk0"/>
                             <constraint firstItem="1O8-db-NTH" firstAttribute="leading" secondItem="1sa-Zn-rnl" secondAttribute="leading" constant="60" id="RSh-cy-EHU"/>
                             <constraint firstItem="oQS-RT-pSC" firstAttribute="top" secondItem="1O8-db-NTH" secondAttribute="bottom" constant="8" id="cf9-xY-qEu"/>
-                            <constraint firstItem="Kws-pG-Q48" firstAttribute="top" secondItem="oQS-RT-pSC" secondAttribute="bottom" constant="38" id="xA6-a7-3f0"/>
+                            <constraint firstItem="Kws-pG-Q48" firstAttribute="top" secondItem="oQS-RT-pSC" secondAttribute="bottom" id="xA6-a7-3f0"/>
                             <constraint firstItem="1O8-db-NTH" firstAttribute="top" secondItem="eU7-Ey-kE4" secondAttribute="bottom" constant="6" id="ygd-KU-kdv"/>
                         </constraints>
                     </view>
@@ -1720,7 +1720,7 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fxv-Sn-twI">
                                 <rect key="frame" x="5" y="524" width="310" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.30170207259999998" green="0.62670436149999997" blue="0.78780995239999996" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.53333333329999999" green="0.25098039220000001" blue="0.65490196079999996" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="kYE-yI-dDo"/>
                                 </constraints>
@@ -1831,7 +1831,7 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="odf-Tr-EzS">
                                 <rect key="frame" x="5" y="511" width="308" height="56"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.30335249484925636" green="0.63013266694262859" blue="0.79211956521739135" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.53333333329999999" green="0.25098039220000001" blue="0.65490196079999996" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="56" id="3Gm-H4-Bns"/>
                                 </constraints>
@@ -2012,7 +2012,7 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g6z-J5-lkq">
                                 <rect key="frame" x="5" y="513" width="310" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.30170207259999998" green="0.62670436149999997" blue="0.78780995239999996" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.53333333329999999" green="0.25098039220000001" blue="0.65490196079999996" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="Dld-E8-y64"/>
                                 </constraints>
@@ -2104,7 +2104,7 @@
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v10-2o-dJp">
                                 <rect key="frame" x="193" y="252" width="52" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.30170207259999998" green="0.62670436149999997" blue="0.78780995239999996" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.53333333329999999" green="0.25098039220000001" blue="0.65490196079999996" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" title="Send">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -2274,7 +2274,7 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F2t-hk-bF2">
                                 <rect key="frame" x="4" y="517" width="310" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.30170207259999998" green="0.62670436149999997" blue="0.78780995239999996" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.53333333329999999" green="0.25098039220000001" blue="0.65490196079999996" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="Zrg-wc-5vs"/>
                                 </constraints>
