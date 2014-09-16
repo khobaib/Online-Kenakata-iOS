@@ -289,6 +289,7 @@
     
     
     
+    NSLog(@"%@",params);
     
     if([paymentMethod isEqualToString:@"bKash"]){
      
@@ -301,7 +302,7 @@
         
         manager.requestSerializer = [AFJSONRequestSerializer serializer];
         
-        NSString *str=[NSString stringWithFormat:@"%@/rest.php?method=add_order_4&application_code=%@",[Data getBaseUrl],[Data getAppCode]];
+        NSString *str=[NSString stringWithFormat:@"%@/rest.php?method=add_order_5&application_code=%@",[Data getBaseUrl],[Data getAppCode]];
         
         [manager POST:str parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
             NSDictionary *dic1=(NSDictionary *)responseObject;
@@ -335,12 +336,10 @@
                                                       cancelButtonTitle:@"Ok"
                                                       otherButtonTitles:nil];
             [alertView show];
+
             
             NSLog(@"Error: %@", error);
         }];
-        
-        
-
     }
 
     
@@ -525,21 +524,33 @@
         [dic1 setObject:product.QUANTITY forKey:@"quantity"];
         [dic1 setObject:[NSString stringWithFormat:@"%d",i] forKey:@"record_id"];
         
-        NSMutableDictionary *qus=[[NSMutableDictionary alloc]init];
+       // NSMutableDictionary *qus=[[NSMutableDictionary alloc]init];
         NSString *TF;
         NSString *ans;
-        if([product.SPECIAL_QUESTION_TEXT isEqualToString:@""]){
+        if([product.varientID isEqualToString:@""]){
             TF=@"FALSE";
             ans=@"0";
         }else{
             TF=@"TRUE";
-            ans=product.SPECIAL_ANS_ID;
+            ans=product.varientID;
+        }
+        [dic1 setObject:TF forKey:@"is_variant"];
+        [dic1 setObject:ans forKey:@"variant_id"];
+        
+        NSArray *arr=[product.attributs componentsSeparatedByCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@": "]];
+        
+       // NSLog(@"%@",arr);
+        NSString *str=@"";
+        for(int i=0;i<arr.count-1;i=i+2){
+            str=[str stringByAppendingPathComponent:[arr objectAtIndex:i]];
         }
         
-        [qus setObject:TF forKey:@"is_special_question"];
-        [qus setObject:ans forKey:@"special_answer_id"];
+       // NSLog(@"%@",str);
+        [dic1 setObject:str forKey:@"attributes"];
+        //[qus setObject:TF forKey:@"is_variant"];
+        //[qus setObject:ans forKey:@"special_answer_id"];
         
-        [dic1 setObject:qus forKey:@"special_question"];
+        //[dic1 setObject:qus forKey:@"special_question"];
         
         [arraylist addObject:dic1];
         

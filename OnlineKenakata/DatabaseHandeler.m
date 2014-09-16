@@ -18,10 +18,8 @@ NSString *const ID =@"id";
 NSString *const QUANTITY =@"quantity";
 NSString *const WEIGHT =@"weight";
 NSString *const ITEM_CODE =@"item_code";
-NSString *const SPECIAL_QUESTION_TEXT =@"special_question_text";
-NSString *const SPECIAL_ANS_ID =@"special_ans_id";
-NSString *const SPECIAL_ANS_TEXT =@"special_ans_text";
-NSString *const SPECIAL_ANS_SUB_SKU =@"special_ans_sub_sku";
+NSString *const ATTRIBUTES=@"attributs";
+NSString *const VARIENTID=@"variant_id";
 NSString *const IMAGE_URL =@"image_url";
 NSString *const THUMBNAIL_IMAGE_URL =@"thumbnail_image_url";
 NSString *const PRICE =@"price";
@@ -29,7 +27,7 @@ NSString *const OLD_PRICE =@"old_price";
 NSString *const AVAILABILITY =@"availability";
 NSString *const PRODUCT_TAG = @"tag";
 
-NSString *const databaseFilename=@"databaseV3.sqlite3";
+NSString *const databaseFilename=@"databaseV4.sqlite3";
 
 
 @implementation DatabaseHandeler
@@ -62,7 +60,7 @@ NSString *const databaseFilename=@"databaseV3.sqlite3";
     
     if([self isExist:product]){
         NSLog(@" exist kore ");
-        if([product.SPECIAL_QUESTION_TEXT isEqualToString:@""]){
+        if([product.varientID isEqualToString:@""]){
             NSString *qurrey=[NSString stringWithFormat:@"UPDATE 'cart_product_table' SET quantity=%@ where id=%@",product.QUANTITY,product.ID];
             bool ret=[database executeUpdate:qurrey];
             
@@ -70,7 +68,7 @@ NSString *const databaseFilename=@"databaseV3.sqlite3";
             return ret;
 
         }else{
-            NSString *qurrey=[NSString stringWithFormat:@"UPDATE 'cart_product_table' SET quantity=%@ where id=%@ AND special_question_text='%@'",product.QUANTITY,product.ID,product.SPECIAL_QUESTION_TEXT];
+            NSString *qurrey=[NSString stringWithFormat:@"UPDATE 'cart_product_table' SET quantity=%@ where id=%@ AND variant_id='%@'",product.QUANTITY,product.ID,product.varientID];
             bool ret=[database executeUpdate:qurrey];
             
             [database close];
@@ -81,7 +79,7 @@ NSString *const databaseFilename=@"databaseV3.sqlite3";
     
        
     
-        BOOL b=[database executeUpdate:@"INSERT INTO 'cart_product_table' VALUES (NULL,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);",product.ID,product.name,product.QUANTITY,product.WEIGHT,product.ITEM_CODE,product.SPECIAL_QUESTION_TEXT,product.SPECIAL_ANS_ID,product.SPECIAL_ANS_TEXT,product.SPECIAL_ANS_SUB_SKU,product.IMAGE_URL,product.THUMBNAIL_IMAGE_URL,product.PRICE,product.OLD_PRICE,product.AVAILABILITY,product.PRODUCT_TAG];
+        BOOL b=[database executeUpdate:@"INSERT INTO 'cart_product_table' VALUES (NULL,?,?,?,?,?,?,?,?,?,?,?,?,?);",product.ID,product.name,product.QUANTITY,product.WEIGHT,product.ITEM_CODE,product.IMAGE_URL,product.THUMBNAIL_IMAGE_URL,product.PRICE,product.OLD_PRICE,product.attributs,product.varientID, product.AVAILABILITY,product.PRODUCT_TAG];
     
         
         [database close];
@@ -106,11 +104,11 @@ NSString *const databaseFilename=@"databaseV3.sqlite3";
     FMResultSet *result;
   //  NSLog(@"%@",product.SPECIAL_QUESTION_TEXT);
 
-    if([product.SPECIAL_QUESTION_TEXT isEqualToString:@""]){
+    if([product.varientID isEqualToString:@""]){
         result=[database executeQuery:@"SELECT * FROM 'cart_product_table' where id=?",product.ID];
     }else{
 
-        result=[database executeQuery:@"SELECT * FROM 'cart_product_table' where id = ? AND special_ans_text = ?",product.ID,product.SPECIAL_ANS_TEXT];
+        result=[database executeQuery:@"SELECT * FROM 'cart_product_table' where id = ? AND variant_id = ?",product.ID,product.varientID];
 
     }
 
@@ -204,7 +202,7 @@ NSString *const databaseFilename=@"databaseV3.sqlite3";
         Product *var=[[Product alloc]init];
     
         
-        var=[var initProduct:[s stringForColumn:name] productId:[s stringForColumn:ID] Quantity:[s stringForColumn:QUANTITY] Weight:[s stringForColumn:WEIGHT] code:[s stringForColumn:ITEM_CODE] spclQusTxt:[s stringForColumn:SPECIAL_QUESTION_TEXT] spclAnsID:[s stringForColumn:SPECIAL_ANS_ID] spclAnsText:[s stringForColumn:SPECIAL_ANS_TEXT] spclAnsSubSku:[s stringForColumn:SPECIAL_ANS_SUB_SKU] imageURL:[s stringForColumn:IMAGE_URL] thumbImage:[s stringForColumn:THUMBNAIL_IMAGE_URL] price:[s stringForColumn:PRICE] oldPrice:[s stringForColumn:OLD_PRICE] availabl:[s intForColumn:AVAILABILITY] tag:[s stringForColumn:PRODUCT_TAG]];
+        var=[var initProduct:[s stringForColumn:name] productId:[s stringForColumn:ID] Quantity:[s stringForColumn:QUANTITY] Weight:[s stringForColumn:WEIGHT] code:[s stringForColumn:ITEM_CODE]attributs:[s stringForColumn:ATTRIBUTES] varient:[s stringForColumn:VARIENTID] imageURL:[s stringForColumn:IMAGE_URL] thumbImage:[s stringForColumn:THUMBNAIL_IMAGE_URL] price:[s stringForColumn:PRICE] oldPrice:[s stringForColumn:OLD_PRICE] availabl:[s intForColumn:AVAILABILITY] tag:[s stringForColumn:PRODUCT_TAG]] ;
 
         var.TABLE_PRIMARY_KEY=[s intForColumn:TABLE_PRIMARY_KEY];
         

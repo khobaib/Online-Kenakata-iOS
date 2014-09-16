@@ -212,9 +212,9 @@
             name.attributedText=[TextStyling AttributForTitle:[data objectForKey:@"name"]];
             
             itemCode.text=[NSString stringWithFormat:@"Item Code %@",[data objectForKey:@"sku"]];
-            NSString *spclQusText =[data objectForKey:@"special_question" ];
-
-            if([spclQusText  isEqualToString:@""]){
+           
+           
+            if([product.varientID  isEqualToString:@""]){
                 spcl.hidden=YES;
                 int GAQ=[[data objectForKey:@"general_available_quantity"]intValue];
                 if(GAQ<1){
@@ -237,17 +237,22 @@
 
                 }
             }else{
-                spcl.text=[NSString stringWithFormat:@"%@: %@",[data objectForKey:@"special_question"],product.SPECIAL_ANS_TEXT];//product.SPECIAL_QUESTION_TEXT,product.SPECIAL_ANS_TEXT];
-                int gaq;
-                NSArray *arr=[data objectForKey:@"special_answers"];
+                spcl.text=[NSString stringWithFormat:@"%@",product.attributs];//product.SPECIAL_QUESTION_TEXT,product.SPECIAL_ANS_TEXT];
+                int gaq=0;
+                NSArray *arr=[data objectForKey:@"variants"];
+               
+                
+               
                 for(int i=0;i<arr.count;i++){
                     NSString *txt=[[arr objectAtIndex:i]objectForKey:@"id"];
-                    if([product.SPECIAL_ANS_ID isEqualToString:txt]){
-                        gaq=[[[arr objectAtIndex:i]objectForKey:@"available_quantity"]intValue];
-
+            
+                    if([product.varientID isEqualToString:txt]){
+                        gaq=[[[arr objectAtIndex:i]objectForKey:@"quantity"]intValue];
+                        
                         break;
                     }
                 }
+               
                 
                 if(gaq<1){
                     stocIndicator.text=@"Out of stock";
@@ -260,6 +265,7 @@
                     stocIndicator.text=[NSString stringWithFormat:@"Only %d left",gaq];
                     [stocIndicator setTextColor:[UIColor orangeColor]];
                     quantityLable.text= [NSString stringWithFormat:@"Quantity #%d",gaq];
+                    product.QUANTITY=[NSString stringWithFormat:@"%d",gaq];
 
 
                 }else {
@@ -292,10 +298,10 @@
         }else{
             name.attributedText=[TextStyling AttributForTitle:product.name];
             itemCode.text=[NSString stringWithFormat:@"Item Code %@",product.ITEM_CODE];
-            if([product.SPECIAL_QUESTION_TEXT isEqualToString:@""]){
+            if([product.varientID isEqualToString:@""]){
                 spcl.hidden=YES;
             }else{
-                spcl.text=[NSString stringWithFormat:@"%@: %@",product.SPECIAL_QUESTION_TEXT,product.SPECIAL_ANS_TEXT];
+                spcl.text=[NSString stringWithFormat:@"%@",product.attributs];
                 
             }
 
@@ -332,17 +338,17 @@
     Product *product=[productList objectAtIndex:quantity.row];
     NSMutableDictionary *dic=[self getProduct:product.ID];
     
-    NSString *spclQusText =[dic objectForKey:@"special_question" ];
+   
     
-    if([spclQusText  isEqualToString:@""]){
+    if([product.varientID  isEqualToString:@""]){
         editQuantity=[[dic objectForKey:@"general_available_quantity"]intValue];
 
     }else{
-      NSArray *arr=[dic objectForKey:@"special_answers"];
+      NSArray *arr=[dic objectForKey:@"variants"];
         for(int i=0;i<arr.count;i++){
             NSString *txt=[[arr objectAtIndex:i]objectForKey:@"id"];
-            if([product.SPECIAL_ANS_ID isEqualToString:txt]){
-                editQuantity=[[[arr objectAtIndex:i]objectForKey:@"available_quantity"]intValue];
+            if([product.varientID isEqualToString:txt]){
+                editQuantity=[[[arr objectAtIndex:i]objectForKey:@"quantity"]intValue];
 
                 break;
             }
@@ -379,20 +385,20 @@
     
     NSMutableDictionary* dic=[self getProduct:product.ID];
     
-    NSString *spclQus=product.SPECIAL_QUESTION_TEXT;
+  
     
-    if([spclQus isEqualToString:@""]){
+    if([product.varientID isEqualToString:@""]){
         int gaq=[[dic objectForKey:@"general_available_quantity"]intValue];
         if(gaq<1){
             counter--;
         }
     }else{
         int gaq;
-        NSArray *arr=[dic objectForKey:@"special_answers"];
+        NSArray *arr=[dic objectForKey:@"variants"];
         for(int i=0;i<arr.count;i++){
             NSString *txt=[[arr objectAtIndex:i]objectForKey:@"id"];
-            if([product.SPECIAL_ANS_ID isEqualToString:txt]){
-                gaq=[[[arr objectAtIndex:i]objectForKey:@"available_quantity"]intValue];
+            if([product.varientID isEqualToString:txt]){
+                gaq=[[[arr objectAtIndex:i]objectForKey:@"quantity"]intValue];
                 break;
             }
             

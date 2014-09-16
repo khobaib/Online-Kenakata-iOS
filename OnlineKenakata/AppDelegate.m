@@ -97,14 +97,14 @@
     BOOL success;
     NSFileManager *fileManager = [NSFileManager defaultManager];
     NSString* homeDir = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
-    NSString *databasePath = [homeDir stringByAppendingPathComponent:@"databaseV3.sqlite3"];
+    NSString *databasePath = [homeDir stringByAppendingPathComponent:@"databaseV4.sqlite3"];
     success = [fileManager fileExistsAtPath:databasePath];
     if(success) {
          NSLog(@"working");
         return;}
     else{
         NSLog(@"notworking");
-        NSString *databasePathFromApp = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"databaseV3.sqlite3"];
+        NSString *databasePathFromApp = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"databaseV4.sqlite3"];
         [fileManager copyItemAtPath:databasePathFromApp toPath:databasePath error:nil];
     }
 }
