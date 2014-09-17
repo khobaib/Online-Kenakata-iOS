@@ -528,14 +528,15 @@
         NSString *TF;
         NSString *ans;
         if([product.varientID isEqualToString:@""]){
-            TF=@"FALSE";
+            TF=@"false";
             ans=@"0";
         }else{
-            TF=@"TRUE";
+            TF=@"true";
             ans=product.varientID;
         }
         [dic1 setObject:TF forKey:@"is_variant"];
         [dic1 setObject:ans forKey:@"variant_id"];
+        
         
         NSArray *arr=[product.attributs componentsSeparatedByCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@": "]];
         
@@ -545,7 +546,7 @@
             str=[str stringByAppendingPathComponent:[arr objectAtIndex:i]];
         }
         
-       // NSLog(@"%@",str);
+        NSLog(@"%@",str);
         [dic1 setObject:str forKey:@"attributes"];
         //[qus setObject:TF forKey:@"is_variant"];
         //[qus setObject:ans forKey:@"special_answer_id"];

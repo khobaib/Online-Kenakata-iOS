@@ -130,9 +130,9 @@
     [self.tableView reloadData];
     
     
-    CLLocationManager *manager=[[CLLocationManager alloc]init];
+   /* CLLocationManager *manager=[[CLLocationManager alloc]init];
     [manager requestWhenInUseAuthorization];
-     manager.delegate = self;
+     manager.delegate = self;*/
     
    // NSLog(@"%@",tableData);
 }

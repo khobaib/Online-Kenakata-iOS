@@ -482,10 +482,10 @@
         NSString *TF;
         NSString *ans;
         if([product.varientID isEqualToString:@""]){
-            TF=@"FALSE";
+            TF=@"false";
             ans=@"0";
         }else{
-            TF=@"TRUE";
+            TF=@"true";
             ans=product.varientID;
         }
         [dic1 setObject:TF forKey:@"is_variant"];
