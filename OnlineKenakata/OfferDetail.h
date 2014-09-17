@@ -25,7 +25,7 @@
 @property (nonatomic, strong) NSMutableArray *pageViews;
 
 @property (strong,nonatomic)IBOutlet UILabel *name;
-@property (strong,nonatomic)IBOutlet UITextView *description;
+@property (strong,nonatomic)IBOutlet UITextView *descriptionText; 
 
 @property (strong,nonatomic)IBOutlet UIScrollView *scrollView;
 

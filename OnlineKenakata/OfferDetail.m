@@ -50,9 +50,9 @@
         
         
         
-        [newPageView setImageWithURL:[NSURL URLWithString:[self.pageImages objectAtIndex:page]]
+        [newPageView sd_setImageWithURL:[NSURL URLWithString:[self.pageImages objectAtIndex:page]]
                     placeholderImage:[UIImage imageNamed:@"placeholder.png"]
-                           completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
+                           completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType,NSURL *imageURL) {
                                
                                [hud hide:YES];
                                
@@ -181,7 +181,7 @@
     self.name.attributedText=[TextStyling AttributForOfferNewsTitle:[self.offerData objectForKey:@"name"]];
     
 
-    self.description.attributedText=[TextStyling AttributForOfferNewsDescription:[self.offerData objectForKey:@"description"]];
+    self.descriptionText.attributedText=[TextStyling AttributForOfferNewsDescription:[self.offerData objectForKey:@"description"]];
     [self initImageSlider];
     [self initOntap];
 
@@ -282,7 +282,7 @@
     
     //fb twitter
     background.caption=[NSString stringWithFormat:@"Recommended - %@ , by %@ , Call %@ . Download Online Kenakata (Android/iOS)",self.name.text,[dic objectForKey:@"user_name"],[dic objectForKey:@"user_phone"]];
-    background.description=[self.offerData objectForKey:@"description"];
+    background.descriptionText=[self.offerData objectForKey:@"description"];
     NSString *imageURL=[[[self.offerData objectForKey:@"images"]objectAtIndex:0]objectForKey:@"image_url"];
     background.url=imageURL;
     background.viewController=self;
@@ -291,7 +291,7 @@
     background.delegate=self;
     
     //email
-    background.emailBody=[NSString stringWithFormat:@"%@ \n%@ .\nDownload Online Kenakata (Android/iOS)",self.description.text,imageURL];
+    background.emailBody=[NSString stringWithFormat:@"%@ \n%@ .\nDownload Online Kenakata (Android/iOS)",self.descriptionText.text,imageURL];
     background.emailSub=[NSString stringWithFormat:@"Recommended - %@ , by %@ , Call %@ ",self.name.text,[dic objectForKey:@"user_name"],[dic objectForKey:@"user_phone"]];
     
     // background.image=

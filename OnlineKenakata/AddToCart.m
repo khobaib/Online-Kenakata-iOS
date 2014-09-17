@@ -95,7 +95,7 @@
     
     NSString * imgurl = [[[self.productData objectForKey:@"images"] objectAtIndex:0]objectForKey:@"thumbnail_image_url"];
 
-    [self.thumbnil setImageWithURL:[NSURL URLWithString:imgurl]
+    [self.thumbnil sd_setImageWithURL:[NSURL URLWithString:imgurl]
              placeholderImage:[UIImage imageNamed:@"placeholder.gif"]];
     
     int tag = (int)[[self.productData objectForKey:@"tag"] integerValue];
@@ -473,7 +473,7 @@
         
     }else{
         
-        attribute_index=indexPath.row;
+        attribute_index=(int)indexPath.row;
         pickerData=[[attributeList objectAtIndex:attribute_index]objectForKey:@"attribute_values"];
         RMPickerViewController *pickerVC = [RMPickerViewController pickerController];
         pickerVC.delegate = self;

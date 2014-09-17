@@ -120,6 +120,8 @@
     }
     [self initLoading];
     [self askContactsPermission];
+    
+   
 }
 
 
@@ -210,13 +212,13 @@
     NSString *imageurl=[[[dic objectForKey:@"success"] objectForKey:@"user"]objectForKey:@"post_splash_image_url"];
     //NSLog(@"%@",imageurl);
     SDWebImageManager *manager = [SDWebImageManager sharedManager];
-    [manager downloadWithURL:[NSURL URLWithString:imageurl]
+    [manager downloadImageWithURL:[NSURL URLWithString:imageurl]
                      options:0
                     progress:^(NSInteger receivedSize, NSInteger expectedSize)
      {
          // progression tracking code
      }
-                   completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished)
+                   completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished,NSURL *imageURL)
      {
          if (image)
          {

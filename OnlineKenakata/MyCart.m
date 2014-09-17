@@ -282,7 +282,7 @@
             
             total.text=[NSString stringWithFormat:@"%@:%d",currency,x];
             NSString *thumbUrl=[[[data objectForKey:@"images"]objectAtIndex:0]objectForKey:@"thumbnail_image_url"];
-            [thumbnil setImageWithURL:[NSURL URLWithString:thumbUrl]
+            [thumbnil sd_setImageWithURL:[NSURL URLWithString:thumbUrl]
                      placeholderImage:[UIImage imageNamed:@"placeholder.gif"]];
             
             int tag = [[data objectForKey:@"tag"] intValue];
@@ -313,7 +313,7 @@
             
             total.text=[NSString stringWithFormat:@"%@:%d",currency,x];
             
-            [thumbnil setImageWithURL:[NSURL URLWithString:product.THUMBNAIL_IMAGE_URL]
+            [thumbnil sd_setImageWithURL:[NSURL URLWithString:product.THUMBNAIL_IMAGE_URL]
                      placeholderImage:[UIImage imageNamed:@"placeholder.gif"]];
             
             int tag = [product.PRODUCT_TAG intValue];

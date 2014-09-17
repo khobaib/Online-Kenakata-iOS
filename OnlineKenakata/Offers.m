@@ -176,7 +176,7 @@
         NSString *imgurl=[[imgArray objectAtIndex:0]objectForKey:@"thumbnail_image_url"];
         
         
-        [thumbnil setImageWithURL:[NSURL URLWithString:imgurl]
+        [thumbnil sd_setImageWithURL:[NSURL URLWithString:imgurl]
                  placeholderImage:[UIImage imageNamed:@"placeholder.gif"]];
     }
     

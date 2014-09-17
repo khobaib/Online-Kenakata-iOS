@@ -52,9 +52,9 @@
         
 
 
-        [newPageView setImageWithURL:[NSURL URLWithString:[self.pageImages objectAtIndex:page]]
+        [newPageView sd_setImageWithURL:[NSURL URLWithString:[self.pageImages objectAtIndex:page]]
                        placeholderImage:[UIImage imageNamed:@"placeholder.png"]
-                              completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
+                              completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType,NSURL *imageurl) {
                               
                                   [hud hide:YES];
 
@@ -576,7 +576,7 @@
     //fb twitter
     background.caption=[NSString stringWithFormat:@"Recommended - %@ , by %@ , Call %@ . Download Online Kenakata (Android/iOS)",[dic1 objectForKey:@"user_name"],[dic1 objectForKey:@"user_name"],[dic1 objectForKey:@"user_phone"]];
     
-    background.description=[NSString stringWithFormat:@"Check out %@. Call %@ or email %@. Opening hours - %@",[dic1 objectForKey:@"user_name"],[dic1 objectForKey:@"user_phone"],[dic1 objectForKey:@"email_address"],[dic1 objectForKey:@"hours"]];
+    background.descriptionText=[NSString stringWithFormat:@"Check out %@. Call %@ or email %@. Opening hours - %@",[dic1 objectForKey:@"user_name"],[dic1 objectForKey:@"user_phone"],[dic1 objectForKey:@"email_address"],[dic1 objectForKey:@"hours"]];
     
     NSString *url=[dic1 objectForKey:@"user_website"];
     background.url=url;

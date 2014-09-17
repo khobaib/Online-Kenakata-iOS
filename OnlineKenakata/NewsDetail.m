@@ -29,7 +29,7 @@
 
     self.name.attributedText=[TextStyling AttributForOfferNewsTitle:self.nameString];
 
-    self.description.attributedText=[TextStyling AttributForOfferNewsDescription:self.descriptionString];
+    self.descriptionText.attributedText=[TextStyling AttributForOfferNewsDescription:self.descriptionString];
 
     
     // Do any additional setup after loading the view.
@@ -74,7 +74,7 @@
     
     //fb twitter
     background.caption=[NSString stringWithFormat:@"Recommended - %@ , by %@ , Call %@ . Download Online Kenakata (Android/iOS)",self.name.text,[dic objectForKey:@"user_name"],[dic objectForKey:@"user_phone"]];
-    background.description=self.description.text ;
+    background.descriptionText=self.descriptionText.text ;
     NSString *url=[dic objectForKey:@"user_website"];
     background.url=url;
     background.viewController=self;
@@ -83,7 +83,7 @@
     background.delegate=self;
     
     //email
-    background.emailBody=[NSString stringWithFormat:@"%@ \n%@ .\nDownload Online Kenakata (Android/iOS)",self.description.text,url];
+    background.emailBody=[NSString stringWithFormat:@"%@ \n%@ .\nDownload Online Kenakata (Android/iOS)",self.descriptionText.text,url];
     background.emailSub=[NSString stringWithFormat:@"Recommended - %@ , by %@ , Call %@ ",self.name.text,[dic objectForKey:@"user_name"],[dic objectForKey:@"user_phone"]];
     
     // background.image=

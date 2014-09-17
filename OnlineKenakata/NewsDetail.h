@@ -17,6 +17,6 @@
 @property(strong,nonatomic) NSString *descriptionString;
 
 @property (strong,nonatomic) IBOutlet UILabel *name;
-@property (strong,nonatomic) IBOutlet UITextView *description;
+@property (strong,nonatomic) IBOutlet UITextView *descriptionText;
 
 @end

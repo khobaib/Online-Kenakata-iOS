@@ -45,8 +45,16 @@
 	<string>This app will use addressbook </string>
 	<key>NSLocationUsageDescription</key>
 	<string>This app will use your location</string>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>location</string>
+	</array>
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Location update needed for showing user&apos;s current location on map</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Location update needed for showing user&apos;s current location on map</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>

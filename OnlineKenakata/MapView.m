@@ -43,9 +43,13 @@
     branches=[[[dic objectForKey:@"success"]objectForKey:@"user"]objectForKey:@"branches"];
     //selectedBranch=[branches objectAtIndex:0];
     
-    [self plotPushPin];
+    if(branches.count!=0){
+        [self plotPushPin];
+        
+        [self branches];
+    }
     
-    [self branches];
+   
 }
 
 - (void)initBarbutton {
@@ -75,12 +79,15 @@
     
 }
 
-
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
     [self initBarbutton];
-    [self goTolocation:0];
+    
+    if(branches.count!=0){
+      [self goTolocation:0];
+
+    }
     self.tabBarController.navigationItem.title=@"Location";
 
     

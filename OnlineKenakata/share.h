@@ -23,7 +23,7 @@
 
 
 @property (strong,nonatomic) NSString *titleName;
-@property (strong,nonatomic) NSString *description;
+@property (strong,nonatomic) NSString *descriptionText;
 @property (strong,nonatomic) NSString *caption;
 @property (strong,nonatomic) UIImage *image;
 @property (strong,nonatomic) NSString *url;

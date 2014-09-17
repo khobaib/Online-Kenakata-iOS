@@ -51,15 +51,16 @@
         
         
         
-        [newPageView setImageWithURL:[NSURL URLWithString:[self.pageImages objectAtIndex:page]]
+        [newPageView sd_setImageWithURL:[NSURL URLWithString:[self.pageImages objectAtIndex:page]]
                     placeholderImage:[UIImage imageNamed:@"placeholder.png"]
-                           completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
+                           completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType,NSURL *imageURL) {
                                
                                [hud hide:YES];
                                
                                
                            }];
         
+       
         //newPageView.contentMode = UIViewContentModeScaleAspectFit;
         
         
@@ -365,7 +366,7 @@
     
     //fb twitter
     background.titleName=[NSString stringWithFormat:@"Recommended - %@ , by %@ , Call %@ . Download Online Kenakata (Android/iOS)",self.name.text,[dic objectForKey:@"user_name"],[dic objectForKey:@"user_phone"]];
-    background.description=self.productDetails.text;
+    background.descriptionText=self.productDetails.text;
     NSString *imageURL=[[[self.productData objectForKey:@"images"]objectAtIndex:0]objectForKey:@"image_url"];
     background.url=imageURL;
     background.viewController=self;

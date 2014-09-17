@@ -10,18 +10,31 @@
 #import "Data.h"
 #import "AFNetworking.h"
 #import "TextStyling.h"
+#import <MapKit/MapKit.h>
+
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
     
-    [[UIApplication sharedApplication] registerForRemoteNotificationTypes:
-     (UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeAlert)];
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
+    {
+         [[UIApplication sharedApplication] registerForRemoteNotifications];
+        [[UIApplication sharedApplication] registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeSound | UIUserNotificationTypeAlert | UIUserNotificationTypeBadge) categories:nil]];
+       
+    }
+    else
+    {
+        [[UIApplication sharedApplication] registerForRemoteNotificationTypes:
+         (UIUserNotificationTypeBadge | UIUserNotificationTypeSound | UIUserNotificationTypeAlert)];
+    }
+
+    
     
     [self checkAndCreateDatabase];
     
-    [UIApplication sharedApplication].applicationIconBadgeNumber =0;
+    
 
     
     if (launchOptions != nil)
@@ -58,6 +71,10 @@
     
     NSLog(@"log log");
     [alert show];
+}
+
+-(void)application:(UIApplication *)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings{
+    [UIApplication sharedApplication].applicationIconBadgeNumber =0;
 }
 - (void)application:(UIApplication*)application didReceiveRemoteNotification:(NSDictionary*)userInfo
 {

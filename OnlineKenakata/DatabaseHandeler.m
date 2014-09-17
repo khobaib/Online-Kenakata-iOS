@@ -49,6 +49,7 @@ NSString *const databaseFilename=@"databaseV4.sqlite3";
 
 
     FMDatabase *database = [FMDatabase databaseWithPath:databasePath];
+
     
     if (![database open]) {
         
@@ -56,7 +57,7 @@ NSString *const databaseFilename=@"databaseV4.sqlite3";
 
         return NO;
     }
-   // NSLog(@"can open");
+    NSLog(@"can open");
     
     if([self isExist:product]){
         NSLog(@" exist kore ");
@@ -68,6 +69,7 @@ NSString *const databaseFilename=@"databaseV4.sqlite3";
             return ret;
 
         }else{
+            
             NSString *qurrey=[NSString stringWithFormat:@"UPDATE 'cart_product_table' SET quantity=%@ where id=%@ AND variant_id='%@'",product.QUANTITY,product.ID,product.varientID];
             bool ret=[database executeUpdate:qurrey];
             
@@ -77,11 +79,11 @@ NSString *const databaseFilename=@"databaseV4.sqlite3";
     }else{
     
     
-       
     
-        BOOL b=[database executeUpdate:@"INSERT INTO 'cart_product_table' VALUES (NULL,?,?,?,?,?,?,?,?,?,?,?,?,?);",product.ID,product.name,product.QUANTITY,product.WEIGHT,product.ITEM_CODE,product.IMAGE_URL,product.THUMBNAIL_IMAGE_URL,product.PRICE,product.OLD_PRICE,product.attributs,product.varientID, product.AVAILABILITY,product.PRODUCT_TAG];
     
-        
+        BOOL b=[database executeUpdate:@"INSERT INTO cart_product_table VALUES (NULL,?,?,?,?,?,?,?,?,?,?,?,?,?);",product.ID,product.name,product.QUANTITY,product.WEIGHT,product.ITEM_CODE,product.IMAGE_URL,product.THUMBNAIL_IMAGE_URL,product.PRICE,product.OLD_PRICE,product.attributs,product.varientID, [NSNumber numberWithInt:product.AVAILABILITY],product.PRODUCT_TAG];
+    
+      
         [database close];
         return b;
     }
@@ -100,8 +102,7 @@ NSString *const databaseFilename=@"databaseV4.sqlite3";
         
         //return NO;
     }
-   // NSLog(@"can open");
-    FMResultSet *result;
+       FMResultSet *result;
   //  NSLog(@"%@",product.SPECIAL_QUESTION_TEXT);
 
     if([product.varientID isEqualToString:@""]){
@@ -115,7 +116,7 @@ NSString *const databaseFilename=@"databaseV4.sqlite3";
     
     if([result next])
     {
-       // NSLog(@"%@",[result stringForColumnIndex:2]);
+        NSLog(@"%@",[result stringForColumnIndex:2]);
         [database close];
 
         return YES;

@@ -51,6 +51,7 @@
     currency=[[[dic objectForKey:@"success"]objectForKey:@"user"]objectForKey:@"currency"];
 
     isSearched=NO;
+    
 }
 
 -(void)initLoading{
@@ -127,6 +128,11 @@
     [loading StopAnimating];
     loading.hidden=YES;
     [self.tableView reloadData];
+    
+    
+    CLLocationManager *manager=[[CLLocationManager alloc]init];
+    [manager requestWhenInUseAuthorization];
+     manager.delegate = self;
     
    // NSLog(@"%@",tableData);
 }
@@ -224,7 +230,7 @@
         
         productName.attributedText=[TextStyling AttributForTitle:[NSString stringWithFormat:@"%@",[dic objectForKey:@"name"]]];
         
-        [thumbnil setImageWithURL:[NSURL URLWithString:imgurl]
+        [thumbnil sd_setImageWithURL:[NSURL URLWithString:imgurl]
                  placeholderImage:[UIImage imageNamed:@"placeholder.gif"]];
         
         int tag = (int)[[dic objectForKey:@"tag"] integerValue];
@@ -266,7 +272,7 @@
     NSString *imgurl=[NSString stringWithFormat:@"%@",[dic objectForKey:@"thumb_image_url"]];
     
     
-    [thumbnil setImageWithURL:[NSURL URLWithString:imgurl]
+    [thumbnil sd_setImageWithURL:[NSURL URLWithString:imgurl]
     placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
     
      return cell;
