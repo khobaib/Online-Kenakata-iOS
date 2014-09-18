@@ -7,8 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CoreLocation/CoreLocation.h>
 
-@interface tabbarController : UITabBarController
+
+@interface tabbarController : UITabBarController{
+     CLLocationManager *locationmanager;
+}
 
 @property (nonatomic,strong) UIButton *barBtn;
 

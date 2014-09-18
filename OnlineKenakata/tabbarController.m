@@ -32,12 +32,16 @@
     [super viewDidLoad];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(localNotificationReceived) name:@"localNotification" object:nil];
 
-    NSLog(@"tab bar loded");
-    // Do any additional setup after loading the view.
-    // Do any additional setup after loading the view.
     
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
+    {
+        locationmanager=[[CLLocationManager alloc]init];
+        //  manager.delegate = self;
+        [locationmanager requestWhenInUseAuthorization];
+    }
    
 }
+
 
 -(void)localNotificationReceived{
     

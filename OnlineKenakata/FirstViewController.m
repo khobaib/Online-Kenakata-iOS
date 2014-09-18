@@ -9,7 +9,7 @@
 #import "FirstViewController.h"
 #import "UIImageView+WebCache.h"
 #import "AFNetworking/AFNetworking.h"
-#import  "ProductList.h"
+#import "ProductList.h"
 #import "Data.h"
 #import "TextStyling.h"
 #import "ProductDetails.h"
@@ -130,9 +130,8 @@
     [self.tableView reloadData];
     
     
-   /* CLLocationManager *manager=[[CLLocationManager alloc]init];
-    [manager requestWhenInUseAuthorization];
-     manager.delegate = self;*/
+  
+    
     
    // NSLog(@"%@",tableData);
 }

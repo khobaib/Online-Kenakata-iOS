@@ -39,14 +39,45 @@
     NSDictionary *dic = [NSKeyedUnarchiver unarchiveObjectWithData:[ud objectForKey:@"get_user_data"]];
 
     
-
+  
+    
     branches=[[[dic objectForKey:@"success"]objectForKey:@"user"]objectForKey:@"branches"];
-    //selectedBranch=[branches objectAtIndex:0];
+
+    
+    
+    
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
+    {
+        CLAuthorizationStatus status = [CLLocationManager authorizationStatus];
+        
+        if (status==kCLAuthorizationStatusAuthorizedWhenInUse) {
+           
+            
+            if(branches.count!=0){
+                
+                
+                [self branches];
+            }
+            
+            
+        } else {
+            
+            UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"Error" message:@"Please Turn on the location permission for this app for better user experience." delegate:self cancelButtonTitle:@"ok" otherButtonTitles: nil];
+            [alert show];
+        }
+        
+    }else{
+         self.mapView.showsUserLocation=YES;
+    }
+
+    
+
+     //selectedBranch=[branches objectAtIndex:0];
     
     if(branches.count!=0){
         [self plotPushPin];
         
-        [self branches];
+      //  [self branches];
     }
     
    

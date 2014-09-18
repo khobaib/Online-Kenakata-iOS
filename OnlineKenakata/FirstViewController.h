@@ -8,11 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "LoadingView.h"
-#import <Foundation/Foundation.h>
-#import <CoreLocation/CoreLocation.h>
 
 
-@interface FirstViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,UISearchBarDelegate,CLLocationManagerDelegate>
+
+@interface FirstViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,UISearchBarDelegate>
 {
     NSMutableArray *catagoryList;
     NSMutableArray *productList;

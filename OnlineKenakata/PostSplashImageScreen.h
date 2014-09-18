@@ -8,12 +8,14 @@
 
 #import <UIKit/UIKit.h>
 #import "LoadingView.h"
-#import <MapKit/MapKit.h>
 
 
-@interface PostSplashImageScreen : UIViewController<MKMapViewDelegate>
+
+
+@interface PostSplashImageScreen : UIViewController
 {
     LoadingView *loading;
+   
 }
 @property IBOutlet UIScrollView *scrollView;
 @property IBOutlet UIImageView *imageView;

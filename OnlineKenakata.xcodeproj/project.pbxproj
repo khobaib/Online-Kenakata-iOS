@@ -897,6 +897,9 @@
 						DevelopmentTeam = V39QP9S6S6;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
+								enabled = 0;
+							};
+							com.apple.Maps.iOS = {
 								enabled = 1;
 							};
 						};

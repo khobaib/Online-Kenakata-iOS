@@ -1043,7 +1043,7 @@
                         <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7WG-7E-RxP">
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="7WG-7E-RxP">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="456"/>
                                 <connections>
                                     <outlet property="delegate" destination="woE-r6-h5S" id="P3p-Dh-EF9"/>
@@ -1073,8 +1073,12 @@
                         <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" restorationIdentifier="video_url" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="To2-Ee-8yb">
+                            <button opaque="NO" contentMode="scaleToFill" restorationIdentifier="video_url" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="To2-Ee-8yb">
                                 <rect key="frame" x="255" y="8" width="55" height="55"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="55" id="2NR-vI-c4G"/>
+                                    <constraint firstAttribute="height" constant="55" id="diG-y5-2iI"/>
+                                </constraints>
                                 <state key="normal" image="video.png">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -1082,8 +1086,12 @@
                                     <action selector="openYoutube:" destination="QG7-GT-yMz" eventType="touchUpInside" id="pBd-bv-sIz"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" restorationIdentifier="fb_profileurl" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hzv-vh-Hvg">
+                            <button opaque="NO" contentMode="scaleToFill" restorationIdentifier="fb_profileurl" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hzv-vh-Hvg">
                                 <rect key="frame" x="255" y="72" width="55" height="55"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="55" id="SuT-YV-xro"/>
+                                    <constraint firstAttribute="width" constant="55" id="th9-Lx-6BP"/>
+                                </constraints>
                                 <state key="normal" image="facebook.png">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -1091,8 +1099,12 @@
                                     <segue destination="fAc-n7-5nQ" kind="push" id="N0v-Ua-HA3"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" restorationIdentifier="twitter_profileurl" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o2N-p0-4Bj">
+                            <button opaque="NO" contentMode="scaleToFill" restorationIdentifier="twitter_profileurl" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o2N-p0-4Bj">
                                 <rect key="frame" x="255" y="136" width="55" height="55"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="55" id="0uf-w6-iTE"/>
+                                    <constraint firstAttribute="height" constant="55" id="FCB-Wk-qls"/>
+                                </constraints>
                                 <state key="normal" title="Button" image="twitter.png">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -1153,12 +1165,18 @@
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="1O8-db-NTH" secondAttribute="trailing" constant="130" id="3pv-XG-BsG"/>
+                            <constraint firstItem="To2-Ee-8yb" firstAttribute="leading" secondItem="eU7-Ey-kE4" secondAttribute="trailing" constant="6" id="A0J-sJ-b56"/>
                             <constraint firstItem="oQS-RT-pSC" firstAttribute="leading" secondItem="1sa-Zn-rnl" secondAttribute="leading" constant="5" id="Adc-o4-wWG"/>
                             <constraint firstItem="eU7-Ey-kE4" firstAttribute="leading" secondItem="1sa-Zn-rnl" secondAttribute="leading" constant="5" id="CWz-P5-NcC"/>
                             <constraint firstItem="eU7-Ey-kE4" firstAttribute="top" secondItem="zb2-hQ-kM2" secondAttribute="bottom" constant="7" id="GD2-aO-xor"/>
+                            <constraint firstItem="o2N-p0-4Bj" firstAttribute="top" secondItem="Hzv-vh-Hvg" secondAttribute="bottom" constant="9" id="Ipp-gb-JeQ"/>
                             <constraint firstAttribute="trailing" secondItem="oQS-RT-pSC" secondAttribute="trailing" constant="10" id="KTc-2B-Mk0"/>
                             <constraint firstItem="1O8-db-NTH" firstAttribute="leading" secondItem="1sa-Zn-rnl" secondAttribute="leading" constant="60" id="RSh-cy-EHU"/>
+                            <constraint firstItem="To2-Ee-8yb" firstAttribute="top" secondItem="zb2-hQ-kM2" secondAttribute="bottom" constant="8" id="StY-F2-leo"/>
+                            <constraint firstItem="o2N-p0-4Bj" firstAttribute="leading" secondItem="eU7-Ey-kE4" secondAttribute="trailing" constant="6" id="UKh-hY-R7n"/>
+                            <constraint firstItem="Hzv-vh-Hvg" firstAttribute="leading" secondItem="eU7-Ey-kE4" secondAttribute="trailing" constant="6" id="c4d-Y6-TzH"/>
                             <constraint firstItem="oQS-RT-pSC" firstAttribute="top" secondItem="1O8-db-NTH" secondAttribute="bottom" constant="8" id="cf9-xY-qEu"/>
+                            <constraint firstItem="Hzv-vh-Hvg" firstAttribute="top" secondItem="To2-Ee-8yb" secondAttribute="bottom" constant="9" id="lk5-c7-wYn"/>
                             <constraint firstItem="Kws-pG-Q48" firstAttribute="top" secondItem="oQS-RT-pSC" secondAttribute="bottom" constant="1" id="xA6-a7-3f0"/>
                             <constraint firstItem="1O8-db-NTH" firstAttribute="top" secondItem="eU7-Ey-kE4" secondAttribute="bottom" constant="6" id="ygd-KU-kdv"/>
                         </constraints>
