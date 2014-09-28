@@ -162,8 +162,8 @@
 }
 
 - (void)done {
-    self.finished = YES;
-    self.executing = NO;
+    [self setFinished:YES];
+    [self setExecuting:NO];
     [self reset];
 }
 

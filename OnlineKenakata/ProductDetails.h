@@ -10,12 +10,18 @@
 #import "MWPhotoBrowser.h"
 #import <MessageUI/MessageUI.h>
 #import "share.h"
+#import "EDStarRating.h"
+#import "LoadingView.h"
 @interface ProductDetails : UIViewController<UIScrollViewDelegate,MWPhotoBrowserDelegate,shareDelegate,MFMessageComposeViewControllerDelegate>{
     NSString *currency;
     NSMutableArray *photos;
+     LoadingView *loading;
+    
 }
 
 @property NSMutableDictionary *productData;
+@property NSMutableArray *similarProducrsData;
+@property NSMutableArray *similarProductPage;
 
 @property (nonatomic, strong) NSMutableArray *pageImages;
 @property (nonatomic, strong) NSMutableArray *pageViews;
@@ -30,6 +36,12 @@
 @property(strong,nonatomic) IBOutlet UILabel *itemCode;
 @property (strong,nonatomic) IBOutlet UILabel *itemCodeLable;
 @property (strong,nonatomic) IBOutlet UIButton *cartBtn;
+@property (strong,nonatomic) IBOutlet UIScrollView *horizontalScroller;
+@property (strong,nonatomic) IBOutlet EDStarRating *starRater;
+@property (strong,nonatomic) IBOutlet UIView *starRaterBack;
+@property (strong,nonatomic) IBOutlet UILabel *reviewNumber;
+
+
 
 -(IBAction)imageEnlarge:(id)sender;
 

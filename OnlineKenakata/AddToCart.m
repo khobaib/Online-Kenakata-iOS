@@ -394,8 +394,10 @@
     
 }
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component{
+
     
     if(attribute_index==-1){
+
         return [NSString stringWithFormat:@"%d",(int)(row+1)];
     }else{
         NSString *str =[[pickerData objectAtIndex:row]objectForKey:@"name"];

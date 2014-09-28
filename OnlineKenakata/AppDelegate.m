@@ -11,6 +11,7 @@
 #import "AFNetworking.h"
 #import "TextStyling.h"
 #import <MapKit/MapKit.h>
+#import "EDStarRating/EDStarRating.h"
 
 @implementation AppDelegate
 
@@ -60,6 +61,7 @@
     
     [TextStyling changeAppearance];
 
+    [EDStarRating class];
     return YES;
 }
 

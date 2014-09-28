@@ -12,6 +12,9 @@
 #import "AddToCart.h"
 #import "Libraries/MBProgressHUD/MBProgressHUD.h"
 #import "TextStyling.h"
+#import "Review.h"
+#import "AFNetworking.h"
+#import "Data.h"
 @interface ProductDetails ()
 
 @end
@@ -99,7 +102,7 @@
     // First, determine which page is currently visible
     CGFloat pageWidth = self.scrollView.frame.size.width;
     NSInteger page = (NSInteger)floor((self.scrollView.contentOffset.x * 2.0f + pageWidth) / (pageWidth * 2.0f));
-    
+
     // Update the page control
     self.pageControl.currentPage = page;
     
@@ -128,13 +131,9 @@
     [super viewWillAppear:animated];
     
     // 4
-    CGSize pagesScrollViewSize = self.scrollView.frame.size;
-    self.scrollView.contentSize = CGSizeMake(pagesScrollViewSize.width * self.pageImages.count, pagesScrollViewSize.height);
-    
-    // 5
-    [self loadVisiblePages];
+ 
+
     [self addShareButton];
-    
     
 }
 
@@ -166,11 +165,16 @@
 
     
     NSString *string =[self.productData objectForKey:@"description"];
+
     //NSDictionary *attributes = @{NSFontAttributeName:[UIFont systemFontOfSize:14]};
     
     //CGRect rect = [string boundingRectWithSize:CGSizeMake(self.productDetails.frame.size.width, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:attributes context:nil];
     
+
+   // NSDictionary *attributes = @{NSFontAttributeName:[UIFont systemFontOfSize:14]};
     
+   // CGRect rect = [string boundingRectWithSize:CGSizeMake(self.productDetails.frame.size.width, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:attributes context:nil];
+
     
     //[self.productDetails setFrame:rect];
     
@@ -182,6 +186,7 @@
     
    
     int available =[[self.productData objectForKey:@"add_to_cart"]intValue];
+
     if(available>0){
         self.itemCode.text=[self.productData objectForKey:@"sku"];
         
@@ -215,6 +220,7 @@
     [self.scrl setScrollEnabled:YES];
     self.pageControl.layer.cornerRadius=7;
     self.pageImages=[[NSMutableArray alloc]init];
+    self.similarProductPage=[[NSMutableArray alloc]init];
     
     NSMutableArray *images=[self.productData objectForKey:@"images"];
     
@@ -230,7 +236,9 @@
     for (NSInteger i = 0; i < self.pageImages.count; ++i) {
         [self.pageViews addObject:[NSNull null]];
     }
-    
+    for(NSInteger i = 0;i<self.similarProducrsData.count;++i){
+        [self.similarProductPage addObject:[NSNull null]];
+    }
     
     
     [self.pageControl addTarget:self action:@selector(changePage:) forControlEvents:UIControlEventValueChanged];
@@ -260,14 +268,139 @@
     
 
    
-    [self setValueOnUI];
+    
+    
+    
+  
+    [self initLoading];
+
+    [self loadData];
+    // NSLog(@"%@",self.pageImages);
+    // Do any additional setup after loading the view.
+}
+
+-(void)loadData{
+    
+    NSString *string = [NSString stringWithFormat:@"%@/rest.php?method=get_products_by_productids&product_ids=%@&application_code=%@",[Data getBaseUrl],[self.productData objectForKey:@"product_id"],[Data getAppCode]];
+    
+    NSURL *url = [NSURL URLWithString:string];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    // NSLog(@"%@",string);
+    // 2
+    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    operation.responseSerializer = [AFJSONResponseSerializer serializer];
+    
+    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        [self parsProducts:responseObject];
+        
+        
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        // 4
+        loading.hidden=YES;
+        [loading StopAnimating];
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error catagory List"
+                                                            message:[error localizedDescription]
+                                                           delegate:nil
+                                                  cancelButtonTitle:@"Ok"
+                                                  otherButtonTitles:nil];
+        [alertView show];
+    }];
+    
+    // 5
+    //  [self.indecator startAnimating];
+    loading.hidden=NO;
+    [loading StartAnimating];
+    [operation start];
+    
+    
+    
+}
+-(void)parsProducts:(id)respons{
+    [loading StopAnimating];
+    loading.hidden=YES;
+    NSMutableDictionary *dic1=(NSMutableDictionary *)respons;
+    self.productData=[[[dic1 objectForKey:@"success"]objectForKey:@"products"]objectAtIndex:0];
+    self.similarProducrsData=[self.productData objectForKey:@"similar_products"];
+    
+  
+      [self starRaterShow];
+    
+   // NSLog(@"%@",self.productData);
+    // 5
+    
     
     [self initImageSlider];
     
     [self initOntap];
+    
+    CGSize pagesScrollViewSize = self.scrollView.frame.size;
+    self.scrollView.contentSize = CGSizeMake(pagesScrollViewSize.width * self.pageImages.count, pagesScrollViewSize.height);
+    
+    
+    self.horizontalScroller.contentSize=CGSizeMake(120*self.similarProducrsData.count, self.horizontalScroller.frame.size.height);
 
-    // NSLog(@"%@",self.pageImages);
-    // Do any additional setup after loading the view.
+    [self loadVisiblePages];
+    
+    [self loadVisibleSimilarProduct];
+    [self setValueOnUI];
+    
+}
+
+
+
+
+-(void)starRaterShow{
+    self.starRater.starImage=[UIImage imageNamed:@"star.png"];
+    self.starRater.starHighlightedImage=[UIImage imageNamed:@"starhighlighted.png"];
+    
+    self.starRater.maxRating = 5.0;
+    
+   self.starRater.horizontalMargin = 12;
+    self.starRater.editable=NO;
+    self.starRater.rating= [[[self.productData objectForKey:@"review_detail"]objectForKey:@"average_rating"] floatValue];
+
+    
+    self.starRater.displayMode=EDStarRatingDisplayAccurate;
+    [self.starRater setNeedsDisplay];
+    
+    UITapGestureRecognizer *tap=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(ratingShow)];
+    tap.numberOfTapsRequired=1;
+    [self.starRater addGestureRecognizer:tap];
+    [self.starRaterBack setAlpha:0.40];
+    
+    [self.starRaterBack.layer setCornerRadius:5.0f];
+    
+    // border
+    [self.starRaterBack.layer setBorderColor:[UIColor grayColor].CGColor];
+    [self.starRaterBack.layer setBorderWidth:1.5f];
+    
+    // drop shadow
+    [self.starRaterBack.layer setShadowColor:[UIColor blackColor].CGColor];
+    [self.starRaterBack.layer setShadowOpacity:0.6];
+    [self.starRaterBack.layer setShadowRadius:3.0];
+    [self.starRaterBack.layer setShadowOffset:CGSizeMake(2.0, 2.0)];
+    
+
+    NSMutableDictionary *arr=[[self.productData objectForKey:@"review_detail"]objectForKey:@"distribution"];
+    int total=0;
+    
+    if(arr==nil){
+        return;
+    }
+    for(int i=0;i<arr.count;i++){
+        total+=[[arr objectForKey:[NSString stringWithFormat:@"%d",i]]intValue];
+    }
+    self.reviewNumber.text=[NSString stringWithFormat:@"%d Reviews",total];
+}
+-(void)ratingShow{
+
+    Review *review=[[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"CustomerReviews"];
+    
+    review.productID=[self.productData objectForKey:@"product_id"];
+    [self.navigationController pushViewController:review animated:YES];
 }
 
 - (IBAction)changePage:(id)sender {
@@ -278,7 +411,12 @@
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     // Load the pages that are now on screen
-    [self loadVisiblePages];
+    if(scrollView.tag==2){
+        [self loadVisiblePages];
+
+    }else{
+        [self loadVisibleSimilarProduct];
+    }
 }
 -(IBAction)imageEnlarge:(id)sender{
     [self openImageViewer];
@@ -398,7 +536,7 @@
     NSMutableDictionary *dic1=[NSKeyedUnarchiver unarchiveObjectWithData:[ud objectForKey:@"get_user_data"]];
     NSMutableDictionary *dic=[[dic1 objectForKey:@"success"]objectForKey:@"user"];
     
-    NSLog(@"protocall");
+   // NSLog(@"protocall");
     if(![MFMessageComposeViewController canSendText]) {
         UIAlertView *warningAlert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Your device doesn't support SMS!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [warningAlert show];
@@ -498,5 +636,148 @@
 }
 
 */
+
+
+#pragma mark -HorizentalSlider
+
+
+-(void)initLoading{
+    CGFloat x= self.view.frame.size.width/2-65;
+    CGFloat y =(self.view.frame.size.height-self.navigationController.navigationBar.frame.size.height-self.tabBarController.tabBar.frame.size.height)/2-25;
+    
+    loading=[[LoadingView alloc]initWithFrame:CGRectMake(x, y, 130, 50)];
+    loading.hidden=YES;
+    [self.view addSubview:loading];
+}
+
+
+- (void)loadSimilarProduct:(NSInteger)page {
+    if (page < 0 || page >= self.similarProducrsData.count) {
+        // If it's outside the range of what you have to display, then do nothing
+        return;
+    }
+    
+    // 1
+    UIView *pageView = [self.similarProductPage objectAtIndex:page];
+    if ((NSNull*)pageView == [NSNull null]) {
+        // 2
+        CGRect frame =CGRectMake(120*page, 0.0, 120, 140);
+       
+        
+        // 3
+        UIImageView *newPageView = [[UIImageView alloc] init];
+        [newPageView setFrame:CGRectMake(4, 4, 102,80)];
+        
+        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:newPageView animated:YES];
+        hud.labelText = @"Loading";
+        
+        NSString *string=[[self.similarProducrsData objectAtIndex:page]objectForKey:@"thumbnail_image_url"];
+        
+
+        [newPageView sd_setImageWithURL:[NSURL URLWithString:string]
+                       placeholderImage:[UIImage imageNamed:@"placeholder.png"]
+                              completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType,NSURL *imageURL) {
+                                  
+                                  [hud hide:YES];
+                                  
+            }];
+       
+        
+        //newPageView.contentMode = UIViewContentModeScaleAspectFit;
+        
+        if(newPageView.image==nil){
+            newPageView.image=[UIImage imageNamed:@"no_photo.png"];
+        }
+        UILabel *lable=[[UILabel alloc]initWithFrame:CGRectMake(4, 85, 102, 40)];
+        lable.text=[[self.similarProducrsData objectAtIndex:page]objectForKey:@"name"];
+        lable.numberOfLines=2;
+        [lable setFont:[UIFont systemFontOfSize:12]];
+        lable.textAlignment=NSTextAlignmentCenter;
+       // lable.textColor=[UIColor whiteColor];
+        lable.backgroundColor=[UIColor whiteColor];
+        UIView *view=[[UIView alloc]initWithFrame:CGRectMake(frame.origin.x+5, frame.origin.y+5, frame.size.width-10, frame.size.height-10)];
+      //  UIColor *color= [UIColor colorWithRed:(78.0/255.0)  green:(46.0/255.0) blue:(40.0/255.0) alpha:1.0f];
+        
+        
+        
+        [view setBackgroundColor:[TextStyling appColor]];
+        
+        [view addSubview:newPageView];
+        [view addSubview:lable];
+    
+        view.tag=page;
+        
+        UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(similarProductTap:)];
+        singleTap.numberOfTapsRequired = 1;
+        
+        [view addGestureRecognizer:singleTap];
+        [self.horizontalScroller addSubview:view];
+        // 4
+        [self.similarProductPage replaceObjectAtIndex:page withObject:view];
+    }
+}
+
+
+-(void)similarProductTap:(id)sender{
+    
+    UITapGestureRecognizer *tap=(UITapGestureRecognizer *)sender;
+    
+    UIView *view=tap.view;
+    NSMutableDictionary *dic = [self.similarProducrsData objectAtIndex:view.tag];
+    
+    ProductDetails *prdtails;
+            prdtails= [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"productDetails3"];
+        
+    
+    
+    prdtails.productData=dic;
+    prdtails.similarProducrsData=self.similarProducrsData;
+    [self.navigationController pushViewController:prdtails animated:YES];
+    
+
+}
+
+- (void)purgeSimilarProduct:(NSInteger)page {
+    if (page < 0 || page >= self.similarProducrsData.count) {
+        // If it's outside the range of what you have to display, then do nothing
+        return;
+    }
+    
+    // Remove a page from the scroll view and reset the container array
+    UIView *pageView = [self.similarProductPage objectAtIndex:page];
+    if ((NSNull*)pageView != [NSNull null]) {
+        [pageView removeFromSuperview];
+        [self.similarProductPage replaceObjectAtIndex:page withObject:[NSNull null]];
+    }
+}
+
+- (void)loadVisibleSimilarProduct {
+    // First, determine which page is currently visible
+    CGFloat pageWidth = self.horizontalScroller.frame.size.width;
+    NSInteger page = (NSInteger)floor((self.horizontalScroller.contentOffset.x * 2.0f + pageWidth) / (pageWidth * 2.0f));
+    
+    // Update the page control
+    
+    // Work out which pages you want to load
+    NSInteger firstPage = page - 1;
+    NSInteger lastPage = page + 1;
+    
+    // Purge anything before the first page
+    for (NSInteger i=0; i<firstPage; i++) {
+        //[self purgeSimilarProduct:i];
+    }
+    
+	// Load pages in our range
+    for (NSInteger i=0; i<=self.similarProducrsData.count; i++) {
+        [self loadSimilarProduct:i];
+    }
+    
+	// Purge anything after the last page
+    for (NSInteger i=lastPage+1; i<self.pageImages.count; i++) {
+        //[self purgeSimilarProduct:i];
+    }
+}
+
+
 
 @end

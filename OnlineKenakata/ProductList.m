@@ -259,22 +259,24 @@
         
        
             if(available<1){
-                prdtails= [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"ProductDetails2"];
+                prdtails= [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"productDetails3"];
+                prdtails.cartBtn.hidden=YES;
                 NSLog(@"in no button");
-                
+                //productDetails3
             }else{
-                prdtails= [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"productdetails"];
+                prdtails= [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"productDetails3"];
                 
             }
-      
+
+
         
         
         prdtails.productData=dic;
-        
+        prdtails.similarProducrsData=productList;
         [self.navigationController pushViewController:prdtails animated:YES];
         
         
-    }else{
+    }else{//productDetails3
         ProductList *pList=[[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"productList"];
         NSString *str = [[catagoryList objectAtIndex:indexPath.row]objectForKey:@"cat_id"];
         
