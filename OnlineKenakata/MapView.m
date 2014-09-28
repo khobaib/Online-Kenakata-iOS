@@ -50,7 +50,7 @@
     {
         CLAuthorizationStatus status = [CLLocationManager authorizationStatus];
         
-        if (status==kCLAuthorizationStatusAuthorizedWhenInUse) {
+        if (status==kCLAuthorizationStatusAuthorized) {
            
             
             if(branches.count!=0){

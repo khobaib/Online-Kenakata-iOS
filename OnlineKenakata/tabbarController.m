@@ -32,7 +32,7 @@
     [super viewDidLoad];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(localNotificationReceived) name:@"localNotification" object:nil];
 
-    
+
     if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
     {
         locationmanager=[[CLLocationManager alloc]init];
