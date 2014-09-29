@@ -8,8 +8,9 @@
 
 #import "Data.h"
 
-NSString * const baseurl=@"http://dev621.online-kenakata.com/mobile_api";
-NSString * const appcode=@"1000";
+NSString * const baseurl=@"http://online-kenakata.com/mobile_api";
+NSString *const kenakataurl=@"";
+NSString * const appcode=@"999";
 @implementation Data
 
 +(NSString *)getAppCode{
@@ -18,6 +19,10 @@ NSString * const appcode=@"1000";
 
 +(NSString *)getBaseUrl{
     return baseurl;
+}
+
++(NSString *)getKenakataUrl{
+    return kenakataurl;
 }
 
 @end

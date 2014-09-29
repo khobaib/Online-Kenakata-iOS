@@ -12,20 +12,15 @@
 #import "ProductDetails.h"
 #import "Data.h"
 #import "TextStyling.h"
+#import "EDStarRating.h"
+
 @interface ProductList ()
 
 @end
 
 @implementation ProductList
 
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
+
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     self.navigationItem.title=self.catagoryName;
@@ -38,6 +33,7 @@
     productList=[[NSMutableArray alloc]init];
     catagoryList=[[NSMutableArray alloc]init];
 
+    counter =0;
     
     if(loading==nil){
         [self initLoading];
@@ -60,6 +56,18 @@
     
 }
 
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
+{
+    float endScrolling = scrollView.contentOffset.y + scrollView.frame.size.height;
+    if (endScrolling >= scrollView.contentSize.height && counter!=-1)
+    {
+        counter++;
+        [self get_categories_by_parent_cateogory_id];
+        NSLog(@"start");
+    }
+}
+
+
 -(void)initLoading{
     CGFloat x= self.view.frame.size.width/2-65;
     CGFloat y =(self.view.frame.size.height-self.navigationController.navigationBar.frame.size.height-self.tabBarController.tabBar.frame.size.height)/2-25;
@@ -78,7 +86,7 @@
     
     [refreshControl addTarget:self action:@selector(refresh:) forControlEvents:UIControlEventValueChanged];
     
-    self.refreshControl=refreshControl;
+  //  self.refreshControl=refreshControl;
     
 }
 
@@ -89,7 +97,7 @@
 
 -(void)get_categories_by_parent_cateogory_id{
     
-    NSString *string = [NSString stringWithFormat:@"%@/rest.php?method=get_categories_by_parent_cateogory_id&parent_category_id=%@&application_code=%@",[Data getBaseUrl],self.productId,[Data getAppCode]];
+    NSString *string = [NSString stringWithFormat:@"%@/rest_kenakata.php?method=get_products_by_tag_id&tag_id=%@&application_code=%@&start=%d",[Data getBaseUrl],self.productId,[Data getAppCode],counter];
     NSURL *url = [NSURL URLWithString:string];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
    // NSLog(@"%@",string);
@@ -128,11 +136,27 @@
 
 -(void)parsProductList:(id) respons{
     NSMutableDictionary *dic=(NSMutableDictionary *)respons;
-    productList=[[dic objectForKey:@"success"]objectForKey:@"products"];
+    if(counter==0){
+        NSMutableArray *Arraytemp=[[dic objectForKey:@"success"]objectForKey:@"products"];
+
+        [productList addObjectsFromArray:[Arraytemp mutableCopy]];
+        if(Arraytemp.count==0||Arraytemp.count%12!=0){
+            counter=-1;
+        }
+        
+    }else{
+        NSMutableArray *arr=[[dic objectForKey:@"success"]objectForKey:@"products"];
+        [productList addObjectsFromArray:[arr mutableCopy]];
+        
+        if(arr.count==0 || arr.count%12!=0){
+            counter=-1;
+        }
+    }
+    
     catagoryList=[[dic objectForKey:@"success"]objectForKey:@"categories"];
 
-    [self.tableView reloadData];
-    [self.refreshControl endRefreshing];
+    [self.collectionView reloadData];
+  //  [self.refreshControl endRefreshing];
     [loading StopAnimating];
     loading.hidden=YES;
     
@@ -146,26 +170,27 @@
 
 #pragma mark - Table view data source
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
+    
 
     return 1;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
    
     
     
-    return productList.count+catagoryList.count;
+    return productList.count;
     
 
 
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cellCat"];
+    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"productGrid" forIndexPath:indexPath];
     
     if(catagoryList.count+productList.count==0){
         return cell;
@@ -173,7 +198,7 @@
     }
 
     if(indexPath.row>=catagoryList.count){
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CellProdect" forIndexPath:indexPath];
+        UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"productGrid" forIndexPath:indexPath];
         
         // Configure the cell...
         
@@ -185,6 +210,11 @@
         UIImageView *toping=(UIImageView *) [cell viewWithTag:302];
         
         UILabel *oldPrice =(UILabel *)[cell viewWithTag:305];
+        UIView *back=[cell viewWithTag:307];
+        EDStarRating *starRating=(EDStarRating *)[cell viewWithTag:308];
+        
+        [self starRaterShow:starRating withView:back starcount:[[[dic objectForKey:@"review_detail"]objectForKey:@"average_rating"]intValue]];
+        
         UILabel *newPrice=(UILabel *) [cell viewWithTag:306];
         //
         productName.text=@"";
@@ -226,6 +256,7 @@
         
         return cell;
     }
+    /*
     UILabel * title=(UILabel *)[cell viewWithTag:202];
     UIImageView *thumbnil=(UIImageView* )[cell viewWithTag:201];
     title.text=@"";
@@ -240,14 +271,16 @@
     
     
     [thumbnil sd_setImageWithURL:[NSURL URLWithString:imgurl]
-             placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
+             placeholderImage:[UIImage imageNamed:@"placeholder.png"]];*/
     
     return cell;
 }
 
 
 
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+
+
+-(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     
     if(catagoryList.count<=indexPath.row){
     
@@ -285,10 +318,55 @@
     }
     
     
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+   // [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
 }
 
+
+
+
+-(void)starRaterShow:(EDStarRating *)starRater withView:(UIView *)starRaterBack starcount:(int) rating{
+    starRater.starImage=[UIImage imageNamed:@"star.png"];
+    starRater.starHighlightedImage=[UIImage imageNamed:@"starhighlighted.png"];
+    
+   starRater.maxRating = 5.0;
+    
+    starRater.horizontalMargin = 0;
+   starRater.editable=NO;
+    starRater.rating= rating;//[[[self.productData objectForKey:@"review_detail"]objectForKey:@"average_rating"] floatValue];
+    
+    
+    starRater.displayMode=EDStarRatingDisplayAccurate;
+   [starRater setNeedsDisplay];
+    
+   // starRater.tintColor=[UIColor colorWithRed:(253.0f/255.0f) green:(181.0f/255.0f)blue:(13.0f/255.0f) alpha:1.0f];
+    [starRaterBack setAlpha:0.50];
+   
+    /*
+    [starRaterBack.layer setCornerRadius:5.0f];
+    
+    // border
+    [starRaterBack.layer setBorderColor:[UIColor grayColor].CGColor];
+    [starRaterBack.layer setBorderWidth:1.5f];
+    
+    // drop shadow
+    [starRaterBack.layer setShadowColor:[UIColor blackColor].CGColor];
+    [starRaterBack.layer setShadowOpacity:0.6];
+    [starRaterBack.layer setShadowRadius:3.0];
+    [starRaterBack.layer setShadowOffset:CGSizeMake(2.0, 2.0)];*/
+    
+    
+   /* NSMutableDictionary *arr=[[self.productData objectForKey:@"review_detail"]objectForKey:@"distribution"];
+    int total=0;
+    
+    if(arr==nil){
+        return;
+    }
+    for(int i=0;i<arr.count;i++){
+        total+=[[arr objectForKey:[NSString stringWithFormat:@"%d",i]]intValue];
+    }
+    self.reviewNumber.text=[NSString stringWithFormat:@"%d Reviews",total];*/
+}
 
 
 

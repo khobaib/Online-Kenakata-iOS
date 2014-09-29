@@ -12,4 +12,5 @@
 
 +(NSString *)getBaseUrl;
 +(NSString *)getAppCode;
++(NSString *)getKenakataUrl;
 @end

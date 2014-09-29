@@ -32,7 +32,7 @@
     [super viewDidLoad];
     catagoryList=[[NSMutableArray alloc]init];
     productList=[[NSMutableArray alloc]init];
-    self.tableView.hidden=YES;
+    self.collectionview.hidden=YES;
     self.searchBar.hidden=YES;
     if(loading==nil){
         [self initLoading];
@@ -43,6 +43,7 @@
     NSLog(@"%f",_image.size.width);
 
     [self addPullToRefresh];
+    counter=0;
     
     [self get_categories_by_parent_cateogory_id];
 
@@ -96,13 +97,23 @@
 
 -(void)tapOnScroll{
     
-    self.tableView.hidden=NO;
+    self.collectionview.hidden=NO;
     self.searchBar.hidden=NO;
     self.scrollView.hidden=YES;
    
     self.tabBarController.navigationItem.title=@"Catalogue";
 }
 
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
+{
+    float endScrolling = scrollView.contentOffset.y + scrollView.frame.size.height;
+    if (endScrolling >= scrollView.contentSize.height && counter!=-1)
+    {
+        counter++;
+        [self get_categories_by_parent_cateogory_id];
+        NSLog(@"start");
+    }
+}
 
 
 - (void)addPullToRefresh
@@ -113,9 +124,9 @@
     
     [refreshControl addTarget:self action:@selector(refresh:) forControlEvents:UIControlEventValueChanged];
     
-    UITableViewController *tableViewController = [[UITableViewController alloc] init];
-    tableViewController.tableView = self.tableView;
-    tableViewController.refreshControl=refreshControl;
+  //  UITableViewController *tableViewController = [[UITableViewController alloc] init];
+    //tableViewController.tableView = self.tableView;
+    //tableViewController.refreshControl=refreshControl;
 }
 
 
@@ -123,13 +134,32 @@
 
     NSMutableDictionary *dic = (NSMutableDictionary *)data;
     
+    if(counter<0){
+        NSMutableArray *arr=[[dic objectForKey:@"success"]objectForKey:@"tags"];
+        
+        [catagoryList addObjectsFromArray:[arr mutableCopy]];
+        
+        if(arr.count==0 || arr.count%12!=0){
+            counter=-1;
+        }
+        
+    }else{
+        [catagoryList addObjectsFromArray:[[[dic objectForKey:@"success"]objectForKey:@"tags"] mutableCopy]];
+
+        if(catagoryList.count==0 || catagoryList.count%12!=0){
+            counter=-1;
+        }
+    }
    
-    catagoryList=[[dic objectForKey:@"success"]objectForKey:@"categories"];
+
+    
+    
+
     productList=[[dic objectForKey:@"success"]objectForKey:@"products"];
     [refreshControl endRefreshing];
     [loading StopAnimating];
     loading.hidden=YES;
-    [self.tableView reloadData];
+    [self.collectionview reloadData];
     
     
   
@@ -140,7 +170,8 @@
 
 -(void)get_categories_by_parent_cateogory_id{
     
-    NSString *string = [NSString stringWithFormat:@"%@/rest.php?method=get_categories_by_parent_cateogory_id&parent_category_id=0&application_code=%@",[Data getBaseUrl],[Data getAppCode]];
+    NSString *string = [NSString stringWithFormat:@"%@/rest_kenakata.php?method=get_all_tags&application_code=%@&start=%d",[Data getBaseUrl],[Data getAppCode],counter];
+   
     NSURL *url = [NSURL URLWithString:string];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     
@@ -179,10 +210,17 @@
     
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
+-(NSInteger )numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
     
-        return (catagoryList.count+productList.count);
+    return 1;
+    
+}
+
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
+{
+
+    
+        return catagoryList.count;
     
 
 }
@@ -194,15 +232,15 @@
     self.tabBarController.navigationItem.title=@"Catalogue";
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
  
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CellCat"];
+    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cellGrid" forIndexPath:indexPath];
 
-    if(catagoryList.count+productList.count==0){
+    if(catagoryList.count==0){
         return cell;
 
     }
-
+/*
     if(indexPath.row>=catagoryList.count){
         
 
@@ -259,19 +297,20 @@
         // NSLog(@"%@",[NSString stringWithFormat:@"%@",[dic objectForKey:@"name"]]);
         
         return cell;
-    }
-    UILabel * title=(UILabel *)[cell viewWithTag:202];
-    UIImageView *thumbnil=(UIImageView* )[cell viewWithTag:201];
+    }*/
+    UILabel * title=(UILabel *)[cell viewWithTag:151];
+    UIImageView *thumbnil=(UIImageView* )[cell viewWithTag:150];
     title.text=@"";
     thumbnil.image=nil;
     
     NSMutableDictionary *dic=[catagoryList objectAtIndex:indexPath.row];
     
+
     
   //  title.text=[dic objectForKey:@"cat_name"];
-    title.attributedText=[TextStyling AttributForTitle:[dic objectForKey:@"cat_name"]];
-    NSString *imgurl=[NSString stringWithFormat:@"%@",[dic objectForKey:@"thumb_image_url"]];
-    
+    title.attributedText=[TextStyling AttributForTitle:[dic objectForKey:@"name"]];
+    NSString *imgurl=[NSString stringWithFormat:@"%@",[dic objectForKey:@"image_url"]];
+
     
     [thumbnil sd_setImageWithURL:[NSURL URLWithString:imgurl]
     placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
@@ -280,7 +319,8 @@
 }
 
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
+   // NSLog(@"%ld",(long)indexPath.row);
     
     if(catagoryList.count<=indexPath.row){
         
@@ -311,7 +351,7 @@
 
     }else{
         ProductList *pList=[[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"productList"];
-        NSString *str = [[catagoryList objectAtIndex:indexPath.row]objectForKey:@"cat_id"];
+        NSString *str = [[catagoryList objectAtIndex:indexPath.row]objectForKey:@"id"];
         
         pList.productId=str;
         pList.catagoryName=[[catagoryList objectAtIndex:indexPath.row]objectForKey:@"cat_name"];
@@ -321,9 +361,34 @@
     }
     
     
-   [tableView deselectRowAtIndexPath:indexPath animated:YES];
+ //  [collectionView deselectRowAtIndexPath:indexPath animated:YES];
 
     
+}
+
+- (void)collectionView:(UICollectionView *)colView didHighlightItemAtIndexPath:(NSIndexPath *)indexPath {
+    UICollectionViewCell* cell = [colView cellForItemAtIndexPath:indexPath];
+ 
+    //set color with animation
+    [UIView animateWithDuration:0.2
+                          delay:0
+                        options:(UIViewAnimationOptionAllowUserInteraction)
+                     animations:^{
+                         [cell setBackgroundColor:[UIColor colorWithRed:232/255.0f green:232/255.0f blue:232/255.0f alpha:1]];
+                     }
+                     completion:nil];
+}
+
+- (void)collectionView:(UICollectionView *)colView  didUnhighlightItemAtIndexPath:(NSIndexPath *)indexPath {
+    UICollectionViewCell* cell = [colView cellForItemAtIndexPath:indexPath];
+    //set color with animation
+    [UIView animateWithDuration:0.2
+                          delay:0
+                        options:(UIViewAnimationOptionAllowUserInteraction)
+                     animations:^{
+                         [cell setBackgroundColor:[UIColor clearColor]];
+                     }
+                     completion:nil ];
 }
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText{
@@ -447,7 +512,7 @@
     productList=[[dic objectForKey:@"success"]objectForKey:@"products"];
     [refreshControl endRefreshing];
 
-    [self.tableView reloadData];
+    [self.collectionview reloadData];
 
     isSearched=YES;
     [loading StopAnimating];
@@ -471,7 +536,7 @@
         
         
     }else{
-        [self.tableView reloadData];
+        [self.collectionview reloadData];
     }
 
     
@@ -485,7 +550,7 @@
     
     productList=backupproDuctList;
     catagoryList=backupCatList;
-    [self.tableView reloadData];
+    [self.collectionview reloadData];
     backupCatList=nil;
     backupproDuctList=nil;
     isSearched=NO;

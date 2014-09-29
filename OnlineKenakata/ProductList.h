@@ -10,16 +10,17 @@
 #import "LoadingView.h"
 
 
-@interface ProductList : UITableViewController{
+@interface ProductList : UIViewController<UICollectionViewDelegate,UICollectionViewDataSource>{
 
     NSMutableArray *catagoryList;
     NSMutableArray *productList;
     NSString *currency;
     LoadingView *loading;
+    int counter;
 }
 @property NSString *productId;
 @property NSString *catagoryName;
-@property (strong,nonatomic) IBOutlet UITableView *tableView;
+@property (strong,nonatomic) IBOutlet UICollectionView *collectionView;
 
 
 -(void)parsProductList:(id) respons;

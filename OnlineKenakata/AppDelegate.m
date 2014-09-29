@@ -18,7 +18,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
-    
+    /*
     if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
     {
          [[UIApplication sharedApplication] registerForRemoteNotifications];
@@ -31,7 +31,7 @@
          (UIUserNotificationTypeBadge | UIUserNotificationTypeSound | UIUserNotificationTypeAlert)];
     }
 
-    
+    */
     
     [self checkAndCreateDatabase];
     
@@ -74,10 +74,10 @@
     NSLog(@"log log");
     [alert show];
 }
-
+/*
 -(void)application:(UIApplication *)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings{
     [UIApplication sharedApplication].applicationIconBadgeNumber =0;
-}
+}*/
 - (void)application:(UIApplication*)application didReceiveRemoteNotification:(NSDictionary*)userInfo
 {
 

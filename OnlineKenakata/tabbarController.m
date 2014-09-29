@@ -35,9 +35,9 @@
 
     if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
     {
-        locationmanager=[[CLLocationManager alloc]init];
+     //   locationmanager=[[CLLocationManager alloc]init];
         //  manager.delegate = self;
-        [locationmanager requestWhenInUseAuthorization];
+       // [locationmanager requestWhenInUseAuthorization];
     }
    
 }

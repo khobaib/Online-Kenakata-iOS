@@ -11,7 +11,7 @@
 
 
 
-@interface FirstViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,UISearchBarDelegate>
+@interface FirstViewController : UIViewController<UICollectionViewDataSource,UICollectionViewDelegate,UISearchBarDelegate>
 {
     NSMutableArray *catagoryList;
     NSMutableArray *productList;
@@ -22,10 +22,11 @@
     NSMutableArray *backupCatList;
     NSMutableArray *backupproDuctList;
     BOOL isSearched;
+    int counter;
 }
 @property UIImage *image;
 @property (strong,nonatomic) IBOutlet UIScrollView *scrollView;
-@property (strong,nonatomic) IBOutlet UITableView *tableView;
+@property (strong,nonatomic) IBOutlet UICollectionView *collectionview;
 @property (strong,nonatomic) IBOutlet UISearchBar *searchBar;
 -(void)parsCatagoryList:(id) data;
 @end

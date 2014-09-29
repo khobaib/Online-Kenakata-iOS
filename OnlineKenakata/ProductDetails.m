@@ -358,9 +358,9 @@
     
     self.starRater.maxRating = 5.0;
     
-   self.starRater.horizontalMargin = 12;
+   self.starRater.horizontalMargin =0;
     self.starRater.editable=NO;
-    self.starRater.rating= [[[self.productData objectForKey:@"review_detail"]objectForKey:@"average_rating"] floatValue];
+    self.starRater.rating= 5;//[[[self.productData objectForKey:@"review_detail"]objectForKey:@"average_rating"] floatValue];
 
     
     self.starRater.displayMode=EDStarRatingDisplayAccurate;
@@ -369,7 +369,7 @@
     UITapGestureRecognizer *tap=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(ratingShow)];
     tap.numberOfTapsRequired=1;
     [self.starRater addGestureRecognizer:tap];
-    [self.starRaterBack setAlpha:0.40];
+    /*[self.starRaterBack setAlpha:0.40];
     
     [self.starRaterBack.layer setCornerRadius:5.0f];
     
@@ -393,7 +393,7 @@
     for(int i=0;i<arr.count;i++){
         total+=[[arr objectForKey:[NSString stringWithFormat:@"%d",i]]intValue];
     }
-    self.reviewNumber.text=[NSString stringWithFormat:@"%d Reviews",total];
+    self.reviewNumber.text=[NSString stringWithFormat:@"%d Reviews",total];*/
 }
 -(void)ratingShow{
 

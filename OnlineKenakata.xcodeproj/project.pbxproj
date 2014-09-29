@@ -143,7 +143,7 @@
 		18AB773C199CB58000364FA6 /* icon3.png in Resources */ = {isa = PBXBuildFile; fileRef = 18AB7739199CB58000364FA6 /* icon3.png */; };
 		18AB773D199CB58000364FA6 /* icon2.png in Resources */ = {isa = PBXBuildFile; fileRef = 18AB773A199CB58000364FA6 /* icon2.png */; };
 		18AB773E199CB58000364FA6 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 18AB773B199CB58000364FA6 /* icon.png */; };
-        9A5201FF19D8044A00FD676D /* TextStyling.m in Sources */ = {isa = PBXBuildFile; fileRef = 183A936B1993518A0097B2F1 /* TextStyling.m */; };
+		9A5201FF19D8044A00FD676D /* TextStyling.m in Sources */ = {isa = PBXBuildFile; fileRef = 183A936B1993518A0097B2F1 /* TextStyling.m */; };
 		9A592D4F19C59EF80042E42A /* databaseV4.sqlite3 in Resources */ = {isa = PBXBuildFile; fileRef = 9A592D4E19C59EF80042E42A /* databaseV4.sqlite3 */; };
 		9A7F131919A35347002F2526 /* phone.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A7F131819A35347002F2526 /* phone.png */; };
 		9AB1AD2D19C9517700229422 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AB1AD2C19C9517700229422 /* FacebookSDK.framework */; };
@@ -1002,7 +1002,6 @@
 				14FB7FCB197B7D5C00E8BDF8 /* down_arrow.png in Resources */,
 				9A7F131919A35347002F2526 /* phone.png in Resources */,
 				14D45A4D1974FC6800F677D0 /* Main.storyboard in Resources */,
-				18C1370D199CB2C000121F18 /* icon2.png in Resources */,
 				1481856E197D2EFA007E0734 /* my_cart.png in Resources */,
 				14D95EFF19766F52001D6CB3 /* imessege.png in Resources */,
 				1848A321198F557600684602 /* splash002.png in Resources */,
