@@ -101,6 +101,8 @@ int indexOfReadMoreButton;
     loading.hidden=YES;
     NSMutableDictionary *dic1=(NSMutableDictionary *)respons;
     NSMutableDictionary *dic=[[[dic1 objectForKey:@"success"]objectForKey:@"products"]objectAtIndex:0];
+    
+   // NSLog(@"%@",dic);
     reviews=[[dic objectForKey:@"review_detail"]objectForKey:@"reviews"];
     averageRating=[[dic objectForKey:@"review_detail"]objectForKey:@"average_rating"];
     distribution=[[dic objectForKey:@"review_detail"]objectForKey:@"distribution"];
@@ -181,6 +183,19 @@ int indexOfReadMoreButton;
         
         UILabel *titile=(UILabel *)[cell viewWithTag:901];
         titile.text=[dic objectForKey:@"title"];//@"This product is very good , i am in love with this product";
+        UILabel *nameDate=(UILabel *)[cell viewWithTag:903];
+        NSString *name=[dic objectForKey:@"name"];
+        NSString *dateStr=[dic objectForKey:@"date"];
+        
+        
+        NSDateFormatter *df = [[NSDateFormatter alloc] init];
+        [df setDateFormat:@"YYYY-MM-DD"];
+        
+        NSDate *date=[df dateFromString:dateStr];
+        
+        NSLog(@"date %@",date);
+        nameDate.text=[NSString stringWithFormat:@"By %@ %@",name,dateStr];
+        
         UITextView *description=(UITextView *)[cell viewWithTag:904];
         [description setTextColor:[UIColor grayColor]];
         [description setFont:[UIFont systemFontOfSize:14]];
@@ -200,6 +215,20 @@ int indexOfReadMoreButton;
         
         UILabel *titile=(UILabel *)[cell viewWithTag:901];
         titile.text=[dic objectForKey:@"title"];//@"This product is very good , i am in love with this product";
+        
+        UILabel *nameDate=(UILabel *)[cell viewWithTag:903];
+        NSString *name=[dic objectForKey:@"name"];
+        NSString *dateStr=[dic objectForKey:@"date"];
+        
+        NSDateFormatter *df = [[NSDateFormatter alloc] init];
+        [df setDateFormat:@"yyyy-MM-dd"];
+        
+        NSDate *date=[df dateFromString:dateStr];
+        
+        NSLog(@"date %@",date);
+        
+        nameDate.text=[NSString stringWithFormat:@"By %@ %@",name,dateStr];
+        
         UITextView *description=(UITextView *)[cell viewWithTag:904];
         [description setTextColor:[UIColor grayColor]];
         [description setFont:[UIFont systemFontOfSize:14]];

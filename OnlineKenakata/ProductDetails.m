@@ -178,14 +178,21 @@
     
     //[self.productDetails setFrame:rect];
     
+
     
     [self.productDetails setScrollEnabled:YES];
     [self.productDetails setAttributedText:[TextStyling AttributForDescription:string]];
     [self.productDetails sizeToFit];
     [self.productDetails setScrollEnabled:NO];
     
-   
+    [self frameUpdateFrom:self.productDetails To:self.itemCodeLable];
+    [self frameUpdateFrom:self.productDetails To:self.itemCode];
+    [self frameUpdateFrom:self.itemCodeLable To:self.similarProductLable];
+    [self frameUpdateFrom:self.similarProductLable To:self.horizontalScroller];
+    
+    
     int available =[[self.productData objectForKey:@"add_to_cart"]intValue];
+    
 
     if(available>0){
         self.itemCode.text=[self.productData objectForKey:@"sku"];
@@ -214,6 +221,15 @@
     
 }
 
+-(void)frameUpdateFrom:(UIView *)from To:(UIView *)to{
+    CGRect frame=to.frame;
+    frame.origin.y=from.frame.origin.y+from.frame.size.height+10;
+    
+    
+    [to setFrame:frame];
+    
+
+}
 - (void)initImageSlider
 {
     [self.scrl setContentSize:CGSizeMake(320, 600)];
@@ -281,7 +297,7 @@
 
 -(void)loadData{
     
-    NSString *string = [NSString stringWithFormat:@"%@/rest.php?method=get_products_by_productids&product_ids=%@&application_code=%@",[Data getBaseUrl],[self.productData objectForKey:@"product_id"],[Data getAppCode]];
+    NSString *string = [NSString stringWithFormat:@"%@/rest_kenakata.php?method=get_products_by_product_ids&product_ids=%@&application_code=%@",[Data getBaseUrl],[self.productData objectForKey:@"product_id"],[Data getAppCode]];
     
     NSURL *url = [NSURL URLWithString:string];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
@@ -325,8 +341,8 @@
     self.productData=[[[dic1 objectForKey:@"success"]objectForKey:@"products"]objectAtIndex:0];
     self.similarProducrsData=[self.productData objectForKey:@"similar_products"];
     
-  
-      [self starRaterShow];
+
+    [self starRaterShow];
     
    // NSLog(@"%@",self.productData);
     // 5
@@ -360,7 +376,7 @@
     
    self.starRater.horizontalMargin =0;
     self.starRater.editable=NO;
-    self.starRater.rating= 5;//[[[self.productData objectForKey:@"review_detail"]objectForKey:@"average_rating"] floatValue];
+    self.starRater.rating= [[[self.productData objectForKey:@"review_detail"]objectForKey:@"average_rating"] floatValue];
 
     
     self.starRater.displayMode=EDStarRatingDisplayAccurate;

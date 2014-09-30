@@ -10,6 +10,8 @@
 #import "AFNetworking/AFNetworking.h"
 #import "Data.h"
 
+
+
 @interface LoginViewController ()
 
 @end
@@ -28,8 +30,14 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    self.loginView.readPermissions = @[@"public_profile", @"email", @"user_friends"];
+    [FBSettings setDefaultUrlSchemeSuffix:@"abcd"];
+   
     // Do any additional setup after loading the view.
 }
+
+
 
 -(IBAction)LoginButtonClicked:(id)sender{
 
@@ -66,6 +74,17 @@
     
     
     
+}
+
+
+- (void)loginViewFetchedUserInfo:(FBLoginView *)loginView
+                            user:(id<FBGraphUser>)user {
+   
+    NSLog(@"%@",[[FBSession activeSession]accessTokenData]);
+}
+
+- (void)loginViewShowingLoggedInUser:(FBLoginView *)loginView {
+   
 }
 
 

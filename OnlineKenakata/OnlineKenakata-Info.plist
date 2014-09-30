@@ -37,9 +37,11 @@
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>fb1439694922951568</string>
+				<string>fb1439694922951568abcd</string>
 			</array>
 		</dict>
 	</array>

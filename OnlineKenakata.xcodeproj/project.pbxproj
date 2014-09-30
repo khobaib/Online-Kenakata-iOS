@@ -146,7 +146,7 @@
 		9A5201FF19D8044A00FD676D /* TextStyling.m in Sources */ = {isa = PBXBuildFile; fileRef = 183A936B1993518A0097B2F1 /* TextStyling.m */; };
 		9A592D4F19C59EF80042E42A /* databaseV4.sqlite3 in Resources */ = {isa = PBXBuildFile; fileRef = 9A592D4E19C59EF80042E42A /* databaseV4.sqlite3 */; };
 		9A7F131919A35347002F2526 /* phone.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A7F131819A35347002F2526 /* phone.png */; };
-		9AB1AD2D19C9517700229422 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AB1AD2C19C9517700229422 /* FacebookSDK.framework */; };
+		9AA6B75519D99AB400C1A235 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AA6B75419D99AB400C1A235 /* FacebookSDK.framework */; };
 		9AB1AD3219C9529000229422 /* UIImageView+HighlightedWebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AB1AD2F19C9529000229422 /* UIImageView+HighlightedWebCache.m */; };
 		9AB1AD3319C9529000229422 /* UIView+WebCacheOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AB1AD3119C9529000229422 /* UIView+WebCacheOperation.m */; };
 		9AB1AD3519C9556500229422 /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AB1AD3419C9556500229422 /* FMDatabasePool.m */; };
@@ -191,7 +191,6 @@
 		1478B4D819752E67002C79B0 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		1478B4DA19752E70002C79B0 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		1478B4DC19752E7C002C79B0 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
-		1478B4DE19752F7A002C79B0 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = OnlineKenakata/FacebookSDK.framework; sourceTree = "<group>"; };
 		1481856D197D2EFA007E0734 /* my_cart.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = my_cart.png; sourceTree = "<group>"; };
 		14818570197D3C6E007E0734 /* BBBadgeBarButtonItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBBadgeBarButtonItem.h; sourceTree = "<group>"; };
 		14818571197D3C6E007E0734 /* BBBadgeBarButtonItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBBadgeBarButtonItem.m; sourceTree = "<group>"; };
@@ -405,7 +404,7 @@
 		18AB773B199CB58000364FA6 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 		9A592D4E19C59EF80042E42A /* databaseV4.sqlite3 */ = {isa = PBXFileReference; lastKnownFileType = file; path = databaseV4.sqlite3; sourceTree = "<group>"; };
 		9A7F131819A35347002F2526 /* phone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = phone.png; sourceTree = "<group>"; };
-		9AB1AD2C19C9517700229422 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = OnlineKenakata/FacebookSDK.framework; sourceTree = "<group>"; };
+		9AA6B75419D99AB400C1A235 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = OnlineKenakata/FacebookSDK.framework; sourceTree = "<group>"; };
 		9AB1AD2E19C9529000229422 /* UIImageView+HighlightedWebCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+HighlightedWebCache.h"; sourceTree = "<group>"; };
 		9AB1AD2F19C9529000229422 /* UIImageView+HighlightedWebCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+HighlightedWebCache.m"; sourceTree = "<group>"; };
 		9AB1AD3019C9529000229422 /* UIView+WebCacheOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+WebCacheOperation.h"; sourceTree = "<group>"; };
@@ -420,6 +419,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9AA6B75519D99AB400C1A235 /* FacebookSDK.framework in Frameworks */,
 				1413996E1977FC2400B8ACA9 /* libsqlite3.0.dylib in Frameworks */,
 				1486EE4B197651BE0036C159 /* MessageUI.framework in Frameworks */,
 				1478B4DD19752E7C002C79B0 /* Social.framework in Frameworks */,
@@ -428,7 +428,6 @@
 				1478B4D719752E5D002C79B0 /* MapKit.framework in Frameworks */,
 				1478B4D519752E33002C79B0 /* QuartzCore.framework in Frameworks */,
 				14D45A3C1974FC6800F677D0 /* CoreGraphics.framework in Frameworks */,
-				9AB1AD2D19C9517700229422 /* FacebookSDK.framework in Frameworks */,
 				14D45A3E1974FC6800F677D0 /* UIKit.framework in Frameworks */,
 				14D45A3A1974FC6800F677D0 /* Foundation.framework in Frameworks */,
 			);
@@ -496,10 +495,9 @@
 		14D45A381974FC6800F677D0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				9AA6B75419D99AB400C1A235 /* FacebookSDK.framework */,
 				1413996D1977FC2400B8ACA9 /* libsqlite3.0.dylib */,
-				9AB1AD2C19C9517700229422 /* FacebookSDK.framework */,
 				1486EE4A197651BE0036C159 /* MessageUI.framework */,
-				1478B4DE19752F7A002C79B0 /* FacebookSDK.framework */,
 				1478B4DC19752E7C002C79B0 /* Social.framework */,
 				1478B4DA19752E70002C79B0 /* AddressBook.framework */,
 				1478B4D819752E67002C79B0 /* CoreLocation.framework */,
@@ -1249,6 +1247,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/OnlineKenakata",
+					/Users/macmini/Documents/FacebookSDK,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "OnlineKenakata/OnlineKenakata-Prefix.pch";
@@ -1270,6 +1269,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/OnlineKenakata",
+					/Users/macmini/Documents/FacebookSDK,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "OnlineKenakata/OnlineKenakata-Prefix.pch";
