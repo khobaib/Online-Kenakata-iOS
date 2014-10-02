@@ -150,6 +150,7 @@
 		9AB1AD3219C9529000229422 /* UIImageView+HighlightedWebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AB1AD2F19C9529000229422 /* UIImageView+HighlightedWebCache.m */; };
 		9AB1AD3319C9529000229422 /* UIView+WebCacheOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AB1AD3119C9529000229422 /* UIView+WebCacheOperation.m */; };
 		9AB1AD3519C9556500229422 /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AB1AD3419C9556500229422 /* FMDatabasePool.m */; };
+		9AD8A08019DA801500924325 /* FacebookViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AD8A07F19DA801500924325 /* FacebookViewController.m */; };
 		9AE0DAE719A2074A003F1D74 /* WriteReviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AE0DAE619A2074A003F1D74 /* WriteReviewViewController.m */; };
 /* End PBXBuildFile section */
 
@@ -410,6 +411,8 @@
 		9AB1AD3019C9529000229422 /* UIView+WebCacheOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+WebCacheOperation.h"; sourceTree = "<group>"; };
 		9AB1AD3119C9529000229422 /* UIView+WebCacheOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+WebCacheOperation.m"; sourceTree = "<group>"; };
 		9AB1AD3419C9556500229422 /* FMDatabasePool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabasePool.m; sourceTree = "<group>"; };
+		9AD8A07E19DA801500924325 /* FacebookViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FacebookViewController.h; sourceTree = "<group>"; };
+		9AD8A07F19DA801500924325 /* FacebookViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FacebookViewController.m; sourceTree = "<group>"; };
 		9AE0DAE519A2074A003F1D74 /* WriteReviewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WriteReviewViewController.h; sourceTree = "<group>"; };
 		9AE0DAE619A2074A003F1D74 /* WriteReviewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WriteReviewViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -839,6 +842,8 @@
 				1853DFB3199B841300C3D5ED /* LoginViewController.m */,
 				1853DFB5199B842300C3D5ED /* SignupViewController.h */,
 				1853DFB6199B842300C3D5ED /* SignupViewController.m */,
+				9AD8A07E19DA801500924325 /* FacebookViewController.h */,
+				9AD8A07F19DA801500924325 /* FacebookViewController.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -1044,6 +1049,7 @@
 				9AE0DAE719A2074A003F1D74 /* WriteReviewViewController.m in Sources */,
 				182B9BE01997934400AF6709 /* bKashViewController.m in Sources */,
 				14D45AD81974FCB900F677D0 /* PSTCollectionView.m in Sources */,
+				9AD8A08019DA801500924325 /* FacebookViewController.m in Sources */,
 				14D45ADF1974FCB900F677D0 /* PSTCollectionViewUpdateItem.m in Sources */,
 				14D45B0A1974FD6B00F677D0 /* AFHTTPRequestOperation.m in Sources */,
 				14D45ADA1974FCB900F677D0 /* PSTCollectionViewController.m in Sources */,

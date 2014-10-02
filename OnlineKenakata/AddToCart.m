@@ -51,7 +51,6 @@
     attributeList=[self.productData objectForKey:@"attributes"];
     
 
-    self.attributeTableHeight.constant=50.0*(attributeList.count+1);
     specialAnsDic=[[NSMutableDictionary alloc]init];
     [self initLoading];
 
@@ -59,6 +58,8 @@
     selectedQuantity=@"";
     varientID=@"";
 
+    specialQus=[self.productData objectForKey:@"special_question"];
+    specialAnsArray=[self.productData objectForKey:@"special_answers"];
     
     attributeIdList=[[NSMutableArray alloc]initWithCapacity:attributeList.count];
     
@@ -66,7 +67,13 @@
        
         [attributeIdList addObject:[NSNull null]];
     }
-    
+    if([specialQus isEqualToString:@""]){
+         self.attributeTableHeight.constant=50.0*(attributeList.count+1);
+    }else{
+         self.attributeTableHeight.constant=50.0*(attributeList.count+2);
+    }
+   
+
 
 }
 
@@ -89,6 +96,7 @@
     NSAttributedString *attributedString = [[NSAttributedString alloc] initWithData:[addToCartMEssage dataUsingEncoding:NSUnicodeStringEncoding] options:@{ NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType } documentAttributes:nil error:nil];
 
 
+    NSLog(@"%@",[self.productData objectForKey:@"product_id"]);
 
     [self.details setAttributedText:attributedString];
   //  NSLog(@"%@",addToCartMEssage);
@@ -225,8 +233,14 @@
     
     NSMutableDictionary *image=[[self.productData objectForKey:@"images"]objectAtIndex:0];
     
-    NSString *attributes=@"";
-    
+    NSString *attributes=specialQus;
+    if([specialQus isEqualToString:@""]){
+        varientID=@"";
+    }else{
+        varientID=[specialAnsDic objectForKey:@"id"];
+
+    }
+   /*
     for(int i=0;i<attributeIdList.count;i++){
         NSString *str=[[attributeList objectAtIndex:i]objectForKey:@"name"];
         attributes=[attributes stringByAppendingFormat:@"%@:",str];
@@ -238,7 +252,7 @@
             }
         }
         
-    }
+    }*/
     NSLog(@"%@ %@",attributes,varientID);
 
     product=[product initProduct:[self.productData objectForKey:@"name"] productId:[self.productData objectForKey:@"product_id"] Quantity:selectedQuantity Weight:[self.productData objectForKey:@"weight"] code:[self.productData objectForKey:@"sku"] attributs:attributes varient:varientID imageURL:[image objectForKey:@"image_url"] thumbImage:[image objectForKey:@"thumbnail_image_url"] price:[self.productData objectForKey:@"price"] oldPrice:[self.productData objectForKey:@"old_price"] availabl:availablity tag:[self.productData objectForKey:@"tag"]];
@@ -336,8 +350,17 @@
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component{
     
     if(attribute_index==-1){
+        if(![specialQus isEqualToString:@""]){
+            return [[specialAnsDic objectForKey:@"available_quantity"]intValue];
+
+        }
+        //NSLog(@"%d",quantity);
         return MIN(30, quantity);
-    }else{
+    }else if(attribute_index==0){
+        return specialAnsArray.count;
+    }
+    
+    else{
      return pickerData.count;
     }
     
@@ -345,11 +368,33 @@
 
 - (void)pickerViewController:(RMPickerViewController *)vc didSelectRows:(NSArray *)selectedRows{
     
+    if(attribute_index==0){
+        specialAnsDic=[specialAnsArray objectAtIndex:selectedRows.count-1];
+
+        NSIndexPath *indexPath=[NSIndexPath indexPathForRow:(attributeIdList.count) inSection:0];
+        
+        UITableViewCell *cell=[self.tableView cellForRowAtIndexPath:indexPath];
+        
+        UIButton *btn=(UIButton*)[cell viewWithTag:42];
+        
+        NSString *str=[specialAnsDic objectForKey:@"answer"];
+        [btn setTitle:str forState:UIControlStateNormal];
+        
+        return;
+        
+    }
+    
+    
     if(attribute_index==-1){
 
         NSString *str=[NSString stringWithFormat:@"%d",[[selectedRows objectAtIndex:selectedRows.count-1]intValue]+1];
+        NSIndexPath *indexPath;
+        if([specialQus isEqualToString:@""]){
+            indexPath=[NSIndexPath indexPathForRow:0 inSection:0];
+        }else{
+            indexPath=[NSIndexPath indexPathForRow:1 inSection:0];
+        }
         
-        NSIndexPath *indexPath=[NSIndexPath indexPathForRow:(attributeIdList.count) inSection:0];
         
         UITableViewCell *cell=[self.tableView cellForRowAtIndexPath:indexPath];
         
@@ -399,6 +444,8 @@
     if(attribute_index==-1){
 
         return [NSString stringWithFormat:@"%d",(int)(row+1)];
+    }else if(attribute_index==0){
+        return [[specialAnsArray objectAtIndex:row]objectForKey:@"answer"];
     }else{
         NSString *str =[[pickerData objectAtIndex:row]objectForKey:@"name"];
         return str;
@@ -425,8 +472,39 @@
 -(IBAction)selectAttribute:(id)sender{
     CGPoint buttonPosition = [sender convertPoint:CGPointZero toView:self.tableView];
     NSIndexPath *indexPath = [self.tableView indexPathForRowAtPoint:buttonPosition];
+    if([specialQus isEqualToString:@""]){
+        attribute_index=-1;
+        RMPickerViewController *pickerVC = [RMPickerViewController pickerController];
+        pickerVC.delegate = self;
+        [pickerVC show];
+        return;
+    }
+    if(indexPath.row==0){
+        
+        attribute_index=0;
+        RMPickerViewController *pickerVC = [RMPickerViewController pickerController];
+        pickerVC.delegate = self;
+        [pickerVC show];
+    }else{
+        if([specialAnsDic count]==0){
+            
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error"
+                                                                message:@"Please select the attribute first."
+                                                               delegate:nil
+                                                      cancelButtonTitle:@"Ok"
+                                                      otherButtonTitles:nil];
+            [alertView show];
+            return;
+
+            
+        }
+        attribute_index=-1;
+        RMPickerViewController *pickerVC = [RMPickerViewController pickerController];
+        pickerVC.delegate = self;
+        [pickerVC show];
+    }
     
-    
+    /*
     if(indexPath.row>=attributeList.count){
         
         if(attributeList.count==0){
@@ -483,10 +561,14 @@
         [pickerVC show];
     }
     
-    
+    */
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    if(![specialQus isEqualToString:@""]){
+        NSLog(@"did");
+        return 2;
+    }
     return (attributeList.count+1);
 }
 
@@ -500,11 +582,17 @@
     
     lineView.backgroundColor = [UIColor colorWithRed:(233.0f/255.0f) green:(231.0f/255.0f) blue:(238.0f/255.0f) alpha:1];
     [cell.contentView addSubview:lineView];
+    if(![specialQus isEqualToString:@""] && indexPath.row==0){
+        type.text=specialQus;
+        return cell;
+    }
     
     if((indexPath.row>=attributeList.count)){
         type.text=@"Quantity";
         return cell;
     }
+    
+    
    // NSLog(@"index %d AList%d",indexPath.row,attributeList.count);
     type.text=[[attributeList objectAtIndex:indexPath.row]objectForKey:@"name"];
     return cell;

@@ -164,8 +164,6 @@
     
 
     
-    NSString *string =[self.productData objectForKey:@"description"];
-
     //NSDictionary *attributes = @{NSFontAttributeName:[UIFont systemFontOfSize:14]};
     
     //CGRect rect = [string boundingRectWithSize:CGSizeMake(self.productDetails.frame.size.width, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:attributes context:nil];
@@ -177,7 +175,14 @@
 
     
     //[self.productDetails setFrame:rect];
-    
+
+    NSString *string ;
+    if([self.productData objectForKey:@"description"]==[NSNull null]){
+        string=@"Not Available";
+    }else{
+        string=[self.productData objectForKey:@"description"];
+    }
+
 
     
     [self.productDetails setScrollEnabled:YES];

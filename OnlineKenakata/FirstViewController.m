@@ -230,8 +230,22 @@
    [super viewWillAppear:animated];
     
     self.tabBarController.navigationItem.title=@"Catalogue";
-}
 
+}
+-(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+     NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+    
+    NSString *token=[ud objectForKey:@"token"];
+    if(![token isEqualToString:@""]){
+        
+        self.signinButton.hidden=YES;
+
+        
+    }
+      NSLog(@"%@",token);
+
+}
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
  
     UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cellGrid" forIndexPath:indexPath];

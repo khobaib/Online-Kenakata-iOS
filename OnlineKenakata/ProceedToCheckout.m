@@ -66,12 +66,18 @@
 }
 
 -(IBAction)iAgree:(id)sender{
-    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Please Choose "
+ /*   UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Please Choose "
                                                         message:@"How would you like to receive the items?"
                                                        delegate:self
                                               cancelButtonTitle:@"cancle"
-                                              otherButtonTitles:@"Self-Collect",@"Delivery",nil];
-    [alertView show];
+                                              otherButtonTitles:@"Self-Collect",@"Delivery",nil];*/
+   // [alertView show];
+    
+    UserData *vc=[[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"userData"];
+    vc.productList=self.productList;
+    vc.type=2;
+    vc.tableData=[DatabaseHandeler getDeleveryMethods:2];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{

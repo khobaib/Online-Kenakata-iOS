@@ -212,11 +212,14 @@
             name.attributedText=[TextStyling AttributForTitle:[data objectForKey:@"name"]];
             
             itemCode.text=[NSString stringWithFormat:@"Item Code %@",[data objectForKey:@"sku"]];
-           
-           
+
+            
             if([product.varientID  isEqualToString:@""]){
                 spcl.hidden=YES;
+                
                 int GAQ=[[data objectForKey:@"general_available_quantity"]intValue];
+
+                
                 if(GAQ<1){
                     stocIndicator.text=@"Out of stock";
                     [stocIndicator setTextColor:[UIColor redColor]];
@@ -239,15 +242,15 @@
             }else{
                 spcl.text=[NSString stringWithFormat:@"%@",product.attributs];//product.SPECIAL_QUESTION_TEXT,product.SPECIAL_ANS_TEXT];
                 int gaq=0;
-                NSArray *arr=[data objectForKey:@"variants"];
+                NSArray *arr=[data objectForKey:@"special_answers"];
                
-                
+                NSLog(@"%@",arr);
                
                 for(int i=0;i<arr.count;i++){
                     NSString *txt=[[arr objectAtIndex:i]objectForKey:@"id"];
             
                     if([product.varientID isEqualToString:txt]){
-                        gaq=[[[arr objectAtIndex:i]objectForKey:@"quantity"]intValue];
+                        gaq=[[[arr objectAtIndex:i]objectForKey:@"available_quantity"]intValue];
                         
                         break;
                     }

@@ -15,6 +15,7 @@
     NSString *currency;
     int quantity;
     NSMutableDictionary *specialAnsDic;
+    NSMutableArray *specialAnsArray;
     int availablity;
     NSString * selectedQuantity;
     LoadingView *loading;
@@ -25,6 +26,7 @@
     NSMutableArray *attributeIdList;
     NSString *varientID;
     
+    NSString *specialQus;
     int attribute_index;
 }
 

@@ -9,6 +9,8 @@
 #import "SignupViewController.h"
 #import "AFNetworking/AFNetworking.h"
 #import "Data.h"
+#import "DeleveryMethod.h"
+#import "DatabaseHandeler.h"
 
 @interface SignupViewController ()
 
@@ -84,15 +86,26 @@
         NSDictionary *dic1=(NSDictionary *)responseObject;
 
         NSLog(@"%@",dic1);
-        if(![[dic1 objectForKey:@"Success"] isEqualToString:@""]){
+        if([dic1 objectForKey:@"success"] !=nil){
+         
+            [self SignupHandle];
+           
             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Success"
-                                                                message:@"Login"
+                                                                message:@"Please check your email and varify your mail address.After varification please login using your email and password"
                                                                delegate:nil
                                                       cancelButtonTitle:@"Ok"
                                                       otherButtonTitles:nil];
             [alertView show];
-             [self dismissViewControllerAnimated:YES completion:nil];
-            if([[dic1 objectForKey:@"error"] isEqualToString:@""]){
+            
+            
+          //  NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+            
+           // [ud setObject:[[dic1 objectForKey:@"success"]objectForKey:@"token"] forKey:@"token"];
+            [self.navigationController popToRootViewControllerAnimated:YES];
+            
+            
+            
+            if([dic1 objectForKey:@"error"] !=nil){
              
                 NSString *message= [[dic1 objectForKey:@"error"]objectForKey:@"message"];
                 UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error"
@@ -112,6 +125,29 @@
     }];
 
 }
+
+-(void)SignupHandle{
+
+    DeleveryMethod *deleveryMethod=[[DeleveryMethod alloc]init];
+    deleveryMethod.name=self.userNameField.text;
+    deleveryMethod.phone=self.phoneNumber.text;
+    deleveryMethod.email=self.emailField.text;
+    deleveryMethod.address=@"";
+    deleveryMethod.comment=@"";
+    deleveryMethod.paymentMethod=0;
+    deleveryMethod.type=2;
+    
+    NSLog(@"wtf");
+    if([DatabaseHandeler insertDeleveryMethodData:deleveryMethod]){
+        NSLog(@"inserted");
+        
+        
+    }
+    
+}
+
+
+#pragma mark -validation
 
 -(BOOL) NSStringIsValidEmail:(NSString *)checkString
 {

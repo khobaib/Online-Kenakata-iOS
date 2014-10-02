@@ -9,6 +9,10 @@
 #import "LoginViewController.h"
 #import "AFNetworking/AFNetworking.h"
 #import "Data.h"
+#import "MBProgressHUD.h"
+#import "FacebookViewController.h"
+
+#import "SignupViewController.h"
 
 
 
@@ -33,6 +37,7 @@
     
     self.loginView.readPermissions = @[@"public_profile", @"email", @"user_friends"];
     [FBSettings setDefaultUrlSchemeSuffix:@"abcd"];
+   // [FBSession.activeSession closeAndClearTokenInformation];
    
     // Do any additional setup after loading the view.
 }
@@ -70,7 +75,7 @@
     
     
     [params setObject:password forKey:@"password"];
-    [self signUP:params];
+    [self loginNative:params];
     
     
     
@@ -80,7 +85,11 @@
 - (void)loginViewFetchedUserInfo:(FBLoginView *)loginView
                             user:(id<FBGraphUser>)user {
    
-    NSLog(@"%@",[[FBSession activeSession]accessTokenData]);
+    NSMutableDictionary *data=[[NSMutableDictionary alloc]init];
+    [data setObject:[NSString stringWithFormat:@"%@",[[FBSession activeSession]accessTokenData]] forKey:@"access_token"];
+    
+    [self facebokLogin:data];
+    
 }
 
 - (void)loginViewShowingLoggedInUser:(FBLoginView *)loginView {
@@ -88,31 +97,90 @@
 }
 
 
--(void)signUP:(NSMutableDictionary *)params{
+-(void)facebokLogin:(NSMutableDictionary *)params{
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    // manager.responseSerializer=[AFCompoundResponseSerializer serializer];
+    
+    NSString *str=[NSString stringWithFormat:@"%@/rest.php?method=registration",[Data getBaseUrl]];
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.mode = MBProgressHUDModeAnnularDeterminate;
+    hud.labelText = @"Please Wait";
+    
+    [manager POST:str parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSDictionary *dic1=(NSDictionary *)responseObject;
+             hud.hidden=YES;
+        //NSLog(@"%@",dic1);
+        if([dic1 objectForKey:@"success"] !=nil){
+            
+            if([[[dic1 objectForKey:@"success"]objectForKey:@"registration_status"]intValue]==1){
+             
+                NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+                
+                 [ud setObject:[[dic1 objectForKey:@"success"]objectForKey:@"token"] forKey:@"token"];
+                [self.navigationController popViewControllerAnimated:YES];
+                
+                
+            }else{
+                FacebookViewController *fvc=[[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"fbsignup"];
+                
+                
+                fvc.dic=[dic1 objectForKey:@"success"];
+            
+                [self.navigationController pushViewController:fvc animated:YES];
+            }
+          
+        }
+        
+        if([dic1 objectForKey:@"error"] !=nil){
+            
+            NSString *message= [[dic1 objectForKey:@"error"]objectForKey:@"message"];
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error"
+                                                                message:message
+                                                               delegate:nil
+                                                      cancelButtonTitle:@"Ok"
+                                                      otherButtonTitles:nil];
+            [alertView show];
+            
+            
+        }
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"Error: %@", error);
+    }];
+
+}
+
+
+
+-(void)loginNative:(NSMutableDictionary *)params{
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
     // manager.responseSerializer=[AFCompoundResponseSerializer serializer];
     
     NSString *str=[NSString stringWithFormat:@"%@/rest.php?method=login",[Data getBaseUrl]];
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     
     [manager POST:str parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSDictionary *dic1=(NSDictionary *)responseObject;
-        
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
          NSLog(@"%@",dic1);
-        if(![[dic1 objectForKey:@"Success"] isEqualToString:@""]){
-            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Success"
-                                                                message:@"Login"
-                                                               delegate:nil
-                                                      cancelButtonTitle:@"Ok"
-                                                      otherButtonTitles:nil];
-            [alertView show];
-            [self dismissViewControllerAnimated:YES completion:nil];
+       
+        if([dic1 objectForKey:@"success"]!=nil){
+         
+            
+  
+            NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+            
+             [ud setObject:[[dic1 objectForKey:@"success"]objectForKey:@"token"] forKey:@"token"];
+            [self.navigationController popViewControllerAnimated:YES];
         
            
         }
         
-        if([[dic1 objectForKey:@"error"] isEqualToString:@""]){
+        if([dic1 objectForKey:@"error"]!=nil){
             
             NSString *message= [[dic1 objectForKey:@"error"]objectForKey:@"message"];
             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error"
@@ -132,9 +200,25 @@
 }
 
 
+
+
+-(IBAction)SignupButtonAction:(id)sender{
+    SignupViewController *signup=[[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"Signup"];
+    
+    [self.navigationController pushViewController:signup animated:YES];
+}
+
+-(IBAction)skipbutton:(id)sender{
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
     return [textField resignFirstResponder];
 }
+
+
+
+#pragma mark -validation
 
 -(BOOL) NSStringIsValidEmail:(NSString *)checkString
 {
@@ -146,26 +230,7 @@
     return [emailTest evaluateWithObject:checkString];
 }
 
--(BOOL)validatePhoneNumber:(NSString *)phoneNumber{
-    
-    NSString *phoneRegex = @"^01[0-9]{9}$";
-    NSPredicate *phoneTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", phoneRegex];
-    BOOL test1=  [phoneTest evaluateWithObject:phoneNumber];
-    
-    NSString *phoneRegex2=@"^\\+8801[0-9]{9}$";
-    NSPredicate *phoneTest2=[NSPredicate predicateWithFormat:@"SELF MATCHES %@",phoneRegex2];
-    BOOL test2=[phoneTest2 evaluateWithObject:phoneNumber];
-    
-    NSString *phoneRegex3=@"^01[1-9]-[0-9]{3}-[0-9]{5}";
-    NSPredicate *phoneTest3=[NSPredicate predicateWithFormat:@"SELF MATCHES %@",phoneRegex3];
-    BOOL test3=[phoneTest3 evaluateWithObject:phoneNumber];
-    
-    NSString *phoneRegex4=@"^\\+8801[1-9]-[0-9]{3}-[0-9]{5}";
-    NSPredicate *phoneTest4=[NSPredicate predicateWithFormat:@"SELF MATCHES %@",phoneRegex4];
-    BOOL test4=[phoneTest4 evaluateWithObject:phoneNumber];
-    
-    return test1|test2|test4|test3;
-}
+
 
 - (void)didReceiveMemoryWarning
 {

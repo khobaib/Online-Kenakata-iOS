@@ -28,5 +28,7 @@
 @property (strong,nonatomic) IBOutlet UIScrollView *scrollView;
 @property (strong,nonatomic) IBOutlet UICollectionView *collectionview;
 @property (strong,nonatomic) IBOutlet UISearchBar *searchBar;
+
+@property (strong,nonatomic)IBOutlet UIButton *signinButton;
 -(void)parsCatagoryList:(id) data;
 @end
