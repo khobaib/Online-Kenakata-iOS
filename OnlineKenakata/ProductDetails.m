@@ -15,6 +15,7 @@
 #import "Review.h"
 #import "AFNetworking.h"
 #import "Data.h"
+#import "LoginViewController.h"
 @interface ProductDetails ()
 
 @end
@@ -163,6 +164,14 @@
     }
     
 
+    self.favoritNumber.text=[NSString stringWithFormat:@"%d",[[self.productData objectForKey:@"total_favorites"] intValue]];
+    
+    
+
+    if([[self.productData objectForKey:@"has_favorited"]intValue]==1){
+        [self.favButton setImage:[UIImage imageNamed:@"icon_favorite.png"] forState:UIControlStateNormal];
+        favFlag=YES;
+    }
     
     //NSDictionary *attributes = @{NSFontAttributeName:[UIFont systemFontOfSize:14]};
     
@@ -287,17 +296,95 @@
     
     currency=[[[dic objectForKey:@"success"]objectForKey:@"user"]objectForKey:@"currency"];
     
-
-   
-    
-    
-    
-  
+    favFlag=NO;
     [self initLoading];
 
     [self loadData];
+    
     // NSLog(@"%@",self.pageImages);
     // Do any additional setup after loading the view.
+}
+
+
+-(IBAction)favButtonPressed:(id)sender{
+    
+    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+    
+    NSString *token=(NSString *)[ud objectForKey:@"token"];
+    if(token!=nil){
+        if(favFlag){
+            int count=[self.favoritNumber.text intValue];
+            count--;
+            self.favoritNumber.text=[NSString stringWithFormat:@"%d",count];
+            [self.favButton setImage:[UIImage imageNamed:@"icon_unfavorite.png"] forState:UIControlStateNormal];
+            
+            [self updateFav:[NSNumber numberWithInt:0] forToken:token];
+            
+        }else{
+            int count=[self.favoritNumber.text intValue];
+            count++;
+            self.favoritNumber.text=[NSString stringWithFormat:@"%d",count];
+            [self.favButton setImage:[UIImage imageNamed:@"icon_favorite.png"] forState:UIControlStateNormal];
+            
+            [self updateFav:[NSNumber numberWithInt:1] forToken:token];
+            
+        }
+        favFlag=!favFlag;
+        
+    }else{
+        
+        LoginViewController *loginVC=[[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"loginScreen"];
+        
+        [self.navigationController pushViewController:loginVC animated:YES];
+    }
+   
+}
+
+-(void)updateFav:(NSNumber *)fav forToken:(NSString *)token{
+    NSMutableDictionary *params=[[NSMutableDictionary alloc]init];
+    [params setObject:token forKey:@"token"];
+    [params setObject:[self.productData objectForKey:@"product_id"] forKey:@"product_id"];
+    [params setObject:fav forKey:@"favorited"];
+    
+    
+    
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    
+    NSString *str=[NSString stringWithFormat:@"%@/rest.php?method=favorites&application_code=%@",[Data getBaseUrl],[Data getAppCode]];
+    
+  //  NSLog(@"%@",str);
+    
+    [manager POST:str parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSDictionary *dic1=(NSDictionary *)responseObject;
+        
+        if([[dic1 objectForKey:@"success"] isEqualToString:@"ok"]){
+           
+        
+        }else{
+            if(favFlag){
+                int count=[self.favoritNumber.text intValue];
+                count--;
+                self.favoritNumber.text=[NSString stringWithFormat:@"%d",count];
+                [self.favButton setImage:[UIImage imageNamed:@"icon_unfavorite.png"] forState:UIControlStateNormal];
+            }else{
+                int count=[self.favoritNumber.text intValue];
+                count++;
+                self.favoritNumber.text=[NSString stringWithFormat:@"%d",count];
+                [self.favButton setImage:[UIImage imageNamed:@"icon_favorite.png"] forState:UIControlStateNormal];
+                
+            }
+            favFlag=!favFlag;
+
+        }
+        NSLog(@"JSON: %@", responseObject);
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+       
+    }];
+    
 }
 
 -(void)loadData{
@@ -306,37 +393,70 @@
     
     NSURL *url = [NSURL URLWithString:string];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
-    // NSLog(@"%@",string);
-    // 2
-    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
-    operation.responseSerializer = [AFJSONResponseSerializer serializer];
-    
-    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
-        
-        [self parsProducts:responseObject];
-        
-        
-        
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        
-        // 4
-        loading.hidden=YES;
-        [loading StopAnimating];
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error catagory List"
-                                                            message:[error localizedDescription]
-                                                           delegate:nil
-                                                  cancelButtonTitle:@"Ok"
-                                                  otherButtonTitles:nil];
-        [alertView show];
-    }];
-    
-    // 5
-    //  [self.indecator startAnimating];
-    loading.hidden=NO;
-    [loading StartAnimating];
-    [operation start];
     
     
+    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+    
+    NSString *token=(NSString *)[ud objectForKey:@"token"];
+    if(token!=nil){
+        
+        
+        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+        
+        manager.requestSerializer = [AFJSONRequestSerializer serializer];
+        
+        NSMutableDictionary *params=[[NSMutableDictionary alloc]init];
+        [params setObject:token forKey:@"token"];
+        
+        [manager POST:string parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            
+            [self parsProducts:responseObject];
+            
+            
+            
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            
+            // 4
+            loading.hidden=YES;
+            [loading StopAnimating];
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error catagory List"
+                                                                message:[error localizedDescription]
+                                                               delegate:nil
+                                                      cancelButtonTitle:@"Ok"
+                                                      otherButtonTitles:nil];
+            [alertView show];
+        }];
+        
+     
+    }else{
+        AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+        
+        operation.responseSerializer = [AFJSONResponseSerializer serializer];
+        
+        
+        [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+            
+            [self parsProducts:responseObject];
+            
+            
+            
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            
+            // 4
+            loading.hidden=YES;
+            [loading StopAnimating];
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error catagory List"
+                                                                message:[error localizedDescription]
+                                                               delegate:nil
+                                                      cancelButtonTitle:@"Ok"
+                                                      otherButtonTitles:nil];
+            [alertView show];
+        }];
+        
+        
+        [operation start];
+        
+    }
     
 }
 -(void)parsProducts:(id)respons{
@@ -379,7 +499,7 @@
     
     self.starRater.maxRating = 5.0;
     
-   self.starRater.horizontalMargin =0;
+   self.starRater.horizontalMargin=0;
     self.starRater.editable=NO;
     self.starRater.rating= [[[self.productData objectForKey:@"review_detail"]objectForKey:@"average_rating"] floatValue];
 
@@ -390,7 +510,7 @@
     UITapGestureRecognizer *tap=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(ratingShow)];
     tap.numberOfTapsRequired=1;
     [self.starRater addGestureRecognizer:tap];
-    /*[self.starRaterBack setAlpha:0.40];
+    [self.starRaterBack setAlpha:0.40];
     
     [self.starRaterBack.layer setCornerRadius:5.0f];
     
@@ -405,6 +525,7 @@
     [self.starRaterBack.layer setShadowOffset:CGSizeMake(2.0, 2.0)];
     
 
+    /*
     NSMutableDictionary *arr=[[self.productData objectForKey:@"review_detail"]objectForKey:@"distribution"];
     int total=0;
     

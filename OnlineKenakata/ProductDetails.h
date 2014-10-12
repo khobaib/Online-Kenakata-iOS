@@ -15,8 +15,9 @@
 @interface ProductDetails : UIViewController<UIScrollViewDelegate,MWPhotoBrowserDelegate,shareDelegate,MFMessageComposeViewControllerDelegate>{
     NSString *currency;
     NSMutableArray *photos;
-     LoadingView *loading;
+    LoadingView *loading;
     
+    BOOL favFlag;
 }
 
 @property NSMutableDictionary *productData;
@@ -39,9 +40,10 @@
 @property (strong,nonatomic) IBOutlet UIScrollView *horizontalScroller;
 @property (strong,nonatomic) IBOutlet EDStarRating *starRater;
 @property (strong,nonatomic) IBOutlet UIView *starRaterBack;
-@property (strong,nonatomic) IBOutlet UILabel *reviewNumber;
+@property (strong,nonatomic) IBOutlet UILabel *favoritNumber;
 @property (strong,nonatomic) IBOutlet UILabel *similarProductLable;
 
+@property (strong,nonatomic) IBOutlet UIButton *favButton;
 
 
 -(IBAction)imageEnlarge:(id)sender;

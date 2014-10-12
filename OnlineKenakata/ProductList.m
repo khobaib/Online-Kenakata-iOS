@@ -12,7 +12,8 @@
 #import "ProductDetails.h"
 #import "Data.h"
 #import "TextStyling.h"
-#import "EDStarRating.h"
+#import "RateView.h"
+
 
 @interface ProductList ()
 
@@ -102,33 +103,79 @@
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
    // NSLog(@"%@",string);
     // 2
-    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
-    operation.responseSerializer = [AFJSONResponseSerializer serializer];
     
-    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+    
+    NSString *token=(NSString *)[ud objectForKey:@"token"];
+    if(token!=nil){
         
-        [self parsProductList:responseObject];
+
+        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+        
+        manager.requestSerializer = [AFJSONRequestSerializer serializer];
+        
+        NSMutableDictionary *params=[[NSMutableDictionary alloc]init];
+        [params setObject:token forKey:@"token"];
+        
+        [manager POST:string parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            
+            [self parsProductList:responseObject];
+            
+            
+            
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            
+            // 4
+            loading.hidden=YES;
+            [loading StopAnimating];
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error catagory List"
+                                                                message:[error localizedDescription]
+                                                               delegate:nil
+                                                      cancelButtonTitle:@"Ok"
+                                                      otherButtonTitles:nil];
+            [alertView show];
+        }];
+
         
         
         
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    }else{
+        AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
         
-        // 4
-        loading.hidden=YES;
-        [loading StopAnimating];
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error catagory List"
-                                                            message:[error localizedDescription]
-                                                           delegate:nil
-                                                  cancelButtonTitle:@"Ok"
-                                                  otherButtonTitles:nil];
-        [alertView show];
-    }];
+        operation.responseSerializer = [AFJSONResponseSerializer serializer];
+        
+        
+        [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+            
+            [self parsProductList:responseObject];
+            
+            
+            
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            
+            // 4
+            loading.hidden=YES;
+            [loading StopAnimating];
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error catagory List"
+                                                                message:[error localizedDescription]
+                                                               delegate:nil
+                                                      cancelButtonTitle:@"Ok"
+                                                      otherButtonTitles:nil];
+            [alertView show];
+        }];
+        
+        
+        [operation start];
+
+    }
+    
+   
+    
     
     // 5
     //  [self.indecator startAnimating];
     loading.hidden=NO;
     [loading StartAnimating];
-    [operation start];
     
     
     
@@ -136,6 +183,8 @@
 
 -(void)parsProductList:(id) respons{
     NSMutableDictionary *dic=(NSMutableDictionary *)respons;
+    
+
     if(counter==0){
         NSMutableArray *Arraytemp=[[dic objectForKey:@"success"]objectForKey:@"products"];
 
@@ -211,11 +260,25 @@
         
         UILabel *oldPrice =(UILabel *)[cell viewWithTag:305];
         UIView *back=[cell viewWithTag:307];
-        EDStarRating *starRating=(EDStarRating *)[cell viewWithTag:308];
+        RateView *starRating=(RateView *)[cell viewWithTag:308];
         
-        [self starRaterShow:starRating withView:back starcount:[[[dic objectForKey:@"review_detail"]objectForKey:@"average_rating"]intValue]];
+        [self starRaterShow:starRating withView:back starcount:[[[dic objectForKey:@"review_detail"]objectForKey:@"average_rating"]floatValue]];
         
         UILabel *newPrice=(UILabel *) [cell viewWithTag:306];
+        UILabel *totalFavorite=(UILabel *)[cell viewWithTag:311];
+        
+        totalFavorite.text=[NSString stringWithFormat:@"%d",[[dic objectForKey:@"total_favorites"] intValue]];
+        
+        //NSLog(@" %@  %d",[dic objectForKey:@"name"],[[dic objectForKey:@"total_favorites"] intValue]);
+
+        if([[dic objectForKey:@"has_favorited"]intValue]==1){
+            UIImageView *favorite=(UIImageView *)[cell viewWithTag:310];
+            
+
+            [favorite setImage:[UIImage imageNamed:@"icon_favorite.png"]];
+
+        }
+        
         //
         productName.text=@"";
         thumbnil.image=nil;
@@ -325,7 +388,10 @@
 
 
 
--(void)starRaterShow:(EDStarRating *)starRater withView:(UIView *)starRaterBack starcount:(int) rating{
+-(void)starRaterShow:(RateView *)starRater withView:(UIView *)starRaterBack starcount:(float) rating{
+    
+    
+    /*
     starRater.starImage=[UIImage imageNamed:@"star.png"];
     starRater.starHighlightedImage=[UIImage imageNamed:@"starhighlighted.png"];
     
@@ -337,35 +403,20 @@
     
     
     starRater.displayMode=EDStarRatingDisplayAccurate;
-   [starRater setNeedsDisplay];
+   [starRater setNeedsDisplay];*/
     
    // starRater.tintColor=[UIColor colorWithRed:(253.0f/255.0f) green:(181.0f/255.0f)blue:(13.0f/255.0f) alpha:1.0f];
+    
+    starRater.fullSelectedImage=[UIImage imageNamed:@"starhighlighted.png"];
+    starRater.notSelectedImage=[UIImage imageNamed:@"star.png"];
+    starRater.maxRating=5;
+    starRater.rating=rating;
+    starRater.editable=NO;
+    
+    
     [starRaterBack setAlpha:0.50];
    
-    /*
-    [starRaterBack.layer setCornerRadius:5.0f];
-    
-    // border
-    [starRaterBack.layer setBorderColor:[UIColor grayColor].CGColor];
-    [starRaterBack.layer setBorderWidth:1.5f];
-    
-    // drop shadow
-    [starRaterBack.layer setShadowColor:[UIColor blackColor].CGColor];
-    [starRaterBack.layer setShadowOpacity:0.6];
-    [starRaterBack.layer setShadowRadius:3.0];
-    [starRaterBack.layer setShadowOffset:CGSizeMake(2.0, 2.0)];*/
-    
-    
-   /* NSMutableDictionary *arr=[[self.productData objectForKey:@"review_detail"]objectForKey:@"distribution"];
-    int total=0;
-    
-    if(arr==nil){
-        return;
-    }
-    for(int i=0;i<arr.count;i++){
-        total+=[[arr objectForKey:[NSString stringWithFormat:@"%d",i]]intValue];
-    }
-    self.reviewNumber.text=[NSString stringWithFormat:@"%d Reviews",total];*/
+   
 }
 
 

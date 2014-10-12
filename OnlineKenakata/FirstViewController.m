@@ -100,6 +100,7 @@
     self.collectionview.hidden=NO;
     self.searchBar.hidden=NO;
     self.scrollView.hidden=YES;
+    self.signinButton.hidden=YES;
    
     self.tabBarController.navigationItem.title=@"Catalogue";
 }
@@ -236,8 +237,8 @@
     [super viewDidAppear:animated];
      NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
     
-    NSString *token=[ud objectForKey:@"token"];
-    if(![token isEqualToString:@""]){
+    NSString *token=(NSString *)[ud objectForKey:@"token"];
+    if(token!=nil){
         
         self.signinButton.hidden=YES;
 

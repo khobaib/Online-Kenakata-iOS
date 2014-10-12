@@ -147,6 +147,9 @@
 		9A592D4F19C59EF80042E42A /* databaseV4.sqlite3 in Resources */ = {isa = PBXBuildFile; fileRef = 9A592D4E19C59EF80042E42A /* databaseV4.sqlite3 */; };
 		9A7F131919A35347002F2526 /* phone.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A7F131819A35347002F2526 /* phone.png */; };
 		9AA6B75519D99AB400C1A235 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AA6B75419D99AB400C1A235 /* FacebookSDK.framework */; };
+		9AB11F3619EA48BC00F0E935 /* RateView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AB11F3519EA48BC00F0E935 /* RateView.m */; };
+		9AB11F3919EA50AE00F0E935 /* icon_favorite.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AB11F3719EA50AE00F0E935 /* icon_favorite.png */; };
+		9AB11F3A19EA50AE00F0E935 /* icon_unfavorite.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AB11F3819EA50AE00F0E935 /* icon_unfavorite.png */; };
 		9AB1AD3219C9529000229422 /* UIImageView+HighlightedWebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AB1AD2F19C9529000229422 /* UIImageView+HighlightedWebCache.m */; };
 		9AB1AD3319C9529000229422 /* UIView+WebCacheOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AB1AD3119C9529000229422 /* UIView+WebCacheOperation.m */; };
 		9AB1AD3519C9556500229422 /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AB1AD3419C9556500229422 /* FMDatabasePool.m */; };
@@ -406,6 +409,10 @@
 		9A592D4E19C59EF80042E42A /* databaseV4.sqlite3 */ = {isa = PBXFileReference; lastKnownFileType = file; path = databaseV4.sqlite3; sourceTree = "<group>"; };
 		9A7F131819A35347002F2526 /* phone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = phone.png; sourceTree = "<group>"; };
 		9AA6B75419D99AB400C1A235 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = OnlineKenakata/FacebookSDK.framework; sourceTree = "<group>"; };
+		9AB11F3419EA48BC00F0E935 /* RateView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RateView.h; sourceTree = "<group>"; };
+		9AB11F3519EA48BC00F0E935 /* RateView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RateView.m; sourceTree = "<group>"; };
+		9AB11F3719EA50AE00F0E935 /* icon_favorite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_favorite.png; sourceTree = "<group>"; };
+		9AB11F3819EA50AE00F0E935 /* icon_unfavorite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_unfavorite.png; sourceTree = "<group>"; };
 		9AB1AD2E19C9529000229422 /* UIImageView+HighlightedWebCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+HighlightedWebCache.h"; sourceTree = "<group>"; };
 		9AB1AD2F19C9529000229422 /* UIImageView+HighlightedWebCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+HighlightedWebCache.m"; sourceTree = "<group>"; };
 		9AB1AD3019C9529000229422 /* UIView+WebCacheOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+WebCacheOperation.h"; sourceTree = "<group>"; };
@@ -759,6 +766,8 @@
 		14D45B451974FF7900F677D0 /* img */ = {
 			isa = PBXGroup;
 			children = (
+				9AB11F3719EA50AE00F0E935 /* icon_favorite.png */,
+				9AB11F3819EA50AE00F0E935 /* icon_unfavorite.png */,
 				9A7F131819A35347002F2526 /* phone.png */,
 				18AB7739199CB58000364FA6 /* icon3.png */,
 				18AB773A199CB58000364FA6 /* icon2.png */,
@@ -884,6 +893,8 @@
 		1895D5951999EE3400713916 /* EDStarRating */ = {
 			isa = PBXGroup;
 			children = (
+				9AB11F3419EA48BC00F0E935 /* RateView.h */,
+				9AB11F3519EA48BC00F0E935 /* RateView.m */,
 				1895D5961999EE3400713916 /* EDStarRating.h */,
 				1895D5971999EE3400713916 /* EDStarRating.m */,
 			);
@@ -982,6 +993,7 @@
 				1478B4CF19752269002C79B0 /* mail.png in Resources */,
 				182B9BE21997980E00AF6709 /* bkashicon.png in Resources */,
 				14D45B551974FFA500F677D0 /* tag_new.png in Resources */,
+				9AB11F3919EA50AE00F0E935 /* icon_favorite.png in Resources */,
 				18AB773E199CB58000364FA6 /* icon.png in Resources */,
 				185E2AFA1990CF86008D741C /* databaseV3.sqlite3 in Resources */,
 				1895D59F1999F05D00713916 /* star.png in Resources */,
@@ -995,6 +1007,7 @@
 				14D45B531974FFA500F677D0 /* facebook.png in Resources */,
 				14D45AD61974FCB900F677D0 /* README.mdown in Resources */,
 				18AB773D199CB58000364FA6 /* icon2.png in Resources */,
+				9AB11F3A19EA50AE00F0E935 /* icon_unfavorite.png in Resources */,
 				14D45AF51974FCB900F677D0 /* MWPhotoBrowser.bundle in Resources */,
 				18AB773C199CB58000364FA6 /* icon3.png in Resources */,
 				14D45B591974FFA500F677D0 /* video.png in Resources */,
@@ -1111,6 +1124,7 @@
 				14D45AEC1974FCB900F677D0 /* SDWebImageDownloader.m in Sources */,
 				14D45B101974FD6B00F677D0 /* AFURLRequestSerialization.m in Sources */,
 				14DE1D33197E4DD2002D4DAA /* Data.m in Sources */,
+				9AB11F3619EA48BC00F0E935 /* RateView.m in Sources */,
 				14D45B0D1974FD6B00F677D0 /* AFNetworkReachabilityManager.m in Sources */,
 				14818572197D3C6E007E0734 /* BBBadgeBarButtonItem.m in Sources */,
 				14D45AE01974FCB900F677D0 /* PSTGridLayoutInfo.m in Sources */,

@@ -69,7 +69,7 @@
                                     <outlet property="delegate" destination="CZ4-MO-1fc" id="FyL-jN-KCD"/>
                                 </connections>
                             </searchBar>
-                            <button opaque="NO" alpha="0.59999999999999998" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OIj-LS-8iv">
+                            <button opaque="NO" alpha="0.80000000000000004" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OIj-LS-8iv">
                                 <rect key="frame" x="0.0" y="415" width="320" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.35294117650000001" green="0.2901960784" blue="0.25882352939999997" alpha="1" colorSpace="calibratedRGB"/>
@@ -140,7 +140,7 @@
                                                 <imageView userInteractionEnabled="NO" tag="302" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rVK-lB-h6Z">
                                                     <rect key="frame" x="0.0" y="0.0" width="55" height="55"/>
                                                 </imageView>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon.png" translatesAutoresizingMaskIntoConstraints="NO" id="266-0u-9qy">
+                                                <imageView userInteractionEnabled="NO" tag="309" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon.png" translatesAutoresizingMaskIntoConstraints="NO" id="266-0u-9qy">
                                                     <rect key="frame" x="128" y="0.0" width="25" height="25"/>
                                                 </imageView>
                                                 <view tag="307" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Z4j-y7-4wq">
@@ -148,10 +148,20 @@
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                 </view>
-                                                <view tag="308" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rfP-7h-yMe" customClass="EDStarRating">
-                                                    <rect key="frame" x="70" y="81" width="84" height="18"/>
+                                                <view tag="308" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rfP-7h-yMe" customClass="RateView">
+                                                    <rect key="frame" x="80" y="81" width="64" height="15"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 </view>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="311" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="123" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MF9-AJ-x1h">
+                                                    <rect key="frame" x="115" y="99" width="25" height="10"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <imageView userInteractionEnabled="NO" tag="310" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon_unfavorite.png" translatesAutoresizingMaskIntoConstraints="NO" id="iDa-ud-Ph8">
+                                                    <rect key="frame" x="92" y="95" width="20" height="20"/>
+                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                </imageView>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="304" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RMF-NP-Hjs">
                                                     <rect key="frame" x="0.0" y="115" width="155" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -2338,13 +2348,29 @@
                                                 </connections>
                                             </scrollView>
                                             <view alpha="0.60000002384185791" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GWN-Ww-hbi">
-                                                <rect key="frame" x="223" y="165" width="84" height="48"/>
+                                                <rect key="frame" x="201" y="165" width="106" height="58"/>
                                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                             </view>
                                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Jq3-pm-bsi" customClass="EDStarRating">
-                                                <rect key="frame" x="223" y="166" width="84" height="20"/>
+                                                <rect key="frame" x="212" y="168" width="91" height="23"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             </view>
+                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text=" " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZFa-3U-mEN">
+                                                <rect key="frame" x="262" y="194" width="29" height="21"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IWA-JG-iP0">
+                                                <rect key="frame" x="234" y="194" width="25" height="25"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <state key="normal" image="icon_unfavorite.png">
+                                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="favButtonPressed:" destination="EMK-Kg-cc9" eventType="touchUpInside" id="BvB-LM-orD"/>
+                                                </connections>
+                                            </button>
                                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TtF-A2-fSL">
                                                 <rect key="frame" x="37" y="173" width="49" height="31"/>
                                                 <state key="normal" image="icon_image_enlarge.png">
@@ -2526,6 +2552,8 @@
                     </view>
                     <connections>
                         <outlet property="cartBtn" destination="Jr1-J4-WdQ" id="IPU-dA-8Sg"/>
+                        <outlet property="favButton" destination="IWA-JG-iP0" id="5uy-IA-BI9"/>
+                        <outlet property="favoritNumber" destination="ZFa-3U-mEN" id="wH4-hK-8xa"/>
                         <outlet property="horizontalScroller" destination="Zb7-fj-BeA" id="LSJ-4O-bUL"/>
                         <outlet property="itemCode" destination="Bva-HM-Ltn" id="E8Q-xE-hbX"/>
                         <outlet property="itemCodeLable" destination="xQR-3f-eaJ" id="xBC-01-Ljl"/>
@@ -3078,6 +3106,7 @@
         <image name="facebook.png" width="120" height="120"/>
         <image name="icon.png" width="120" height="120"/>
         <image name="icon_image_enlarge.png" width="98" height="61"/>
+        <image name="icon_unfavorite.png" width="128" height="128"/>
         <image name="menu_icn_catalogue.png" width="30" height="30"/>
         <image name="menu_icn_info.png" width="30" height="30"/>
         <image name="menu_icn_location.png" width="30" height="30"/>
