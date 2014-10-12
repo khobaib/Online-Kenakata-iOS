@@ -21,7 +21,7 @@
 @property IBOutlet UIImageView *imageView;
 
 -(void)getUserData: (NSDictionary *) dic;
--(void)imageDownloaded;
+
 
 @end
   

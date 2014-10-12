@@ -151,8 +151,6 @@
         self.oldPrice.attributedText=[TextStyling AttributForPrice:[NSString stringWithFormat:@"%@ %@",currency,[self.productData objectForKey:@"price"]]];
     }else if (tag==2){
         
-      
-        
         self.oldPrice.attributedText = [TextStyling AttributForPriceStrickThrough:[NSString stringWithFormat:@"%@ %@",currency,[self.productData objectForKey:@"old_price"]]];
         
         
@@ -166,6 +164,13 @@
 
     self.favoritNumber.text=[NSString stringWithFormat:@"%d",[[self.productData objectForKey:@"total_favorites"] intValue]];
     
+    
+    NSString *key=[NSString stringWithFormat:@"marchent_data_%@",[self.productData objectForKey:@"user_id"]];
+    
+    NSString *marchentLogo=[[[NSUserDefaults standardUserDefaults] objectForKey:key]objectForKey:@"logo"];
+    
+    [self.logoImageView sd_setImageWithURL:[NSURL URLWithString:marchentLogo]
+            placeholderImage:[UIImage imageNamed:@"icon"]];
     
 
     if([[self.productData objectForKey:@"has_favorited"]intValue]==1){

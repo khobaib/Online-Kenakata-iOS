@@ -142,7 +142,7 @@
     // self.navigationController.navigationBar.hidden=YES;
     
     NSString *string = [NSString stringWithFormat:@"%@/rest.php?method=get_user_data&application_code=%@",[Data getBaseUrl],[Data getAppCode]];
-    NSLog(@"%@",string);
+
     NSURL *url = [NSURL URLWithString:string];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     
@@ -168,7 +168,7 @@
                                                   cancelButtonTitle:@"Ok"
                                                   otherButtonTitles:nil];
         [alertView show];
-        NSLog(@"%@",url);
+
     }];
     
     // 5
@@ -194,6 +194,7 @@
 - (BOOL)connected {
     return [AFNetworkReachabilityManager sharedManager].reachable;
 }
+
 -(void)initLoading{
     CGFloat x= self.view.frame.size.width/2-65;
     CGFloat y =(self.view.frame.size.height-self.navigationController.navigationBar.frame.size.height-self.tabBarController.tabBar.frame.size.height)/2-25;
@@ -253,6 +254,9 @@
          }else{
              [loading StopAnimating];
              loading.hidden=YES;
+             
+             
+             
              navicationController *nav=[[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"navigationController"];
              
              tabbarController *tbc=[nav.viewControllers objectAtIndex:0];
@@ -267,14 +271,55 @@
              NSLog(@"not present");
 
          }
-         
+         [self getMarchentData];
      }];
     
     
 }
--(void)imageDownloaded{
+-(void)getMarchentData{
     
     
+    NSString *string = [NSString stringWithFormat:@"%@/rest_kenakata.php?method=get_merchant_data&application_code=%@",[Data getBaseUrl],[Data getAppCode]];
+    
+    NSURL *url = [NSURL URLWithString:string];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    
+    // 2
+    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    operation.responseSerializer = [AFJSONResponseSerializer serializer];
+    
+    
+    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSMutableDictionary *dic=(NSMutableDictionary *)responseObject;
+        
+        [self saveMArchentData:[[dic objectForKey:@"success"] objectForKey:@"merchant"]];
+
+        
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+       
+        
+        
+        // 4
+       
+        
+    }];
+
+    [operation start];
+
+}
+
+-(void)saveMArchentData:(NSMutableArray *)data{
+    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+    
+
+    for(int i=0;i<data.count;i++){
+        
+        NSMutableDictionary *dic=[data objectAtIndex:i];
+        
+        NSString *key = [NSString stringWithFormat:@"marchent_data_%@",[dic objectForKey:@"user_id"]];
+        [ud setObject:dic forKey:key];
+    }
 }
 
 - (void)didReceiveMemoryWarning

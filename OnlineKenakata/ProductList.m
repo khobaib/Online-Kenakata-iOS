@@ -258,6 +258,8 @@
         UIImageView *thumbnil=(UIImageView *)[cell viewWithTag:301];
         UIImageView *toping=(UIImageView *) [cell viewWithTag:302];
         
+        UIImageView *logo=(UIImageView *)[cell viewWithTag:309];
+        
         UILabel *oldPrice =(UILabel *)[cell viewWithTag:305];
         UIView *back=[cell viewWithTag:307];
         RateView *starRating=(RateView *)[cell viewWithTag:308];
@@ -279,6 +281,14 @@
 
         }
         
+      
+        
+        NSString *key=[NSString stringWithFormat:@"marchent_data_%@",[dic objectForKey:@"user_id"]];
+        
+        NSString *marchentLogo=[[[NSUserDefaults standardUserDefaults] objectForKey:key]objectForKey:@"logo"];
+     
+        [logo sd_setImageWithURL:[NSURL URLWithString:marchentLogo]
+                placeholderImage:[UIImage imageNamed:@"icon"]];
         //
         productName.text=@"";
         thumbnil.image=nil;

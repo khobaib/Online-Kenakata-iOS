@@ -44,6 +44,7 @@
 @property (strong,nonatomic) IBOutlet UILabel *similarProductLable;
 
 @property (strong,nonatomic) IBOutlet UIButton *favButton;
+@property (strong,nonatomic) IBOutlet UIImageView *logoImageView;
 
 
 -(IBAction)imageEnlarge:(id)sender;
