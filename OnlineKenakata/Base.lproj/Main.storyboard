@@ -2419,9 +2419,10 @@
                                                         <color key="textColor" red="0.24430006379999999" green="0.24430006379999999" blue="0.24430006379999999" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Kc-ZI-n9d">
+                                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Kc-ZI-n9d">
                                                         <rect key="frame" x="13" y="108" width="301" height="162"/>
                                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <gestureRecognizers/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="162" id="5fM-dZ-rXR"/>
                                                             <constraint firstAttribute="width" constant="301" id="sR9-cx-sPC"/>
@@ -2429,6 +2430,9 @@
                                                         <color key="textColor" red="0.3516621492" green="0.3516621492" blue="0.3516621492" alpha="1" colorSpace="calibratedRGB"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                        <connections>
+                                                            <outletCollection property="gestureRecognizers" destination="kN9-pU-dhR" appends="YES" id="fQA-rA-3sT"/>
+                                                        </connections>
                                                     </textView>
                                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Item Code:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xQR-3f-eaJ">
                                                         <rect key="frame" x="20" y="278" width="80" height="21"/>
@@ -2509,9 +2513,10 @@
                                                     <constraint firstItem="1c4-dA-LVE" firstAttribute="top" secondItem="oiE-gk-Dpl" secondAttribute="top" constant="5" id="wJp-Wf-O2Q"/>
                                                 </constraints>
                                             </view>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon.png" translatesAutoresizingMaskIntoConstraints="NO" id="JUy-zx-F1r">
-                                                <rect key="frame" x="258" y="8" width="50" height="50"/>
+                                            <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon.png" translatesAutoresizingMaskIntoConstraints="NO" id="JUy-zx-F1r">
+                                                <rect key="frame" x="257" y="8" width="50" height="50"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <gestureRecognizers/>
                                             </imageView>
                                         </subviews>
                                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
@@ -2569,6 +2574,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="urM-6g-Tnr" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer delaysTouchesBegan="YES" numberOfTapsRequired="7" id="kN9-pU-dhR">
+                    <connections>
+                        <action selector="TapHandlerMethod:" destination="EMK-Kg-cc9" id="VRb-tU-whE"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1937" y="-1904"/>
         </scene>

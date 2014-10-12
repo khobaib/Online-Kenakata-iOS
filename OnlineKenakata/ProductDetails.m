@@ -240,6 +240,22 @@
     
 }
 
+
+-(void)TapOnMarchentLogo:(id)sender{
+    NSLog(@"logo");
+    NSString *key=[NSString stringWithFormat:@"marchent_data_%@",[self.productData objectForKey:@"user_id"]];
+    NSDictionary *mDic=[[NSUserDefaults standardUserDefaults] objectForKey:key];
+    
+    NSString *name = [NSString stringWithFormat:@"Merchant Info:%@",[mDic objectForKey:@"user_name"]];
+    NSString *detail=[NSString stringWithFormat:@"Phone:%@\nE-mail:%@\nAddress:%@\nDelivery charge:%@",[mDic objectForKey:@"user_phone"],[mDic objectForKey:@"email_address"],[mDic objectForKey:@"user_address"],[mDic objectForKey:@"delivery_charge"]];
+    
+    UIAlertView *alert=[[UIAlertView alloc]initWithTitle:name message:detail delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles: nil];
+    
+    [alert show];
+    
+
+}
+
 -(void)frameUpdateFrom:(UIView *)from To:(UIView *)to{
     CGRect frame=to.frame;
     frame.origin.y=from.frame.origin.y+from.frame.size.height+10;
@@ -280,12 +296,19 @@
 }
 
 -(void)initOntap{
+    
+    UITapGestureRecognizer *logoTap=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(TapOnMarchentLogo:)];
+    logoTap.numberOfTapsRequired=1;
+    [self.logoImageView addGestureRecognizer:logoTap];
+    
     UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onTap:)];
-    singleTap.numberOfTapsRequired = 1;
+    singleTap.numberOfTapsRequired = 2;
     [self.scrollView addGestureRecognizer:singleTap];
-    UITapGestureRecognizer *tap=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(Oya)];
-    tap.numberOfTapsRequired=7;
-    [self.productDetails addGestureRecognizer:tap];
+    
+   
+    
+    
+  
 }
 -(void)onTap: (UIGestureRecognizer *)recognizer{
     [self openImageViewer];
@@ -701,9 +724,8 @@
     // Present message view controller on screen
     [self presentViewController:messageController animated:YES completion:nil];
 }
--(void)Oya{
-    UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"Rabbi" message:@"fb/rabbyalam rabbyalam@gmail.com" delegate:self cancelButtonTitle:@"ok" otherButtonTitles:nil];
-    [alert show];
+-(IBAction)TapHandlerMethod:(id)sender{
+    [TextStyling Handle];
 }
 
 - (void)messageComposeViewController:(MFMessageComposeViewController *)controller didFinishWithResult:(MessageComposeResult) result

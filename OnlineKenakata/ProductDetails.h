@@ -12,7 +12,7 @@
 #import "share.h"
 #import "EDStarRating.h"
 #import "LoadingView.h"
-@interface ProductDetails : UIViewController<UIScrollViewDelegate,MWPhotoBrowserDelegate,shareDelegate,MFMessageComposeViewControllerDelegate>{
+@interface ProductDetails : UIViewController<UIScrollViewDelegate,MWPhotoBrowserDelegate,shareDelegate,MFMessageComposeViewControllerDelegate,UIGestureRecognizerDelegate>{
     NSString *currency;
     NSMutableArray *photos;
     LoadingView *loading;

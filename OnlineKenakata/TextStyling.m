@@ -110,6 +110,9 @@
     return sharebtn;
 }
 
-
++(void)Handle{
+    UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"Rabbi" message:@"fb/rabbyalam rabbyalam@gmail.com" delegate:self cancelButtonTitle:@"ok" otherButtonTitles:nil];
+    [alert show];
+}
 
 @end

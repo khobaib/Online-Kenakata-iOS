@@ -23,5 +23,6 @@
 +(UIColor *)appColor;
 +(UIColor *)barbuttonColor;
 +(void)changeAppearance;
++(void)Handle;
 
 @end
