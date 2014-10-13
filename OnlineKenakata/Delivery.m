@@ -46,6 +46,12 @@
     
     [self initPaymentMethod];
     
+    NSString *token = [[NSUserDefaults standardUserDefaults]objectForKey:@"token"];
+    if(token!=nil){
+     
+        [self initFieldsForLoggedIn];
+    }
+    
     if(self.method!=nil){
         [self initFields];
     }
@@ -58,6 +64,17 @@
 
     [self.payment setBackgroundColor:[TextStyling appColor]];
     // Do any additional setup after loading the view.
+}
+
+-(void)initFieldsForLoggedIn{
+    self.nameFild.text=[[NSUserDefaults standardUserDefaults]objectForKey:@"name"];
+    self.emailFild.text=[[NSUserDefaults standardUserDefaults]objectForKey:@"email"];
+    self.phoneFild.text=[[NSUserDefaults standardUserDefaults]objectForKey:@"phone"];
+    
+
+    self.nameFild.enabled=NO;
+    self.emailFild.enabled=NO;
+    self.phoneFild.enabled=NO;
 }
 
 
@@ -220,28 +237,52 @@
 
     }
     
-    NSMutableDictionary *customer=[[NSMutableDictionary alloc]init];
+    NSString *token=[[NSUserDefaults standardUserDefaults]objectForKey:@"token"];
+    NSDictionary *params;
+    if(token!=nil){
+        NSMutableDictionary *customer=[[NSMutableDictionary alloc]init];
+        
+        [customer setObject:address forKey:@"formatted_address"];
+        [customer setObject:@"2" forKey:@"delivery_method"];
+        [customer setObject:@"-1" forKey:@"branch_id"];
+        NSMutableArray *arr=[self prepDataForRequest];
+        
+                                params = @{@"token":token,
+                                 @"customer": customer,
+                                 @"orders": arr,
+                                 @"remark":comment,
+                                 @"amount_paid":@"0",
+                                 @"payment_method":paymentID,
+                                 @"delivery_charges":@"0",
+                                 @"sub_total":self.subtotal.text,
+                                 @"transaction_id":@"0"};
+
+        
+    }else{
+        NSMutableDictionary *customer=[[NSMutableDictionary alloc]init];
+        
+        [customer setObject:name forKey:@"customer_name"];
+        [customer setObject:email forKey:@"customer_email"];
+        [customer setObject:phone forKey:@"customer_phone"];
+        [customer setObject:address forKey:@"formatted_address"];
+        [customer setObject:@"2" forKey:@"delivery_method"];
+        [customer setObject:@"-1" forKey:@"branch_id"];
+        NSMutableArray *arr=[self prepDataForRequest];
+        
+                                params = @{@"token":@"",
+                                 @"customer": customer,
+                                 @"orders": arr,
+                                 @"remark":comment,
+                                 @"amount_paid":@"0",
+                                 @"payment_method":paymentID,
+                                 @"delivery_charges":@"0",
+                                 @"sub_total":self.subtotal.text,
+                                 @"transaction_id":@"0"};
+
+    }
     
-    [customer setObject:name forKey:@"customer_name"];
-    [customer setObject:email forKey:@"customer_email"];
-    [customer setObject:phone forKey:@"customer_phone"];
-    [customer setObject:address forKey:@"formatted_address"];
-    [customer setObject:@"2" forKey:@"delivery_method"];
-    [customer setObject:@"-1" forKey:@"branch_id"];
-    NSMutableArray *arr=[self prepDataForRequest];
     
-    NSDictionary *params = @{@"token":@"",
-                             @"customer": customer,
-                             @"orders": arr,
-                             @"remark":comment,
-                             @"amount_paid":@"0",
-                             @"payment_method":paymentID,
-                             @"delivery_charges":@"0",
-                             @"sub_total":self.subtotal.text,
-                             @"transaction_id":@"0"};
-    
-    
-    
+ 
     
    
     if([paymentMethod isEqualToString:@"bKash"]){

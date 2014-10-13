@@ -71,6 +71,9 @@
              NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
             
             [ud setObject:[[dic1 objectForKey:@"success"]objectForKey:@"token"] forKey:@"token"];
+            [ud setObject:[[dic1 objectForKey:@"success"]objectForKey:@"email"] forKey:@"email"];
+            [ud setObject:[[dic1 objectForKey:@"success"]objectForKey:@"phone"] forKey:@"phone"];
+            [ud setObject:[[dic1 objectForKey:@"success"]objectForKey:@"name"] forKey:@"name"];
             
             [self.navigationController popToRootViewControllerAnimated:YES];
             

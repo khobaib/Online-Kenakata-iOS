@@ -75,11 +75,24 @@
                                               otherButtonTitles:@"Self-Collect",@"Delivery",nil];*/
    // [alertView show];
     
-    UserData *vc=[[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"userData"];
-    vc.productList=self.productList;
-    vc.type=2;
-    vc.tableData=[DatabaseHandeler getDeleveryMethods:2];
-    [self.navigationController pushViewController:vc animated:YES];
+    NSString *token = [[NSUserDefaults standardUserDefaults]objectForKey:@"token"];
+    if(token!=nil){
+        Delivery *dvc=[[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"delivery"];
+        dvc.productList=self.productList;
+        
+        [self.navigationController pushViewController:dvc animated:YES];
+        
+        
+    }else{
+        UserData *vc=[[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"userData"];
+        vc.productList=self.productList;
+        vc.type=2;
+        vc.tableData=[DatabaseHandeler getDeleveryMethods:2];
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+    
+    
+
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{

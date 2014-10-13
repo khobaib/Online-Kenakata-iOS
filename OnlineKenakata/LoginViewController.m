@@ -37,7 +37,7 @@
     
     self.loginView.readPermissions = @[@"public_profile", @"email", @"user_friends"];
     [FBSettings setDefaultUrlSchemeSuffix:@"abcd"];
-   // [FBSession.activeSession closeAndClearTokenInformation];
+    [FBSession.activeSession closeAndClearTokenInformation];
    
     // Do any additional setup after loading the view.
 }
@@ -55,7 +55,8 @@
         UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"Error" message:@"Please fillup All the fields." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
         [alert show];
         return;
-    }/*
+    }
+    /*
       if(![self NSStringIsValidEmail:email]){
       UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"Error" message:@"Enter Valid Email." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
       [alert show];
@@ -66,8 +67,8 @@
       UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"Error" message:@"Enter Valid Phone Number." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
       [alert show];
       return;
-      }*/
-    
+      }
+    */
     NSMutableDictionary *params=[[NSMutableDictionary alloc]init];
     
     [params setObject:name forKey:@"email"];
@@ -111,14 +112,19 @@
     [manager POST:str parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSDictionary *dic1=(NSDictionary *)responseObject;
              hud.hidden=YES;
-        //NSLog(@"%@",dic1);
+        NSLog(@"%@",dic1);
         if([dic1 objectForKey:@"success"] !=nil){
             
             if([[[dic1 objectForKey:@"success"]objectForKey:@"registration_status"]intValue]==1){
              
                 NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
                 
+                
                  [ud setObject:[[dic1 objectForKey:@"success"]objectForKey:@"token"] forKey:@"token"];
+                 [ud setObject:[[dic1 objectForKey:@"success"]objectForKey:@"email"] forKey:@"email"];
+                 [ud setObject:[[dic1 objectForKey:@"success"]objectForKey:@"phone"] forKey:@"phone"];
+                 [ud setObject:[[dic1 objectForKey:@"success"]objectForKey:@"name"] forKey:@"name"];
+                
                 [self.navigationController popViewControllerAnimated:YES];
                 
                 
@@ -175,6 +181,9 @@
             NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
             
              [ud setObject:[[dic1 objectForKey:@"success"]objectForKey:@"token"] forKey:@"token"];
+            [ud setObject:[[dic1 objectForKey:@"success"]objectForKey:@"email"] forKey:@"email"];
+            [ud setObject:[[dic1 objectForKey:@"success"]objectForKey:@"phone"] forKey:@"phone"];
+            [ud setObject:[[dic1 objectForKey:@"success"]objectForKey:@"name"] forKey:@"name"];
             [self.navigationController popViewControllerAnimated:YES];
         
            

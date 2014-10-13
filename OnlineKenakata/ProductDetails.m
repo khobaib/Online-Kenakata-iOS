@@ -10,7 +10,7 @@
 #import "UIImageView+WebCache.h"
 #import "share.h"
 #import "AddToCart.h"
-#import "Libraries/MBProgressHUD/MBProgressHUD.h"
+#import "MBProgressHUD.h"
 #import "TextStyling.h"
 #import "Review.h"
 #import "AFNetworking.h"
@@ -436,17 +436,20 @@
         NSMutableDictionary *params=[[NSMutableDictionary alloc]init];
         [params setObject:token forKey:@"token"];
         
+        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        
         [manager POST:string parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
             
+            [MBProgressHUD hideHUDForView:self.view animated:YES];
             [self parsProducts:responseObject];
             
             
             
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             
-            // 4
-            loading.hidden=YES;
-            [loading StopAnimating];
+            [MBProgressHUD hideHUDForView:self.view animated:YES];
+
+            
             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error catagory List"
                                                                 message:[error localizedDescription]
                                                                delegate:nil
@@ -461,18 +464,22 @@
         
         operation.responseSerializer = [AFJSONResponseSerializer serializer];
         
+        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+
         
         [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
             
+            [MBProgressHUD hideHUDForView:self.view animated:YES];
+
             [self parsProducts:responseObject];
             
             
             
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             
-            // 4
-            loading.hidden=YES;
-            [loading StopAnimating];
+            [MBProgressHUD hideHUDForView:self.view animated:YES];
+
+          
             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error catagory List"
                                                                 message:[error localizedDescription]
                                                                delegate:nil
@@ -529,7 +536,7 @@
     
    self.starRater.horizontalMargin=0;
     self.starRater.editable=NO;
-    self.starRater.rating= [[[self.productData objectForKey:@"review_detail"]objectForKey:@"average_rating"] floatValue];
+    self.starRater.rating= [[self.productData objectForKey:@"average_rating"] floatValue];
 
     
     self.starRater.displayMode=EDStarRatingDisplayAccurate;
