@@ -15,6 +15,7 @@
 #import "Data.h"
 #import "TextStyling.h"
 #import "AddToCart.h"
+#import "Marchent.h"
 
 @interface MyCart ()
 
@@ -107,8 +108,10 @@
 
     }
     
-    self.total.text=[NSString stringWithFormat:@"%@%d",currency,total];
+    int charge=[self marchentArraySubtotal];
+    self.total.text=[NSString stringWithFormat:@"%@%d",currency,total+charge];
     self.subTotal.text=[NSString stringWithFormat:@"%@%d",currency,total];
+    self.deleveryChargeLable.text=[NSString stringWithFormat:@"%@%d",currency,charge];
     [self checkAvailablity:str];
 }
 
@@ -244,7 +247,7 @@
                 int gaq=0;
                 NSArray *arr=[data objectForKey:@"special_answers"];
                
-                NSLog(@"%@",arr);
+               // NSLog(@"%@",arr);
                
                 for(int i=0;i<arr.count;i++){
                     NSString *txt=[[arr objectAtIndex:i]objectForKey:@"id"];
@@ -494,8 +497,39 @@
     
     ProceedToCheckout *pcd=[[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"proceedToCheckOut"];
     pcd.productList=productList;
+    pcd.deleveryCharge=self.deleveryChargeLable.text;
+    pcd.marchentDictionary=marchentDictionary;
     
     [self.navigationController pushViewController:pcd animated:YES];
+}
+
+
+-(int)marchentArraySubtotal{
+    marchentDictionary=[[NSMutableDictionary alloc]init];
+    int deleveryCharge=0;
+    for (int i=0; i<self.productList.count; i++) {
+        Product *product=[self.productList objectAtIndex:i];
+        Marchent *marchent=[marchentDictionary objectForKey:product.marchantID];
+        if(marchent==nil){
+            NSString *key=[NSString stringWithFormat:@"marchent_data_%@",product.marchantID];
+            NSDictionary *dic=[[NSUserDefaults standardUserDefaults] objectForKey:key];
+            
+            marchent=[[Marchent alloc]initwithID:product.marchantID deleveryCharge:[dic objectForKey:@"delivery_charge"]];
+            
+            [marchent.productArray addObject:product];
+            
+            [marchentDictionary setObject:marchent forKey:product.marchantID];
+            
+            deleveryCharge+=[marchent.deleveryCharge intValue];
+            
+        }else{
+            [marchent.productArray addObject:product];
+        }
+    }
+
+    [Data setMarchentData:marchentDictionary];
+    [Data setDeleveryCharge:deleveryCharge];
+    return deleveryCharge;
 }
 
 /*

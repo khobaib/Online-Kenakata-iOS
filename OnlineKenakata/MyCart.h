@@ -19,6 +19,8 @@
     BOOL serverData;
     int editQuantity;
     int counter;
+    
+    NSMutableDictionary *marchentDictionary;
 }
 @property (strong,nonatomic) NSMutableArray *productList;
 
@@ -26,6 +28,7 @@
 @property (strong,nonatomic) IBOutlet UILabel *subTotal;
 @property (strong,nonatomic) IBOutlet UILabel *total;
 @property (strong,nonatomic) IBOutlet UILabel *subTotalLable;
+@property (strong,nonatomic) IBOutlet UILabel *deleveryChargeLable;
 @property (strong,nonatomic) IBOutlet UIButton *checkoutBtn;
 
 @end

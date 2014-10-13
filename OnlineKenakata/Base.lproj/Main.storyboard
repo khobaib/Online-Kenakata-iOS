@@ -1548,6 +1548,7 @@
                     </view>
                     <connections>
                         <outlet property="checkoutBtn" destination="TYt-Zb-gVI" id="3qu-nX-n74"/>
+                        <outlet property="deleveryChargeLable" destination="Lwf-hy-DBv" id="nwA-45-oV7"/>
                         <outlet property="subTotal" destination="oh3-2K-tDW" id="sjf-kI-O84"/>
                         <outlet property="subTotalLable" destination="Tme-ot-PiD" id="ka3-rK-nK6"/>
                         <outlet property="tableview" destination="9aq-ec-85u" id="vKF-rK-vMh"/>
@@ -1671,6 +1672,7 @@
                     <navigationItem key="navigationItem" id="dpy-Yc-H9e"/>
                     <connections>
                         <outlet property="agreeBtn" destination="fxv-Sn-twI" id="Gdj-ve-O9J"/>
+                        <outlet property="deleveryChargeLabel" destination="PjJ-Pu-sUu" id="ilf-0f-Yzm"/>
                         <outlet property="subtotal" destination="VMU-7H-uzM" id="Fr3-he-KZv"/>
                         <outlet property="subtotalLable" destination="r7Q-PA-9j1" id="oos-Vs-l7a"/>
                         <outlet property="terms" destination="R5i-p5-bvU" id="xXI-yw-JCC"/>

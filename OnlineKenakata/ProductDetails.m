@@ -752,14 +752,16 @@
 }
 
 -(IBAction)callButton:(id)sender{
-    NSUserDefaults *ud =[NSUserDefaults standardUserDefaults];
-    NSMutableDictionary *dic1=[NSKeyedUnarchiver unarchiveObjectWithData:[ud objectForKey:@"get_user_data"]];
-   NSMutableDictionary *dic=[[dic1 objectForKey:@"success"]objectForKey:@"user"];
+  
+    NSString *key=[NSString stringWithFormat:@"marchent_data_%@",[self.productData objectForKey:@"user_id"]];
+   NSMutableDictionary *dic=[[ NSUserDefaults standardUserDefaults] objectForKey:key];
     
     NSString *phoneNumber = [@"telprompt://" stringByAppendingString:[dic objectForKey:@"user_phone"]];
     NSString *deviceType = [UIDevice currentDevice].model;
     //  NSLog(@"%@",deviceType);
     
+    
+    NSLog(@"%@",phoneNumber);
     
     if([deviceType isEqualToString:@"iPhone"]){
         

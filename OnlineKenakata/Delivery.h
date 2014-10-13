@@ -44,6 +44,11 @@
 
 @property (strong,nonatomic) DeleveryMethod *method;
 
+@property (strong,nonatomic) IBOutlet UILabel *deleveryChargeLabel;
+
+@property NSString* deleveryCharge;
+@property NSMutableDictionary *marchentDictionary;
+
 @end
 
 

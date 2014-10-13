@@ -297,10 +297,7 @@ int indexOfReadMoreButton;
         NSString *name=[dic objectForKey:@"name"];
         NSString *dateStr=[dic objectForKey:@"date"];
         
-        NSDateFormatter *df = [[NSDateFormatter alloc] init];
-        [df setDateFormat:@"yyyy-MM-dd"];
-        
-        NSDate *date=[df dateFromString:dateStr];
+       
         
       //  NSLog(@"date %@",date);
         

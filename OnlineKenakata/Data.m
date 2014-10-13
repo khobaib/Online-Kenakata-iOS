@@ -11,6 +11,9 @@
 NSString * const baseurl=@"http://online-kenakata.com/mobile_api";
 NSString *const kenakataurl=@"";
 NSString * const appcode=@"999";
+static NSMutableDictionary *marchentData;
+static int deleverycharge;
+
 @implementation Data
 
 +(NSString *)getAppCode{
@@ -24,5 +27,20 @@ NSString * const appcode=@"999";
 +(NSString *)getKenakataUrl{
     return kenakataurl;
 }
+
+
++(NSMutableDictionary*)getMarchentData{
+    return marchentData;
+}
++(void)setMarchentData:(NSMutableDictionary*)marchent{
+    marchentData=marchent;
+}
++(int)getDeleveryCharge{
+    return deleverycharge;
+}
++(void)setDeleveryCharge:(int)charge{
+    deleverycharge=charge;
+}
+
 
 @end

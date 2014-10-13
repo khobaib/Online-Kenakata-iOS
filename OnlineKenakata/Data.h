@@ -8,9 +8,16 @@
 
 #import <Foundation/Foundation.h>
 
-@interface Data : NSObject
+@interface Data : NSObject{
+   
+}
 
 +(NSString *)getBaseUrl;
 +(NSString *)getAppCode;
 +(NSString *)getKenakataUrl;
+
++(NSMutableDictionary*)getMarchentData;
++(void)setMarchentData:(NSMutableDictionary*)marchent;
++(int)getDeleveryCharge;
++(void)setDeleveryCharge:(int)charge;
 @end

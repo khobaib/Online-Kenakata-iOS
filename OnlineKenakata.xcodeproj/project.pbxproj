@@ -145,6 +145,7 @@
 		18AB773E199CB58000364FA6 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 18AB773B199CB58000364FA6 /* icon.png */; };
 		9A5201FF19D8044A00FD676D /* TextStyling.m in Sources */ = {isa = PBXBuildFile; fileRef = 183A936B1993518A0097B2F1 /* TextStyling.m */; };
 		9A6245A019EBC30500BE15A1 /* databaseV1.sqlite3 in Resources */ = {isa = PBXBuildFile; fileRef = 9A62459F19EBC30500BE15A1 /* databaseV1.sqlite3 */; };
+		9A6245A319EBC7C100BE15A1 /* Marchent.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A6245A219EBC7C100BE15A1 /* Marchent.m */; };
 		9A7F131919A35347002F2526 /* phone.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A7F131819A35347002F2526 /* phone.png */; };
 		9AA6B75519D99AB400C1A235 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AA6B75419D99AB400C1A235 /* FacebookSDK.framework */; };
 		9AB11F3619EA48BC00F0E935 /* RateView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AB11F3519EA48BC00F0E935 /* RateView.m */; };
@@ -408,6 +409,8 @@
 		18AB773B199CB58000364FA6 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 		9A62459E19EBBBAF00BE15A1 /* databaseV7.sqlite3 */ = {isa = PBXFileReference; lastKnownFileType = file; path = databaseV7.sqlite3; sourceTree = "<group>"; };
 		9A62459F19EBC30500BE15A1 /* databaseV1.sqlite3 */ = {isa = PBXFileReference; lastKnownFileType = file; path = databaseV1.sqlite3; sourceTree = "<group>"; };
+		9A6245A119EBC7C100BE15A1 /* Marchent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Marchent.h; sourceTree = "<group>"; };
+		9A6245A219EBC7C100BE15A1 /* Marchent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Marchent.m; sourceTree = "<group>"; };
 		9A7F131819A35347002F2526 /* phone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = phone.png; sourceTree = "<group>"; };
 		9AA6B75419D99AB400C1A235 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = OnlineKenakata/FacebookSDK.framework; sourceTree = "<group>"; };
 		9AB11F3419EA48BC00F0E935 /* RateView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RateView.h; sourceTree = "<group>"; };
@@ -872,6 +875,8 @@
 				1413995B1977FC0C00B8ACA9 /* Product.m */,
 				185E2AF31990C2CA008D741C /* DeleveryMethod.h */,
 				185E2AF41990C2CA008D741C /* DeleveryMethod.m */,
+				9A6245A119EBC7C100BE15A1 /* Marchent.h */,
+				9A6245A219EBC7C100BE15A1 /* Marchent.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -1115,6 +1120,7 @@
 				14D45B111974FD6B00F677D0 /* AFURLResponseSerialization.m in Sources */,
 				14D45AD51974FCB900F677D0 /* MBProgressHUD.m in Sources */,
 				14D45B401974FF4800F677D0 /* FirstViewController.m in Sources */,
+				9A6245A319EBC7C100BE15A1 /* Marchent.m in Sources */,
 				143644F21977D571008335D0 /* AddToCart.m in Sources */,
 				14D45AF41974FCB900F677D0 /* UIImageView+WebCache.m in Sources */,
 				14D45ADD1974FCB900F677D0 /* PSTCollectionViewItemKey.m in Sources */,

@@ -40,4 +40,10 @@
 @property (strong,nonatomic) IBOutlet UIButton *payment;
 @property (strong,nonatomic) DeleveryMethod *method;
 
+
+@property (strong,nonatomic) IBOutlet UILabel *deleveryChargeLabel;
+
+@property NSString* deleveryCharge;
+@property NSMutableDictionary *marchentDictionary;
+
 @end

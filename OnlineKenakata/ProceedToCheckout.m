@@ -13,6 +13,7 @@
 #import "UserData.h"
 #import "DatabaseHandeler.h"
 #import "TextStyling.h"
+#import "Data.h"
 
 @interface ProceedToCheckout ()
 
@@ -61,8 +62,9 @@
         
     }
     
-    self.total.text=[NSString stringWithFormat:@"%@%d",currency,total];
+    self.total.text=[NSString stringWithFormat:@"%@%d",currency,total+[Data getDeleveryCharge]];
     self.subtotal.text=[NSString stringWithFormat:@"%@%d",currency,total];
+    self.deleveryChargeLabel.text=[NSString stringWithFormat:@"%@%d",currency,[Data getDeleveryCharge]];
 }
 
 -(IBAction)iAgree:(id)sender{

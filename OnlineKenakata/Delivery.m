@@ -13,6 +13,8 @@
 #import "DatabaseHandeler.h"
 #import "TextStyling.h"
 #import "bKashViewController.h"
+#import "Marchent.h"
+#import "MBProgressHUD.h"
 @interface Delivery ()
 
 @end
@@ -84,8 +86,8 @@
 
 -(void)setValueOntop{
    
-    int charge=[[dic objectForKey:@"delivery_charge"]intValue];
-    self.deleveryChargeLable.text=[NSString stringWithFormat:@"%@ %@",currency,[dic objectForKey:@"delivery_charge"]];
+    int charge=[Data getDeleveryCharge];
+    self.deleveryChargeLable.text=[NSString stringWithFormat:@"%@ %d",currency,charge];
     self.subtotalLable.text=[NSString stringWithFormat:@"Sub total (%luitems):",(unsigned long)self.productList.count];
     int total=0;
     for (int i=0; i<self.productList.count; i++) {
@@ -225,12 +227,12 @@
     [customer setObject:phone forKey:@"customer_phone"];
     [customer setObject:address forKey:@"formatted_address"];
     [customer setObject:@"2" forKey:@"delivery_method"];
-    [customer setObject:@"" forKey:@"branch_id"];
-    NSMutableArray *arr=[self productData];
+    [customer setObject:@"-1" forKey:@"branch_id"];
+    NSMutableArray *arr=[self prepDataForRequest];
     
     NSDictionary *params = @{@"token":@"",
                              @"customer": customer,
-                             @"options": arr,
+                             @"orders": arr,
                              @"remark":comment,
                              @"amount_paid":@"0",
                              @"payment_method":paymentID,
@@ -239,9 +241,9 @@
                              @"transaction_id":@"0"};
     
     
-    //   NSLog(@"%@",params);
     
     
+   
     if([paymentMethod isEqualToString:@"bKash"]){
         
         bKashViewController *bvc=[[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"bKash"];
@@ -254,11 +256,15 @@
         
         manager.requestSerializer = [AFJSONRequestSerializer serializer];
         
-        NSString *str=[NSString stringWithFormat:@"%@/rest.php?method=add_order_5&application_code=%@",[Data getBaseUrl],[Data getAppCode]];
+        NSString *str=[NSString stringWithFormat:@"%@/rest_kenakata.php?method=add_order_4_1&application_code=%@",[Data getBaseUrl],[Data getAppCode]];
+        
+        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         
         [manager POST:str parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
             NSDictionary *dic1=(NSDictionary *)responseObject;
-            if([[dic1 objectForKey:@"ok"] isEqualToString:@"success"]){
+            [MBProgressHUD hideHUDForView:self.view animated:YES];
+            NSLog(@"%@",dic1);
+            if([[dic1 objectForKey:@"success"] isEqualToString:@"ok"]){
                 UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Success"
                                                                     message:@"Please check your mail for details."
                                                                    delegate:nil
@@ -468,11 +474,14 @@
     
     [DatabaseHandeler insertDeleveryMethodData:obj];
 }
--(NSMutableArray *)productData{
+-(NSMutableDictionary *)marchentProductData:(NSMutableArray *)productArr{
     NSMutableArray *arraylist=[[NSMutableArray alloc]init];
-    
-    for (int i=0; i<self.productList.count; i++) {
-        Product *product=[self.productList objectAtIndex:i];
+    NSMutableDictionary *data=[[NSMutableDictionary alloc]init];
+    int marchentTotal=0;
+    for (int i=0; i<productArr.count; i++) {
+        Product *product=[productArr objectAtIndex:i];
+        
+        marchentTotal+=([product.PRICE intValue] *[product.QUANTITY intValue]);
         
         NSMutableDictionary *dic1=[[NSMutableDictionary alloc]init];
         [dic1 setObject:product.ID forKey:@"product_id"];
@@ -488,8 +497,10 @@
             TF=@"true";
             ans=product.varientID;
         }
-        [dic1 setObject:TF forKey:@"is_variant"];
-        [dic1 setObject:ans forKey:@"variant_id"];
+        NSMutableDictionary *dic2=[[NSMutableDictionary alloc]init];
+        [dic2 setObject:TF forKey:@"is_special_question"];
+        [dic2 setObject:ans forKey:@"special_answer_id"];
+        [dic1 setObject:dic2 forKey:@"special_question"];
         
         NSArray *arr=[product.attributs componentsSeparatedByCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@": "]];
         
@@ -506,8 +517,33 @@
         
     }
     
-    return arraylist;
+    [data setObject:[NSNumber numberWithInt:marchentTotal] forKey:@"merchant_total" ];
+    [data setObject:arraylist forKey:@"products"];
+    
+    
+    return data;
 }
+
+
+-(NSMutableArray*)prepDataForRequest{
+    NSMutableArray *arr=[[NSMutableArray alloc]init];
+    
+    NSArray *valArr=[[Data getMarchentData] allValues];
+    
+    
+    for(int i=0;i<valArr.count;i++){
+        Marchent *marchent=[valArr objectAtIndex:i];
+        
+        NSMutableDictionary *marchentDictionary=[self marchentProductData:marchent.productArray];
+        [marchentDictionary setObject:marchent.marchentId forKey:@"merchant_id"];
+        [marchentDictionary setObject:marchent.deleveryCharge forKey:@"delivery_charge"];
+       
+        [arr addObject:marchentDictionary];
+    }
+    
+    return arr;
+}
+
 
 -(BOOL) NSStringIsValidEmail:(NSString *)checkString
 {

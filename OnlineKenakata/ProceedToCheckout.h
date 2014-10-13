@@ -19,4 +19,8 @@
 @property (strong,nonatomic) IBOutlet UILabel *total;
 @property (strong,nonatomic) IBOutlet UITextView *terms;
 @property (strong,nonatomic) IBOutlet UIButton *agreeBtn;
+@property (strong,nonatomic) IBOutlet UILabel *deleveryChargeLabel;
+
+@property NSString* deleveryCharge;
+@property NSMutableDictionary *marchentDictionary;
 @end

@@ -17,4 +17,9 @@
 
 @property int type;
 
+@property (strong,nonatomic) IBOutlet UILabel *deleveryChargeLabel;
+
+@property NSString* deleveryCharge;
+@property NSMutableDictionary *marchentDictionary;
+
 @end
