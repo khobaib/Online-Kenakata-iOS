@@ -22,4 +22,6 @@
 @property (strong,nonatomic) IBOutlet UITextView *description;
 @property (strong,nonatomic) IBOutlet  UIButton *submit;
 
+@property (strong,nonatomic) NSDictionary *userReview;
+
 @end

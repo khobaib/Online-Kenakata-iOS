@@ -18,6 +18,7 @@
     NSMutableDictionary *distribution;
     NSMutableArray *isSelected;
     BOOL isdataloaded;
+    NSDictionary *userReview;
 }
 
 @property (strong,nonatomic) NSString *productID;
@@ -31,4 +32,6 @@
 @property (strong,nonatomic) IBOutlet UITableView *tableview;
 @property (strong,nonatomic) IBOutlet UIView *barContainer;
 
+
+@property IBOutlet UIButton *writeReviewButton;
 @end

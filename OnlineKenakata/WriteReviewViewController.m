@@ -52,6 +52,14 @@
     
     [self.submit setBackgroundColor:[TextStyling appColor]];
     [self initLoading];
+    
+    
+    if(self.userReview!=nil){
+        self.Headline.text=[self.userReview objectForKey:@"title"];
+        self.description.text=[self.userReview objectForKey:@"detail"];
+        self.starRater.rating=[[self.userReview objectForKey:@"rating"]intValue];
+    }
+    
     // Do any additional setup after loading the view.
     //NSLog(@"product id %@",self.productID);
 }
@@ -141,16 +149,16 @@
         
         return;
     }
+    NSString *tok=(NSString *)[[NSUserDefaults standardUserDefaults] objectForKey:@"token"];
     
-    NSDictionary *params = @{@"token": @"ad76fdf3458003fffcf279aa02fa75d0a5eb1256",
+    NSLog(@"%@",tok);
+    NSDictionary *params = @{@"token":tok,
                              @"product_id": self.productID,
                              @"rating":[NSNumber numberWithFloat:self.starRater.rating],
                              @"title":tittle,
                              @"detail":descreption};
     
-
-    
-    
+ 
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     
     manager.requestSerializer = [AFJSONRequestSerializer serializer];

@@ -264,7 +264,7 @@
         UIView *back=[cell viewWithTag:307];
         RateView *starRating=(RateView *)[cell viewWithTag:308];
         
-        [self starRaterShow:starRating withView:back starcount:[[[dic objectForKey:@"review_detail"]objectForKey:@"average_rating"]floatValue]];
+        [self starRaterShow:starRating withView:back starcount:[[dic objectForKey:@"average_rating"]floatValue]];
         
         UILabel *newPrice=(UILabel *) [cell viewWithTag:306];
         UILabel *totalFavorite=(UILabel *)[cell viewWithTag:311];

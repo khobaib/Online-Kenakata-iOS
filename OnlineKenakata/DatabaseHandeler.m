@@ -26,8 +26,9 @@ NSString *const PRICE =@"price";
 NSString *const OLD_PRICE =@"old_price";
 NSString *const AVAILABILITY =@"availability";
 NSString *const PRODUCT_TAG = @"tag";
+NSString *const MARCHANTID=@"marchantid";
 
-NSString *const databaseFilename=@"databaseV4.sqlite3";
+NSString *const databaseFilename=@"databaseV1.sqlite3";
 
 
 @implementation DatabaseHandeler
@@ -81,7 +82,7 @@ NSString *const databaseFilename=@"databaseV4.sqlite3";
     
     
     
-        BOOL b=[database executeUpdate:@"INSERT INTO cart_product_table VALUES (NULL,?,?,?,?,?,?,?,?,?,?,?,?,?);",product.ID,product.name,product.QUANTITY,product.WEIGHT,product.ITEM_CODE,product.IMAGE_URL,product.THUMBNAIL_IMAGE_URL,product.PRICE,product.OLD_PRICE,product.attributs,product.varientID, [NSNumber numberWithInt:product.AVAILABILITY],product.PRODUCT_TAG];
+        BOOL b=[database executeUpdate:@"INSERT INTO cart_product_table VALUES (NULL,?,?,?,?,?,?,?,?,?,?,?,?,?,?);",product.ID,product.name,product.QUANTITY,product.WEIGHT,product.ITEM_CODE,product.IMAGE_URL,product.THUMBNAIL_IMAGE_URL,product.PRICE,product.OLD_PRICE,product.attributs,product.varientID, [NSNumber numberWithInt:product.AVAILABILITY],product.PRODUCT_TAG,product.marchantID];
     
       
         [database close];
@@ -203,9 +204,11 @@ NSString *const databaseFilename=@"databaseV4.sqlite3";
         Product *var=[[Product alloc]init];
     
         
-        var=[var initProduct:[s stringForColumn:name] productId:[s stringForColumn:ID] Quantity:[s stringForColumn:QUANTITY] Weight:[s stringForColumn:WEIGHT] code:[s stringForColumn:ITEM_CODE]attributs:[s stringForColumn:ATTRIBUTES] varient:[s stringForColumn:VARIENTID] imageURL:[s stringForColumn:IMAGE_URL] thumbImage:[s stringForColumn:THUMBNAIL_IMAGE_URL] price:[s stringForColumn:PRICE] oldPrice:[s stringForColumn:OLD_PRICE] availabl:[s intForColumn:AVAILABILITY] tag:[s stringForColumn:PRODUCT_TAG]] ;
+        var=[var initProduct:[s stringForColumn:name] productId:[s stringForColumn:ID] Quantity:[s stringForColumn:QUANTITY] Weight:[s stringForColumn:WEIGHT] code:[s stringForColumn:ITEM_CODE]attributs:[s stringForColumn:ATTRIBUTES] varient:[s stringForColumn:VARIENTID] imageURL:[s stringForColumn:IMAGE_URL] thumbImage:[s stringForColumn:THUMBNAIL_IMAGE_URL] price:[s stringForColumn:PRICE] oldPrice:[s stringForColumn:OLD_PRICE] availabl:[s intForColumn:AVAILABILITY] tag:[s stringForColumn:PRODUCT_TAG] marchantID:[s stringForColumn:MARCHANTID]] ;
 
         var.TABLE_PRIMARY_KEY=[s intForColumn:TABLE_PRIMARY_KEY];
+        
+
         
         [array addObject:var];
     }

@@ -27,7 +27,8 @@
 @property NSString *OLD_PRICE;
 @property int AVAILABILITY;
 @property NSString *PRODUCT_TAG;
+@property NSString *marchantID;
 
--(id)initProduct:(NSString *)name productId:(NSString *)ID Quantity:(NSString *)quantity Weight:(NSString *)weight code:(NSString*)item_code attributs:(NSString *)attributs varient:(NSString*)varientID imageURL:(NSString *)imageUrl thumbImage:(NSString *)thumbImage price:(NSString *)price oldPrice:(NSString *)oldPrice availabl:(int )availablity tag:(NSString *)product_tag;
+-(id)initProduct:(NSString *)name productId:(NSString *)ID Quantity:(NSString *)quantity Weight:(NSString *)weight code:(NSString*)item_code attributs:(NSString *)attributs varient:(NSString*)varientID imageURL:(NSString *)imageUrl thumbImage:(NSString *)thumbImage price:(NSString *)price oldPrice:(NSString *)oldPrice availabl:(int )availablity tag:(NSString *)product_tag marchantID:(NSString *)marchant;
 
 @end

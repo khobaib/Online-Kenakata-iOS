@@ -2627,7 +2627,7 @@
                                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
                                                 <connections>
-                                                    <segue destination="hSz-Es-lUk" kind="push" id="LnX-gL-xgE"/>
+                                                    <action selector="clickOnWriteReview:" destination="QL1-bL-7EG" eventType="touchUpInside" id="MVh-4R-I1J"/>
                                                 </connections>
                                             </button>
                                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="150" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="vpC-mv-oj6">
@@ -2663,6 +2663,17 @@
                                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                                 </textView>
+                                                                <button opaque="NO" tag="905" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GX8-J7-Out">
+                                                                    <rect key="frame" x="205" y="31" width="72" height="24"/>
+                                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                                    <state key="normal" title="Edit Review">
+                                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                                    </state>
+                                                                    <connections>
+                                                                        <action selector="editOwnReview:" destination="QL1-bL-7EG" eventType="touchUpInside" id="UsI-wz-Mla"/>
+                                                                    </connections>
+                                                                </button>
                                                             </subviews>
                                                             <constraints>
                                                                 <constraint firstItem="3uH-19-dwj" firstAttribute="top" secondItem="6Ga-pk-TZu" secondAttribute="top" constant="67" id="6Pq-uI-lqu"/>
@@ -2712,6 +2723,17 @@
                                                                     </state>
                                                                     <connections>
                                                                         <action selector="readmoreButtonClicked:" destination="QL1-bL-7EG" eventType="touchUpInside" id="pkf-9n-k20"/>
+                                                                    </connections>
+                                                                </button>
+                                                                <button opaque="NO" tag="905" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5wb-uJ-cUL">
+                                                                    <rect key="frame" x="206" y="27" width="77" height="24"/>
+                                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                                    <state key="normal" title="Edit Review">
+                                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                                    </state>
+                                                                    <connections>
+                                                                        <action selector="editOwnReview:" destination="QL1-bL-7EG" eventType="touchUpInside" id="BQP-fA-HHG"/>
                                                                     </connections>
                                                                 </button>
                                                             </subviews>
@@ -2802,11 +2824,12 @@
                         <outlet property="reviewCount" destination="ZfR-cn-bYI" id="KGE-Ao-ZMO"/>
                         <outlet property="scrollview" destination="iQs-fY-hEI" id="04b-sx-1Bh"/>
                         <outlet property="tableview" destination="vpC-mv-oj6" id="S8b-R6-LOZ"/>
+                        <outlet property="writeReviewButton" destination="tI4-2W-Ae1" id="5bu-cw-5Yq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Nf4-78-l67" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1700" y="-1258"/>
+            <point key="canvasLocation" x="1766" y="-1247"/>
         </scene>
         <!--Write Review View Controller-->
         <scene sceneID="AuK-vp-vrP">
@@ -2840,7 +2863,6 @@
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="Write your review here" translatesAutoresizingMaskIntoConstraints="NO" id="HGJ-cG-WWR">
                                                 <rect key="frame" x="20" y="141" width="286" height="163"/>
                                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                <color key="textColor" red="0.74095618210000003" green="0.73369345370000005" blue="0.66226548959999998" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                 <connections>
