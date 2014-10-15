@@ -8,12 +8,12 @@
 
 #import "ProceedToCheckout.h"
 #import "Product.h"
-#import "SelfCollect.h"
 #import "Delivery.h"
 #import "UserData.h"
 #import "DatabaseHandeler.h"
 #import "TextStyling.h"
 #import "Data.h"
+#import "LoginViewController.h"
 
 @interface ProceedToCheckout ()
 
@@ -77,18 +77,25 @@
     
     NSString *token = [[NSUserDefaults standardUserDefaults]objectForKey:@"token"];
     if(token!=nil){
+        
+       
+        
         Delivery *dvc=[[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"delivery"];
-        dvc.productList=self.productList;
-        
+       
+     
         [self.navigationController pushViewController:dvc animated:YES];
-        
+     
         
     }else{
+        /*
         UserData *vc=[[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"userData"];
         vc.productList=self.productList;
         vc.type=2;
-        vc.tableData=[DatabaseHandeler getDeleveryMethods:2];
-        [self.navigationController pushViewController:vc animated:YES];
+        vc.tableData=[DatabaseHandeler getDeleveryMethods:2];*/
+        
+        LoginViewController *login =[[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"loginScreen"];
+        login.fromProcideToCheckout=YES;
+        [self.navigationController pushViewController:login animated:YES];
     }
     
     
@@ -99,7 +106,6 @@
 
     if(buttonIndex==1 || buttonIndex==2){
         UserData *vc=[[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"userData"];
-        vc.productList=self.productList;
         vc.type=(int)buttonIndex;
         vc.tableData=[DatabaseHandeler getDeleveryMethods:(int)buttonIndex];
         [self.navigationController pushViewController:vc animated:YES];

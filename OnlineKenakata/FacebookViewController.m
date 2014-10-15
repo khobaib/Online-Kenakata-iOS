@@ -8,6 +8,7 @@
 
 #import "FacebookViewController.h"
 #import "Data.h"
+#import "Delivery.h"
 
 @interface FacebookViewController ()
 
@@ -74,6 +75,14 @@
             [ud setObject:[[dic1 objectForKey:@"success"]objectForKey:@"email"] forKey:@"email"];
             [ud setObject:[[dic1 objectForKey:@"success"]objectForKey:@"phone"] forKey:@"phone"];
             [ud setObject:[[dic1 objectForKey:@"success"]objectForKey:@"name"] forKey:@"name"];
+            if(self.fromProcideToCheckout){
+                Delivery *dvc=[[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"delivery"];
+                
+                
+                [self.navigationController pushViewController:dvc animated:YES];
+                return ;
+            }
+
             
             [self.navigationController popToRootViewControllerAnimated:YES];
             

@@ -113,6 +113,11 @@
     self.subTotal.text=[NSString stringWithFormat:@"%@%d",currency,total];
     self.deleveryChargeLable.text=[NSString stringWithFormat:@"%@%d",currency,charge];
     [self checkAvailablity:str];
+    
+    [Data setSubTotal:total];
+    [Data setProductCount:self.productList.count];
+    
+
 }
 
 -(void) viewWillDisappear:(BOOL)animated {

@@ -21,5 +21,8 @@
 @property (strong,nonatomic) IBOutlet UITextField *name;
 @property (strong,nonatomic) IBOutlet UITextField *phone;
 
+@property BOOL fromProcideToCheckout;
+
+
 
 @end

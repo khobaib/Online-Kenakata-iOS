@@ -13,6 +13,10 @@
 #import "FacebookViewController.h"
 
 #import "SignupViewController.h"
+#import "UserData.h"
+#import "DatabaseHandeler.h"
+
+#import "Delivery.h"
 
 
 
@@ -38,7 +42,14 @@
     self.loginView.readPermissions = @[@"public_profile", @"email", @"user_friends"];
     [FBSettings setDefaultUrlSchemeSuffix:@"abcd"];
     [FBSession.activeSession closeAndClearTokenInformation];
+    
    
+    if(self.fromProcideToCheckout){
+        NSLog(@"Yes");
+    }else{
+        NSLog(@"No");
+    }
+    
     // Do any additional setup after loading the view.
 }
 
@@ -125,6 +136,14 @@
                  [ud setObject:[[dic1 objectForKey:@"success"]objectForKey:@"phone"] forKey:@"phone"];
                  [ud setObject:[[dic1 objectForKey:@"success"]objectForKey:@"name"] forKey:@"name"];
                 
+                if(self.fromProcideToCheckout){
+                    Delivery *dvc=[[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"delivery"];
+                    
+                    
+                    [self.navigationController pushViewController:dvc animated:YES];
+                    return ;
+                }
+                
                 [self.navigationController popViewControllerAnimated:YES];
                 
                 
@@ -184,6 +203,17 @@
             [ud setObject:[[dic1 objectForKey:@"success"]objectForKey:@"email"] forKey:@"email"];
             [ud setObject:[[dic1 objectForKey:@"success"]objectForKey:@"phone"] forKey:@"phone"];
             [ud setObject:[[dic1 objectForKey:@"success"]objectForKey:@"name"] forKey:@"name"];
+            
+            
+            if(self.fromProcideToCheckout){
+                Delivery *dvc=[[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"delivery"];
+                
+                
+                [self.navigationController pushViewController:dvc animated:YES];
+                return ;
+            }
+
+            
             [self.navigationController popViewControllerAnimated:YES];
         
            
@@ -218,7 +248,19 @@
 }
 
 -(IBAction)skipbutton:(id)sender{
-    [self.navigationController popViewControllerAnimated:YES];
+    
+    if(self.fromProcideToCheckout){
+        UserData *vc=[[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"userData"];
+      
+        vc.type=2;
+        vc.tableData=[DatabaseHandeler getDeleveryMethods:2];
+        [self.navigationController pushViewController:vc animated:YES];
+    }else{
+        
+        [self.navigationController popViewControllerAnimated:YES];
+
+    }
+    
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{

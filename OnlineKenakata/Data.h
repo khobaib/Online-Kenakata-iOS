@@ -20,4 +20,11 @@
 +(void)setMarchentData:(NSMutableDictionary*)marchent;
 +(int)getDeleveryCharge;
 +(void)setDeleveryCharge:(int)charge;
+
++(int)getSubTotal;
++(void)setSubTotal:(int)total;
+
++(int)getProdictCount;
++(void)setProductCount:(int)prodCount;
+
 @end

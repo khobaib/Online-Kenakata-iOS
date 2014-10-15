@@ -24,7 +24,6 @@
 
 }
 
-@property (strong,nonatomic) NSMutableArray *productList;
 
 @property (strong,nonatomic) IBOutlet UITextField *nameFild;
 @property (strong,nonatomic) IBOutlet UITextField *emailFild;

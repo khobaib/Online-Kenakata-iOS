@@ -17,4 +17,6 @@
 
 @property (weak, nonatomic) IBOutlet FBLoginView *loginView;
 
+@property BOOL fromProcideToCheckout;
+
 @end

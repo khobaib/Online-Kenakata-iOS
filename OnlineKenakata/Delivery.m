@@ -70,6 +70,7 @@
     self.nameFild.text=[[NSUserDefaults standardUserDefaults]objectForKey:@"name"];
     self.emailFild.text=[[NSUserDefaults standardUserDefaults]objectForKey:@"email"];
     self.phoneFild.text=[[NSUserDefaults standardUserDefaults]objectForKey:@"phone"];
+    self.address.text=[[NSUserDefaults standardUserDefaults]objectForKey:@"address"];
     
 
     self.nameFild.enabled=NO;
@@ -103,21 +104,10 @@
 
 -(void)setValueOntop{
    
-    int charge=[Data getDeleveryCharge];
-    self.deleveryChargeLable.text=[NSString stringWithFormat:@"%@ %d",currency,charge];
-    self.subtotalLable.text=[NSString stringWithFormat:@"Sub total (%luitems):",(unsigned long)self.productList.count];
-    int total=0;
-    for (int i=0; i<self.productList.count; i++) {
-        Product *product=[self.productList objectAtIndex:i];
-        
-        total+= [product.PRICE intValue]*[product.QUANTITY intValue];
-        
-        
-        
-    }
+    self.subtotalLable.text=[NSString stringWithFormat:@"Sub total (%luitems):",(unsigned long)[Data getProdictCount]];
     
-    self.total.text=[NSString stringWithFormat:@"%@%d",currency,total+charge];
-    self.subtotal.text=[NSString stringWithFormat:@"%@%d",currency,total];
+    self.total.text=[NSString stringWithFormat:@"%@%d",currency,[Data getSubTotal]+[Data getDeleveryCharge]];
+    self.subtotal.text=[NSString stringWithFormat:@"%@%d",currency,[Data getSubTotal]];
 }
 
 
@@ -209,7 +199,7 @@
         
     }
     
-    [self setMethod];
+   
   
     if([self isfood]){
         NSLog(@"food");
@@ -240,6 +230,9 @@
     NSString *token=[[NSUserDefaults standardUserDefaults]objectForKey:@"token"];
     NSDictionary *params;
     if(token!=nil){
+        
+        [[NSUserDefaults standardUserDefaults]setObject:address forKey:@"address"];
+        
         NSMutableDictionary *customer=[[NSMutableDictionary alloc]init];
         
         [customer setObject:address forKey:@"formatted_address"];
@@ -259,6 +252,10 @@
 
         
     }else{
+        
+        [self setMethod];
+        
+        
         NSMutableDictionary *customer=[[NSMutableDictionary alloc]init];
         
         [customer setObject:name forKey:@"customer_name"];

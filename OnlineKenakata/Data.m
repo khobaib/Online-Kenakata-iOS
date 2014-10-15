@@ -13,6 +13,8 @@ NSString *const kenakataurl=@"";
 NSString * const appcode=@"999";
 static NSMutableDictionary *marchentData;
 static int deleverycharge;
+static int subtotal;
+static int productCount;
 
 @implementation Data
 
@@ -42,5 +44,19 @@ static int deleverycharge;
     deleverycharge=charge;
 }
 
++(int)getSubTotal{
+    return subtotal;
+}
++(void)setSubTotal:(int)total{
+
+    subtotal=total;
+}
+
++(int)getProdictCount{
+    return productCount;
+}
++(void)setProductCount:(int)prodCount{
+    productCount=prodCount;
+}
 
 @end

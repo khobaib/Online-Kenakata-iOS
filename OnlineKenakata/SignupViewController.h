@@ -15,4 +15,7 @@
 @property (strong,nonatomic) IBOutlet UITextField *passwordField;
 @property (strong,nonatomic) IBOutlet UITextField *emailField;
 @property (strong,nonatomic) IBOutlet UITextField *phoneNumber;
+
+@property BOOL fromProcideToCheckout;
+
 @end

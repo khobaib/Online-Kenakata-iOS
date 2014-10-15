@@ -8,7 +8,6 @@
 
 #import "UserData.h"
 #import "DeleveryMethod.h"
-#import "SelfCollect.h"
 #import "Delivery.h"
 #import "TextStyling.h"
 
@@ -74,12 +73,10 @@
 -(IBAction)addNew:(id)sender{
  
     if(self.type==1){
-        SelfCollect *vc=[[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"selfCollect"];
-        vc.productList=self.productList;
-        [self.navigationController pushViewController:vc animated:YES];
+      //  SelfCollect *vc=[[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"selfCollect"];
+       // [self.navigationController pushViewController:vc animated:YES];
     }else if(self.type==2){
         Delivery *vc=[[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"delivery"];
-        vc.productList=self.productList;
         [self.navigationController pushViewController:vc animated:YES];
     }
 }
@@ -87,13 +84,11 @@
     
     DeleveryMethod *method=[self.tableData objectAtIndex:indexPath.row];
     if(self.type==1){
-        SelfCollect *vc=[[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"selfCollect"];
-        vc.productList=self.productList;
-        vc.method=method;
-        [self.navigationController pushViewController:vc animated:YES];
+       // SelfCollect *vc=[[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"selfCollect"];
+       // vc.method=method;
+       // [self.navigationController pushViewController:vc animated:YES];
     }else if(self.type==2){
         Delivery *vc=[[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"delivery"];
-        vc.productList=self.productList;
         vc.method=method;
         [self.navigationController pushViewController:vc animated:YES];
     }
