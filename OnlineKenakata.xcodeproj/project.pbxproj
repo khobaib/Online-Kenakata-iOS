@@ -145,6 +145,7 @@
 		9A5201FF19D8044A00FD676D /* TextStyling.m in Sources */ = {isa = PBXBuildFile; fileRef = 183A936B1993518A0097B2F1 /* TextStyling.m */; };
 		9A6245A019EBC30500BE15A1 /* databaseV1.sqlite3 in Resources */ = {isa = PBXBuildFile; fileRef = 9A62459F19EBC30500BE15A1 /* databaseV1.sqlite3 */; };
 		9A6245A319EBC7C100BE15A1 /* Marchent.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A6245A219EBC7C100BE15A1 /* Marchent.m */; };
+		9A743EF219EE531700A52FD8 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A743EF119EE531700A52FD8 /* SettingsViewController.m */; };
 		9A7F131919A35347002F2526 /* phone.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A7F131819A35347002F2526 /* phone.png */; };
 		9AA6B75519D99AB400C1A235 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AA6B75419D99AB400C1A235 /* FacebookSDK.framework */; };
 		9AB11F3619EA48BC00F0E935 /* RateView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AB11F3519EA48BC00F0E935 /* RateView.m */; };
@@ -408,6 +409,8 @@
 		9A62459F19EBC30500BE15A1 /* databaseV1.sqlite3 */ = {isa = PBXFileReference; lastKnownFileType = file; path = databaseV1.sqlite3; sourceTree = "<group>"; };
 		9A6245A119EBC7C100BE15A1 /* Marchent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Marchent.h; sourceTree = "<group>"; };
 		9A6245A219EBC7C100BE15A1 /* Marchent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Marchent.m; sourceTree = "<group>"; };
+		9A743EF019EE531700A52FD8 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
+		9A743EF119EE531700A52FD8 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
 		9A7F131819A35347002F2526 /* phone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = phone.png; sourceTree = "<group>"; };
 		9AA6B75419D99AB400C1A235 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = OnlineKenakata/FacebookSDK.framework; sourceTree = "<group>"; };
 		9AB11F3419EA48BC00F0E935 /* RateView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RateView.h; sourceTree = "<group>"; };
@@ -852,6 +855,8 @@
 				1853DFB6199B842300C3D5ED /* SignupViewController.m */,
 				9AD8A07E19DA801500924325 /* FacebookViewController.h */,
 				9AD8A07F19DA801500924325 /* FacebookViewController.m */,
+				9A743EF019EE531700A52FD8 /* SettingsViewController.h */,
+				9A743EF119EE531700A52FD8 /* SettingsViewController.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -1133,6 +1138,7 @@
 				14D45ACC1974FCB900F677D0 /* MWCaptionView.m in Sources */,
 				14D45B3E1974FF4800F677D0 /* tabbarController.m in Sources */,
 				1895D5981999EE3400713916 /* EDStarRating.m in Sources */,
+				9A743EF219EE531700A52FD8 /* SettingsViewController.m in Sources */,
 				14D45AD71974FCB900F677D0 /* NSIndexPath+PSTCollectionViewAdditions.m in Sources */,
 				1848A324198F5F1700684602 /* Reachability.m in Sources */,
 				14D45B391974FF4800F677D0 /* Info.m in Sources */,

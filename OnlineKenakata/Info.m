@@ -134,10 +134,22 @@
     // 5
     [self loadVisiblePages];
     [self addShareButton];
+    UIBarButtonItem *newBackButton = [[UIBarButtonItem alloc] initWithTitle:@"< Back" style:UIBarButtonItemStyleBordered target:self action:@selector(home:)];
+    [newBackButton setTintColor:[TextStyling barbuttonColor]];
+    self.tabBarController.navigationItem.leftBarButtonItem=newBackButton;
 }
+
+-(void)home:(UIBarButtonItem *)sender {
+    
+    [self.navigationController popViewControllerAnimated:YES];
+    
+}
+
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
     [self.tabBarController.navigationItem setTitleView:nil];
+    
+    [self.tabBarController.navigationItem setLeftBarButtonItem:nil];
 }
 
 

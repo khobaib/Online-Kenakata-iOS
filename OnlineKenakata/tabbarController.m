@@ -32,6 +32,8 @@
     [super viewDidLoad];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(localNotificationReceived) name:@"localNotification" object:nil];
 
+    self.moreNavigationController.delegate = self;
+
 
     if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
     {
@@ -41,6 +43,16 @@
     }
    
 }
+
+
+- (void)navigationController:(UINavigationController *)navigationController
+      willShowViewController:(UIViewController *)viewController
+                    animated:(BOOL)animated
+{
+
+      navigationController.navigationBarHidden=YES;
+}
+
 
 
 -(void)localNotificationReceived{

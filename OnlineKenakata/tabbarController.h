@@ -10,7 +10,7 @@
 #import <CoreLocation/CoreLocation.h>
 
 
-@interface tabbarController : UITabBarController{
+@interface tabbarController : UITabBarController<UINavigationControllerDelegate>{
      CLLocationManager *locationmanager;
 }
 

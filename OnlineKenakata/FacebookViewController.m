@@ -75,6 +75,8 @@
             [ud setObject:[[dic1 objectForKey:@"success"]objectForKey:@"email"] forKey:@"email"];
             [ud setObject:[[dic1 objectForKey:@"success"]objectForKey:@"phone"] forKey:@"phone"];
             [ud setObject:[[dic1 objectForKey:@"success"]objectForKey:@"name"] forKey:@"name"];
+            [ud setObject:[[dic1 objectForKey:@"success"]objectForKey:@"is_facebook"] forKey:@"is_facebook"];
+
             if(self.fromProcideToCheckout){
                 Delivery *dvc=[[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"delivery"];
                 
