@@ -8,15 +8,18 @@
 
 #import <UIKit/UIKit.h>
 #import "LoadingView.h"
+#import "RMPickerViewController.h"
 
 
-@interface ProductList : UIViewController<UICollectionViewDelegate,UICollectionViewDataSource>{
+@interface ProductList : UIViewController<UICollectionViewDelegate,UICollectionViewDataSource,UIPickerViewDataSource,UIPickerViewDelegate,RMPickerViewControllerDelegate>{
 
     NSMutableArray *catagoryList;
     NSMutableArray *productList;
     NSString *currency;
     LoadingView *loading;
     int counter;
+    
+    RMPickerViewController *sortByPicker;
 }
 @property NSString *productId;
 @property NSString *catagoryName;

@@ -379,7 +379,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="CGO-tY-IoA">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <rect key="frame" x="0.0" y="50" width="320" height="518"/>
                                 <color key="backgroundColor" red="0.91480553669999998" green="0.91480553669999998" blue="0.91480553669999998" alpha="1" colorSpace="calibratedRGB"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="5" minimumInteritemSpacing="5" id="IdF-yO-NFO">
                                     <size key="itemSize" width="155" height="155"/>
@@ -472,6 +472,18 @@
                                     <segue destination="3qZ-gF-05r" kind="push" id="vpd-Uy-Lqa"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N2k-aB-Hlx">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.92549019610000005" green="0.72941176470000002" blue="0.062745098040000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="Sort">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="sort:" destination="fhT-tG-Ei2" eventType="touchUpInside" id="GwT-yV-c8S"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
@@ -479,7 +491,7 @@
                             <constraint firstItem="k2S-7q-d2z" firstAttribute="leading" secondItem="FUy-ch-8ZG" secondAttribute="leading" id="9uT-mN-6Ca"/>
                             <constraint firstItem="IiH-ad-Ktj" firstAttribute="top" secondItem="CGO-tY-IoA" secondAttribute="bottom" id="Bf0-E1-wJX"/>
                             <constraint firstAttribute="trailing" secondItem="CGO-tY-IoA" secondAttribute="trailing" id="FZc-BW-JMU"/>
-                            <constraint firstItem="CGO-tY-IoA" firstAttribute="top" secondItem="FUy-ch-8ZG" secondAttribute="top" id="UN2-wZ-n97"/>
+                            <constraint firstItem="CGO-tY-IoA" firstAttribute="top" secondItem="FUy-ch-8ZG" secondAttribute="top" constant="50" id="UN2-wZ-n97"/>
                             <constraint firstAttribute="trailing" secondItem="k2S-7q-d2z" secondAttribute="trailing" id="ZIJ-2T-jm3"/>
                             <constraint firstItem="CGO-tY-IoA" firstAttribute="leading" secondItem="FUy-ch-8ZG" secondAttribute="leading" id="heX-V9-6tJ"/>
                         </constraints>
