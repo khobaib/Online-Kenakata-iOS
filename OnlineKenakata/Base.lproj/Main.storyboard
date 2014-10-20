@@ -1682,7 +1682,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <connections>
-                        <outlet property="description" destination="wJx-qd-a0w" id="oLq-T0-jkz"/>
+                        <outlet property="descriptionText" destination="wJx-qd-a0w" id="ezH-JW-hch"/>
                         <outlet property="name" destination="8Fd-xL-Z70" id="Ec7-IR-pf2"/>
                     </connections>
                 </viewController>

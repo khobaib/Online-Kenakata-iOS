@@ -13,8 +13,7 @@
 @interface NewsDetail : UIViewController<shareDelegate,MFMessageComposeViewControllerDelegate>{
     
 }
-@property (strong,nonatomic) NSString *nameString;
-@property(strong,nonatomic) NSString *descriptionString;
+@property (strong,nonatomic) NSDictionary *dic;
 
 @property (strong,nonatomic) IBOutlet UILabel *name;
 @property (strong,nonatomic) IBOutlet UITextView *descriptionText;

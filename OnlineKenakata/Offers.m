@@ -195,8 +195,7 @@
         NSDictionary *dic = [tableData objectAtIndex:indexPath.row];
         
         
-        newsDtl.nameString=[dic objectForKey:@"name"];
-        newsDtl.descriptionString=[dic objectForKey:@"description"];
+        newsDtl.dic=dic;
         
         [self.navigationController pushViewController:newsDtl animated:YES];
 
