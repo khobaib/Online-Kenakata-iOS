@@ -425,6 +425,8 @@
     
     NSString *string = [NSString stringWithFormat:@"%@/rest_kenakata.php?method=get_products_by_product_ids&product_ids=%@&application_code=%@",[Data getBaseUrl],[self.productData objectForKey:@"product_id"],[Data getAppCode]];
     
+    
+    NSLog(@"%@",string);
     NSURL *url = [NSURL URLWithString:string];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     

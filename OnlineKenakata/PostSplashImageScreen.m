@@ -313,6 +313,8 @@
     NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
     
 
+    [ud setObject:data forKey:@"marchent_data"];
+    
     for(int i=0;i<data.count;i++){
         
         NSMutableDictionary *dic=[data objectAtIndex:i];

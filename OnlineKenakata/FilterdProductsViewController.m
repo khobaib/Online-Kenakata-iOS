@@ -1,60 +1,53 @@
 //
-//  ProductList.m
-//  OnlineKenakata-Demo
+//  FilterdProductsViewController.m
+//  kenakata
 //
-//  Created by Rabby Alam on 7/9/14.
-//  Copyright (c) 2014 rabbi. All rights reserved.
+//  Created by MC MINI on 10/20/14.
+//  Copyright (c) 2014 OnlineKenakata. All rights reserved.
 //
 
-#import "ProductList.h"
-#import "UIImageView+WebCache.h"
-#import "AFNetworking/AFNetworking.h"
-#import "ProductDetails.h"
+#import "FilterdProductsViewController.h"
+#import "AFNetworking.h"
+#import "RateView.h"
 #import "Data.h"
 #import "TextStyling.h"
-#import "RateView.h"
+#import "MBProgressHUD.h"
+#import "UIImageView+WebCache.h"
+#import "ProductDetails.h"
+#import "ProductList.h"
 
-
-@interface ProductList ()
+@interface FilterdProductsViewController ()
 
 @end
 
-@implementation ProductList
+@implementation FilterdProductsViewController
 
-
--(void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
-    self.navigationItem.title=self.catagoryName;
-    
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        // Custom initialization
+    }
+    return self;
 }
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
+
     productList=[[NSMutableArray alloc]init];
-    catagoryList=[[NSMutableArray alloc]init];
-
-    counter =0;
-    
-    if(loading==nil){
-        [self initLoading];
-    }
-        
-        
-    [self get_categories_by_parent_cateogory_id];
-
     
     
-    
-    [self addPullToRefresh];
     NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
-
+    
     NSMutableDictionary *dic = [NSKeyedUnarchiver unarchiveObjectWithData:[ud objectForKey:@"get_user_data"]];
-
+    
     currency=[[[dic objectForKey:@"success"]objectForKey:@"user"]objectForKey:@"currency"];
+    counter=0;
+    [self get_categories_by_parent_cateogory_id];
     
-    
-    
+    // Do any additional setup after loading the view.
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
@@ -68,40 +61,21 @@
     }
 }
 
-
--(void)initLoading{
-    CGFloat x= self.view.frame.size.width/2-65;
-    CGFloat y =(self.view.frame.size.height-self.navigationController.navigationBar.frame.size.height-self.tabBarController.tabBar.frame.size.height)/2-25;
-    
-    loading=[[LoadingView alloc]initWithFrame:CGRectMake(x, y, 130, 50)];
-    loading.hidden=YES;
-    [self.view addSubview:loading];
-}
-
-
-- (void)addPullToRefresh
+- (void)didReceiveMemoryWarning
 {
-    UIRefreshControl *refreshControl = [[UIRefreshControl alloc]
-                      init];
-    refreshControl.tintColor = [UIColor blackColor];
-    
-    [refreshControl addTarget:self action:@selector(refresh:) forControlEvents:UIControlEventValueChanged];
-    
-  //  self.refreshControl=refreshControl;
-    
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
 }
 
--(void)refresh:(id)sender {
-    
-    [self get_categories_by_parent_cateogory_id];
-}
 
 -(void)get_categories_by_parent_cateogory_id{
     
-    NSString *string = [NSString stringWithFormat:@"%@/rest_kenakata.php?method=get_products_by_tag_id&tag_id=%@&application_code=%@&start=%d",[Data getBaseUrl],self.productId,[Data getAppCode],counter];
+    NSString *string = [NSString stringWithFormat:@"%@/rest_kenakata.php?method=filter&merchant_id=%@&tag_id=%@&low_price=%@&high_price=%@&start=%d&application_code=%@",[Data getBaseUrl],self.params[@"marchent"],self.params[@"tag"],self.params[@"low"],self.params[@"heigh"],counter,[Data getAppCode]];
+    
+    
     NSURL *url = [NSURL URLWithString:string];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
-   // NSLog(@"%@",string);
+
     // 2
     
     NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
@@ -109,7 +83,7 @@
     NSString *token=(NSString *)[ud objectForKey:@"token"];
     if(token!=nil){
         
-
+        
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
         
         manager.requestSerializer = [AFJSONRequestSerializer serializer];
@@ -117,8 +91,11 @@
         NSMutableDictionary *params=[[NSMutableDictionary alloc]init];
         [params setObject:token forKey:@"token"];
         
+        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        
         [manager POST:string parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
             
+            [MBProgressHUD hideHUDForView:self.view animated:YES];
             [self parsProductList:responseObject];
             
             
@@ -126,8 +103,8 @@
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             
             // 4
-            loading.hidden=YES;
-            [loading StopAnimating];
+               [MBProgressHUD hideHUDForView:self.view animated:YES];
+          
             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error catagory List"
                                                                 message:[error localizedDescription]
                                                                delegate:nil
@@ -135,7 +112,7 @@
                                                       otherButtonTitles:nil];
             [alertView show];
         }];
-
+        
         
         
         
@@ -144,9 +121,12 @@
         
         operation.responseSerializer = [AFJSONResponseSerializer serializer];
         
+        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+
         
         [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
             
+               [MBProgressHUD hideHUDForView:self.view animated:YES];
             [self parsProductList:responseObject];
             
             
@@ -154,8 +134,8 @@
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             
             // 4
-            loading.hidden=YES;
-            [loading StopAnimating];
+               [MBProgressHUD hideHUDForView:self.view animated:YES];
+          
             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error catagory List"
                                                                 message:[error localizedDescription]
                                                                delegate:nil
@@ -166,16 +146,13 @@
         
         
         [operation start];
-
+        
     }
     
-   
     
     
-    // 5
-    //  [self.indecator startAnimating];
-    loading.hidden=NO;
-    [loading StartAnimating];
+    
+
     
     
     
@@ -185,56 +162,43 @@
     NSMutableDictionary *dic=(NSMutableDictionary *)respons;
     
 
-    if(counter==0){
         NSMutableArray *Arraytemp=[[dic objectForKey:@"success"]objectForKey:@"products"];
-
+    
+    if(Arraytemp.count>0){
         [productList addObjectsFromArray:[Arraytemp mutableCopy]];
         if(Arraytemp.count==0||Arraytemp.count%12!=0){
             counter=-1;
         }
-        
+        [self.collectionView reloadData];
+
     }else{
-        NSMutableArray *arr=[[dic objectForKey:@"success"]objectForKey:@"products"];
-        [productList addObjectsFromArray:[arr mutableCopy]];
-        
-        if(arr.count==0 || arr.count%12!=0){
-            counter=-1;
-        }
+        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"" message:@"No product matches with this description" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles: nil];
+        [alert show];
     }
     
-    catagoryList=[[dic objectForKey:@"success"]objectForKey:@"categories"];
-
-    [self.collectionView reloadData];
-  //  [self.refreshControl endRefreshing];
-    [loading StopAnimating];
-    loading.hidden=YES;
     
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
+
 
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
     
-
+    
     return 1;
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-   
+    
     
     
     return productList.count;
     
-
-
+    
+    
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
@@ -245,7 +209,7 @@
         return cell;
         
     }
-
+    
     if(indexPath.row>=catagoryList.count){
         UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"productGrid" forIndexPath:indexPath];
         
@@ -272,21 +236,21 @@
         totalFavorite.text=[NSString stringWithFormat:@"%d",[[dic objectForKey:@"total_favorites"] intValue]];
         
         //NSLog(@" %@  %d",[dic objectForKey:@"name"],[[dic objectForKey:@"total_favorites"] intValue]);
-
+        
         if([[dic objectForKey:@"has_favorited"]intValue]==1){
             UIImageView *favorite=(UIImageView *)[cell viewWithTag:310];
             
-
+            
             [favorite setImage:[UIImage imageNamed:@"icon_favorite.png"]];
-
+            
         }
         
-      
+        
         
         NSString *key=[NSString stringWithFormat:@"marchent_data_%@",[dic objectForKey:@"user_id"]];
         
         NSString *marchentLogo=[[[NSUserDefaults standardUserDefaults] objectForKey:key]objectForKey:@"logo"];
-     
+        
         [logo sd_setImageWithURL:[NSURL URLWithString:marchentLogo]
                 placeholderImage:[UIImage imageNamed:@"icon"]];
         //
@@ -301,7 +265,7 @@
         productName.attributedText=[TextStyling AttributForTitle:[NSString stringWithFormat:@"%@",[dic objectForKey:@"name"]]];
         
         [thumbnil sd_setImageWithURL:[NSURL URLWithString:imgurl]
-                 placeholderImage:[UIImage imageNamed:@"placeholder.gif"]];
+                    placeholderImage:[UIImage imageNamed:@"placeholder.gif"]];
         
         int tag = (int)[[dic objectForKey:@"tag"] integerValue];
         if(tag==1){
@@ -330,21 +294,21 @@
         return cell;
     }
     /*
-    UILabel * title=(UILabel *)[cell viewWithTag:202];
-    UIImageView *thumbnil=(UIImageView* )[cell viewWithTag:201];
-    title.text=@"";
-    thumbnil.image=nil;
-    
-    NSMutableDictionary *dic=[catagoryList objectAtIndex:indexPath.row];
-    
-    
-    //  title.text=[dic objectForKey:@"cat_name"];
-    title.attributedText=[TextStyling AttributForTitle:[dic objectForKey:@"cat_name"]];
-    NSString *imgurl=[NSString stringWithFormat:@"%@",[dic objectForKey:@"thumb_image_url"]];
-    
-    
-    [thumbnil sd_setImageWithURL:[NSURL URLWithString:imgurl]
-             placeholderImage:[UIImage imageNamed:@"placeholder.png"]];*/
+     UILabel * title=(UILabel *)[cell viewWithTag:202];
+     UIImageView *thumbnil=(UIImageView* )[cell viewWithTag:201];
+     title.text=@"";
+     thumbnil.image=nil;
+     
+     NSMutableDictionary *dic=[catagoryList objectAtIndex:indexPath.row];
+     
+     
+     //  title.text=[dic objectForKey:@"cat_name"];
+     title.attributedText=[TextStyling AttributForTitle:[dic objectForKey:@"cat_name"]];
+     NSString *imgurl=[NSString stringWithFormat:@"%@",[dic objectForKey:@"thumb_image_url"]];
+     
+     
+     [thumbnil sd_setImageWithURL:[NSURL URLWithString:imgurl]
+     placeholderImage:[UIImage imageNamed:@"placeholder.png"]];*/
     
     return cell;
 }
@@ -356,25 +320,25 @@
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     
     if(catagoryList.count<=indexPath.row){
-    
+        
         NSMutableDictionary *dic = [productList objectAtIndex:indexPath.row];
         
         ProductDetails *prdtails;
-       
+        
         int available =[[dic objectForKey:@"add_to_cart"]intValue];
         
-       
-            if(available<1){
-                prdtails= [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"productDetails3"];
-                prdtails.cartBtn.hidden=YES;
-                NSLog(@"in no button");
-                //productDetails3
-            }else{
-                prdtails= [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"productDetails3"];
-                
-            }
-
-
+        
+        if(available<1){
+            prdtails= [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"productDetails3"];
+            prdtails.cartBtn.hidden=YES;
+            NSLog(@"in no button");
+            //productDetails3
+        }else{
+            prdtails= [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"productDetails3"];
+            
+        }
+        
+        
         
         
         prdtails.productData=dic;
@@ -391,7 +355,7 @@
     }
     
     
-   // [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    // [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
 }
 
@@ -402,20 +366,20 @@
     
     
     /*
-    starRater.starImage=[UIImage imageNamed:@"star.png"];
-    starRater.starHighlightedImage=[UIImage imageNamed:@"starhighlighted.png"];
+     starRater.starImage=[UIImage imageNamed:@"star.png"];
+     starRater.starHighlightedImage=[UIImage imageNamed:@"starhighlighted.png"];
+     
+     starRater.maxRating = 5.0;
+     
+     starRater.horizontalMargin = 0;
+     starRater.editable=NO;
+     starRater.rating= rating;//[[[self.productData objectForKey:@"review_detail"]objectForKey:@"average_rating"] floatValue];
+     
+     
+     starRater.displayMode=EDStarRatingDisplayAccurate;
+     [starRater setNeedsDisplay];*/
     
-   starRater.maxRating = 5.0;
-    
-    starRater.horizontalMargin = 0;
-   starRater.editable=NO;
-    starRater.rating= rating;//[[[self.productData objectForKey:@"review_detail"]objectForKey:@"average_rating"] floatValue];
-    
-    
-    starRater.displayMode=EDStarRatingDisplayAccurate;
-   [starRater setNeedsDisplay];*/
-    
-   // starRater.tintColor=[UIColor colorWithRed:(253.0f/255.0f) green:(181.0f/255.0f)blue:(13.0f/255.0f) alpha:1.0f];
+    // starRater.tintColor=[UIColor colorWithRed:(253.0f/255.0f) green:(181.0f/255.0f)blue:(13.0f/255.0f) alpha:1.0f];
     
     starRater.fullSelectedImage=[UIImage imageNamed:@"starhighlighted.png"];
     starRater.notSelectedImage=[UIImage imageNamed:@"star.png"];
@@ -425,49 +389,14 @@
     
     
     [starRaterBack setAlpha:0.50];
-   
-   
+    
+    
 }
 
 
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
 
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
 
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
 
 /*
 #pragma mark - Navigation
