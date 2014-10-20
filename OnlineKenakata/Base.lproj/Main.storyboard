@@ -171,7 +171,7 @@
         <!--View Controller-->
         <scene sceneID="UDp-kX-g6Y">
             <objects>
-                <viewController id="3qZ-gF-05r" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="filterview" useStoryboardIdentifierAsRestorationIdentifier="YES" id="3qZ-gF-05r" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="e83-s9-KB5"/>
                         <viewControllerLayoutGuide type="bottom" id="uxe-da-U7D"/>
@@ -184,7 +184,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xnb-dK-KZn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1156" y="-1247"/>
+            <point key="canvasLocation" x="1112" y="-1228"/>
         </scene>
         <!--Product List-->
         <scene sceneID="0GH-Om-g9C">
