@@ -23,6 +23,9 @@
     NSMutableArray *backupproDuctList;
     BOOL isSearched;
     int counter;
+    int searchCounter;
+   
+    NSString *searchText;
 }
 @property UIImage *image;
 @property (strong,nonatomic) IBOutlet UIScrollView *scrollView;

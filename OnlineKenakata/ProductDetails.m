@@ -82,9 +82,9 @@
         [view addSubview:newPageView];
         [self.scrollView addSubview:view];
         
-        //FBLikeControl *like = [[FBLikeControl alloc] init];
-        //like.objectID =[self.pageImages objectAtIndex:page];
-        //[self.scrollView addSubview:like];
+        FBLikeControl *like = [[FBLikeControl alloc] init];
+        like.objectID =[self.pageImages objectAtIndex:page];
+        [self.scrollView addSubview:like];
         // 4
         [self.pageViews replaceObjectAtIndex:page withObject:newPageView];
     }

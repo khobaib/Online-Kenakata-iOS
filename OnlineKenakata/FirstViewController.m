@@ -17,6 +17,8 @@
 
 #import "LoginViewController.h"
 #import "SignupViewController.h"
+#import "RateView.h"
+
 
 @interface FirstViewController ()
 
@@ -40,10 +42,12 @@
     }
     
     [self initScroller];
+    isSearched=NO;
     NSLog(@"%f",_image.size.width);
 
     [self addPullToRefresh];
     counter=0;
+    searchCounter=0;
     
     [self get_categories_by_parent_cateogory_id];
 
@@ -53,7 +57,7 @@
 
     currency=[[[dic objectForKey:@"success"]objectForKey:@"user"]objectForKey:@"currency"];
 
-    isSearched=NO;
+
     
 }
 
@@ -110,9 +114,18 @@
     float endScrolling = scrollView.contentOffset.y + scrollView.frame.size.height;
     if (endScrolling >= scrollView.contentSize.height && counter!=-1)
     {
-        counter++;
-        [self get_categories_by_parent_cateogory_id];
-        NSLog(@"start");
+        if(isSearched && searchCounter!=-1){
+            searchCounter++;
+            [self searchMethod];
+            
+            return;
+        }
+        if(!isSearched){
+            counter++;
+            [self get_categories_by_parent_cateogory_id];
+            NSLog(@"start");
+        }
+        
     }
 }
 
@@ -221,7 +234,7 @@
 {
 
     
-        return catagoryList.count;
+        return catagoryList.count+productList.count;
     
 
 }
@@ -251,41 +264,73 @@
  
     UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cellGrid" forIndexPath:indexPath];
 
-    if(catagoryList.count==0){
-        return cell;
+    
 
-    }
-/*
+
+    
     if(indexPath.row>=catagoryList.count){
         
-
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"productCell" forIndexPath:indexPath];
+        
+        
+        UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cellProduct" forIndexPath:indexPath];
         
         // Configure the cell...
         
-        NSLog(@"%@",productList);
+        
         NSMutableDictionary *dic=[productList objectAtIndex:indexPath.row-catagoryList.count];
+        
+        
+      
+        
         
         UILabel* productName=(UILabel *)[cell viewWithTag:304];
         UIImageView *thumbnil=(UIImageView *)[cell viewWithTag:301];
         UIImageView *toping=(UIImageView *) [cell viewWithTag:302];
         
+        UIImageView *logo=(UIImageView *)[cell viewWithTag:309];
+        
         UILabel *oldPrice =(UILabel *)[cell viewWithTag:305];
+        UIView *back=[cell viewWithTag:307];
+        RateView *starRating=(RateView *)[cell viewWithTag:308];
+        
+        [self starRaterShow:starRating withView:back starcount:[[dic objectForKey:@"average_rating"]floatValue]];
+        
         UILabel *newPrice=(UILabel *) [cell viewWithTag:306];
+        UILabel *totalFavorite=(UILabel *)[cell viewWithTag:311];
+        
+        totalFavorite.text=[NSString stringWithFormat:@"%d",[[dic objectForKey:@"total_favorites"] intValue]];
+        
+        //NSLog(@" %@  %d",[dic objectForKey:@"name"],[[dic objectForKey:@"total_favorites"] intValue]);
+        
+        if([[dic objectForKey:@"has_favorited"]intValue]==1){
+            UIImageView *favorite=(UIImageView *)[cell viewWithTag:310];
+            
+            
+            [favorite setImage:[UIImage imageNamed:@"icon_favorite.png"]];
+            
+        }
+        
+        
+        
+        NSString *key=[NSString stringWithFormat:@"marchent_data_%@",[dic objectForKey:@"user_id"]];
+        
+        NSString *marchentLogo=[[[NSUserDefaults standardUserDefaults] objectForKey:key]objectForKey:@"logo"];
+        
+        [logo sd_setImageWithURL:[NSURL URLWithString:marchentLogo]
+                placeholderImage:[UIImage imageNamed:@"icon"]];
         //
         productName.text=@"";
         thumbnil.image=nil;
         toping.image=nil;
         oldPrice.text=@"";
         newPrice.text=@"";
-       
         NSString * imgurl = [[[dic objectForKey:@"images"] objectAtIndex:0]objectForKey:@"thumbnail_image_url"];
         
         
         productName.attributedText=[TextStyling AttributForTitle:[NSString stringWithFormat:@"%@",[dic objectForKey:@"name"]]];
         
         [thumbnil sd_setImageWithURL:[NSURL URLWithString:imgurl]
-                 placeholderImage:[UIImage imageNamed:@"placeholder.gif"]];
+                    placeholderImage:[UIImage imageNamed:@"placeholder.gif"]];
         
         int tag = (int)[[dic objectForKey:@"tag"] integerValue];
         if(tag==1){
@@ -312,7 +357,10 @@
         // NSLog(@"%@",[NSString stringWithFormat:@"%@",[dic objectForKey:@"name"]]);
         
         return cell;
-    }*/
+
+    }
+    
+    
     UILabel * title=(UILabel *)[cell viewWithTag:151];
     UIImageView *thumbnil=(UIImageView* )[cell viewWithTag:150];
     title.text=@"";
@@ -406,14 +454,47 @@
                      completion:nil ];
 }
 
-- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText{
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchTextt{
 
-    if([searchText isEqualToString:@""]){
+    if([searchTextt isEqualToString:@""]){
         [self endSearch];
     }
     
     
 }
+
+-(void)starRaterShow:(RateView *)starRater withView:(UIView *)starRaterBack starcount:(float) rating{
+    
+    
+    /*
+     starRater.starImage=[UIImage imageNamed:@"star.png"];
+     starRater.starHighlightedImage=[UIImage imageNamed:@"starhighlighted.png"];
+     
+     starRater.maxRating = 5.0;
+     
+     starRater.horizontalMargin = 0;
+     starRater.editable=NO;
+     starRater.rating= rating;//[[[self.productData objectForKey:@"review_detail"]objectForKey:@"average_rating"] floatValue];
+     
+     
+     starRater.displayMode=EDStarRatingDisplayAccurate;
+     [starRater setNeedsDisplay];*/
+    
+    // starRater.tintColor=[UIColor colorWithRed:(253.0f/255.0f) green:(181.0f/255.0f)blue:(13.0f/255.0f) alpha:1.0f];
+    
+    starRater.fullSelectedImage=[UIImage imageNamed:@"starhighlighted.png"];
+    starRater.notSelectedImage=[UIImage imageNamed:@"star.png"];
+    starRater.maxRating=5;
+    starRater.rating=rating;
+    starRater.editable=NO;
+    
+    
+    [starRaterBack setAlpha:0.50];
+    
+    
+}
+
+
 -(void)get_products_by_parent_cateogory_id:(NSString *)product{
     
     NSString *string = [NSString stringWithFormat:@"%@/rest.php?method=get_categories_by_parent_cateogory_id&parent_category_id=%@&application_code=%@",[Data getBaseUrl],product,[Data getAppCode]];
@@ -457,18 +538,18 @@
   
 }
 
-- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar{
-    UITextField *searchField = [searchBar valueForKey:@"_searchField"];
-    
-    [searchField resignFirstResponder];
+- (void)searchMethod {
     [overlayButton removeFromSuperview];
     
+    isSearched=YES;
+    NSString *string = [NSString stringWithFormat:@"%@/rest_kenakata.php?method=get_prod_tag_by_search&search_value=%@&start=%d&application_code=%@",[Data getBaseUrl],searchText,searchCounter,[Data getAppCode]];
     
-    NSString *string = [NSString stringWithFormat:@"%@/rest.php?method=get_prod_cat_by_search&search_value=%@&application_code=%@",[Data getBaseUrl],searchField.text,[Data getAppCode]];
     NSURL *url = [NSURL URLWithString:[string stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     
     // 2
+    
+    NSLog(@"%@",string);
     AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
     operation.responseSerializer = [AFJSONResponseSerializer serializer];
     
@@ -498,6 +579,14 @@
     loading.hidden=NO;
     [loading StartAnimating];
     [operation start];
+}
+
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar{
+    UITextField *searchField = [searchBar valueForKey:@"_searchField"];
+    searchText=searchField.text;
+    
+    [searchField resignFirstResponder];
+    [self searchMethod];
     
     
 
@@ -537,11 +626,34 @@
 -(void)parsForSearch:(id) respons{
     NSMutableDictionary *dic=(NSMutableDictionary *)respons;
 
-    backupCatList=[[NSMutableArray alloc]initWithArray:catagoryList];
-    backupproDuctList=[[NSMutableArray alloc]initWithArray:productList];
+    if(searchCounter==0){
+        backupCatList=[[NSMutableArray alloc]initWithArray:catagoryList];
+        backupproDuctList=[[NSMutableArray alloc]initWithArray:productList];
+        
+        catagoryList=[[[[dic objectForKey:@"success"]objectForKey:@"user" ] objectForKey:@"tags"] mutableCopy];
+        productList=[[[[dic objectForKey:@"success"]objectForKey:@"user" ] objectForKey:@"products"] mutableCopy];
+        
+        if(productList.count==0 || productList.count%12!=0){
+            searchCounter=-1;
+        }
+        
+        
+    }else{
+        [catagoryList addObjectsFromArray:[[[[dic objectForKey:@"success"]objectForKey:@"user" ] objectForKey:@"tags"] mutableCopy]];
+        [productList addObjectsFromArray:[[[[dic objectForKey:@"success"]objectForKey:@"user" ] objectForKey:@"products"] mutableCopy]];
+        
+        if(productList.count==0 || productList.count%12!=0){
+            searchCounter=-1;
+        }
+        
     
-    catagoryList=[[dic objectForKey:@"success"]objectForKey:@"categories"];
-    productList=[[dic objectForKey:@"success"]objectForKey:@"products"];
+    }
+    
+    
+    NSLog(@" %lu %lu",(unsigned long)productList.count,(unsigned long)catagoryList.count);
+    
+   
+    
     [refreshControl endRefreshing];
 
     if(catagoryList.count==0&&productList.count==0){
