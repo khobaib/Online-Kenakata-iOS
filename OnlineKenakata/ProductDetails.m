@@ -308,7 +308,7 @@
     [self.logoImageView addGestureRecognizer:logoTap];
     
     UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onTap:)];
-    singleTap.numberOfTapsRequired = 2;
+    singleTap.numberOfTapsRequired = 1;
     [self.scrollView addGestureRecognizer:singleTap];
     
    
@@ -537,17 +537,16 @@
 
 
 -(void)starRaterShow{
-    self.starRater.starImage=[UIImage imageNamed:@"star.png"];
-    self.starRater.starHighlightedImage=[UIImage imageNamed:@"starhighlighted.png"];
     
-    self.starRater.maxRating = 5.0;
     
-   self.starRater.horizontalMargin=0;
+    self.starRater.fullSelectedImage=[UIImage imageNamed:@"starhighlighted.png"];
+    self.starRater.notSelectedImage=[UIImage imageNamed:@"star.png"];
+    self.starRater.maxRating=5;
+    
     self.starRater.editable=NO;
     self.starRater.rating= [[self.productData objectForKey:@"average_rating"] floatValue];
 
     
-    self.starRater.displayMode=EDStarRatingDisplayAccurate;
     [self.starRater setNeedsDisplay];
     
     UITapGestureRecognizer *tap=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(ratingShow)];
@@ -852,7 +851,7 @@
         
         // 3
         UIImageView *newPageView = [[UIImageView alloc] init];
-        [newPageView setFrame:CGRectMake(4, 4, 102,80)];
+        [newPageView setFrame:CGRectMake(4, 4, 110,90)];
         
         MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:newPageView animated:YES];
         hud.labelText = @"Loading";
@@ -874,7 +873,7 @@
         if(newPageView.image==nil){
             newPageView.image=[UIImage imageNamed:@"no_photo.png"];
         }
-        UILabel *lable=[[UILabel alloc]initWithFrame:CGRectMake(4, 85, 102, 40)];
+        UILabel *lable=[[UILabel alloc]initWithFrame:CGRectMake(4, 95, 110, 40)];
         lable.text=[[self.similarProducrsData objectAtIndex:page]objectForKey:@"name"];
         lable.numberOfLines=2;
         [lable setFont:[UIFont systemFontOfSize:12]];
@@ -886,7 +885,7 @@
         
         
         
-        [view setBackgroundColor:[TextStyling appColor]];
+        //[view setBackgroundColor:[TextStyling appColor]];
         
         [view addSubview:newPageView];
         [view addSubview:lable];

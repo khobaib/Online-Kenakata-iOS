@@ -8,6 +8,11 @@
 
 #import "NewsDetail.h"
 #import "TextStyling.h"
+#import "UIImageView+WebCache.h"
+#import "MBProgressHUD.h"
+
+
+
 @interface NewsDetail ()
 
 @end
@@ -28,6 +33,24 @@
     [super viewDidLoad];
 
     self.name.attributedText=[TextStyling AttributForDescription:[self.dic objectForKey:@"news_title"]];
+    
+    NSString *imageurl= [[[self.dic objectForKey:@"images"]objectAtIndex:0]objectForKey:@"image_url"];
+    
+    if(imageurl!=nil){
+        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.imageView animated:YES];
+        hud.labelText = @"Loading";
+        
+        
+        
+        [self.imageView sd_setImageWithURL:[NSURL URLWithString:imageurl]
+                       placeholderImage:[UIImage imageNamed:@"placeholder.png"]
+                              completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType,NSURL *imageURL) {
+                                  
+                                  [hud hide:YES];
+                                  
+                                  
+                              }];
+    }
 
     self.descriptionText.attributedText=[TextStyling AttributForDescription:[self.dic objectForKey:@"news_contents"]];
 

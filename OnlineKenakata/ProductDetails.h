@@ -10,7 +10,7 @@
 #import "MWPhotoBrowser.h"
 #import <MessageUI/MessageUI.h>
 #import "share.h"
-#import "EDStarRating.h"
+#import "RateView.h"
 #import "LoadingView.h"
 @interface ProductDetails : UIViewController<UIScrollViewDelegate,MWPhotoBrowserDelegate,shareDelegate,MFMessageComposeViewControllerDelegate,UIGestureRecognizerDelegate>{
     NSString *currency;
@@ -38,7 +38,7 @@
 @property (strong,nonatomic) IBOutlet UILabel *itemCodeLable;
 @property (strong,nonatomic) IBOutlet UIButton *cartBtn;
 @property (strong,nonatomic) IBOutlet UIScrollView *horizontalScroller;
-@property (strong,nonatomic) IBOutlet EDStarRating *starRater;
+@property (strong,nonatomic) IBOutlet RateView *starRater;
 @property (strong,nonatomic) IBOutlet UIView *starRaterBack;
 @property (strong,nonatomic) IBOutlet UILabel *favoritNumber;
 @property (strong,nonatomic) IBOutlet UILabel *similarProductLable;

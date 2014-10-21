@@ -15,6 +15,7 @@
 }
 @property (strong,nonatomic) NSDictionary *dic;
 
+@property (strong,nonatomic) IBOutlet UIImageView *imageView;
 @property (strong,nonatomic) IBOutlet UILabel *name;
 @property (strong,nonatomic) IBOutlet UITextView *descriptionText;
 
