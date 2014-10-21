@@ -863,6 +863,8 @@
 				14D45B281974FF4800F677D0 /* NewsDetail.m */,
 				14D45B1C1974FF4800F677D0 /* Info.h */,
 				14D45B1B1974FF4800F677D0 /* Info.m */,
+				9A743EF019EE531700A52FD8 /* SettingsViewController.h */,
+				9A743EF119EE531700A52FD8 /* SettingsViewController.m */,
 				14D45B1E1974FF4800F677D0 /* WebBrowser.h */,
 				14D45B1D1974FF4800F677D0 /* WebBrowser.m */,
 				14D45B1A1974FF4800F677D0 /* MapView.h */,
@@ -877,8 +879,6 @@
 				1853DFB6199B842300C3D5ED /* SignupViewController.m */,
 				9AD8A07E19DA801500924325 /* FacebookViewController.h */,
 				9AD8A07F19DA801500924325 /* FacebookViewController.m */,
-				9A743EF019EE531700A52FD8 /* SettingsViewController.h */,
-				9A743EF119EE531700A52FD8 /* SettingsViewController.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";

@@ -1184,7 +1184,6 @@
                         <segue destination="cU3-FH-WMj" kind="relationship" relationship="viewControllers" id="bhN-71-2Nb"/>
                         <segue destination="lTe-ra-Rhm" kind="relationship" relationship="viewControllers" id="Il7-4f-Lff"/>
                         <segue destination="woE-r6-h5S" kind="relationship" relationship="viewControllers" id="Yeq-Hy-ppk"/>
-                        <segue destination="QG7-GT-yMz" kind="relationship" relationship="viewControllers" id="C4P-tk-bOV"/>
                         <segue destination="iG1-RH-FOU" kind="relationship" relationship="viewControllers" id="ZsM-xG-3vd"/>
                     </connections>
                 </tabBarController>
@@ -1314,7 +1313,7 @@
         <!--Info - Info-->
         <scene sceneID="TnM-3z-Myc">
             <objects>
-                <viewController id="QG7-GT-yMz" customClass="Info" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="infoview" useStoryboardIdentifierAsRestorationIdentifier="YES" id="QG7-GT-yMz" customClass="Info" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="zb2-hQ-kM2"/>
                         <viewControllerLayoutGuide type="bottom" id="Kws-pG-Q48"/>
@@ -1432,6 +1431,7 @@
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Info" image="menu_icn_info.png" id="MEJ-0P-oJM"/>
+                    <navigationItem key="navigationItem" id="G9G-xb-4mW"/>
                     <connections>
                         <outlet property="pageControl" destination="1O8-db-NTH" id="7Gx-aC-WaC"/>
                         <outlet property="scrollView" destination="eU7-Ey-kE4" id="7aj-gC-bY5"/>
@@ -1439,7 +1439,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aJ8-Wx-TMU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="777" y="1921"/>
+            <point key="canvasLocation" x="1204" y="1859"/>
         </scene>
         <!--Settings View Controller - Settings-->
         <scene sceneID="lgp-oB-YaI">
@@ -1541,7 +1541,7 @@
                             <constraint firstItem="4zI-Zg-i2o" firstAttribute="top" secondItem="N0n-us-Dhb" secondAttribute="bottom" id="wW9-SR-LfN"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Settings" id="50u-bW-PMH"/>
+                    <tabBarItem key="tabBarItem" title="Settings" image="menu_icn_info.png" id="50u-bW-PMH"/>
                     <connections>
                         <outlet property="appvertion" destination="tc1-J4-MPg" id="hnr-5x-8fL"/>
                         <outlet property="email" destination="mDD-8r-RzM" id="CQX-9s-gCe"/>
@@ -1549,11 +1549,12 @@
                         <outlet property="settingsTableHeight" destination="6XN-ol-tHm" id="vsB-Hf-aln"/>
                         <outlet property="table" destination="4zI-Zg-i2o" id="Wqk-WI-nGe"/>
                         <outlet property="username" destination="ryV-xL-ilO" id="p3b-mD-g1l"/>
+                        <segue destination="QG7-GT-yMz" kind="push" identifier="pushinfo" id="1lE-aF-NBL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jvf-pu-14f" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="777" y="2603"/>
+            <point key="canvasLocation" x="797" y="1859"/>
         </scene>
         <!--Web Browser-->
         <scene sceneID="kTV-RN-3bF">
@@ -1587,7 +1588,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Xwp-l1-z0h" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1222" y="1914"/>
+            <point key="canvasLocation" x="1655" y="1859"/>
         </scene>
         <!--News Detail-->
         <scene sceneID="laq-T2-fpd">

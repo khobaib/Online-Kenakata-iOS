@@ -29,26 +29,27 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
     // Do any additional setup after loading the view.
 }
 
--(void)viewWillAppear:(BOOL)animated{
+-(void)viewDidAppear:(BOOL)animated{
+    
+    NSLog(@"log");
     [super viewWillAppear:animated];
     token=[[NSUserDefaults standardUserDefaults] objectForKey:@"token"];
     
-
+   self.tabBarController.navigationItem.title=@"Settings";
     
     if(token!=nil){
-        self.settingsTableHeight.constant=177;
+        self.settingsTableHeight.constant=236;
     }else{
-        self.settingsTableHeight.constant=118;
+        self.settingsTableHeight.constant=177;
     }
     
     [self setDataOnUI];
     
-    UIBarButtonItem *newBackButton = [[UIBarButtonItem alloc] initWithTitle:@"< Back" style:UIBarButtonItemStyleBordered target:self action:@selector(home:)];
-    [newBackButton setTintColor:[TextStyling barbuttonColor]];
-    self.tabBarController.navigationItem.leftBarButtonItem=newBackButton;
+   
     [self.table reloadData];
 }
 
@@ -97,9 +98,9 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     if(token!=nil){
-        return 3;
+        return 4;
     }else{
-        return 2;
+        return 3;
     }
     
 }
@@ -114,12 +115,14 @@
        
         UILabel *lable=(UILabel *)[cell viewWithTag:1101];
         lable.text=@"";
-        if(indexPath.row==0){
+        if(indexPath.row==1){
               lable.text=@"Change Password";
-        }else if(indexPath.row==1){
+        }else if(indexPath.row==2){
               lable.text=@"Rate App";
-        }else if (indexPath.row==2){
+        }else if (indexPath.row==3){
               lable.text=@"Logout";
+        }else if(indexPath.row==0){
+             lable.text=@"Info";
         }
         
       
@@ -134,11 +137,14 @@
         
         lable.text=@"";
         
-        if(indexPath.row==0){
+        if(indexPath.row==1){
              lable.text=@"Rate App";
-        }else if(indexPath.row==1){
+        }else if(indexPath.row==2){
              lable.text=@"Login";
+        }else if(indexPath.row==0){
+            lable.text=@"Info";
         }
+        
         
        
         
@@ -148,26 +154,36 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if(token!=nil){
-        if(indexPath.row==1){
-            [[UIApplication sharedApplication]openURL:[NSURL URLWithString:@"itms-apps://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=905900408"]];
+        
+        if(indexPath.row==0){
+            [self performSegueWithIdentifier:@"pushinfo" sender:self];
         }
         if(indexPath.row==2){
+            [[UIApplication sharedApplication]openURL:[NSURL URLWithString:@"itms-apps://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=905900408"]];
+        }
+        if(indexPath.row==3){
         
             UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"" message:@"Do you like to Logout?" delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
             [alert show];
         }
         
-        if(indexPath.row==0){
+        if(indexPath.row==1){
             UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"" message:@"Please Enter The new password." delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
             [alert show];
         }
         
+        
+        
     }else{
+        
         if(indexPath.row==0){
+            [self performSegueWithIdentifier:@"pushinfo" sender:self];
+        }
+        if(indexPath.row==1){
             [[UIApplication sharedApplication]openURL:[NSURL URLWithString:@"itms-apps://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=905900408"]];
         }
         
-        if(indexPath.row==1){
+        if(indexPath.row==2){
             LoginViewController *login =[[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"loginScreen"];
             [self.navigationController pushViewController:login animated:YES];
         }
@@ -179,7 +195,7 @@
     if(buttonIndex==1){
         [[NSUserDefaults standardUserDefaults]setObject:nil forKey:@"token"];
         [FBSession.activeSession closeAndClearTokenInformation];
-        [self.navigationController popToRootViewControllerAnimated:YES];
+        [self viewDidAppear:YES];
     }
 }
 
