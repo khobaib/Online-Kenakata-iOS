@@ -154,6 +154,8 @@
 		9AB1AD3219C9529000229422 /* UIImageView+HighlightedWebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AB1AD2F19C9529000229422 /* UIImageView+HighlightedWebCache.m */; };
 		9AB1AD3319C9529000229422 /* UIView+WebCacheOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AB1AD3119C9529000229422 /* UIView+WebCacheOperation.m */; };
 		9AB1AD3519C9556500229422 /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AB1AD3419C9556500229422 /* FMDatabasePool.m */; };
+		9ABB98A519F4DC2100768061 /* FilterInputViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9ABB98A419F4DC2100768061 /* FilterInputViewController.m */; };
+		9ABB98A819F4EBB500768061 /* FilterdProductsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9ABB98A719F4EBB500768061 /* FilterdProductsViewController.m */; };
 		9AD8A08019DA801500924325 /* FacebookViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AD8A07F19DA801500924325 /* FacebookViewController.m */; };
 		9AE0DAE719A2074A003F1D74 /* WriteReviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AE0DAE619A2074A003F1D74 /* WriteReviewViewController.m */; };
 /* End PBXBuildFile section */
@@ -422,6 +424,10 @@
 		9AB1AD3019C9529000229422 /* UIView+WebCacheOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+WebCacheOperation.h"; sourceTree = "<group>"; };
 		9AB1AD3119C9529000229422 /* UIView+WebCacheOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+WebCacheOperation.m"; sourceTree = "<group>"; };
 		9AB1AD3419C9556500229422 /* FMDatabasePool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabasePool.m; sourceTree = "<group>"; };
+		9ABB98A319F4DC2100768061 /* FilterInputViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterInputViewController.h; sourceTree = "<group>"; };
+		9ABB98A419F4DC2100768061 /* FilterInputViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilterInputViewController.m; sourceTree = "<group>"; };
+		9ABB98A619F4EBB500768061 /* FilterdProductsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterdProductsViewController.h; sourceTree = "<group>"; };
+		9ABB98A719F4EBB500768061 /* FilterdProductsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilterdProductsViewController.m; sourceTree = "<group>"; };
 		9AD8A07E19DA801500924325 /* FacebookViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FacebookViewController.h; sourceTree = "<group>"; };
 		9AD8A07F19DA801500924325 /* FacebookViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FacebookViewController.m; sourceTree = "<group>"; };
 		9AE0DAE519A2074A003F1D74 /* WriteReviewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WriteReviewViewController.h; sourceTree = "<group>"; };
@@ -815,6 +821,10 @@
 				14D45B241974FF4800F677D0 /* ProductList.m */,
 				14D45B2F1974FF4800F677D0 /* ProductDetails.h */,
 				14D45B171974FF4800F677D0 /* ProductDetails.m */,
+				9ABB98A319F4DC2100768061 /* FilterInputViewController.h */,
+				9ABB98A419F4DC2100768061 /* FilterInputViewController.m */,
+				9ABB98A619F4EBB500768061 /* FilterdProductsViewController.h */,
+				9ABB98A719F4EBB500768061 /* FilterdProductsViewController.m */,
 				143644F01977D571008335D0 /* AddToCart.h */,
 				143644F11977D571008335D0 /* AddToCart.m */,
 				1403D1FE197A50680074B61C /* MyCart.h */,
@@ -1094,6 +1104,7 @@
 				14D45AF01974FCB900F677D0 /* UIButton+WebCache.m in Sources */,
 				14D45B161974FDC800F677D0 /* RMPickerViewController.m in Sources */,
 				14D45B3B1974FF4800F677D0 /* PushPin.m in Sources */,
+				9ABB98A519F4DC2100768061 /* FilterInputViewController.m in Sources */,
 				14D45AF11974FCB900F677D0 /* UIImage+GIF.m in Sources */,
 				14D45A461974FC6800F677D0 /* main.m in Sources */,
 				14D45B421974FF4800F677D0 /* NewsList.m in Sources */,
@@ -1109,6 +1120,7 @@
 				1478B4D31975241F002C79B0 /* share.m in Sources */,
 				14D45B371974FF4800F677D0 /* MapView.m in Sources */,
 				1413996A1977FC0C00B8ACA9 /* FMDatabaseAdditions.m in Sources */,
+				9ABB98A819F4EBB500768061 /* FilterdProductsViewController.m in Sources */,
 				14D45B3A1974FF4800F677D0 /* WebBrowser.m in Sources */,
 				14D45AE91974FCB900F677D0 /* SDImageCache.m in Sources */,
 				14D45B0C1974FD6B00F677D0 /* AFHTTPSessionManager.m in Sources */,

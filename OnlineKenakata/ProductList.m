@@ -13,7 +13,7 @@
 #import "Data.h"
 #import "TextStyling.h"
 #import "RateView.h"
-
+#import <QuartzCore/QuartzCore.h>
 
 @interface ProductList ()
 
@@ -64,7 +64,7 @@
     {
         counter++;
         [self get_categories_by_parent_cateogory_id];
-        NSLog(@"start");
+
     }
 }
 
@@ -250,7 +250,8 @@
         UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"productGrid" forIndexPath:indexPath];
         
         // Configure the cell...
-        
+        cell.layer.shouldRasterize = YES;
+        cell.layer.rasterizationScale = [UIScreen mainScreen].scale;
         
         NSMutableDictionary *dic=[productList objectAtIndex:indexPath.row-catagoryList.count];
         
@@ -430,6 +431,132 @@
 }
 
 
+#pragma mark sorting functions
+
+-(IBAction)sort:(id)sender{
+    RMPickerViewController *pickerVC = [RMPickerViewController pickerController];
+    pickerVC.delegate = self;
+    [pickerVC show];
+    
+}
+
+
+- (void)pickerViewController:(RMPickerViewController *)vc didSelectRows:(NSArray *)selectedRows{
+
+    int i=[[selectedRows objectAtIndex:0]intValue];
+    
+    if(i==0){
+        NSArray *sortDescriptors = [NSArray arrayWithObject:[self getDesctiptorwithkey:@"price" ascending:NO]];
+        NSArray *sortedArray;
+        sortedArray = [productList sortedArrayUsingDescriptors:sortDescriptors];
+        
+        productList=[sortedArray mutableCopy];
+        [self.collectionView reloadData];
+        
+    }else if (i==1){
+        
+        NSArray *sortDescriptors = [NSArray arrayWithObject:[self getDesctiptorwithkey:@"price" ascending:YES]];
+        NSArray *sortedArray;
+        sortedArray = [productList sortedArrayUsingDescriptors:sortDescriptors];
+        
+        productList=[sortedArray mutableCopy];
+        [self.collectionView reloadData];
+        
+    }else if(i==2){
+        
+        NSArray *sortDescriptors = [NSArray arrayWithObject:[self getDesctiptorwithkey:@"total_favorites" ascending:NO]];
+        NSArray *sortedArray;
+        sortedArray = [productList sortedArrayUsingDescriptors:sortDescriptors];
+        
+        productList=[sortedArray mutableCopy];
+        [self.collectionView reloadData];
+
+    }else if (i==3){
+        NSSortDescriptor *sortDescriptor;
+        
+        sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"tag" ascending:NO comparator:^(id obj1, id obj2) {
+            
+            if ([obj1 integerValue] ==1) {
+                return (NSComparisonResult)NSOrderedDescending;
+            }else{
+                return (NSComparisonResult)NSOrderedAscending;
+            }
+            return (NSComparisonResult)NSOrderedSame;
+        }];
+
+        
+        NSArray *sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
+        NSArray *sortedArray;
+        sortedArray = [productList sortedArrayUsingDescriptors:sortDescriptors];
+        
+        productList=[sortedArray mutableCopy];
+        [self.collectionView reloadData];
+
+        
+    }else if (i==4){
+        NSArray *sortDescriptors = [NSArray arrayWithObject:[self getDesctiptorwithkey:@"tag" ascending:NO]];
+        NSArray *sortedArray;
+        sortedArray = [productList sortedArrayUsingDescriptors:sortDescriptors];
+        
+        productList=[sortedArray mutableCopy];
+        [self.collectionView reloadData];
+    }
+    
+    [self.collectionView setContentOffset:CGPointZero animated:NO];
+}
+
+-(NSSortDescriptor *)getDesctiptorwithkey:(NSString *)key ascending:(BOOL)bol{
+    NSSortDescriptor *sortDescriptor;
+    
+    sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:key ascending:bol comparator:^(id obj1, id obj2) {
+        
+        if ([obj1 integerValue] > [obj2 integerValue]) {
+            return (NSComparisonResult)NSOrderedDescending;
+        }
+        if ([obj1 integerValue] < [obj2 integerValue]) {
+            return (NSComparisonResult)NSOrderedAscending;
+        }
+        return (NSComparisonResult)NSOrderedSame;
+    }];
+    
+    return sortDescriptor;
+}
+
+- (void)pickerViewControllerDidCancel:(RMPickerViewController *)vc{
+    
+    
+}
+
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView{
+    return 1;
+}
+
+// returns the # of rows in each component..
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component{
+    return 5;
+}
+
+- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component{
+    if(row==0){
+        return @"Price heigh";
+     }
+    if(row==1){
+        return @"Price Low";
+        
+    }
+    if(row==2){
+        return @"Popularity";
+    }
+    if(row==3){
+        return @"New";
+    }
+    
+    if(row==4){
+        return @"Sale";
+    }
+    
+    return @"Default";
+}
 
 /*
 // Override to support conditional editing of the table view.

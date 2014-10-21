@@ -164,10 +164,10 @@
     description.text=@"";
     
 
-    title.attributedText=[TextStyling AttributForOfferNewsTitle:[[newsData objectAtIndex:indexPath.row]objectForKey:@"news_title"]];
+    title.attributedText=[TextStyling AttributForDescription:[[newsData objectAtIndex:indexPath.row]objectForKey:@"news_title"]];
     
 
-    description.attributedText=[TextStyling AttributForOfferNewsDescription:[[newsData objectAtIndex:indexPath.row]objectForKey:@"news_contents"]];
+    description.attributedText=[TextStyling AttributForDescription:[[newsData objectAtIndex:indexPath.row]objectForKey:@"news_contents"]];
     return cell;
 }
 
@@ -176,8 +176,7 @@
     
     NSDictionary *dic = [newsData objectAtIndex:indexPath.row];
 
-    newsDtl.nameString=[dic objectForKey:@"news_title"];
-    newsDtl.descriptionString=[dic objectForKey:@"news_contents"];
+    newsDtl.dic=dic;
 
     
     [self.navigationController pushViewController:newsDtl animated:YES];

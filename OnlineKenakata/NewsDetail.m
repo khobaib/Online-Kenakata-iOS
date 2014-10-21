@@ -27,9 +27,9 @@
 {
     [super viewDidLoad];
 
-    self.name.attributedText=[TextStyling AttributForOfferNewsTitle:self.nameString];
+    self.name.attributedText=[TextStyling AttributForDescription:[self.dic objectForKey:@"news_title"]];
 
-    self.descriptionText.attributedText=[TextStyling AttributForOfferNewsDescription:self.descriptionString];
+    self.descriptionText.attributedText=[TextStyling AttributForDescription:[self.dic objectForKey:@"news_contents"]];
 
     
     // Do any additional setup after loading the view.
