@@ -22,7 +22,7 @@
     
     [FBSession.activeSession closeAndClearTokenInformation];
     // Override point for customization after application launch.
-    /*
+  
     if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
     {
          [[UIApplication sharedApplication] registerForRemoteNotifications];
@@ -35,7 +35,7 @@
          (UIUserNotificationTypeBadge | UIUserNotificationTypeSound | UIUserNotificationTypeAlert)];
     }
 
-    */
+   
     
     [self checkAndCreateDatabase];
     

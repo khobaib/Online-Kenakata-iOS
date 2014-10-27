@@ -11,6 +11,8 @@
 #import <AddressBook/AddressBook.h>
 #import "TextStyling.h"
 #import "tabbarController.h"
+#import "UIImageView+WebCache.h"
+
 
 @interface MapView ()
 
@@ -158,26 +160,108 @@
     }
     
     for(int i=0;i<branches.count;i++){
-        float lat=[[[branches objectAtIndex:i]objectForKey:@"branch_latitude"]floatValue];
-        float ln=[[[branches objectAtIndex:i]objectForKey:@"branch_longitude"]floatValue];
+        float lat=[[[branches objectAtIndex:i]objectForKey:@"latitude"]floatValue];
+        float ln=[[[branches objectAtIndex:i]objectForKey:@"longitude"]floatValue];
         CLLocationCoordinate2D zoomLocation;
         zoomLocation.latitude = lat;
         zoomLocation.longitude= ln;
-        NSString *name=[[branches objectAtIndex:i]objectForKey:@"branch_address"];
-        PushPin *annotation = [[PushPin alloc] initWithName:name address:@"" coordinate:zoomLocation] ;
+        NSString *address=[[branches objectAtIndex:i]objectForKey:@"user_address"];
+        
+        
+        NSString *key=[NSString stringWithFormat:@"marchent_data_%@",[[branches objectAtIndex:i] objectForKey:@"user_id"]];
+        NSString *name=[[[NSUserDefaults standardUserDefaults]objectForKey:key]objectForKey:@"user_name"];
+        
+        
+        PushPin *annotation = [[PushPin alloc] initWithName:name address:address coordinate:zoomLocation] ;
+        annotation.imageUrl=[[branches objectAtIndex:i]objectForKey:@"logo"];
+        annotation.pinIndex=i;
         [self.mapView addAnnotation:annotation];
     }
 }
 
 
+- (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation>)annotation{
+    
+    
+    static NSString *identifier = @"PushPin";
+    if ([annotation isKindOfClass:[PushPin class]]) {
+        
+        PushPin *pin=(PushPin*)annotation;
+        MKPinAnnotationView *annotationView = (MKPinAnnotationView *) [_mapView dequeueReusableAnnotationViewWithIdentifier:identifier];
+        if (annotationView == nil) {
+            annotationView = [[MKPinAnnotationView alloc] initWithAnnotation:pin reuseIdentifier:identifier];
+            annotationView.enabled = YES;
+            
+        
+            CGRect frame=annotationView.frame;
+            
+            UIButton *button = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+            
+            button.frame = CGRectMake(0, 0, 30, 30);
+            annotationView.rightCalloutAccessoryView = button;
+            button.tag=pin.pinIndex;
+            
+            [button addTarget:self action:@selector(showDerection:) forControlEvents:UIControlEventTouchUpInside];
+            
+            // Image and two labels
+            
+            
+            UIImageView *leftCAV = [[UIImageView alloc] initWithFrame:CGRectMake(0,0,30,30)];
+            
+            SDWebImageManager *manager = [SDWebImageManager sharedManager];
+            [manager downloadImageWithURL:[NSURL URLWithString:pin.imageUrl]
+                                  options:0
+                                 progress:^(NSInteger receivedSize, NSInteger expectedSize)
+             {
+                 // progression tracking code
+             }
+                                completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished,NSURL *imageURL)
+             {
+                 if (image)
+                 {
+                     if (image && finished)
+                     {
+                         annotationView.image=image;
+                         
+                         [annotationView setFrame:CGRectMake(frame.origin.x, frame.origin.y, 40, 40)];
+                     }
+                 }
+             }];
+            
+            
+            [leftCAV sd_setImageWithURL:[NSURL URLWithString:pin.imageUrl]
+                    placeholderImage:nil];
+            
+            annotationView.leftCalloutAccessoryView = leftCAV;
+            
+            annotationView.canShowCallout = YES;
+
+        } else {
+            annotationView.annotation = pin;
+        }
+        
+        return annotationView;
+    }
+    
+    return nil;
+    
+}
+
+-(void)showDerection:(id)sender{
+    UIButton *btn=(UIButton *)sender;
+    selectedBranch=[branches objectAtIndex:btn.tag];
+    [self direction];
+    
+}
+
 -(void)goTolocation:(int) index{
-    float lat=[[[branches objectAtIndex:index]objectForKey:@"branch_latitude"]floatValue];
-    float ln=[[[branches objectAtIndex:index]objectForKey:@"branch_longitude"]floatValue];
+    float lat=[[[branches objectAtIndex:index]objectForKey:@"latitude"]floatValue];
+    float ln=[[[branches objectAtIndex:index]objectForKey:@"longitude"]floatValue];
     CLLocationCoordinate2D zoomLocation;
     zoomLocation.latitude = lat;
     zoomLocation.longitude= ln;
 
-    MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(zoomLocation, 0.75*METERS_PER_MILE, 0.75*METERS_PER_MILE);
+    MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(zoomLocation, 1.75*METERS_PER_MILE, 1.75*METERS_PER_MILE);
     
     [self.mapView setRegion:viewRegion animated:YES];
 }
@@ -293,8 +377,8 @@
     }else{
         
         CLLocationCoordinate2D coord;
-        coord.latitude=[[selectedBranch objectForKey:@"branch_latitude"]floatValue];
-        coord.longitude=[[selectedBranch objectForKey:@"branch_longitude"]floatValue];
+        coord.latitude=[[selectedBranch objectForKey:@"latitude"]floatValue];
+        coord.longitude=[[selectedBranch objectForKey:@"longitude"]floatValue];
         [self navigateToLatitude:coord.latitude longitude:coord.longitude option:2];
 
         
@@ -305,13 +389,19 @@
 }
 
 
+
 - (void)actionSheet:(UIActionSheet *)popup clickedButtonAtIndex:(NSInteger)buttonIndex {
     
+    
+    if(buttonIndex==popup.cancelButtonIndex){
+        return;
+    }
     CLLocationCoordinate2D coord;
-    coord.latitude=[[selectedBranch objectForKey:@"branch_latitude"]floatValue];
-    coord.longitude=[[selectedBranch objectForKey:@"branch_longitude"]floatValue];
+    coord.latitude=[[selectedBranch objectForKey:@"latitude"]floatValue];
+    coord.longitude=[[selectedBranch objectForKey:@"longitude"]floatValue];
     
 
+    NSLog(@"%d",buttonIndex);
 
     switch (popup.tag) {
         case 1:
@@ -430,7 +520,9 @@
 }
 
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component{
-    NSString *name=[[branches objectAtIndex:row] objectForKey:@"branch_address"];
+    
+    NSString *key=[NSString stringWithFormat:@"marchent_data_%@",[[branches objectAtIndex:row] objectForKey:@"user_id"]];
+    NSString *name=[[[NSUserDefaults standardUserDefaults]objectForKey:key]objectForKey:@"user_name"];
     return name;
 }
 -(void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component{

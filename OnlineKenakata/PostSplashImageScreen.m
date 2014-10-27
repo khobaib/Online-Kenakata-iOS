@@ -141,7 +141,7 @@
     
     // self.navigationController.navigationBar.hidden=YES;
     
-    NSString *string = [NSString stringWithFormat:@"%@/rest.php?method=get_user_data&application_code=%@",[Data getBaseUrl],[Data getAppCode]];
+    NSString *string = [NSString stringWithFormat:@"%@/rest_kenakata.php?method=get_user_data&application_code=%@",[Data getBaseUrl],[Data getAppCode]];
 
     NSURL *url = [NSURL URLWithString:string];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];

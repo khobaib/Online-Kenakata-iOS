@@ -15,6 +15,8 @@
 @property (nonatomic, copy) NSString *name;
 @property (nonatomic, copy) NSString *address;
 @property (nonatomic, assign) CLLocationCoordinate2D theCoordinate;
+@property (strong) NSString *imageUrl;
+@property int pinIndex;
 
 - (id)initWithName:(NSString*)name address:(NSString*)address coordinate:(CLLocationCoordinate2D)coordinate;
 - (MKMapItem*)mapItem;
