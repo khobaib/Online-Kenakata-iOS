@@ -43,8 +43,8 @@
     
     [self initScroller];
     isSearched=NO;
-    NSLog(@"%f",_image.size.width);
 
+    
     [self addPullToRefresh];
     counter=0;
     searchCounter=0;
@@ -586,6 +586,7 @@
     searchText=searchField.text;
     
     [searchField resignFirstResponder];
+    searchCounter=0;
     [self searchMethod];
     
     
@@ -612,6 +613,8 @@
 -(void)parsProductList:(id) respons{
     NSMutableDictionary *dic=(NSMutableDictionary *)respons;
     
+    
+    
     catagoryList=[[dic objectForKey:@"success"]objectForKey:@"categories"];
     productList=[[dic objectForKey:@"success"]objectForKey:@"products"];
     [refreshControl endRefreshing];
@@ -630,8 +633,8 @@
         backupCatList=[[NSMutableArray alloc]initWithArray:catagoryList];
         backupproDuctList=[[NSMutableArray alloc]initWithArray:productList];
         
-        catagoryList=[[[[dic objectForKey:@"success"]objectForKey:@"user" ] objectForKey:@"tags"] mutableCopy];
-        productList=[[[[dic objectForKey:@"success"]objectForKey:@"user" ] objectForKey:@"products"] mutableCopy];
+        catagoryList=[[[dic objectForKey:@"success"]objectForKey:@"tags"] mutableCopy];
+        productList=[[[dic objectForKey:@"success"] objectForKey:@"products"] mutableCopy];
         
         if(productList.count==0 || productList.count%12!=0){
             searchCounter=-1;
@@ -639,8 +642,8 @@
         
         
     }else{
-        [catagoryList addObjectsFromArray:[[[[dic objectForKey:@"success"]objectForKey:@"user" ] objectForKey:@"tags"] mutableCopy]];
-        [productList addObjectsFromArray:[[[[dic objectForKey:@"success"]objectForKey:@"user" ] objectForKey:@"products"] mutableCopy]];
+        [catagoryList addObjectsFromArray:[[[dic objectForKey:@"success"]objectForKey:@"tags"] mutableCopy]];
+        [productList addObjectsFromArray:[[[dic objectForKey:@"success"] objectForKey:@"products"] mutableCopy]];
         
         if(productList.count==0 || productList.count%12!=0){
             searchCounter=-1;
@@ -650,7 +653,6 @@
     }
     
     
-    NSLog(@" %lu %lu",(unsigned long)productList.count,(unsigned long)catagoryList.count);
     
    
     

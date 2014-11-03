@@ -9,9 +9,12 @@
 #import <UIKit/UIKit.h>
 #import "LoadingView.h"
 
-@interface Offers : UITableViewController{
-    NSMutableArray *tableData;
-    LoadingView *loading;
+@interface Offers : UIViewController<UICollectionViewDelegate,UICollectionViewDataSource>{
+    NSMutableArray *productList;
+    NSMutableArray *catagoryList;
+    int counter;
+    NSString *currency;
 }
+@property IBOutlet UICollectionView *collectionView;
 
 @end

@@ -46,7 +46,6 @@
     
     
     
-    [self addPullToRefresh];
     NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
 
     NSMutableDictionary *dic = [NSKeyedUnarchiver unarchiveObjectWithData:[ud objectForKey:@"get_user_data"]];
