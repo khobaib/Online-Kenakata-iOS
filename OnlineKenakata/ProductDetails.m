@@ -16,6 +16,8 @@
 #import "AFNetworking.h"
 #import "Data.h"
 #import "LoginViewController.h"
+#import "DatabaseHandeler.h"
+#import "Product.h"
 @interface ProductDetails ()
 
 @end
@@ -248,7 +250,7 @@
 
 
 -(void)TapOnMarchentLogo:(id)sender{
-    NSLog(@"logo");
+
     NSString *key=[NSString stringWithFormat:@"marchent_data_%@",[self.productData objectForKey:@"user_id"]];
     NSDictionary *mDic=[[NSUserDefaults standardUserDefaults] objectForKey:key];
     
@@ -426,7 +428,6 @@
     NSString *string = [NSString stringWithFormat:@"%@/rest_kenakata.php?method=get_products_by_product_ids&product_ids=%@&application_code=%@",[Data getBaseUrl],[self.productData objectForKey:@"product_id"],[Data getAppCode]];
     
     
-    NSLog(@"%@",string);
     NSURL *url = [NSURL URLWithString:string];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     
@@ -530,6 +531,7 @@
     
     [self loadVisibleSimilarProduct];
     [self setValueOnUI];
+    [self saveProduct];
     
 }
 
@@ -822,6 +824,28 @@
 
 */
 
+#pragma mark -Save product
+
+-(void)saveProduct{
+    Product *product=[[Product alloc]init];
+    
+    product.ID=self.productData[@"product_id"];
+    product.name=self.productData[@"name"];
+    product.IMAGE_URL=self.productData[@"image_url"];
+    product.THUMBNAIL_IMAGE_URL=[[self.productData[@"images"]objectAtIndex:0]objectForKey:@"thumbnail_image_url"];
+    product.PRICE=self.productData[@"price"];
+    product.OLD_PRICE=self.productData[@"old_price"];
+    product.PRODUCT_TAG=self.productData[@"tag"];
+    product.marchantID=self.productData[@"user_id"];
+    product.ITEM_CODE=self.productData[@"sku"];
+    product.totalFvt=self.productData[@"total_favorites"];
+    product.hasFvt=self.productData[@"has_favorited"];
+    product.rating=self.productData[@"average_rating"];
+    
+    if([DatabaseHandeler insertRecentProduct:product]){
+       
+    }
+}
 
 #pragma mark -HorizentalSlider
 

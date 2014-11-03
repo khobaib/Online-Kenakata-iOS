@@ -28,6 +28,12 @@
 +(NSString *)getUserData;
 
 
+//recent products
+
++(BOOL)insertRecentProduct:(Product *)product;
+
++(NSMutableArray *)getAllProducts;
+
 //customer data;
 
 +(BOOL)insertDeleveryMethodData:(DeleveryMethod *)deleveryMethod;

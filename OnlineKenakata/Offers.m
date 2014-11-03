@@ -282,7 +282,7 @@
         toping.image=nil;
         oldPrice.text=@"";
         newPrice.text=@"";
-        NSString * imgurl = [[[dic objectForKey:@"images"] objectAtIndex:0]objectForKey:@"image_url"];
+        NSString * imgurl = [[[dic objectForKey:@"images"] objectAtIndex:0]objectForKey:@"thumbnail_image_url"];
         
         
         productName.attributedText=[TextStyling AttributForTitle:[NSString stringWithFormat:@"%@",[dic objectForKey:@"name"]]];

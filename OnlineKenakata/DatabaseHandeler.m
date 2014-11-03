@@ -202,10 +202,8 @@ NSString *const databaseFilename=@"databaseV1.sqlite3";
     while ([s next]) {
 
         Product *var=[[Product alloc]init];
-    
-        
         var=[var initProduct:[s stringForColumn:name] productId:[s stringForColumn:ID] Quantity:[s stringForColumn:QUANTITY] Weight:[s stringForColumn:WEIGHT] code:[s stringForColumn:ITEM_CODE]attributs:[s stringForColumn:ATTRIBUTES] varient:[s stringForColumn:VARIENTID] imageURL:[s stringForColumn:IMAGE_URL] thumbImage:[s stringForColumn:THUMBNAIL_IMAGE_URL] price:[s stringForColumn:PRICE] oldPrice:[s stringForColumn:OLD_PRICE] availabl:[s intForColumn:AVAILABILITY] tag:[s stringForColumn:PRODUCT_TAG] marchantID:[s stringForColumn:MARCHANTID]] ;
-
+        
         var.TABLE_PRIMARY_KEY=[s intForColumn:TABLE_PRIMARY_KEY];
         
 
@@ -353,5 +351,117 @@ NSString *const databaseFilename=@"databaseV1.sqlite3";
     return array;
 }
 
++(BOOL)insertRecentProduct:(Product *)product{
+    if([self isProductExist:product]){
+        return YES;
+    }
+    
+    NSString* homeDir = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
+    NSString *databasePath = [homeDir stringByAppendingPathComponent:databaseFilename];
+    
+    
+    FMDatabase *database = [FMDatabase databaseWithPath:databasePath];
+    
+    
+    if (![database open]) {
+        
+        NSLog(@"cant open");
+        
+        return NO;
+    }
+ //   NSLog(@"can open ,product.THUMBNAIL_IMAGE_URL);
+
+    
+    BOOL b=[database executeUpdate:@"INSERT INTO recent_products VALUES (?,?,?,?,?,?,?,?,?,?,?,?);",product.ID,product.name,product.ITEM_CODE,product.IMAGE_URL,product.THUMBNAIL_IMAGE_URL,product.marchantID,product.OLD_PRICE,product.PRICE,product.PRODUCT_TAG,product.rating,product.totalFvt,product.hasFvt];
+    
+    
+    [database close];
+    return b;
+}
+
++(NSMutableArray *)getAllProducts{
+    
+    NSMutableArray *array=[[NSMutableArray alloc]init];
+    
+    NSString* homeDir = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
+    NSString *databasePath = [homeDir stringByAppendingPathComponent:databaseFilename];
+    
+    
+    
+    FMDatabase *database = [FMDatabase databaseWithPath:databasePath];
+    
+    
+    
+    if (![database open]) {
+        
+        return nil;
+    }
+    // NSLog(@"can open");
+    
+    
+    FMResultSet *s = [database executeQuery:@"SELECT * FROM 'recent_products' ORDER BY id"];
+    while ([s next]) {
+       Product *var=[[Product alloc]init];
+        
+        
+        
+        
+        var.name=[s stringForColumn:name];
+        var.ID=[s stringForColumn:ID];
+        var.ITEM_CODE=[s stringForColumn:ITEM_CODE];
+        var.IMAGE_URL=[s stringForColumn:IMAGE_URL];
+        var.THUMBNAIL_IMAGE_URL=[s stringForColumn:@"thumbnil_image_url"];
+        var.marchantID=[s stringForColumn:@"user_id"];
+        var.OLD_PRICE=[s stringForColumn:OLD_PRICE];
+        var.PRICE=[s stringForColumn:PRICE];
+        var.PRODUCT_TAG=[s stringForColumn:PRODUCT_TAG];
+        var.totalFvt=[s stringForColumn:@"total_favorites"];
+        var.hasFvt=[s stringForColumn:@"has_favorited"];
+        var.rating=[s stringForColumn:@"average_rating"];
+
+        
+        [array addObject:var];
+    }
+    
+    [database close];
+    
+    return array;
+
+}
++(BOOL)isProductExist:(Product *)product{
+    NSString* homeDir = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
+    NSString *databasePath = [homeDir stringByAppendingPathComponent:databaseFilename];
+    
+    
+    FMDatabase *database = [FMDatabase databaseWithPath:databasePath];
+    
+    if (![database open]) {
+        
+        NSLog(@"cant open");
+        
+        //return NO;
+    }
+    FMResultSet *result;
+    //  NSLog(@"%@",product.SPECIAL_QUESTION_TEXT);
+    
+   
+        result=[database executeQuery:@"SELECT * FROM 'recent_products' where id=?",product.ID];
+ 
+        
+ 
+    
+    if([result next])
+    {
+        NSLog(@"%@",[result stringForColumnIndex:2]);
+        [database close];
+        
+        return YES;
+        
+    }
+    [database close];
+    
+    return NO;
+
+}
 
 @end
