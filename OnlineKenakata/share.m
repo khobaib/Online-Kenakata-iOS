@@ -35,7 +35,7 @@
         [mail addTarget:self action:@selector(mail:) forControlEvents:UIControlEventTouchUpInside];
         
         x+=75;
-        
+
         UIButton *messanger=[[UIButton alloc]initWithFrame:CGRectMake(x, 30, 60, 60)];
         [messanger setBackgroundImage:[UIImage imageNamed:@"imessege.png"] forState:UIControlStateNormal];
         [messanger addTarget:self action:@selector(messanger:) forControlEvents:UIControlEventTouchUpInside];
@@ -46,7 +46,7 @@
         [cancle setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         [cancle addTarget:self action:@selector(cancle:) forControlEvents:UIControlEventTouchUpInside];
         
-        
+
         [self addSubview:facebook];
         [self addSubview:twitter];
         [self addSubview:mail];

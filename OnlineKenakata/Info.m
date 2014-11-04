@@ -563,7 +563,7 @@
     
     sharebtn.hidden=NO;
     // [self.navigationController.navigationBar addSubview:sharebtn];
-    self.tabBarController.navigationItem.titleView=sharebtn;
+    self.navigationItem.titleView=sharebtn;
     
     //[self.navigationItem.titleView addSubview:sharebtn];
 }

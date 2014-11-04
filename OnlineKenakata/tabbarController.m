@@ -97,7 +97,7 @@
 
  //   NSLog(@"log %d",cart.productList.count);
     if(cart.productList.count<1){
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error "
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"কেনাকাটা"
                                                             message:@"My Cart is empty"
                                                            delegate:nil
                                                   cancelButtonTitle:@"Ok"

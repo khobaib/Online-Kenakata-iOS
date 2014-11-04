@@ -47,6 +47,8 @@
 @property (strong,nonatomic) IBOutlet UIImageView *logoImageView;
 
 
+@property IBOutlet UICollectionView *collectionView;
+
 -(IBAction)imageEnlarge:(id)sender;
 
 - (void)loadVisiblePages;

@@ -106,7 +106,7 @@
     self.scrollView.hidden=YES;
     self.signinButton.hidden=YES;
    
-    self.tabBarController.navigationItem.title=@"Catalogue";
+    self.tabBarController.navigationItem.title=@"Selected Category";
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
