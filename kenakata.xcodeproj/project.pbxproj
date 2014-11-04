@@ -27,6 +27,9 @@
 		14818572197D3C6E007E0734 /* BBBadgeBarButtonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 14818571197D3C6E007E0734 /* BBBadgeBarButtonItem.m */; };
 		1486EE4B197651BE0036C159 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1486EE4A197651BE0036C159 /* MessageUI.framework */; };
 		14B7B1211A08979D00C4A016 /* kenakataTests-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 14B7B1201A08979D00C4A016 /* kenakataTests-Info.plist */; };
+		14B7B1231A08C10200C4A016 /* view_phone.png in Resources */ = {isa = PBXBuildFile; fileRef = 14B7B1221A08C10100C4A016 /* view_phone.png */; };
+		14B7B1251A08C35D00C4A016 /* menu_icon_offers_pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 14B7B1241A08C35D00C4A016 /* menu_icon_offers_pressed.png */; };
+		14B7B1271A08C39800C4A016 /* menu_icon_recently_viewed_pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 14B7B1261A08C39800C4A016 /* menu_icon_recently_viewed_pressed.png */; };
 		14D45A3A1974FC6800F677D0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14D45A391974FC6800F677D0 /* Foundation.framework */; };
 		14D45A3C1974FC6800F677D0 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14D45A3B1974FC6800F677D0 /* CoreGraphics.framework */; };
 		14D45A3E1974FC6800F677D0 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14D45A3D1974FC6800F677D0 /* UIKit.framework */; };
@@ -193,6 +196,9 @@
 		14818571197D3C6E007E0734 /* BBBadgeBarButtonItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBBadgeBarButtonItem.m; sourceTree = "<group>"; };
 		1486EE4A197651BE0036C159 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		14B7B1201A08979D00C4A016 /* kenakataTests-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "kenakataTests-Info.plist"; sourceTree = "<group>"; };
+		14B7B1221A08C10100C4A016 /* view_phone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = view_phone.png; sourceTree = "<group>"; };
+		14B7B1241A08C35D00C4A016 /* menu_icon_offers_pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menu_icon_offers_pressed.png; sourceTree = "<group>"; };
+		14B7B1261A08C39800C4A016 /* menu_icon_recently_viewed_pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menu_icon_recently_viewed_pressed.png; sourceTree = "<group>"; };
 		14D45A361974FC6800F677D0 /* kenakata.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = kenakata.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		14D45A391974FC6800F677D0 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		14D45A3B1974FC6800F677D0 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -758,6 +764,9 @@
 		14D45B451974FF7900F677D0 /* img */ = {
 			isa = PBXGroup;
 			children = (
+				14B7B1261A08C39800C4A016 /* menu_icon_recently_viewed_pressed.png */,
+				14B7B1241A08C35D00C4A016 /* menu_icon_offers_pressed.png */,
+				14B7B1221A08C10100C4A016 /* view_phone.png */,
 				9A6B51E119F62ABE004C0A2C /* icon_filter_pressed.png */,
 				9A6B51E219F62ABE004C0A2C /* icon_filter.png */,
 				9A6B51E319F62ABE004C0A2C /* icon_sort_pressed.png */,
@@ -975,8 +984,10 @@
 				9A6245A019EBC30500BE15A1 /* databaseV1.sqlite3 in Resources */,
 				182B9BE21997980E00AF6709 /* bkashicon.png in Resources */,
 				9A6B51E519F62ABE004C0A2C /* icon_filter_pressed.png in Resources */,
+				14B7B1231A08C10200C4A016 /* view_phone.png in Resources */,
 				14D45B551974FFA500F677D0 /* tag_new.png in Resources */,
 				9AB11F3919EA50AE00F0E935 /* icon_favorite.png in Resources */,
+				14B7B1251A08C35D00C4A016 /* menu_icon_offers_pressed.png in Resources */,
 				14B7B1211A08979D00C4A016 /* kenakataTests-Info.plist in Resources */,
 				18AB773E199CB58000364FA6 /* icon.png in Resources */,
 				1895D59F1999F05D00713916 /* star.png in Resources */,
@@ -992,6 +1003,7 @@
 				9AB11F3A19EA50AE00F0E935 /* icon_unfavorite.png in Resources */,
 				14D45AF51974FCB900F677D0 /* MWPhotoBrowser.bundle in Resources */,
 				18AB773C199CB58000364FA6 /* icon3.png in Resources */,
+				14B7B1271A08C39800C4A016 /* menu_icon_recently_viewed_pressed.png in Resources */,
 				14D45B591974FFA500F677D0 /* video.png in Resources */,
 				9A6B51E819F62ABE004C0A2C /* icon_sort.png in Resources */,
 				9A6B51E619F62ABE004C0A2C /* icon_filter.png in Resources */,

@@ -532,27 +532,24 @@
 
 // returns the # of rows in each component..
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component{
-    return 5;
+    return 4;
 }
 
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component{
     if(row==0){
-        return @"Price heigh";
+        return @"Price - High to Low";
      }
     if(row==1){
-        return @"Price Low";
+        return @"Price - Low to High";
         
     }
     if(row==2){
-        return @"Popularity";
+        return @"Newest First";
     }
     if(row==3){
-        return @"New";
+        return @"Discounts First";
     }
     
-    if(row==4){
-        return @"Sale";
-    }
     
     return @"Default";
 }
