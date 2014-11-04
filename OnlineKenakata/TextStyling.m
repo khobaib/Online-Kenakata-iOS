@@ -24,6 +24,9 @@
     [[UINavigationBar appearance] setBarTintColor:[self appColor]];
     [[UINavigationBar appearance] setTintColor: [self barbuttonColor]];
     
+    [[UITabBar appearance] setTintColor:[UIColor colorWithRed:(179.0/255.0) green:(138.0/255.0) blue:(2.0/255.0) alpha:1.0]
+];
+    [[UITabBar appearance] setBarTintColor:[UIColor colorWithRed:(254.0/255.0) green:(242.0/255.0) blue:(201.0/255.0) alpha:1.0]];
    // [[UITabBar appearance] setBarTintColor:[self appColor]];
     //[[UITabBar appearance] setTintColor:[UIColor blueColor]];
     //[[UITabBar appearance] setSelectedImageTintColor:[UIColor clearColor]];

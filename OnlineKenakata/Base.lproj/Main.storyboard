@@ -1161,19 +1161,22 @@
                     <tabBar key="tabBar" contentMode="scaleToFill" id="JQR-rB-NYL">
                         <rect key="frame" x="0.0" y="431" width="320" height="49"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.99607843139999996" green="0.94901960780000005" blue="0.78823529410000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="tintColor" red="0.70196078429999997" green="0.54117647059999996" blue="0.0078431372550000003" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="barTintColor" red="0.99607843139999996" green="0.94901960780000005" blue="0.78823529410000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="selectedImageTintColor" red="0.70196078429999997" green="0.54117647059999996" blue="0.0078431372550000003" alpha="1" colorSpace="calibratedRGB"/>
                     </tabBar>
                     <connections>
-                        <segue destination="CZ4-MO-1fc" kind="relationship" relationship="viewControllers" id="mb4-lQ-pad"/>
-                        <segue destination="qqe-JN-5lc" kind="relationship" relationship="viewControllers" id="K6u-0P-jQ2"/>
-                        <segue destination="woE-r6-h5S" kind="relationship" relationship="viewControllers" id="nFv-vc-pNg"/>
-                        <segue destination="iG1-RH-FOU" kind="relationship" relationship="viewControllers" id="CJ7-Yq-TCO"/>
-                        <segue destination="yKW-hB-tTM" kind="relationship" relationship="viewControllers" id="z97-Il-Vzy"/>
+                        <segue destination="CZ4-MO-1fc" kind="relationship" relationship="viewControllers" id="5Nb-K3-JBF"/>
+                        <segue destination="qqe-JN-5lc" kind="relationship" relationship="viewControllers" id="rsw-6P-ZgO"/>
+                        <segue destination="lTe-ra-Rhm" kind="relationship" relationship="viewControllers" id="xeG-KJ-DSg"/>
+                        <segue destination="yKW-hB-tTM" kind="relationship" relationship="viewControllers" id="KGg-Ar-3Mt"/>
+                        <segue destination="iG1-RH-FOU" kind="relationship" relationship="viewControllers" id="X7S-W5-tXR"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FNP-y4-bzi" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="225" y="-129"/>
+            <point key="canvasLocation" x="287" y="-129"/>
         </scene>
         <!--Offers-->
         <scene sceneID="0cZ-dy-OOc">
@@ -1227,7 +1230,7 @@
             <objects>
                 <tableViewController id="lTe-ra-Rhm" customClass="NewsList" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="107" sectionHeaderHeight="22" sectionFooterHeight="22" id="cBt-VM-laN">
-                        <rect key="frame" x="0.0" y="64" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="455"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
@@ -1292,13 +1295,14 @@
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Location" image="menu_icn_location.png" id="Eo0-mD-mOi"/>
+                    <navigationItem key="navigationItem" id="YVd-8e-OsE"/>
                     <connections>
                         <outlet property="mapView" destination="7WG-7E-RxP" id="KeL-1n-KiQ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="btJ-vM-hHA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="767" y="1148"/>
+            <point key="canvasLocation" x="1204" y="2544"/>
         </scene>
         <!--Info-->
         <scene sceneID="TnM-3z-Myc">
@@ -1534,6 +1538,7 @@
                         <outlet property="table" destination="4zI-Zg-i2o" id="Wqk-WI-nGe"/>
                         <outlet property="username" destination="ryV-xL-ilO" id="p3b-mD-g1l"/>
                         <segue destination="QG7-GT-yMz" kind="push" identifier="pushinfo" id="1lE-aF-NBL"/>
+                        <segue destination="woE-r6-h5S" kind="push" identifier="locationseg" id="gfZ-7r-5IX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jvf-pu-14f" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1788,14 +1793,14 @@
                             <constraint firstItem="9Og-c2-2ZI" firstAttribute="top" secondItem="xLx-ed-yzg" secondAttribute="bottom" id="bF1-x1-3hm"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Recent" id="Lbk-cL-DhI"/>
+                    <tabBarItem key="tabBarItem" title="Recent" image="menu_icn_location.png" id="Lbk-cL-DhI"/>
                     <connections>
                         <outlet property="collectionView" destination="xLx-ed-yzg" id="1nI-N4-4iL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ECC-Dq-vp7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1373" y="-170"/>
+            <point key="canvasLocation" x="816" y="1236"/>
         </scene>
         <!--My Cart-->
         <scene sceneID="Aui-xf-p2x">
@@ -3443,7 +3448,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="252-ht-f7A">
-                                <rect key="frame" x="20" y="192" width="100" height="30"/>
+                                <rect key="frame" x="110" y="253" width="100" height="30"/>
                                 <color key="backgroundColor" red="0.92941176469999998" green="0.71764705880000002" blue="0.01176470588" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" title="Signup">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
@@ -3454,7 +3459,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4io-GJ-Xv8">
-                                <rect key="frame" x="20" y="330" width="280" height="35"/>
+                                <rect key="frame" x="20" y="311" width="280" height="35"/>
                                 <color key="backgroundColor" red="0.92941176469999998" green="0.71764705880000002" blue="0.01176470588" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" title="Skip">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
@@ -3465,7 +3470,7 @@
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2XB-Wo-LOH" customClass="FBLoginView">
-                                <rect key="frame" x="60" y="246" width="200" height="50"/>
+                                <rect key="frame" x="60" y="175" width="200" height="60"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                 <connections>
                                     <outlet property="delegate" destination="dcE-mX-g5K" id="Med-iY-CUS"/>

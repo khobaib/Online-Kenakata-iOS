@@ -26,6 +26,7 @@
 		1481856E197D2EFA007E0734 /* my_cart.png in Resources */ = {isa = PBXBuildFile; fileRef = 1481856D197D2EFA007E0734 /* my_cart.png */; };
 		14818572197D3C6E007E0734 /* BBBadgeBarButtonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 14818571197D3C6E007E0734 /* BBBadgeBarButtonItem.m */; };
 		1486EE4B197651BE0036C159 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1486EE4A197651BE0036C159 /* MessageUI.framework */; };
+		14B7B1211A08979D00C4A016 /* kenakataTests-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 14B7B1201A08979D00C4A016 /* kenakataTests-Info.plist */; };
 		14D45A3A1974FC6800F677D0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14D45A391974FC6800F677D0 /* Foundation.framework */; };
 		14D45A3C1974FC6800F677D0 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14D45A3B1974FC6800F677D0 /* CoreGraphics.framework */; };
 		14D45A3E1974FC6800F677D0 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14D45A3D1974FC6800F677D0 /* UIKit.framework */; };
@@ -34,11 +35,6 @@
 		14D45A4A1974FC6800F677D0 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 14D45A491974FC6800F677D0 /* AppDelegate.m */; };
 		14D45A4D1974FC6800F677D0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 14D45A4B1974FC6800F677D0 /* Main.storyboard */; };
 		14D45A521974FC6800F677D0 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 14D45A511974FC6800F677D0 /* Images.xcassets */; };
-		14D45A591974FC6900F677D0 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14D45A581974FC6900F677D0 /* XCTest.framework */; };
-		14D45A5A1974FC6900F677D0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14D45A391974FC6800F677D0 /* Foundation.framework */; };
-		14D45A5B1974FC6900F677D0 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14D45A3D1974FC6800F677D0 /* UIKit.framework */; };
-		14D45A631974FC6900F677D0 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 14D45A611974FC6900F677D0 /* InfoPlist.strings */; };
-		14D45A651974FC6900F677D0 /* OnlineKenakataTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 14D45A641974FC6900F677D0 /* OnlineKenakataTests.m */; };
 		14D45ACC1974FCB900F677D0 /* MWCaptionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 14D45A711974FCB900F677D0 /* MWCaptionView.m */; };
 		14D45ACD1974FCB900F677D0 /* MWGridCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 14D45A741974FCB900F677D0 /* MWGridCell.m */; };
 		14D45ACE1974FCB900F677D0 /* MWGridViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14D45A761974FCB900F677D0 /* MWGridViewController.m */; };
@@ -164,16 +160,6 @@
 		9AE0DAE719A2074A003F1D74 /* WriteReviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AE0DAE619A2074A003F1D74 /* WriteReviewViewController.m */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		14D45A5C1974FC6900F677D0 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 14D45A2E1974FC6800F677D0 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 14D45A351974FC6800F677D0;
-			remoteInfo = OnlineKenakata;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXFileReference section */
 		1403D1FE197A50680074B61C /* MyCart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyCart.h; sourceTree = "<group>"; };
 		1403D1FF197A50680074B61C /* MyCart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyCart.m; sourceTree = "<group>"; };
@@ -206,6 +192,7 @@
 		14818570197D3C6E007E0734 /* BBBadgeBarButtonItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBBadgeBarButtonItem.h; sourceTree = "<group>"; };
 		14818571197D3C6E007E0734 /* BBBadgeBarButtonItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBBadgeBarButtonItem.m; sourceTree = "<group>"; };
 		1486EE4A197651BE0036C159 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		14B7B1201A08979D00C4A016 /* kenakataTests-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "kenakataTests-Info.plist"; sourceTree = "<group>"; };
 		14D45A361974FC6800F677D0 /* kenakata.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = kenakata.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		14D45A391974FC6800F677D0 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		14D45A3B1974FC6800F677D0 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -218,9 +205,7 @@
 		14D45A491974FC6800F677D0 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		14D45A4C1974FC6800F677D0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		14D45A511974FC6800F677D0 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		14D45A571974FC6900F677D0 /* kenakataTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = kenakataTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		14D45A581974FC6900F677D0 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
-		14D45A601974FC6900F677D0 /* কেনাকাটাTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "কেনাকাটাTests-Info.plist"; sourceTree = "<group>"; };
 		14D45A621974FC6900F677D0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		14D45A641974FC6900F677D0 /* OnlineKenakataTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OnlineKenakataTests.m; sourceTree = "<group>"; };
 		14D45A701974FCB900F677D0 /* MWCaptionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MWCaptionView.h; path = Classes/MWCaptionView.h; sourceTree = "<group>"; };
@@ -461,16 +446,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		14D45A541974FC6900F677D0 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				14D45A591974FC6900F677D0 /* XCTest.framework in Frameworks */,
-				14D45A5B1974FC6900F677D0 /* UIKit.framework in Frameworks */,
-				14D45A5A1974FC6900F677D0 /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -515,7 +490,6 @@
 			isa = PBXGroup;
 			children = (
 				14D45A361974FC6800F677D0 /* kenakata.app */,
-				14D45A571974FC6900F677D0 /* kenakataTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -579,7 +553,7 @@
 		14D45A5F1974FC6900F677D0 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				14D45A601974FC6900F677D0 /* কেনাকাটাTests-Info.plist */,
+				14B7B1201A08979D00C4A016 /* kenakataTests-Info.plist */,
 				14D45A611974FC6900F677D0 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
@@ -950,24 +924,6 @@
 			productReference = 14D45A361974FC6800F677D0 /* kenakata.app */;
 			productType = "com.apple.product-type.application";
 		};
-		14D45A561974FC6900F677D0 /* kenakataTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 14D45A6B1974FC6900F677D0 /* Build configuration list for PBXNativeTarget "kenakataTests" */;
-			buildPhases = (
-				14D45A531974FC6900F677D0 /* Sources */,
-				14D45A541974FC6900F677D0 /* Frameworks */,
-				14D45A551974FC6900F677D0 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				14D45A5D1974FC6900F677D0 /* PBXTargetDependency */,
-			);
-			name = kenakataTests;
-			productName = OnlineKenakataTests;
-			productReference = 14D45A571974FC6900F677D0 /* kenakataTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -988,9 +944,6 @@
 							};
 						};
 					};
-					14D45A561974FC6900F677D0 = {
-						TestTargetID = 14D45A351974FC6800F677D0;
-					};
 				};
 			};
 			buildConfigurationList = 14D45A311974FC6800F677D0 /* Build configuration list for PBXProject "kenakata" */;
@@ -1007,7 +960,6 @@
 			projectRoot = "";
 			targets = (
 				14D45A351974FC6800F677D0 /* কেনাকাটা */,
-				14D45A561974FC6900F677D0 /* kenakataTests */,
 			);
 		};
 /* End PBXProject section */
@@ -1025,6 +977,7 @@
 				9A6B51E519F62ABE004C0A2C /* icon_filter_pressed.png in Resources */,
 				14D45B551974FFA500F677D0 /* tag_new.png in Resources */,
 				9AB11F3919EA50AE00F0E935 /* icon_favorite.png in Resources */,
+				14B7B1211A08979D00C4A016 /* kenakataTests-Info.plist in Resources */,
 				18AB773E199CB58000364FA6 /* icon.png in Resources */,
 				1895D59F1999F05D00713916 /* star.png in Resources */,
 				14D45B581974FFA500F677D0 /* twitter.png in Resources */,
@@ -1058,14 +1011,6 @@
 				14D45B521974FFA500F677D0 /* a2mc_pressed.png in Resources */,
 				1848A326198F654500684602 /* PostSplash.png in Resources */,
 				14D45B571974FFA500F677D0 /* tag_sale.png in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		14D45A551974FC6900F677D0 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				14D45A631974FC6900F677D0 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1177,23 +1122,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		14D45A531974FC6900F677D0 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				14D45A651974FC6900F677D0 /* OnlineKenakataTests.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		14D45A5D1974FC6900F677D0 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 14D45A351974FC6800F677D0 /* কেনাকাটা */;
-			targetProxy = 14D45A5C1974FC6900F677D0 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		14D45A421974FC6800F677D0 /* InfoPlist.strings */ = {
@@ -1337,46 +1266,6 @@
 			};
 			name = Release;
 		};
-		14D45A6C1974FC6900F677D0 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/OnlineKenakata.app/OnlineKenakata";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "OnlineKenakata/OnlineKenakata-Prefix.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = "OnlineKenakataTests/কেনাকাটাTests-Info.plist";
-				PRODUCT_NAME = kenakataTests;
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = xctest;
-			};
-			name = Debug;
-		};
-		14D45A6D1974FC6900F677D0 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/OnlineKenakata.app/OnlineKenakata";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "OnlineKenakata/OnlineKenakata-Prefix.pch";
-				INFOPLIST_FILE = "OnlineKenakataTests/কেনাকাটাTests-Info.plist";
-				PRODUCT_NAME = kenakataTests;
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = xctest;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1394,15 +1283,6 @@
 			buildConfigurations = (
 				14D45A691974FC6900F677D0 /* Debug */,
 				14D45A6A1974FC6900F677D0 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		14D45A6B1974FC6900F677D0 /* Build configuration list for PBXNativeTarget "kenakataTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				14D45A6C1974FC6900F677D0 /* Debug */,
-				14D45A6D1974FC6900F677D0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

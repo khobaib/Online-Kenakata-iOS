@@ -42,9 +42,9 @@
    self.tabBarController.navigationItem.title=@"Settings";
     
     if(token!=nil){
-        self.settingsTableHeight.constant=236;
+        self.settingsTableHeight.constant=295;
     }else{
-        self.settingsTableHeight.constant=177;
+        self.settingsTableHeight.constant=236;
     }
     
     [self setDataOnUI];
@@ -98,9 +98,9 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     if(token!=nil){
-        return 4;
+        return 5;
     }else{
-        return 3;
+        return 4;
     }
     
 }
@@ -115,14 +115,16 @@
        
         UILabel *lable=(UILabel *)[cell viewWithTag:1101];
         lable.text=@"";
-        if(indexPath.row==1){
+        if(indexPath.row==2){
               lable.text=@"Change Password";
-        }else if(indexPath.row==2){
+        }else if(indexPath.row==3){
               lable.text=@"Rate App";
-        }else if (indexPath.row==3){
+        }else if (indexPath.row==4){
               lable.text=@"Logout";
         }else if(indexPath.row==0){
              lable.text=@"Info";
+        }else if(indexPath.row==1){
+            lable.text=@"Location";
         }
         
       
@@ -137,12 +139,16 @@
         
         lable.text=@"";
         
-        if(indexPath.row==1){
+        if(indexPath.row==2){
              lable.text=@"Rate App";
-        }else if(indexPath.row==2){
+        }else if(indexPath.row==3){
              lable.text=@"Login";
         }else if(indexPath.row==0){
             lable.text=@"Info";
+        }else if (indexPath.row==1){
+         
+            lable.text=@"Location";
+
         }
         
         
@@ -158,16 +164,20 @@
         if(indexPath.row==0){
             [self performSegueWithIdentifier:@"pushinfo" sender:self];
         }
-        if(indexPath.row==2){
-            [[UIApplication sharedApplication]openURL:[NSURL URLWithString:@"itms-apps://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=905900408"]];
+        if(indexPath.row==1){
+            [self performSegueWithIdentifier:@"locationseg" sender:self];
+
         }
         if(indexPath.row==3){
+            [[UIApplication sharedApplication]openURL:[NSURL URLWithString:@"itms-apps://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=905900408"]];
+        }
+        if(indexPath.row==4){
         
             UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"" message:@"Do you like to Logout?" delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
             [alert show];
         }
         
-        if(indexPath.row==1){
+        if(indexPath.row==2){
             UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"" message:@"Please Enter The new password." delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
             [alert show];
         }
@@ -179,11 +189,17 @@
         if(indexPath.row==0){
             [self performSegueWithIdentifier:@"pushinfo" sender:self];
         }
+        
         if(indexPath.row==1){
+         
+            [self performSegueWithIdentifier:@"locationseg" sender:self];
+
+        }
+        if(indexPath.row==2){
             [[UIApplication sharedApplication]openURL:[NSURL URLWithString:@"itms-apps://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=905900408"]];
         }
         
-        if(indexPath.row==2){
+        if(indexPath.row==3){
             LoginViewController *login =[[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"loginScreen"];
             [self.navigationController pushViewController:login animated:YES];
         }
