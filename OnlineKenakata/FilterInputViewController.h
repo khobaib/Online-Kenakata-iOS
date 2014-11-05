@@ -11,10 +11,14 @@
 @interface FilterInputViewController : UIViewController<UIPickerViewDataSource,UIPickerViewDelegate,UITextFieldDelegate>{
     UIPickerView *marchentPicker;
     UIPickerView *tagPicker;
+    UIPickerView *pricePicker;
     NSArray *marchentList;
     NSArray *tagList;
-  
+    NSArray *priceList;
+    
+    NSDictionary *priceRange;
     NSMutableDictionary *filterParams;
+    
     int counter;
 }
 

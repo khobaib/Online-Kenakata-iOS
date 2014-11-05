@@ -35,8 +35,9 @@
     tagList=[[NSArray alloc]init];
     marchentList=[[NSUserDefaults standardUserDefaults]objectForKey:@"marchent_data"];
     filterParams=[[NSMutableDictionary alloc]init];
-    
+    priceList=[self dataforPrice];
 
+    
     [self get_categories_by_parent_cateogory_id];
     
     [self initTagPicker];
@@ -49,6 +50,10 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(void)initPricePicker{
+    
 }
 
 -(void)initTagPicker{
@@ -184,6 +189,48 @@
     tagList=[[dic objectForKey:@"success"]objectForKey:@"tags"];
     
 
+}
+
+-(NSMutableArray *)dataforPrice{
+    NSMutableArray *aray=[[NSMutableArray alloc]init];
+    
+    NSMutableDictionary *dic=[[NSMutableDictionary alloc]init];
+    
+    dic[@"title"]=@"Below 250TK";
+    dic[@"low"]=@"0";
+    dic[@"heigh"]=@"250";
+    
+    NSMutableDictionary *dic1=[[NSMutableDictionary alloc]init];
+    
+    dic1[@"title"]=@"TK 251-500";
+    dic1[@"low"]=@"251";
+    dic1[@"heigh"]=@"500";
+    
+    NSMutableDictionary *dic2=[[NSMutableDictionary alloc]init];
+    
+    dic2[@"title"]=@"TK 501-1000";
+    dic2[@"low"]=@"501";
+    dic2[@"heigh"]=@"1000";
+    
+    NSMutableDictionary *dic3=[[NSMutableDictionary alloc]init];
+    
+    dic3[@"title"]=@"TK 1001-2000";
+    dic3[@"low"]=@"1001";
+    dic3[@"heigh"]=@"2000";
+    
+    NSMutableDictionary *dic4=[[NSMutableDictionary alloc]init];
+    
+    dic4[@"title"]=@"Tk 2000+";
+    dic4[@"low"]=@"2000";
+    dic4[@"heigh"]=@"";
+    
+    [aray addObject:dic];
+    [aray addObject:dic1];
+    [aray addObject:dic2];
+    [aray addObject:dic3];
+    [aray addObject:dic4];
+    
+    return aray;
 }
 
 
