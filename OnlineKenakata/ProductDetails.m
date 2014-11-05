@@ -215,7 +215,7 @@
     [self frameUpdateFrom:self.productDetails To:self.itemCodeLable];
     [self frameUpdateFrom:self.productDetails To:self.itemCode];
     [self frameUpdateFrom:self.itemCodeLable To:self.similarProductLable];
-    [self frameUpdateFrom:self.similarProductLable To:self.horizontalScroller];
+    [self frameUpdateFrom:self.similarProductLable To:self.collectionView];
     
     
     int available =[[self.productData objectForKey:@"add_to_cart"]intValue];
@@ -892,44 +892,25 @@
         UIImageView *thumbnil=(UIImageView *)[cell viewWithTag:301];
         UIImageView *toping=(UIImageView *) [cell viewWithTag:302];
         
-        UIImageView *logo=(UIImageView *)[cell viewWithTag:309];
+    
         
         UILabel *oldPrice =(UILabel *)[cell viewWithTag:305];
-        UIView *back=[cell viewWithTag:307];
-        RateView *starRating=(RateView *)[cell viewWithTag:308];
-        
-        [self starRaterShow:starRating withView:back starcount:[[dic objectForKey:@"average_rating"]floatValue]];
-        
+    
+    
         UILabel *newPrice=(UILabel *) [cell viewWithTag:306];
-        UILabel *totalFavorite=(UILabel *)[cell viewWithTag:311];
-        
-        totalFavorite.text=[NSString stringWithFormat:@"%d",[[dic objectForKey:@"total_favorites"] intValue]];
-        
+    
+    
         //NSLog(@" %@  %d",[dic objectForKey:@"name"],[[dic objectForKey:@"total_favorites"] intValue]);
-        
-        if([[dic objectForKey:@"has_favorited"]intValue]==1){
-            UIImageView *favorite=(UIImageView *)[cell viewWithTag:310];
-            
-            
-            [favorite setImage:[UIImage imageNamed:@"icon_favorite.png"]];
-            
-        }
+    
         
         
-        
-        NSString *key=[NSString stringWithFormat:@"marchent_data_%@",[dic objectForKey:@"user_id"]];
-        
-        NSString *marchentLogo=[[[NSUserDefaults standardUserDefaults] objectForKey:key]objectForKey:@"logo"];
-        
-        [logo sd_setImageWithURL:[NSURL URLWithString:marchentLogo]
-                placeholderImage:[UIImage imageNamed:@"icon"]];
-        //
+                      //
         productName.text=@"";
         thumbnil.image=nil;
         toping.image=nil;
         oldPrice.text=@"";
         newPrice.text=@"";
-        NSString * imgurl = [[[dic objectForKey:@"images"] objectAtIndex:0]objectForKey:@"thumbnail_image_url"];
+        NSString * imgurl = [dic objectForKey:@"thumbnail_image_url"] ;
         
         
         productName.attributedText=[TextStyling AttributForTitle:[NSString stringWithFormat:@"%@",[dic objectForKey:@"name"]]];
@@ -999,7 +980,7 @@
         
         if(available<1){
             prdtails= [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"productDetails3"];
-            prdtails.cartBtn.hidden=YES;
+          //  prdtails.cartBtn.hidden=YES;
             NSLog(@"in no button");
             //productDetails3
         }else{

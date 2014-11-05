@@ -366,7 +366,7 @@
        
             if(available<1){
                 prdtails= [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"productDetails3"];
-                prdtails.cartBtn.hidden=YES;
+               // prdtails.cartBtn.hidden=YES;
                 NSLog(@"in no button");
                 //productDetails3
             }else{
