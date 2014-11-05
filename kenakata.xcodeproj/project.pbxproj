@@ -149,7 +149,6 @@
 		9A6B51E819F62ABE004C0A2C /* icon_sort.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A6B51E419F62ABE004C0A2C /* icon_sort.png */; };
 		9A743EF219EE531700A52FD8 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A743EF119EE531700A52FD8 /* SettingsViewController.m */; };
 		9A7F131919A35347002F2526 /* phone.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A7F131819A35347002F2526 /* phone.png */; };
-		9AA6B75519D99AB400C1A235 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AA6B75419D99AB400C1A235 /* FacebookSDK.framework */; };
 		9AB11F3619EA48BC00F0E935 /* RateView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AB11F3519EA48BC00F0E935 /* RateView.m */; };
 		9AB11F3919EA50AE00F0E935 /* icon_favorite.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AB11F3719EA50AE00F0E935 /* icon_favorite.png */; };
 		9AB11F3A19EA50AE00F0E935 /* icon_unfavorite.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AB11F3819EA50AE00F0E935 /* icon_unfavorite.png */; };
@@ -161,6 +160,7 @@
 		9AD130751A07959500A7EF58 /* RecentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AD130741A07959500A7EF58 /* RecentViewController.m */; };
 		9AD8A08019DA801500924325 /* FacebookViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AD8A07F19DA801500924325 /* FacebookViewController.m */; };
 		9AE0DAE719A2074A003F1D74 /* WriteReviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AE0DAE619A2074A003F1D74 /* WriteReviewViewController.m */; };
+		9AE346F01A0A2E4600C66953 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AE346EF1A0A2E4600C66953 /* FacebookSDK.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -411,7 +411,6 @@
 		9A743EF019EE531700A52FD8 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
 		9A743EF119EE531700A52FD8 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
 		9A7F131819A35347002F2526 /* phone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = phone.png; sourceTree = "<group>"; };
-		9AA6B75419D99AB400C1A235 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = OnlineKenakata/FacebookSDK.framework; sourceTree = "<group>"; };
 		9AB11F3419EA48BC00F0E935 /* RateView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RateView.h; sourceTree = "<group>"; };
 		9AB11F3519EA48BC00F0E935 /* RateView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RateView.m; sourceTree = "<group>"; };
 		9AB11F3719EA50AE00F0E935 /* icon_favorite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_favorite.png; sourceTree = "<group>"; };
@@ -431,6 +430,7 @@
 		9AD8A07F19DA801500924325 /* FacebookViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FacebookViewController.m; sourceTree = "<group>"; };
 		9AE0DAE519A2074A003F1D74 /* WriteReviewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WriteReviewViewController.h; sourceTree = "<group>"; };
 		9AE0DAE619A2074A003F1D74 /* WriteReviewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WriteReviewViewController.m; sourceTree = "<group>"; };
+		9AE346EF1A0A2E4600C66953 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -438,7 +438,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9AA6B75519D99AB400C1A235 /* FacebookSDK.framework in Frameworks */,
 				1413996E1977FC2400B8ACA9 /* libsqlite3.0.dylib in Frameworks */,
 				1486EE4B197651BE0036C159 /* MessageUI.framework in Frameworks */,
 				1478B4DD19752E7C002C79B0 /* Social.framework in Frameworks */,
@@ -447,6 +446,7 @@
 				1478B4D719752E5D002C79B0 /* MapKit.framework in Frameworks */,
 				1478B4D519752E33002C79B0 /* QuartzCore.framework in Frameworks */,
 				14D45A3C1974FC6800F677D0 /* CoreGraphics.framework in Frameworks */,
+				9AE346F01A0A2E4600C66953 /* FacebookSDK.framework in Frameworks */,
 				14D45A3E1974FC6800F677D0 /* UIKit.framework in Frameworks */,
 				14D45A3A1974FC6800F677D0 /* Foundation.framework in Frameworks */,
 			);
@@ -503,7 +503,7 @@
 		14D45A381974FC6800F677D0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				9AA6B75419D99AB400C1A235 /* FacebookSDK.framework */,
+				9AE346EF1A0A2E4600C66953 /* FacebookSDK.framework */,
 				1413996D1977FC2400B8ACA9 /* libsqlite3.0.dylib */,
 				1486EE4A197651BE0036C159 /* MessageUI.framework */,
 				1478B4DC19752E7C002C79B0 /* Social.framework */,
@@ -1245,6 +1245,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/OnlineKenakata",
 					/Users/macmini/Documents/FacebookSDK,
+					"$(PROJECT_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "OnlineKenakata/kenakata-Prefix.pch";
@@ -1267,6 +1268,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/OnlineKenakata",
 					/Users/macmini/Documents/FacebookSDK,
+					"$(PROJECT_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "OnlineKenakata/kenakata-Prefix.pch";

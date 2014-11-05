@@ -19,7 +19,7 @@
 @property (strong,nonatomic) NSString *productID;
 @property (strong,nonatomic) IBOutlet EDStarRating *starRater;
 @property (strong,nonatomic) IBOutlet UITextField *Headline;
-@property (strong,nonatomic) IBOutlet UITextView *description;
+@property (strong,nonatomic) IBOutlet UITextView *detailReview;
 @property (strong,nonatomic) IBOutlet  UIButton *submit;
 
 @property (strong,nonatomic) NSDictionary *userReview;

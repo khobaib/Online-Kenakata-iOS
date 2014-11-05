@@ -18,6 +18,7 @@
 
 @interface share : UIView{
     UIActionSheet *action;
+    UIAlertController *alert;
 }
 @property (nonatomic, weak) id <shareDelegate> delegate;
 
@@ -33,4 +34,7 @@
 @property (strong,nonatomic) NSString *emailSub;
 @property (strong,nonatomic) NSString *smsBody;
 - (id)initWithFrame:(CGRect)frame actionSheet:(UIActionSheet *)sheet;
+-(void)facebookShare;
+-(void)twiterShare;
+-(void)mailShare;
 @end

@@ -19,8 +19,8 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    
-    [FBSession.activeSession closeAndClearTokenInformation];
+    [FBSettings setDefaultUrlSchemeSuffix:@"abcd"];
+    //[FBSession.activeSession closeAndClearTokenInformation];
     // Override point for customization after application launch.
   
     if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)

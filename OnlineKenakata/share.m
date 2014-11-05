@@ -61,74 +61,74 @@
     return self;
 }
 
+
+
 -(void)cancle:(id)sender{
     [action dismissWithClickedButtonIndex:-1 animated:YES];
     action=nil;
 
 }
--(void)facebook:(id)sender{
-    [action dismissWithClickedButtonIndex:-1 animated:YES];
-    action=nil;
-    
-    
+- (void)facebookShare {
     FBLinkShareParams *params = [[FBLinkShareParams alloc] init];
     NSMutableDictionary *paramsDic = [[NSMutableDictionary alloc]init];
+    
     
     if(![self.url isEqualToString:@""]){
         
         [paramsDic setObject:self.url forKey:@"link"];
         params.link = [NSURL URLWithString:self.url];
-
-
+        
+        
     }
-    if(![self.description isEqualToString:@""]){
-      
-        params.linkDescription=self.description;
-        [paramsDic setObject:self.description forKey:@"description"];
-
-
+    if(![self.descriptionText isEqualToString:@""]){
+        
+        params.linkDescription=self.descriptionText;
+        [paramsDic setObject:self.descriptionText forKey:@"description"];
+        
+        
     }
     if(![self.titleName isEqualToString:@""]){
         params.name=self.titleName;
         [paramsDic setObject:self.titleName forKey:@"name"];
-
-
+        
+        
     }
     if(![self.caption isEqualToString:@""]){
         params.caption=self.caption;
         [paramsDic setObject:self.caption forKey:@"caption"];
-
-
+        
+        
     }
     
     if(![self.imageUrl isEqualToString:@""]){
         params.picture=[NSURL URLWithString:self.imageUrl];
         [paramsDic setObject:self.imageUrl forKey:@"picture"];
-
-
+        
+        
     }
     
-   // NSLog(@"%@ %@",params.linkDescription,self.url);
-
+    // NSLog(@"%@ %@",params.linkDescription,self.url);
+    
     
     
     
     // If the Facebook app is installed and we can present the share dialog
+    
     if ([FBDialogs canPresentShareDialogWithParams:params]) {
         // Present the share dialog
-      //  NSLog(@"App present");
+        //  NSLog(@"App present");
         [FBDialogs presentShareDialogWithParams:params clientState:nil
          
                                         handler:^(FBAppCall *call, NSDictionary *results, NSError *error) {
-                                          if(error) {
-                                              // An error occurred, we need to handle the error
-                                              // See: https://developers.facebook.com/docs/ios/errors
-                                              NSLog(@"Error publishing story: %@", error.description);
-                                          } else {
-                                              // Success
-                                              NSLog(@"result %@", results);
-                                          }
-                                      }];
+                                            if(error) {
+                                                // An error occurred, we need to handle the error
+                                                // See: https://developers.facebook.com/docs/ios/errors
+                                                NSLog(@"Error publishing story: %@", error.description);
+                                            } else {
+                                                // Success
+                                                NSLog(@"result %@", results);
+                                            }
+                                        }];
         
     } else {
         // Present the feed dialog
@@ -136,7 +136,7 @@
         //NSLog(@"App not present");
         
         
-      //  NSLog(@"%@",paramsDic);
+        //  NSLog(@"%@",paramsDic);
         // Show the feed dialog
         [FBWebDialogs presentFeedDialogModallyWithSession:nil
                                                parameters:paramsDic
@@ -168,6 +168,14 @@
         
         
     }
+}
+
+-(void)facebook:(id)sender{
+    [action dismissWithClickedButtonIndex:-1 animated:YES];
+    action=nil;
+    
+    
+    [self facebookShare];
 
 }
 
@@ -183,14 +191,10 @@
     }
     return params;
 }
--(void)twitter:(id)sender{
-    [action dismissWithClickedButtonIndex:-1 animated:YES];
-    action=nil;
-    
-    
+- (void)twiterShare {
     SLComposeViewController *tweetSheet = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeTwitter];
     [tweetSheet addURL:[NSURL URLWithString:self.url]];
-
+    
     if(self.titleName.length>117){
         NSRange stringRange = {0, MIN([self.titleName length], 114)};
         
@@ -198,7 +202,7 @@
         
         // Now you can create the short string
         NSString *shortString = [self.titleName substringWithRange:stringRange];
-
+        
         [tweetSheet setInitialText:[NSString stringWithFormat:@"%@...",shortString]];
         
     }else{
@@ -225,19 +229,31 @@
     
     
     [self.viewController presentViewController:tweetSheet animated:YES completion:nil];
+}
+
+-(void)twitter:(id)sender{
+    [action dismissWithClickedButtonIndex:-1 animated:YES];
+    action=nil;
+    
+    
+    [self twiterShare];
 
     
 }
 
--(void)mail:(id)sender{
-    [action dismissWithClickedButtonIndex:-1 animated:YES];
-    action=nil;
+- (void)mailShare {
     NSURL *url = [[NSURL alloc] initWithString:[NSString stringWithFormat:@"mailto:?to=&subject=%@&body=%@",
                                                 [self.emailSub stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding],
                                                 [self.emailBody stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding]]];
     
     /* load the URL */
     [[UIApplication sharedApplication] openURL:url];
+}
+
+-(void)mail:(id)sender{
+    [action dismissWithClickedButtonIndex:-1 animated:YES];
+    action=nil;
+    [self mailShare];
 
     
     

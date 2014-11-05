@@ -45,10 +45,10 @@
     self.starRater.displayMode=EDStarRatingDisplayFull;
     [self initLoading];
     
-    self.description.layer.borderWidth = 3.0f;
-     self.description.layer.borderColor = [[UIColor lightGrayColor] CGColor];
+    self.detailReview.layer.borderWidth = 3.0f;
+     self.detailReview.layer.borderColor = [[UIColor lightGrayColor] CGColor];
 
-    self.description.layer.cornerRadius=5.0f;
+    self.detailReview.layer.cornerRadius=5.0f;
     
     [self.submit setBackgroundColor:[TextStyling appColor]];
     [self initLoading];
@@ -56,7 +56,7 @@
     
     if(self.userReview!=nil){
         self.Headline.text=[self.userReview objectForKey:@"title"];
-        self.description.text=[self.userReview objectForKey:@"detail"];
+        self.detailReview.text=[self.userReview objectForKey:@"detail"];
         self.starRater.rating=[[self.userReview objectForKey:@"rating"]intValue];
     }
     
@@ -139,9 +139,9 @@
 
 -(IBAction)SubmitButtonPressed:(id)sender{
     [self.Headline resignFirstResponder];
-    [self.description resignFirstResponder];
+    [self.detailReview resignFirstResponder];
     NSString *tittle=self.Headline.text;
-    NSString *descreption=self.description.text;
+    NSString *descreption=self.detailReview.text;
     
     if([tittle isEqualToString:@""] ||[descreption isEqualToString:@""]){
         UIAlertView *alert =[[UIAlertView alloc]initWithTitle:@"Error" message:@"Please Fillup all fields" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];

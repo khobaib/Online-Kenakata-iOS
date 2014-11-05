@@ -86,7 +86,7 @@
         
         FBLikeControl *like = [[FBLikeControl alloc] init];
         like.objectID =[self.pageImages objectAtIndex:page];
-        [self.scrollView addSubview:like];
+        //[self.scrollView addSubview:like];
         // 4
         [self.pageViews replaceObjectAtIndex:page withObject:newPageView];
     }
@@ -659,6 +659,7 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+#pragma mark -Share functionality
 
 
 -(void)addShareButton{
@@ -672,19 +673,8 @@
     
     //[self.navigationItem.titleView addSubview:sharebtn];
 }
--(void)shareButtonClick:(id)sender{
-    UIActionSheet * action = [[UIActionSheet alloc]
-                              initWithTitle:@"Share"
-                              delegate:nil
-                              cancelButtonTitle:@"Cancel"
-                              destructiveButtonTitle:nil
-                              otherButtonTitles:@"",nil];
 
-    
-   // UIAlertController *alert=[UIAlertController al]
-       
-    share *background = [[share alloc]initWithFrame:CGRectMake(0, 0, 320, 150) actionSheet:action];
-    
+- (void)shareConfig:(share *)background {
     NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
     NSMutableDictionary *dic1=[NSKeyedUnarchiver unarchiveObjectWithData:[ud objectForKey:@"get_user_data"]];
     
@@ -693,7 +683,7 @@
     
     
     //fb twitter
-    background.titleName=[NSString stringWithFormat:@"Recommended - %@ , by %@ , Call %@ . Download Online Kenakata (Android/iOS)",self.name.text,[dic objectForKey:@"user_name"],[dic objectForKey:@"user_phone"]];
+    background.titleName=[NSString stringWithFormat:@"Recommended - %@ , by %@ , Call %@ . Download কেনাকাটা (Android/iOS)",self.name.text,[dic objectForKey:@"user_name"],[dic objectForKey:@"user_phone"]];
     background.descriptionText=self.productDetails.text;
     NSString *imageURL=[[[self.productData objectForKey:@"images"]objectAtIndex:0]objectForKey:@"image_url"];
     background.url=imageURL;
@@ -703,20 +693,81 @@
     background.delegate=self;
     
     //email
-    background.emailBody=[NSString stringWithFormat:@"%@ \n%@ .\nDownload Online Kenakata (Android/iOS)",self.productDetails.text,imageURL];
+    background.emailBody=[NSString stringWithFormat:@"%@ \n%@ .\nDownload কেনাকাটা (Android/iOS)",self.productDetails.text,imageURL];
     background.emailSub=[NSString stringWithFormat:@"Recommended - %@ , by %@ , Call %@ ",self.name.text,[dic objectForKey:@"user_name"],[dic objectForKey:@"user_phone"]];
+}
+
+-(void)shareInIOS8{
+    UIAlertController *alert=[UIAlertController alertControllerWithTitle:@"Share" message:@"" preferredStyle:UIAlertControllerStyleActionSheet];
     
-   // background.image=
-    //NSLog(@"%@",background.caption);
-    
-    background.backgroundColor = [UIColor whiteColor];
-    
-    
-    [action addSubview:background];
-    
-    [action showInView:self.view];
+    share *background=[[share alloc]init];
+
+    [self shareConfig:background];
     
 
+  
+    UIAlertAction *facebook=[UIAlertAction actionWithTitle:@"facebook" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
+        [background facebookShare];
+    }];
+
+    UIAlertAction *twiter=[UIAlertAction actionWithTitle:@"twiter" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
+        [background twiterShare];
+    }];
+
+    UIAlertAction *email=[UIAlertAction actionWithTitle:@"email" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
+        [background mailShare];
+    }];
+
+    UIAlertAction *message=[UIAlertAction actionWithTitle:@"message" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
+        
+        [self setMessanger];
+    }];
+    
+    UIAlertAction *cancle=[UIAlertAction actionWithTitle:@"cancle" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action){
+        
+    }];
+
+  
+    
+    
+    [alert addAction:facebook];
+    [alert addAction:twiter];
+    [alert addAction:email];
+    [alert addAction:message];
+    [alert addAction:cancle];
+    
+    [self presentViewController:alert animated:YES completion:nil];
+
+}
+
+-(void)shareButtonClick:(id)sender{
+    UIActionSheet * action = [[UIActionSheet alloc]
+                              initWithTitle:@"Share"
+                              delegate:nil
+                              cancelButtonTitle:@"Cancel"
+                              destructiveButtonTitle:nil
+                              otherButtonTitles:@"",nil];
+
+    
+    
+    share *background;// = [[share alloc]initWithFrame:CGRectMake(0, 0, 320, 150) actionSheet:action];
+    
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
+    {
+        [self shareInIOS8];
+        return;
+    }else{
+          background = [[share alloc]initWithFrame:CGRectMake(0, 0, 320, 150) actionSheet:action];
+    }
+    
+    [self shareConfig:background];
+    
+    background.backgroundColor = [UIColor whiteColor];
+   
+        [action addSubview:background];
+        
+        [action showInView:self.view];
+   
 
 }
 
@@ -734,7 +785,7 @@
     }
     
   //  NSArray *recipents = @[@"12345678", @"72345524"];
-    NSString *message = [NSString stringWithFormat:@"Recommended - %@ , %@ , %@ .Download Online Kenakata (Android/iOS)",self.name.text,[dic objectForKey:@"user_name"],[dic objectForKey:@"user_phone"]];
+    NSString *message = [NSString stringWithFormat:@"Recommended - %@ , %@ , %@ .Download কেনাকাটা (Android/iOS)",self.name.text,[dic objectForKey:@"user_name"],[dic objectForKey:@"user_phone"]];
     
     MFMessageComposeViewController *messageController = [[MFMessageComposeViewController alloc] init];
     messageController.messageComposeDelegate = self;
@@ -797,7 +848,7 @@
     }
 
 }
-
+#pragma mark - Navigation
 -(IBAction)AddTocart:(id)sender{
 
     NSString *spclQus=[self.productData objectForKey:@"special_question"];
@@ -813,7 +864,7 @@
     cart.productData=self.productData;
     [self.navigationController pushViewController:cart animated:YES];
 }
-#pragma mark - Navigation
+
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 /*

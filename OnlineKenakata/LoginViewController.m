@@ -41,7 +41,7 @@
     
     self.loginView.readPermissions = @[@"public_profile", @"email", @"user_friends"];
     [FBSettings setDefaultUrlSchemeSuffix:@"abcd"];
-    [FBSession.activeSession closeAndClearTokenInformation];
+    //[FBSession.activeSession closeAndClearTokenInformation];
     
    
     if(self.fromProcideToCheckout){
