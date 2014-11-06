@@ -13,15 +13,20 @@
 
 
 
-@interface MapView : UIViewController<RMPickerViewControllerDelegate,MKMapViewDelegate,UIActionSheetDelegate>{
+@interface MapView : UIViewController<RMPickerViewControllerDelegate,MKMapViewDelegate,UIActionSheetDelegate,UITableViewDataSource,UITableViewDelegate,UISearchBarDelegate>{
     UIActionSheet *sheet;
-    NSMutableArray *branches;
+    NSArray *branches;
     
     NSMutableDictionary *selectedBranch;
     UIButton *cart;
+    
+    NSArray *searchArray;
 
 }
 
 @property (strong,nonatomic) IBOutlet UIPickerView *pickerView;
 @property (strong,nonatomic) IBOutlet MKMapView *mapView;
+
+@property IBOutlet UISearchBar *searchBar;
+
 @end

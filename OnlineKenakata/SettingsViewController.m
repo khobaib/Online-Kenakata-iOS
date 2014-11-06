@@ -11,6 +11,7 @@
 #import <FacebookSDK/FacebookSDK.h>
 #import "TextStyling.h"
 
+
 @interface SettingsViewController ()
 
 @end
@@ -35,7 +36,7 @@
 
 -(void)viewDidAppear:(BOOL)animated{
     
-    NSLog(@"log");
+
     [super viewWillAppear:animated];
     token=[[NSUserDefaults standardUserDefaults] objectForKey:@"token"];
     
@@ -165,7 +166,8 @@
             [self performSegueWithIdentifier:@"pushinfo" sender:self];
         }
         if(indexPath.row==1){
-            [self performSegueWithIdentifier:@"locationseg" sender:self];
+            
+         [self performSegueWithIdentifier:@"locationseg" sender:self];
 
         }
         if(indexPath.row==3){

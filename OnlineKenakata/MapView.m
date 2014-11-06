@@ -36,15 +36,14 @@
 
     NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
     
-   // NSDictionary *retrievedDictionary = [NSKeyedUnarchiver unarchiveObjectWithData:data];
-
-    NSDictionary *dic = [NSKeyedUnarchiver unarchiveObjectWithData:[ud objectForKey:@"get_user_data"]];
-
+    // NSDictionary *retrievedDictionary = [NSKeyedUnarchiver unarchiveObjectWithData:data];
     
-  
+    NSDictionary *dic = [NSKeyedUnarchiver unarchiveObjectWithData:[ud objectForKey:@"get_user_data"]];
+    
+    
+    
     
     branches=[[[dic objectForKey:@"success"]objectForKey:@"user"]objectForKey:@"branches"];
-
     
     
     
@@ -72,18 +71,25 @@
          self.mapView.showsUserLocation=YES;
     }
 
-    
 
-     //selectedBranch=[branches objectAtIndex:0];
-    
     if(branches.count!=0){
         [self plotPushPin];
         
-      //  [self branches];
+        //  [self branches];
     }
     
+
    
+    searchArray=branches;
+
+    //selectedBranch=[branches objectAtIndex:0];
+    
+    
+    
+
 }
+
+
 
 - (void)initBarbutton {
     
@@ -121,6 +127,8 @@
       [self goTolocation:0];
 
     }
+    
+    
     self.tabBarController.navigationItem.title=@"Location";
 
     
@@ -168,8 +176,8 @@
         NSString *address=[[branches objectAtIndex:i]objectForKey:@"user_address"];
         
         
-        NSString *key=[NSString stringWithFormat:@"marchent_data_%@",[[branches objectAtIndex:i] objectForKey:@"user_id"]];
-        NSString *name=[[[NSUserDefaults standardUserDefaults]objectForKey:key]objectForKey:@"user_name"];
+        
+        NSString *name=[[branches objectAtIndex:i]objectForKey:@"user_name"];
         
         
         PushPin *annotation = [[PushPin alloc] initWithName:name address:address coordinate:zoomLocation] ;
@@ -184,6 +192,7 @@
     
     
     static NSString *identifier = @"PushPin";
+
     if ([annotation isKindOfClass:[PushPin class]]) {
         
         PushPin *pin=(PushPin*)annotation;
@@ -191,8 +200,9 @@
         if (annotationView == nil) {
             annotationView = [[MKPinAnnotationView alloc] initWithAnnotation:pin reuseIdentifier:identifier];
             annotationView.enabled = YES;
-            
+           
         
+           
             CGRect frame=annotationView.frame;
             
             UIButton *button = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
@@ -233,6 +243,7 @@
                     placeholderImage:nil];
             
             annotationView.leftCalloutAccessoryView = leftCAV;
+           
             
             annotationView.canShowCallout = YES;
 
@@ -334,6 +345,9 @@
     */
     
 }
+
+
+
 -(void)showMapChooser{
     
     
@@ -538,5 +552,59 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+#pragma mark -search controller
+
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return searchArray.count;
+}
+
+// Row display. Implementers should *always* try to reuse cells by setting each cell's reuseIdentifier and querying for available reusable cells with dequeueReusableCellWithIdentifier:
+// Cell gets various attributes set automatically based on table (separators) and data source (accessory views, editing controls)
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    static NSString *CellIdentifier = @"Cell";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (!cell) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+    }
+    
+    
+    cell.textLabel.text=[[searchArray objectAtIndex:indexPath.row]objectForKey:@"user_name"];
+    
+    return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+
+    [self.searchDisplayController setActive:NO];
+    
+    float lat=[[[searchArray objectAtIndex:indexPath.row]objectForKey:@"latitude"]floatValue];
+    float ln=[[[searchArray objectAtIndex:indexPath.row]objectForKey:@"longitude"]floatValue];
+    CLLocationCoordinate2D zoomLocation;
+    zoomLocation.latitude = lat;
+    zoomLocation.longitude= ln;
+    
+    MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(zoomLocation, 1.75*METERS_PER_MILE, 1.75*METERS_PER_MILE);
+    
+    [self.mapView setRegion:viewRegion animated:YES];
+    
+}
+
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText{
+}
+
+
+-(BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString
+{
+    NSString *str=[NSString stringWithFormat:@"SELF['user_name'] CONTAINS[c] '%@'",searchString];
+    
+    NSPredicate *resultPredicate =[NSPredicate predicateWithFormat:str];
+    searchArray = [branches filteredArrayUsingPredicate:resultPredicate];
+
+    
+    return YES;
+}
 
 @end
