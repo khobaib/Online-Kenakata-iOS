@@ -280,7 +280,17 @@
     if(filterParams[@"heigh"]==nil){
         filterParams[@"heigh"]=@"-1";
     }
+    if(self.isNew.on){
+        filterParams[@"is_new"]=@"1";
+    }else{
+        filterParams[@"is_new"]=@"0";
+    }
     
+    if(self.isDiscount.on){
+        filterParams[@"is_discount"]=@"1";
+    }else{
+        filterParams[@"is_discount"]=@"0";
+    }
     
     FilterdProductsViewController *vc=[segue destinationViewController];
     vc.params=filterParams;

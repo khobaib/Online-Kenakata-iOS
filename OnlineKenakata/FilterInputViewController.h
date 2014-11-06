@@ -25,5 +25,7 @@
 @property (strong,nonatomic) IBOutlet UITextField *marchent;
 @property (strong,nonatomic) IBOutlet UITextField *tag;
 @property (strong,nonatomic) IBOutlet UITextField *priceField;
+@property IBOutlet UISwitch *isDiscount;
+@property IBOutlet UISwitch *isNew;
 
 @end

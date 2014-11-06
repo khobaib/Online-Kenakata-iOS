@@ -70,7 +70,7 @@
 
 -(void)get_categories_by_parent_cateogory_id{
     
-    NSString *string = [NSString stringWithFormat:@"%@/rest_kenakata.php?method=filter&merchant_id=%@&tag_id=%@&low_price=%@&high_price=%@&start=%d&application_code=%@",[Data getBaseUrl],self.params[@"marchent"],self.params[@"tag"],self.params[@"low"],self.params[@"heigh"],counter,[Data getAppCode]];
+    NSString *string = [NSString stringWithFormat:@"%@/rest_kenakata.php?method=filter&merchant_id=%@&tag_id=%@&low_price=%@&high_price=%@&start=%d&is_new=%@&is_discount=%@&application_code=%@",[Data getBaseUrl],self.params[@"marchent"],self.params[@"tag"],self.params[@"low"],self.params[@"heigh"],counter,self.params[@"is_new"],self.params[@"is_discount"],[Data getAppCode]];
     
     
     NSURL *url = [NSURL URLWithString:string];
