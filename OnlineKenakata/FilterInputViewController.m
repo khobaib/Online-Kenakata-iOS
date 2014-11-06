@@ -42,6 +42,7 @@
     
     [self initTagPicker];
     [self initMarchantPicker];
+    [self initPricePicker];
     
     // Do any additional setup after loading the view.
 }
@@ -53,8 +54,19 @@
 }
 
 -(void)initPricePicker{
+    pricePicker=[[UIPickerView alloc]init];
+    pricePicker.delegate=self;
+    pricePicker.dataSource=self;
+    pricePicker.showsSelectionIndicator=YES;
+    pricePicker.tag=3;
+    UIToolbar *accessoryView = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, 320, 44)];
     
+    UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(onPriceSelection)];
+    [accessoryView setItems:[NSArray arrayWithObject:doneButton]];
+    self.priceField.inputView=pricePicker;
+    self.priceField.inputAccessoryView=accessoryView;
 }
+
 
 -(void)initTagPicker{
     tagPicker = [[UIPickerView alloc] init];
@@ -104,6 +116,14 @@
     [self.marchent resignFirstResponder];
     filterParams[@"marchent"]=[[marchentList objectAtIndex:row]objectForKey:@"user_id"];
 }
+-(void)onPriceSelection{
+    NSInteger row=[pricePicker selectedRowInComponent:0];
+    self.priceField.text=[[priceList objectAtIndex:row]objectForKey:@"title"];
+    filterParams[@"heigh"]=[[priceList objectAtIndex:row]objectForKey:@"heigh"];
+    filterParams[@"low"]=[[priceList objectAtIndex:row]objectForKey:@"low"];
+    
+    [self.priceField resignFirstResponder];
+}
 
 
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView{
@@ -120,8 +140,10 @@
     if(pickerView.tag==1){
         return marchentList.count;
 
-    }else{
+    }else if(pickerView.tag==2){
         return tagList.count;
+    }else{
+        return priceList.count;
     }
     
 }
@@ -132,8 +154,10 @@
     if(pickerView.tag==1){
         return [[marchentList objectAtIndex:row]objectForKey:@"user_name"];
         
-    }else{
+    }else if(pickerView.tag==2){
         return [[tagList objectAtIndex:row]objectForKey:@"name"];
+    }else{
+        return [[priceList objectAtIndex:row]objectForKey:@"title"];
     }
     
 }
@@ -222,7 +246,7 @@
     
     dic4[@"title"]=@"Tk 2000+";
     dic4[@"low"]=@"2000";
-    dic4[@"heigh"]=@"";
+    dic4[@"heigh"]=@"-1";
     
     [aray addObject:dic];
     [aray addObject:dic1];
@@ -249,18 +273,13 @@
         filterParams[@"marchent"]=@"-1";
     }
     
-    if([self.lowestprice.text isEqualToString:@""]){
+    if( filterParams[@"low"]==nil){
         filterParams[@"low"]=@"-1";
-    }else{
-        filterParams[@"low"]=self.lowestprice.text;
     }
     
-    if([self.heighPrice.text isEqualToString:@""]){
+    if(filterParams[@"heigh"]==nil){
         filterParams[@"heigh"]=@"-1";
-    }else{
-        filterParams[@"heigh"]=self.heighPrice.text;
     }
-    
     
     
     FilterdProductsViewController *vc=[segue destinationViewController];

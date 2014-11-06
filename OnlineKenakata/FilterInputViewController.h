@@ -24,7 +24,6 @@
 
 @property (strong,nonatomic) IBOutlet UITextField *marchent;
 @property (strong,nonatomic) IBOutlet UITextField *tag;
-@property (strong,nonatomic) IBOutlet UITextField *lowestprice;
-@property (strong,nonatomic) IBOutlet UITextField *heighPrice;
+@property (strong,nonatomic) IBOutlet UITextField *priceField;
 
 @end

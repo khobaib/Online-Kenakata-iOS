@@ -219,24 +219,8 @@
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                             </view>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Lowest Price" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="MEq-PA-T1A">
-                                <rect key="frame" x="10" y="151" width="108" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                                <connections>
-                                    <outlet property="delegate" destination="3qZ-gF-05r" id="bni-rP-Ia6"/>
-                                </connections>
-                            </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Highest Price" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="JhV-2v-NKl">
-                                <rect key="frame" x="202" y="151" width="108" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                                <connections>
-                                    <outlet property="delegate" destination="3qZ-gF-05r" id="UF8-k5-GLI"/>
-                                </connections>
-                            </textField>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rjw-9W-CTp">
-                                <rect key="frame" x="10" y="218" width="300" height="42"/>
+                                <rect key="frame" x="10" y="209" width="300" height="42"/>
                                 <color key="backgroundColor" red="0.92941176469999998" green="0.71764705880000002" blue="0.01176470588" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" title="Filter">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
@@ -246,14 +230,33 @@
                                     <segue destination="w8h-qG-G4O" kind="push" id="Ovm-4X-EMQ"/>
                                 </connections>
                             </button>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="75D-lE-Cgx">
+                                <rect key="frame" x="10" y="141" width="300" height="49"/>
+                                <subviews>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Lowest Price" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="MEq-PA-T1A">
+                                        <rect key="frame" x="144" y="9" width="141" height="30"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="3qZ-gF-05r" id="bni-rP-Ia6"/>
+                                        </connections>
+                                    </textField>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Price Range" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="70M-9d-huV">
+                                        <rect key="frame" x="8" y="14" width="94" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                     </view>
                     <navigationItem key="navigationItem" id="D3c-vA-HqY"/>
                     <connections>
-                        <outlet property="heighPrice" destination="JhV-2v-NKl" id="gHZ-oC-C2N"/>
-                        <outlet property="lowestprice" destination="MEq-PA-T1A" id="3sG-kb-UTd"/>
                         <outlet property="marchent" destination="fm1-oz-bOu" id="SzX-1b-nqf"/>
+                        <outlet property="priceField" destination="MEq-PA-T1A" id="iFX-FJ-9Pq"/>
                         <outlet property="tag" destination="faY-hT-uWm" id="RGu-ah-O4I"/>
                     </connections>
                 </viewController>
