@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Catalogue-->
@@ -174,6 +175,70 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qh2-T1-AhA" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="767" y="-1920"/>
+        </scene>
+        <!--How It Works View Controller-->
+        <scene sceneID="mmc-P3-lRl">
+            <objects>
+                <viewController storyboardIdentifier="howitWorks" id="iP9-Eb-wLV" customClass="HowItWorksViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="XBR-qq-nIK"/>
+                        <viewControllerLayoutGuide type="bottom" id="0CQ-kZ-pwK"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="lTo-vo-0uq">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XCG-RU-ibO">
+                                <rect key="frame" x="10" y="22" width="300" height="498"/>
+                                <connections>
+                                    <outlet property="delegate" destination="iP9-Eb-wLV" id="wOs-WZ-dox"/>
+                                </connections>
+                            </scrollView>
+                            <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="5" translatesAutoresizingMaskIntoConstraints="NO" id="3Ky-VA-Klb">
+                                <rect key="frame" x="82" y="494" width="157" height="20"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="gkb-s3-UhW"/>
+                                </constraints>
+                                <color key="currentPageIndicatorTintColor" red="0.92549019610000005" green="0.72941176470000002" blue="0.062745098040000002" alpha="1" colorSpace="calibratedRGB"/>
+                            </pageControl>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kkF-DC-uZY">
+                                <rect key="frame" x="10" y="528" width="300" height="40"/>
+                                <color key="backgroundColor" red="0.92549019610000005" green="0.72941176470000002" blue="0.062745098040000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="3ph-NO-yyE"/>
+                                </constraints>
+                                <color key="tintColor" red="0.93715083799999999" green="0.93715083799999999" blue="0.93715083799999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="Skip">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="skip:" destination="iP9-Eb-wLV" eventType="touchUpInside" id="vx3-w2-PXY"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="kkF-DC-uZY" firstAttribute="leading" secondItem="lTo-vo-0uq" secondAttribute="leading" constant="10" id="0cf-rx-caY"/>
+                            <constraint firstItem="0CQ-kZ-pwK" firstAttribute="top" secondItem="kkF-DC-uZY" secondAttribute="bottom" id="0vJ-lQ-QdL"/>
+                            <constraint firstItem="kkF-DC-uZY" firstAttribute="top" secondItem="3Ky-VA-Klb" secondAttribute="bottom" constant="14" id="6cG-Ca-vEa"/>
+                            <constraint firstItem="XCG-RU-ibO" firstAttribute="leading" secondItem="lTo-vo-0uq" secondAttribute="leading" constant="10" id="7Ob-q1-pOm"/>
+                            <constraint firstItem="kkF-DC-uZY" firstAttribute="top" secondItem="XCG-RU-ibO" secondAttribute="bottom" constant="8" id="Gl6-U0-Vog"/>
+                            <constraint firstItem="3Ky-VA-Klb" firstAttribute="leading" secondItem="lTo-vo-0uq" secondAttribute="leadingMargin" constant="66" id="NUG-mg-Awe"/>
+                            <constraint firstAttribute="trailing" secondItem="XCG-RU-ibO" secondAttribute="trailing" constant="10" id="Njd-G7-8AI"/>
+                            <constraint firstAttribute="trailing" secondItem="kkF-DC-uZY" secondAttribute="trailing" constant="10" id="hnS-Ot-P4S"/>
+                            <constraint firstItem="XCG-RU-ibO" firstAttribute="top" secondItem="XBR-qq-nIK" secondAttribute="bottom" constant="2" id="qbb-wQ-tTO"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="3Ky-VA-Klb" secondAttribute="trailing" constant="65" id="tRT-dc-VFQ"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="pageControl" destination="3Ky-VA-Klb" id="0W5-Hi-lRI"/>
+                        <outlet property="scrollView" destination="XCG-RU-ibO" id="DbP-36-P22"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cOx-LI-76j" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="490" y="-2816"/>
         </scene>
         <!--Filter Input View Controller-->
         <scene sceneID="UDp-kX-g6Y">

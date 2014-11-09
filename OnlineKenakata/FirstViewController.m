@@ -18,6 +18,7 @@
 #import "LoginViewController.h"
 #import "SignupViewController.h"
 #import "RateView.h"
+#import "HowItWorksViewController.h"
 
 
 @interface FirstViewController ()
@@ -57,6 +58,12 @@
 
     currency=[[[dic objectForKey:@"success"]objectForKey:@"user"]objectForKey:@"currency"];
 
+    if([ud objectForKey:@"isFirst"]==nil){
+        HowItWorksViewController *hvc=[[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"howitWorks"];
+        
+        [self.tabBarController.navigationController pushViewController:hvc animated:YES];
+
+    }
 
     
 }

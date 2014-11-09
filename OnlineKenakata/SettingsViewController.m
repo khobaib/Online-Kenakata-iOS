@@ -10,6 +10,7 @@
 #import "LoginViewController.h"
 #import <FacebookSDK/FacebookSDK.h>
 #import "TextStyling.h"
+#import "HowItWorksViewController.h"
 
 
 @interface SettingsViewController ()
@@ -43,9 +44,9 @@
    self.tabBarController.navigationItem.title=@"Settings";
     
     if(token!=nil){
-        self.settingsTableHeight.constant=295;
+        self.settingsTableHeight.constant=354;
     }else{
-        self.settingsTableHeight.constant=236;
+        self.settingsTableHeight.constant=295;
     }
     
     [self setDataOnUI];
@@ -99,9 +100,9 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     if(token!=nil){
-        return 5;
+        return 6;
     }else{
-        return 4;
+        return 5;
     }
     
 }
@@ -126,7 +127,11 @@
              lable.text=@"Info";
         }else if(indexPath.row==1){
             lable.text=@"Location";
+        }else if(indexPath.row==5){
+            lable.text=@"How It works";
         }
+        
+        
         
       
         
@@ -150,6 +155,8 @@
          
             lable.text=@"Location";
 
+        }else if(indexPath.row==4){
+            lable.text=@"How It works";
         }
         
         
@@ -184,6 +191,11 @@
             [alert show];
         }
         
+        if(indexPath.row==5){
+            HowItWorksViewController *hvc=[[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"howitWorks"];
+            
+            [self.navigationController pushViewController:hvc animated:YES];
+        }
         
         
     }else{
@@ -204,6 +216,12 @@
         if(indexPath.row==3){
             LoginViewController *login =[[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"loginScreen"];
             [self.navigationController pushViewController:login animated:YES];
+        }
+        
+        if(indexPath.row==4){
+            HowItWorksViewController *hvc=[[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"howitWorks"];
+            
+            [self.navigationController pushViewController:hvc animated:YES];
         }
     }
 }

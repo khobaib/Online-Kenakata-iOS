@@ -147,6 +147,12 @@
 		9A6B51E619F62ABE004C0A2C /* icon_filter.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A6B51E219F62ABE004C0A2C /* icon_filter.png */; };
 		9A6B51E719F62ABE004C0A2C /* icon_sort_pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A6B51E319F62ABE004C0A2C /* icon_sort_pressed.png */; };
 		9A6B51E819F62ABE004C0A2C /* icon_sort.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A6B51E419F62ABE004C0A2C /* icon_sort.png */; };
+		9A6CB5F71A0F341B00BB92AC /* s5.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A6CB5F21A0F341B00BB92AC /* s5.png */; };
+		9A6CB5F81A0F341B00BB92AC /* s1.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A6CB5F31A0F341B00BB92AC /* s1.png */; };
+		9A6CB5F91A0F341B00BB92AC /* s3.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A6CB5F41A0F341B00BB92AC /* s3.png */; };
+		9A6CB5FA1A0F341B00BB92AC /* s4.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A6CB5F51A0F341B00BB92AC /* s4.png */; };
+		9A6CB5FB1A0F341B00BB92AC /* s2.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A6CB5F61A0F341B00BB92AC /* s2.png */; };
+		9A6CB5FE1A0F36B200BB92AC /* HowItWorksViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A6CB5FD1A0F36B200BB92AC /* HowItWorksViewController.m */; };
 		9A743EF219EE531700A52FD8 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A743EF119EE531700A52FD8 /* SettingsViewController.m */; };
 		9A7F131919A35347002F2526 /* phone.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A7F131819A35347002F2526 /* phone.png */; };
 		9AB11F3619EA48BC00F0E935 /* RateView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AB11F3519EA48BC00F0E935 /* RateView.m */; };
@@ -408,6 +414,13 @@
 		9A6B51E219F62ABE004C0A2C /* icon_filter.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_filter.png; sourceTree = "<group>"; };
 		9A6B51E319F62ABE004C0A2C /* icon_sort_pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_sort_pressed.png; sourceTree = "<group>"; };
 		9A6B51E419F62ABE004C0A2C /* icon_sort.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_sort.png; sourceTree = "<group>"; };
+		9A6CB5F21A0F341B00BB92AC /* s5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = s5.png; sourceTree = "<group>"; };
+		9A6CB5F31A0F341B00BB92AC /* s1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = s1.png; sourceTree = "<group>"; };
+		9A6CB5F41A0F341B00BB92AC /* s3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = s3.png; sourceTree = "<group>"; };
+		9A6CB5F51A0F341B00BB92AC /* s4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = s4.png; sourceTree = "<group>"; };
+		9A6CB5F61A0F341B00BB92AC /* s2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = s2.png; sourceTree = "<group>"; };
+		9A6CB5FC1A0F36B200BB92AC /* HowItWorksViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HowItWorksViewController.h; sourceTree = "<group>"; };
+		9A6CB5FD1A0F36B200BB92AC /* HowItWorksViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HowItWorksViewController.m; sourceTree = "<group>"; };
 		9A743EF019EE531700A52FD8 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
 		9A743EF119EE531700A52FD8 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
 		9A7F131819A35347002F2526 /* phone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = phone.png; sourceTree = "<group>"; };
@@ -764,6 +777,11 @@
 		14D45B451974FF7900F677D0 /* img */ = {
 			isa = PBXGroup;
 			children = (
+				9A6CB5F21A0F341B00BB92AC /* s5.png */,
+				9A6CB5F31A0F341B00BB92AC /* s1.png */,
+				9A6CB5F41A0F341B00BB92AC /* s3.png */,
+				9A6CB5F51A0F341B00BB92AC /* s4.png */,
+				9A6CB5F61A0F341B00BB92AC /* s2.png */,
 				14B7B1261A08C39800C4A016 /* menu_icon_recently_viewed_pressed.png */,
 				14B7B1241A08C35D00C4A016 /* menu_icon_offers_pressed.png */,
 				14B7B1221A08C10100C4A016 /* view_phone.png */,
@@ -864,6 +882,8 @@
 				1853DFB6199B842300C3D5ED /* SignupViewController.m */,
 				9AD8A07E19DA801500924325 /* FacebookViewController.h */,
 				9AD8A07F19DA801500924325 /* FacebookViewController.m */,
+				9A6CB5FC1A0F36B200BB92AC /* HowItWorksViewController.h */,
+				9A6CB5FD1A0F36B200BB92AC /* HowItWorksViewController.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -988,6 +1008,7 @@
 				14D45B551974FFA500F677D0 /* tag_new.png in Resources */,
 				9AB11F3919EA50AE00F0E935 /* icon_favorite.png in Resources */,
 				14B7B1251A08C35D00C4A016 /* menu_icon_offers_pressed.png in Resources */,
+				9A6CB5FB1A0F341B00BB92AC /* s2.png in Resources */,
 				14B7B1211A08979D00C4A016 /* kenakataTests-Info.plist in Resources */,
 				18AB773E199CB58000364FA6 /* icon.png in Resources */,
 				1895D59F1999F05D00713916 /* star.png in Resources */,
@@ -1008,21 +1029,25 @@
 				9A6B51E819F62ABE004C0A2C /* icon_sort.png in Resources */,
 				9A6B51E619F62ABE004C0A2C /* icon_filter.png in Resources */,
 				14D45A441974FC6800F677D0 /* InfoPlist.strings in Resources */,
+				9A6CB5F81A0F341B00BB92AC /* s1.png in Resources */,
 				14F05AF3197D0A8600188C54 /* menu_icn_offers.png in Resources */,
 				14F05AF2197D0A8600188C54 /* menu_icn_news.png in Resources */,
 				14F05AF1197D0A8600188C54 /* menu_icn_info.png in Resources */,
 				14FB7FCB197B7D5C00E8BDF8 /* down_arrow.png in Resources */,
 				9A7F131919A35347002F2526 /* phone.png in Resources */,
+				9A6CB5F71A0F341B00BB92AC /* s5.png in Resources */,
 				9A6B51E719F62ABE004C0A2C /* icon_sort_pressed.png in Resources */,
 				14D45A4D1974FC6800F677D0 /* Main.storyboard in Resources */,
 				1481856E197D2EFA007E0734 /* my_cart.png in Resources */,
 				14D95EFF19766F52001D6CB3 /* imessege.png in Resources */,
 				1848A321198F557600684602 /* splash002.png in Resources */,
+				9A6CB5FA1A0F341B00BB92AC /* s4.png in Resources */,
 				14D45AE41974FCB900F677D0 /* LICENSE in Resources */,
 				14F05AF0197D0A8600188C54 /* menu_icn_catalogue.png in Resources */,
 				14D45B521974FFA500F677D0 /* a2mc_pressed.png in Resources */,
 				1848A326198F654500684602 /* PostSplash.png in Resources */,
 				14D45B571974FFA500F677D0 /* tag_sale.png in Resources */,
+				9A6CB5F91A0F341B00BB92AC /* s3.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1052,6 +1077,7 @@
 				14D45AD81974FCB900F677D0 /* PSTCollectionView.m in Sources */,
 				9AD8A08019DA801500924325 /* FacebookViewController.m in Sources */,
 				14D45ADF1974FCB900F677D0 /* PSTCollectionViewUpdateItem.m in Sources */,
+				9A6CB5FE1A0F36B200BB92AC /* HowItWorksViewController.m in Sources */,
 				14D45B0A1974FD6B00F677D0 /* AFHTTPRequestOperation.m in Sources */,
 				14D45ADA1974FCB900F677D0 /* PSTCollectionViewController.m in Sources */,
 				1895D5A3199A1CA200713916 /* Review.m in Sources */,
