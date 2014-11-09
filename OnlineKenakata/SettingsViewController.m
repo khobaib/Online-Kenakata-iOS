@@ -11,6 +11,9 @@
 #import <FacebookSDK/FacebookSDK.h>
 #import "TextStyling.h"
 #import "HowItWorksViewController.h"
+#import "AFNetworking.h"
+#import "Data.h"
+#import "MBProgressHUD.h"
 
 
 @interface SettingsViewController ()
@@ -43,7 +46,10 @@
     
    self.tabBarController.navigationItem.title=@"Settings";
     
-    if(token!=nil){
+    NSString *str=[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults]objectForKey:@"is_facebook"]];
+    
+
+    if(token!=nil && ![str isEqualToString:@"true"]){
         self.settingsTableHeight.constant=354;
     }else{
         self.settingsTableHeight.constant=295;
@@ -72,7 +78,10 @@
 
 -(void)setDataOnUI{
     if(token!=nil){
-        NSString *str=[[NSUserDefaults standardUserDefaults]objectForKey:@"is_facebook"];
+        NSString *str=[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults]objectForKey:@"is_facebook"]];
+        
+        
+        NSLog(@"%@",str);
         
         if([str isEqualToString:@"true"]){
             self.loggedinVia.text=@"Logged in Via:Facebook";
@@ -100,7 +109,13 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     if(token!=nil){
-        return 6;
+         NSString *str=[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults]objectForKey:@"is_facebook"]];
+        
+        if([str isEqualToString:@"true"]){
+        
+             return 5;
+        }
+        else return 6;
     }else{
         return 5;
     }
@@ -117,19 +132,43 @@
        
         UILabel *lable=(UILabel *)[cell viewWithTag:1101];
         lable.text=@"";
-        if(indexPath.row==2){
-              lable.text=@"Change Password";
-        }else if(indexPath.row==3){
-              lable.text=@"Rate App";
-        }else if (indexPath.row==4){
-              lable.text=@"Logout";
-        }else if(indexPath.row==0){
-             lable.text=@"Info";
-        }else if(indexPath.row==1){
-            lable.text=@"Location";
-        }else if(indexPath.row==5){
-            lable.text=@"How It works";
+        
+        NSString *str=[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults]objectForKey:@"is_facebook"]];
+        
+        if([str isEqualToString:@"true"]){
+            
+            if(indexPath.row==2){
+                lable.text=@"Rate App";
+            }else if (indexPath.row==3){
+                lable.text=@"Logout";
+            }else if(indexPath.row==0){
+                lable.text=@"Info";
+            }else if(indexPath.row==1){
+                lable.text=@"Location";
+            }else if(indexPath.row==4){
+                lable.text=@"How It works";
+            }
+
+            
+        }else{
+            
+            if(indexPath.row==2){
+                lable.text=@"Change Password";
+            }else if(indexPath.row==3){
+                lable.text=@"Rate App";
+            }else if (indexPath.row==4){
+                lable.text=@"Logout";
+            }else if(indexPath.row==0){
+                lable.text=@"Info";
+            }else if(indexPath.row==1){
+                lable.text=@"Location";
+            }else if(indexPath.row==5){
+                lable.text=@"How It works";
+            }
+
+
         }
+        
         
         
         
@@ -184,11 +223,11 @@
         
             UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"" message:@"Do you like to Logout?" delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
             [alert show];
+            alert.tag=1;
         }
         
         if(indexPath.row==2){
-            UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"" message:@"Please Enter The new password." delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
-            [alert show];
+            [self passwordChange];
         }
         
         if(indexPath.row==5){
@@ -228,14 +267,69 @@
 
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
-    if(buttonIndex==1){
+    if(buttonIndex==1 && alertView.tag==1){
         [[NSUserDefaults standardUserDefaults]setObject:nil forKey:@"token"];
         [FBSession.activeSession closeAndClearTokenInformation];
         [self viewDidAppear:YES];
     }
+    if(buttonIndex==1 && alertView.tag==2){
+        
+        UITextField *textField = [alertView textFieldAtIndex:0];
+        
+        [self changePassURL:textField.text];
+    }
+}
+
+-(void)passwordChange{
+    UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"" message:@"Please Enter The new password." delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
+    
+    
+    [alert setAlertViewStyle:UIAlertViewStylePlainTextInput];
+    /* Display a numerical keypad for this text field */
+    UITextField *textField = [alert textFieldAtIndex:0];
+    textField.secureTextEntry=YES;
+
+    [alert show];
+    alert.tag=2;
 }
 
 
+-(void)changePassURL:(NSString *)newpass{
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    // manager.responseSerializer=[AFCompoundResponseSerializer serializer];
+    
+    NSMutableDictionary *params=[[NSMutableDictionary alloc]init];
+    
+    params[@"new_pass"]=newpass;
+    params[@"token"]=[[NSUserDefaults standardUserDefaults]objectForKey:@"token"];
+    
+    
+    NSString *str=[NSString stringWithFormat:@"%@/rest.php?method=pass_change",[Data getBaseUrl]];
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    
+ 
+    [manager POST:str parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        NSDictionary *dic1=(NSDictionary *)responseObject;
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+        
+        
+        if([dic1[@"success"] isEqualToString:@"ok"]){
+            UIAlertView *alertView=[[UIAlertView alloc]initWithTitle:@"কেনাকাটা" message:@"Your password is reset" delegate:nil cancelButtonTitle:@"Cancle" otherButtonTitles: nil];
+            [alertView show];
+        }
+        
+        NSLog(@"%@",dic1);
+    }
+    failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+         [MBProgressHUD hideHUDForView:self.view animated:YES];
+        
+         NSLog(@"Error: %@", error);
+     }];
+
+}
 
 - (void)didReceiveMemoryWarning
 {
