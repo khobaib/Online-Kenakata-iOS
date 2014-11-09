@@ -50,9 +50,9 @@
     
 
     if(token!=nil && ![str isEqualToString:@"true"]){
-        self.settingsTableHeight.constant=354;
+        self.settingsTableHeight.constant=431;
     }else{
-        self.settingsTableHeight.constant=295;
+        self.settingsTableHeight.constant=354;
     }
     
     [self setDataOnUI];
@@ -108,16 +108,14 @@
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    if(token!=nil){
-         NSString *str=[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults]objectForKey:@"is_facebook"]];
+    NSString *str=[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults]objectForKey:@"is_facebook"]];
+
+    if(token!=nil && ![str isEqualToString:@"true"]){
         
-        if([str isEqualToString:@"true"]){
-        
-             return 5;
-        }
-        else return 6;
+        return 7;
+   
     }else{
-        return 5;
+        return 6;
     }
     
 }
@@ -126,54 +124,32 @@
 // Cell gets various attributes set automatically based on table (separators) and data source (accessory views, editing controls)
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    
-    if(token!=nil){
+    NSString *str=[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults]objectForKey:@"is_facebook"]];
+
+    if(token!=nil && ![str isEqualToString:@"true"]){
         UITableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:@"settingCell" forIndexPath:indexPath];
        
         UILabel *lable=(UILabel *)[cell viewWithTag:1101];
         lable.text=@"";
         
-        NSString *str=[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults]objectForKey:@"is_facebook"]];
         
-        if([str isEqualToString:@"true"]){
-            
-            if(indexPath.row==2){
-                lable.text=@"Rate App";
-            }else if (indexPath.row==3){
-                lable.text=@"Logout";
-            }else if(indexPath.row==0){
-                lable.text=@"Info";
-            }else if(indexPath.row==1){
-                lable.text=@"Location";
-            }else if(indexPath.row==4){
-                lable.text=@"How It works";
-            }
-
-            
-        }else{
-            
-            if(indexPath.row==2){
-                lable.text=@"Change Password";
-            }else if(indexPath.row==3){
-                lable.text=@"Rate App";
-            }else if (indexPath.row==4){
-                lable.text=@"Logout";
-            }else if(indexPath.row==0){
-                lable.text=@"Info";
-            }else if(indexPath.row==1){
-                lable.text=@"Location";
-            }else if(indexPath.row==5){
-                lable.text=@"How It works";
-            }
-
-
+        if(indexPath.row==0){
+            lable.text=@"Recently Viewed";
+        }else if(indexPath.row==1){
+            lable.text=@"Find a Store";
+        }else if(indexPath.row==2){
+          lable.text=@"Change Password";
         }
-        
-        
-        
-        
-      
-        
+        else if(indexPath.row==3){
+            lable.text=@"Rate App";
+        }else if (indexPath.row==4){
+            lable.text=@"Info";
+        }else if(indexPath.row==5){
+            lable.text=@"How It works";
+        }else if(indexPath.row==6){
+            lable.text=@"Logout";
+        }
+
         return cell;
         
     }else{
@@ -184,19 +160,26 @@
         
         lable.text=@"";
         
-        if(indexPath.row==2){
-             lable.text=@"Rate App";
-        }else if(indexPath.row==3){
-             lable.text=@"Login";
-        }else if(indexPath.row==0){
+        if(indexPath.row==0){
+            lable.text=@"Recently Viewed";
+        }else if(indexPath.row==1){
+            lable.text=@"Find a Store";
+        }else if(indexPath.row==2){
+            lable.text=@"Rate App";
+        }else if (indexPath.row==3){
             lable.text=@"Info";
-        }else if (indexPath.row==1){
-         
-            lable.text=@"Location";
-
         }else if(indexPath.row==4){
             lable.text=@"How It works";
+        }else if(indexPath.row==5){
+            
+            if(token!=nil){
+                lable.text=@"Logout";
+            }else{
+                lable.text=@"Login";
+            }
+            
         }
+        
         
         
        
@@ -206,62 +189,73 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    if(token!=nil){
-        
+    
+    NSString *str=[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults]objectForKey:@"is_facebook"]];
+    
+    if(token!=nil && ![str isEqualToString:@"true"]){
         if(indexPath.row==0){
-            [self performSegueWithIdentifier:@"pushinfo" sender:self];
-        }
-        if(indexPath.row==1){
+          [self performSegueWithIdentifier:@"recentlyViewed" sender:self];
+        
+        }else if(indexPath.row==1){
             
          [self performSegueWithIdentifier:@"locationseg" sender:self];
 
-        }
-        if(indexPath.row==3){
+        }else if(indexPath.row==2){
+            [self passwordChange];
+            
+        }else if(indexPath.row==3){
             [[UIApplication sharedApplication]openURL:[NSURL URLWithString:@"itms-apps://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=905900408"]];
-        }
-        if(indexPath.row==4){
+            
+        }else if(indexPath.row==4){
+            [self performSegueWithIdentifier:@"pushinfo" sender:self];
+        
+        }else if(indexPath.row==5){
+            HowItWorksViewController *hvc=[[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"howitWorks"];
+            
+            [self.navigationController pushViewController:hvc animated:YES];
+        
+        }else if(indexPath.row==6){
         
             UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"" message:@"Do you like to Logout?" delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
             [alert show];
             alert.tag=1;
         }
         
-        if(indexPath.row==2){
-            [self passwordChange];
-        }
         
-        if(indexPath.row==5){
-            HowItWorksViewController *hvc=[[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"howitWorks"];
-            
-            [self.navigationController pushViewController:hvc animated:YES];
-        }
         
         
     }else{
         
         if(indexPath.row==0){
-            [self performSegueWithIdentifier:@"pushinfo" sender:self];
-        }
-        
-        if(indexPath.row==1){
-         
+            [self performSegueWithIdentifier:@"recentlyViewed" sender:self];
+            
+        }else if(indexPath.row==1){
+            
             [self performSegueWithIdentifier:@"locationseg" sender:self];
-
-        }
-        if(indexPath.row==2){
+            
+        }else if(indexPath.row==2){
             [[UIApplication sharedApplication]openURL:[NSURL URLWithString:@"itms-apps://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=905900408"]];
-        }
-        
-        if(indexPath.row==3){
-            LoginViewController *login =[[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"loginScreen"];
-            [self.navigationController pushViewController:login animated:YES];
-        }
-        
-        if(indexPath.row==4){
+            
+        }else if(indexPath.row==3){
+            [self performSegueWithIdentifier:@"pushinfo" sender:self];
+            
+        }else if(indexPath.row==4){
             HowItWorksViewController *hvc=[[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"howitWorks"];
             
             [self.navigationController pushViewController:hvc animated:YES];
+            
+        }else if(indexPath.row==5){
+            if(token!=nil){
+                UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"" message:@"Do you like to Logout?" delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
+                [alert show];
+                alert.tag=1;
+            }else{
+                LoginViewController *login =[[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"loginScreen"];
+                [self.navigationController pushViewController:login animated:YES];
+            }
+            
         }
+        
     }
 }
 
@@ -317,7 +311,7 @@
         
         
         if([dic1[@"success"] isEqualToString:@"ok"]){
-            UIAlertView *alertView=[[UIAlertView alloc]initWithTitle:@"কেনাকাটা" message:@"Your password is reset" delegate:nil cancelButtonTitle:@"Cancle" otherButtonTitles: nil];
+            UIAlertView *alertView=[[UIAlertView alloc]initWithTitle:@"কেনাকাটা" message:@"Your password is reset" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
             [alertView show];
         }
         
