@@ -154,6 +154,7 @@
 		9A6CB5FB1A0F341B00BB92AC /* s2.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A6CB5F61A0F341B00BB92AC /* s2.png */; };
 		9A6CB5FE1A0F36B200BB92AC /* HowItWorksViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A6CB5FD1A0F36B200BB92AC /* HowItWorksViewController.m */; };
 		9A743EF219EE531700A52FD8 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A743EF119EE531700A52FD8 /* SettingsViewController.m */; };
+		9A75CCB71A0F74F200B3B507 /* NewArraivalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A75CCB61A0F74F200B3B507 /* NewArraivalViewController.m */; };
 		9A7F131919A35347002F2526 /* phone.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A7F131819A35347002F2526 /* phone.png */; };
 		9AB11F3619EA48BC00F0E935 /* RateView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AB11F3519EA48BC00F0E935 /* RateView.m */; };
 		9AB11F3919EA50AE00F0E935 /* icon_favorite.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AB11F3719EA50AE00F0E935 /* icon_favorite.png */; };
@@ -423,6 +424,8 @@
 		9A6CB5FD1A0F36B200BB92AC /* HowItWorksViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HowItWorksViewController.m; sourceTree = "<group>"; };
 		9A743EF019EE531700A52FD8 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
 		9A743EF119EE531700A52FD8 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
+		9A75CCB51A0F74F200B3B507 /* NewArraivalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewArraivalViewController.h; sourceTree = "<group>"; };
+		9A75CCB61A0F74F200B3B507 /* NewArraivalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewArraivalViewController.m; sourceTree = "<group>"; };
 		9A7F131819A35347002F2526 /* phone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = phone.png; sourceTree = "<group>"; };
 		9AB11F3419EA48BC00F0E935 /* RateView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RateView.h; sourceTree = "<group>"; };
 		9AB11F3519EA48BC00F0E935 /* RateView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RateView.m; sourceTree = "<group>"; };
@@ -844,6 +847,8 @@
 				1403D1FF197A50680074B61C /* MyCart.m */,
 				9AD130731A07959500A7EF58 /* RecentViewController.h */,
 				9AD130741A07959500A7EF58 /* RecentViewController.m */,
+				9A75CCB51A0F74F200B3B507 /* NewArraivalViewController.h */,
+				9A75CCB61A0F74F200B3B507 /* NewArraivalViewController.m */,
 				1895D5A1199A1CA200713916 /* Review.h */,
 				1895D5A2199A1CA200713916 /* Review.m */,
 				9AE0DAE519A2074A003F1D74 /* WriteReviewViewController.h */,
@@ -1135,6 +1140,7 @@
 				14D45AF41974FCB900F677D0 /* UIImageView+WebCache.m in Sources */,
 				14D45ADD1974FCB900F677D0 /* PSTCollectionViewItemKey.m in Sources */,
 				14D45AD01974FCB900F677D0 /* MWPhotoBrowser.m in Sources */,
+				9A75CCB71A0F74F200B3B507 /* NewArraivalViewController.m in Sources */,
 				14D45ACE1974FCB900F677D0 /* MWGridViewController.m in Sources */,
 				9AB1AD3219C9529000229422 /* UIImageView+HighlightedWebCache.m in Sources */,
 				1853DFB7199B842300C3D5ED /* SignupViewController.m in Sources */,
