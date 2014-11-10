@@ -13,7 +13,7 @@
 
 
 
-@interface MapView : UIViewController<RMPickerViewControllerDelegate,MKMapViewDelegate,UIActionSheetDelegate,UITableViewDataSource,UITableViewDelegate,UISearchBarDelegate>{
+@interface MapView : UIViewController<RMPickerViewControllerDelegate,MKMapViewDelegate,UIActionSheetDelegate,UITableViewDataSource,UITableViewDelegate,UISearchBarDelegate,UISearchDisplayDelegate>{
     UIActionSheet *sheet;
     NSArray *branches;
     

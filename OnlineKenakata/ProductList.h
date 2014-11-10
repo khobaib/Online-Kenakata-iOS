@@ -18,6 +18,7 @@
     NSString *currency;
     LoadingView *loading;
     int counter;
+    BOOL isLoading;
     
     RMPickerViewController *sortByPicker;
 }

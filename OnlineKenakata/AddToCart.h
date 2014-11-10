@@ -51,4 +51,6 @@
 
 @property (strong,nonatomic)IBOutlet UIView *quantityView;
 @property (strong,nonatomic)IBOutlet UIButton *confirmBtn;
+
+@property IBOutlet UIView *topBack;
 @end

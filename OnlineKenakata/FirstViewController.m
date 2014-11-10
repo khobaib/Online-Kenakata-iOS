@@ -210,8 +210,8 @@
         
         // 4
         
-        loading.hidden=YES;
-        [loading StopAnimating];
+       // loading.hidden=YES;
+        //[loading StopAnimating];
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error catagory List"
                                                             message:[error localizedDescription]
                                                            delegate:nil
@@ -223,8 +223,8 @@
     // 5
     //  [self.indecator startAnimating];
     
-    loading.hidden=NO;
-    [loading StartAnimating];
+    //loading.hidden=NO;
+   // [loading StartAnimating];
     [operation start];
     
     
@@ -250,7 +250,13 @@
 -(void)viewWillAppear:(BOOL)animated{
    [super viewWillAppear:animated];
     
-    self.tabBarController.navigationItem.title=@"Catalogue";
+    if(!self.scrollView.hidden){
+        self.tabBarController.navigationItem.title=@"Highlight";
+    }else{
+         self.tabBarController.navigationItem.title=@"Catalogue";
+    }
+    
+   
 
 }
 -(void)viewDidAppear:(BOOL)animated{
@@ -262,9 +268,13 @@
         
         self.signinButton.hidden=YES;
 
-        
     }
       NSLog(@"%@",token);
+    
+    if(token==nil && !self.scrollView.hidden){
+        self.signinButton.hidden=NO;
+
+    }
 
 }
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{

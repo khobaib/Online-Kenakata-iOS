@@ -164,10 +164,13 @@
     description.text=@"";
     
 
-    title.attributedText=[TextStyling AttributForDescription:[[newsData objectAtIndex:indexPath.row]objectForKey:@"news_title"]];
+    title.text=[[newsData objectAtIndex:indexPath.row]objectForKey:@"news_title"];
+    //[TextStyling AttributForDescription:[[newsData objectAtIndex:indexPath.row]objectForKey:@"news_title"]];
     
 
-    description.attributedText=[TextStyling AttributForDescription:[[newsData objectAtIndex:indexPath.row]objectForKey:@"news_contents"]];
+    description.text=[[newsData objectAtIndex:indexPath.row]objectForKey:@"news_contents"];
+    //[TextStyling AttributForDescription:[[newsData objectAtIndex:indexPath.row]objectForKey:@"news_contents"]];
+    
     return cell;
 }
 

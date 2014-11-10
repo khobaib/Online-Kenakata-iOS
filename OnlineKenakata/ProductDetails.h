@@ -45,7 +45,7 @@
 
 @property (strong,nonatomic) IBOutlet UIButton *favButton;
 @property (strong,nonatomic) IBOutlet UIImageView *logoImageView;
-
+@property (strong,nonatomic) IBOutlet UILabel *productCode;
 
 @property IBOutlet UICollectionView *collectionView;
 

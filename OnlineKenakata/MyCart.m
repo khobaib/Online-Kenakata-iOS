@@ -16,6 +16,7 @@
 #import "TextStyling.h"
 #import "AddToCart.h"
 #import "Marchent.h"
+#import "QuartzCore/QuartzCore.h"
 
 @interface MyCart ()
 
@@ -47,6 +48,10 @@
         }
     }
     
+    
+    self.tableview.layer.borderWidth=2.0f;
+    self.tableview.layer.borderColor=[UIColor grayColor].CGColor;
+    self.tableview.layer.cornerRadius=10.0f;
    
 /*
     if(cartbtn!=nil){
@@ -109,9 +114,9 @@
     }
     
     int charge=[self marchentArraySubtotal];
-    self.total.text=[NSString stringWithFormat:@"%@%d",currency,total+charge];
-    self.subTotal.text=[NSString stringWithFormat:@"%@%d",currency,total];
-    self.deleveryChargeLable.text=[NSString stringWithFormat:@"%@%d",currency,charge];
+    self.total.text=[NSString stringWithFormat:@"%@ %d",currency,total+charge];
+    self.subTotal.text=[NSString stringWithFormat:@"%@ %d",currency,total];
+    self.deleveryChargeLable.text=[NSString stringWithFormat:@"%@ %d",currency,charge];
     [self checkAvailablity:str];
     
     [Data setSubTotal:total];
@@ -287,11 +292,11 @@
                 }
             }
 
-            price.attributedText=[TextStyling AttributForPrice:[NSString stringWithFormat:@"%@:%@",currency, [data objectForKey:@"price"]]];
+            price.attributedText=[TextStyling AttributForPrice:[NSString stringWithFormat:@"%@ %@",currency, [data objectForKey:@"price"]]];
             
             int x=[[data objectForKey:@"price"] intValue]*[product.QUANTITY intValue];
             
-            total.text=[NSString stringWithFormat:@"%@:%d",currency,x];
+            total.text=[NSString stringWithFormat:@"%@ %d",currency,x];
             NSString *thumbUrl=[[[data objectForKey:@"images"]objectAtIndex:0]objectForKey:@"thumbnail_image_url"];
             [thumbnil sd_setImageWithURL:[NSURL URLWithString:thumbUrl]
                      placeholderImage:[UIImage imageNamed:@"placeholder.gif"]];
@@ -316,13 +321,13 @@
                 
             }
 
-            price.attributedText=[TextStyling AttributForPrice:[NSString stringWithFormat:@"%@:%@",currency, product.PRICE]];
+            price.attributedText=[TextStyling AttributForPrice:[NSString stringWithFormat:@"%@ %@",currency, product.PRICE]];
             
             quantityLable.text= [NSString stringWithFormat:@"Quantity #%@",product.QUANTITY];
             
             int x=[product.PRICE intValue]*[product.QUANTITY intValue];
             
-            total.text=[NSString stringWithFormat:@"%@:%d",currency,x];
+            total.text=[NSString stringWithFormat:@"%@ %d",currency,x];
             
             [thumbnil sd_setImageWithURL:[NSURL URLWithString:product.THUMBNAIL_IMAGE_URL]
                      placeholderImage:[UIImage imageNamed:@"placeholder.gif"]];
@@ -455,7 +460,7 @@
     int x=[[dic objectForKey:@"price"] intValue]*qNew;
     UILabel *totalL=(UILabel *)[cell viewWithTag:708];
 
-    totalL.text=[NSString stringWithFormat:@"%@:%d",currency,x];
+    totalL.text=[NSString stringWithFormat:@"%@ %d",currency,x];
 
     quantityLable.text= [NSString stringWithFormat:@"Quantity #%d",qNew];
 
@@ -473,8 +478,8 @@
         
     }
     
-    self.total.text=[NSString stringWithFormat:@"%@%d",currency,total];
-    self.subTotal.text=[NSString stringWithFormat:@"%@%d",currency,total];
+    self.total.text=[NSString stringWithFormat:@"%@ %d",currency,total];
+    self.subTotal.text=[NSString stringWithFormat:@"%@ %d",currency,total];
 
     [DatabaseHandeler updateQuantity:qNew productID:product.ID];
     

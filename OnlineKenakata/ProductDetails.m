@@ -52,16 +52,15 @@
         UIImageView *newPageView = [[UIImageView alloc] init];
         [newPageView setFrame:CGRectMake(4, 4, frame.size.width-18, frame.size.height-18)];
         
-        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:newPageView animated:YES];
-        hud.labelText = @"Loading";
+       
         
         
         
         [newPageView sd_setImageWithURL:[NSURL URLWithString:[self.pageImages objectAtIndex:page]]
-                    placeholderImage:[UIImage imageNamed:@"placeholder.png"]
+                    placeholderImage:[UIImage imageNamed:@"bg_grid_image_stub.png"]
                            completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType,NSURL *imageURL) {
                                
-                               [hud hide:YES];
+                            
                                
                                
                            }];
@@ -150,6 +149,7 @@
 {
     self.name.attributedText=[TextStyling AttributForTitle:[self.productData objectForKey:@"name"]];
     
+    self.productCode.text=[NSString stringWithFormat:@"Product Code:%@",[self.productData objectForKey:@"product_code"]];
     [self.cartBtn setBackgroundColor:[TextStyling appColor]];
     
     int tag = (int)[[self.productData objectForKey:@"tag"] integerValue];
@@ -178,7 +178,7 @@
     NSString *marchentLogo=[[[NSUserDefaults standardUserDefaults] objectForKey:key]objectForKey:@"logo"];
     
     [self.logoImageView sd_setImageWithURL:[NSURL URLWithString:marchentLogo]
-            placeholderImage:[UIImage imageNamed:@"icon"]];
+            placeholderImage:[UIImage imageNamed:@"bg_grid_image_stub.png"]];
     
 
     if([[self.productData objectForKey:@"has_favorited"]intValue]==1){
@@ -544,8 +544,9 @@
 -(void)starRaterShow{
     
     
-    self.starRater.fullSelectedImage=[UIImage imageNamed:@"starhighlighted.png"];
-    self.starRater.notSelectedImage=[UIImage imageNamed:@"star.png"];
+    _starRater.fullSelectedImage=[UIImage imageNamed:@"starFull.png"];
+    _starRater.notSelectedImage=[UIImage imageNamed:@"starEmpty.png"];
+    _starRater.halfSelectedImage=[UIImage imageNamed:@"starHalf.png"];
     self.starRater.maxRating=5;
     
     self.starRater.editable=NO;
@@ -1074,8 +1075,9 @@
     
     // starRater.tintColor=[UIColor colorWithRed:(253.0f/255.0f) green:(181.0f/255.0f)blue:(13.0f/255.0f) alpha:1.0f];
     
-    starRater.fullSelectedImage=[UIImage imageNamed:@"starhighlighted.png"];
-    starRater.notSelectedImage=[UIImage imageNamed:@"star.png"];
+    starRater.fullSelectedImage=[UIImage imageNamed:@"starFull.png"];
+    starRater.notSelectedImage=[UIImage imageNamed:@"starEmpty.png"];
+    starRater.halfSelectedImage=[UIImage imageNamed:@"starHalf.png"];
     starRater.maxRating=5;
     starRater.rating=rating;
     starRater.editable=NO;

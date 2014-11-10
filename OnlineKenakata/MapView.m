@@ -57,7 +57,7 @@
             if(branches.count!=0){
                 
                 
-                [self branches];
+              //  [self branches];
             }
             
             
@@ -81,6 +81,10 @@
 
    
     searchArray=branches;
+    
+
+
+ 
 
     //selectedBranch=[branches objectAtIndex:0];
     
@@ -88,7 +92,6 @@
     
 
 }
-
 
 
 - (void)initBarbutton {

@@ -35,13 +35,24 @@
     self.moreNavigationController.delegate = self;
 
 
+    
     if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
     {
         locationmanager=[[CLLocationManager alloc]init];
 
         [locationmanager requestWhenInUseAuthorization];
     }
-   
+    NSArray *array=@[@"menu_icn_catalogue_pressed.png",@"menu_icn_offers_normal.png",@"new.png",@"menu_icn_news_pressed.png",@"menu_icon_settings_pressed.png"];
+    
+    int i=0;
+    for(UITabBarItem *item in self.tabBar.items) {
+        // use the UIImage category code for the imageWithColor: method
+        if(i==1 || i==2){
+            [item setImage:[[UIImage imageNamed:[array objectAtIndex:i]] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
+
+        }
+        i++;
+    }
 }
 
 
@@ -77,7 +88,8 @@
    // [barButton setImageInsets:UIEdgeInsetsMake(0.0, 0, 0, 10)];
 
   
-    barButton.badgeBGColor=[UIColor redColor];
+    barButton.badgeBGColor=[UIColor whiteColor];
+    barButton.badgeTextColor=[UIColor redColor];
     [barButton setBadgeValue:[NSString stringWithFormat:@"%d",[DatabaseHandeler totalProduct]]];
     barButton.badgeOriginX=16;
     barButton.badgeOriginY=4;

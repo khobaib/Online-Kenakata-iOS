@@ -175,7 +175,7 @@
     NSString *comment=self.commentFild.text;
     NSString *address=self.address.text;
     NSString *paymentMethod=self.paymentMethod.text;
-    if([name isEqualToString:@""]||[phone isEqualToString:@""]||[email isEqualToString:@""]||[comment isEqualToString:@""]||[address isEqualToString:@""]||[paymentMethod isEqualToString:@""])
+    if([name isEqualToString:@""]||[phone isEqualToString:@""]||[email isEqualToString:@""]||[address isEqualToString:@""]||[paymentMethod isEqualToString:@""])
     {
         
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error"
@@ -188,6 +188,18 @@
         
     }
     
+    if(![self validatePhoneNumber:self.phoneFild.text]){
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error"
+                                                            message:@"Please Enter a valid phone number."
+                                                           delegate:nil
+                                                  cancelButtonTitle:@"Ok"
+                                                  otherButtonTitles:nil];
+        [alertView show];
+        return;
+        
+    }
+
+    
     if(![self NSStringIsValidEmail:email]){
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error"
                                                             message:@"Please Enter A valid email Address."
@@ -199,7 +211,7 @@
         
     }
     
-   
+    
   
     if([self isfood]){
         NSLog(@"food");
@@ -215,18 +227,7 @@
         }
         
     }
-    
-    if(![self validatePhoneNumber:self.phoneFild.text]){
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"ERROR"
-                                                            message:@"Please Enter a valid phone number."
-                                                           delegate:nil
-                                                  cancelButtonTitle:@"Calcle"
-                                                  otherButtonTitles:nil];
-        [alertView show];
-        return;
-
-    }
-    
+   
     NSString *token=[[NSUserDefaults standardUserDefaults]objectForKey:@"token"];
     NSDictionary *params;
   
@@ -598,7 +599,7 @@
 }
 
 -(BOOL)validatePhoneNumber:(NSString *)phoneNumber{
-    
+    NSLog(@"%@",phoneNumber);
     NSString *phoneRegex = @"^01[0-9]{9}$";
     NSPredicate *phoneTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", phoneRegex];
     BOOL test1=  [phoneTest evaluateWithObject:phoneNumber];

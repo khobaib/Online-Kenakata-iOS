@@ -14,6 +14,7 @@
 #import "TextStyling.h"
 #import "RateView.h"
 #import <QuartzCore/QuartzCore.h>
+#import "MBProgressHUD.h"
 
 @interface ProductList ()
 
@@ -39,7 +40,8 @@
     if(loading==nil){
         [self initLoading];
     }
-        
+    
+    isLoading=NO;
         
     [self get_categories_by_parent_cateogory_id];
 
@@ -62,6 +64,8 @@
     if (endScrolling >= scrollView.contentSize.height && counter!=-1)
     {
         counter++;
+        isLoading=YES;
+        [self.collectionView reloadData];
         [self get_categories_by_parent_cateogory_id];
 
     }
@@ -173,8 +177,7 @@
     
     // 5
     //  [self.indecator startAnimating];
-    loading.hidden=NO;
-    [loading StartAnimating];
+ 
     
     
     
@@ -203,10 +206,10 @@
     
     catagoryList=[[dic objectForKey:@"success"]objectForKey:@"categories"];
 
+    isLoading=NO;
     [self.collectionView reloadData];
   //  [self.refreshControl endRefreshing];
-    [loading StopAnimating];
-    loading.hidden=YES;
+    
     
 }
 
@@ -228,7 +231,9 @@
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
    
-    
+    if(isLoading){
+      return  productList.count+1;
+    }
     
     return productList.count;
     
@@ -243,6 +248,12 @@
     if(catagoryList.count+productList.count==0){
         return cell;
         
+    }
+    
+    if(isLoading && indexPath.row>=productList.count){
+        cell.contentView.hidden=YES;
+        [MBProgressHUD showHUDAddedTo:cell animated:YES];
+        return cell;
     }
 
     if(indexPath.row>=catagoryList.count){

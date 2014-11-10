@@ -35,7 +35,13 @@
 {
     [super viewDidLoad];
    
+    self.tableView.layer.borderWidth=2.0f;
+    self.tableView.layer.borderColor=[UIColor lightGrayColor].CGColor;
+    self.tableView.layer.cornerRadius=5.0f;
     
+    self.topBack.layer.borderColor=[UIColor lightGrayColor].CGColor;
+    self.topBack.layer.borderWidth=2.0f;
+    self.topBack.layer.cornerRadius=5.0f;
     
     // Do any additional setup after loading the view.
 }
@@ -308,7 +314,8 @@
         // [barButton setImageInsets:UIEdgeInsetsMake(0.0, 0, 0, 10)];
         
         
-        barButton.badgeBGColor=[UIColor redColor];
+        barButton.badgeBGColor=[UIColor whiteColor];
+        barButton.badgeTextColor=[UIColor redColor];
         [barButton setBadgeValue:[NSString stringWithFormat:@"%d",[DatabaseHandeler totalProduct]]];
         barButton.badgeOriginX=16;
         barButton.badgeOriginY=4;

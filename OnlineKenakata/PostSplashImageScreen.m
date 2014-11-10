@@ -74,8 +74,8 @@
     if([manager diskImageExistsForURL:[NSURL URLWithString:url]]){
         
         NSLog(@"present");
-        [loading StopAnimating];
-        loading.hidden=YES;
+       // [loading StopAnimating];
+        //loading.hidden=YES;
         navicationController *nav=[[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"navigationController"];
         
         tabbarController *tbc=[nav.viewControllers objectAtIndex:0];
@@ -89,8 +89,8 @@
         
     }else{
         
-        [loading StopAnimating];
-        loading.hidden=YES;
+        //[loading StopAnimating];
+        //loading.hidden=YES;
         navicationController *nav=[[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"navigationController"];
         
         tabbarController *tbc=[nav.viewControllers objectAtIndex:0];
@@ -157,8 +157,8 @@
         
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        [loading StopAnimating];
-        loading.hidden=YES;
+       // [loading StopAnimating];
+        //loading.hidden=YES;
         
         
         // 4
@@ -180,9 +180,9 @@
         [self InternetUnavailable];
         
     } else {
-        loading.hidden=NO;
+       // loading.hidden=NO;
         
-        [loading StartAnimating];
+      //  [loading StartAnimating];
         [operation start];
         
     }
@@ -230,8 +230,8 @@
          {
              if (image && finished)
              {
-                 [loading StopAnimating];
-                 loading.hidden=YES;
+                 //[loading StopAnimating];
+                 //loading.hidden=YES;
                  navicationController *nav=[[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"navigationController"];
                  
                  tabbarController *tbc=[nav.viewControllers objectAtIndex:0];
@@ -252,8 +252,8 @@
                  */
              }
          }else{
-             [loading StopAnimating];
-             loading.hidden=YES;
+            // [loading StopAnimating];
+            // loading.hidden=YES;
              
              
              

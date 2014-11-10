@@ -31,7 +31,7 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
-     self.tabBarController.navigationItem.title=@"Offers";
+     self.tabBarController.navigationItem.title=@"Discounts";
 }
 - (void)viewDidLoad
 {
