@@ -251,9 +251,14 @@
     }
     
     if(isLoading && indexPath.row>=productList.count){
-        cell.contentView.hidden=YES;
-        [MBProgressHUD showHUDAddedTo:cell animated:YES];
-        return cell;
+        
+        UICollectionViewCell *cell1 = [collectionView dequeueReusableCellWithReuseIdentifier:@"loading" forIndexPath:indexPath];
+      
+        UIActivityIndicatorView *view=(UIActivityIndicatorView *)[cell1 viewWithTag:221];
+        [view startAnimating];
+       
+        
+        return cell1;
     }
 
     if(indexPath.row>=catagoryList.count){
