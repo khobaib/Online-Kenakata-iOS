@@ -59,14 +59,17 @@
     UILabel *name=(UILabel *)[cell viewWithTag:801];
     UILabel *email=(UILabel *)[cell viewWithTag:802];
     UILabel *phone=(UILabel *)[cell viewWithTag:803];
+    UILabel *address=(UILabel *)[cell viewWithTag:804];
     phone.text=@"";
     name.text=@"";
     phone.text=@"";
+    address.text=@"";
     
     DeleveryMethod *obj =[self.tableData objectAtIndex:indexPath.row];
     name.text=obj.name;
     email.text=obj.email;
     phone.text=obj.phone;
+    address.text=obj.address;
     return cell;
 }
 

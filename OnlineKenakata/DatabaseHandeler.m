@@ -293,9 +293,19 @@ NSString *const databaseFilename=@"databaseV1.sqlite3";
         
         return NO;
     }
+    
+     NSString *query;
+     query = [NSString stringWithFormat:@"INSERT INTO 'customer_data_table' VALUES (NULL,'%@','%@','%@','%@','%@','%@','%d' ,'%d');",deleveryMethod.name,deleveryMethod.email,deleveryMethod.phone,deleveryMethod.branchName,deleveryMethod.address,deleveryMethod.comment,deleveryMethod.paymentMethod,deleveryMethod.type];
+    BOOL b=[database executeUpdate:query];
+    
+    
+    
+    [database close];
+    return b;
+    
    // NSLog(@"can open");
     
-    NSString *query;
+   /* NSString *query;
     if(deleveryMethod._id==0){
         query = [NSString stringWithFormat:@"INSERT INTO 'customer_data_table' VALUES (NULL,'%@','%@','%@','%@','%@','%@','%d' ,'%d');",deleveryMethod.name,deleveryMethod.email,deleveryMethod.phone,deleveryMethod.branchName,deleveryMethod.address,deleveryMethod.comment,deleveryMethod.paymentMethod,deleveryMethod.type];
         
@@ -304,14 +314,9 @@ NSString *const databaseFilename=@"databaseV1.sqlite3";
      
         query=[NSString stringWithFormat:@"UPDATE 'customer_data_table' SET name='%@' , email='%@' , phone='%@' , branch='%@' , address='%@' , comment='%@' , paymentMethod=%d , collectMethod=%d where id=%d",deleveryMethod.name,deleveryMethod.email,deleveryMethod.phone,deleveryMethod.branchName,deleveryMethod.address,deleveryMethod.comment,deleveryMethod.paymentMethod,deleveryMethod.type,deleveryMethod._id];
     }
+    */
     
-    
-    BOOL b=[database executeUpdate:query];
-    
-    
-    
-    [database close];
-    return b;
+   
 }
 +(NSMutableArray *)getDeleveryMethods:(int) type{
  

@@ -140,10 +140,11 @@
             
                 
                 if(self.fromProcideToCheckout){
-                    Delivery *dvc=[[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"delivery"];
+                    UserData *vc=[[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"userData"];
                     
-                    
-                    [self.navigationController pushViewController:dvc animated:YES];
+                    vc.type=2;
+                    vc.tableData=[DatabaseHandeler getDeleveryMethods:2];
+                    [self.navigationController pushViewController:vc animated:YES];
                     return ;
                 }
                 
@@ -211,10 +212,11 @@
             
             
             if(self.fromProcideToCheckout){
-                Delivery *dvc=[[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"delivery"];
+                UserData *vc=[[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"userData"];
                 
-                
-                [self.navigationController pushViewController:dvc animated:YES];
+                vc.type=2;
+                vc.tableData=[DatabaseHandeler getDeleveryMethods:2];
+                [self.navigationController pushViewController:vc animated:YES];
                 return ;
             }
 

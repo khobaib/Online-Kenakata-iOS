@@ -229,6 +229,10 @@
     
     NSString *token=[[NSUserDefaults standardUserDefaults]objectForKey:@"token"];
     NSDictionary *params;
+  
+    [self setMethod];
+    
+    
     if(token!=nil){
         
         [[NSUserDefaults standardUserDefaults]setObject:address forKey:@"address"];
@@ -253,9 +257,9 @@
         
     }else{
         
-        [self setMethod];
+       
         
-        
+       
         NSMutableDictionary *customer=[[NSMutableDictionary alloc]init];
         
         [customer setObject:name forKey:@"customer_name"];
