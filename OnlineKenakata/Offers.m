@@ -42,7 +42,7 @@
     
     counter =0;
     
-   
+    isLoading=NO;
     
     [self getDiscountProducts];
     
@@ -65,6 +65,8 @@
     if (endScrolling >= scrollView.contentSize.height && counter!=-1)
     {
         counter++;
+        isLoading=YES;
+        [self.collectionView reloadData];
         [self getDiscountProducts];
         
     }
@@ -91,6 +93,10 @@
     NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
     
     NSString *token=(NSString *)[ud objectForKey:@"token"];
+    if(!isLoading){
+        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+
+    }
     if(token!=nil){
         
         
@@ -101,10 +107,8 @@
         NSMutableDictionary *params=[[NSMutableDictionary alloc]init];
         [params setObject:token forKey:@"token"];
         
-        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         [manager POST:string parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
             
-            [MBProgressHUD hideHUDForView:self.view animated:YES];
             
             [self parsProductList:responseObject];
             
@@ -113,7 +117,6 @@
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             
           
-            [MBProgressHUD hideHUDForView:self.view animated:YES];
 
             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error catagory List"
                                                                 message:[error localizedDescription]
@@ -131,17 +134,14 @@
         
         operation.responseSerializer = [AFJSONResponseSerializer serializer];
         
-        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
 
         [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
-            [MBProgressHUD hideHUDForView:self.view animated:YES];
 
             [self parsProductList:responseObject];
             
             
             
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            [MBProgressHUD hideHUDForView:self.view animated:YES];
 
             // 4
          
@@ -172,7 +172,9 @@
 -(void)parsProductList:(id) respons{
     NSMutableDictionary *dic=(NSMutableDictionary *)respons;
     
-    
+    if(!isLoading){
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+    }
     if(counter==0){
         NSMutableArray *Arraytemp=[[dic objectForKey:@"success"]objectForKey:@"products"];
         
@@ -192,6 +194,7 @@
     
     catagoryList=[[dic objectForKey:@"success"]objectForKey:@"categories"];
     
+    isLoading=NO;
     [self.collectionView reloadData];
 
     
@@ -215,7 +218,10 @@
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
     
-    
+    if(isLoading){
+        return productList.count+1;
+
+    }
     
     return productList.count;
     
@@ -225,6 +231,22 @@
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
+    
+    
+    if(isLoading && indexPath.row>=productList.count){
+        
+        UICollectionViewCell *cell1 = [collectionView dequeueReusableCellWithReuseIdentifier:@"loading" forIndexPath:indexPath];
+        
+        UIActivityIndicatorView *view=(UIActivityIndicatorView *)[cell1 viewWithTag:221];
+        [view startAnimating];
+        
+        
+        return cell1;
+    }
+    
+    
+
+    
     UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"productGrid" forIndexPath:indexPath];
     
     if(catagoryList.count+productList.count==0){

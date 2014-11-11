@@ -14,6 +14,7 @@
     NSMutableArray *catagoryList;
     int counter;
     NSString *currency;
+    BOOL isLoading;
 }
 @property IBOutlet UICollectionView *collectionView;
 

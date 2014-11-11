@@ -13,6 +13,7 @@
     NSString *currency;
     int counter;
 
+    BOOL isLoading;
 
 }
 @property IBOutlet UICollectionView *collectionView;

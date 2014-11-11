@@ -65,7 +65,7 @@
 
     }
 
-    
+    isLoading=NO;
 }
 
 -(void)initLoading{
@@ -132,6 +132,9 @@
             [self get_categories_by_parent_cateogory_id];
             NSLog(@"start");
         }
+        
+        isLoading=YES;
+        [self.collectionview reloadData];
         
     }
 }
@@ -240,6 +243,9 @@
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
 
+    if(isLoading){
+        return catagoryList.count+productList.count+1;
+    }
     
         return catagoryList.count+productList.count;
     
@@ -281,7 +287,17 @@
  
     UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cellGrid" forIndexPath:indexPath];
 
-    
+    if(isLoading && indexPath.row>=(productList.count+catagoryList.count)){
+        
+        UICollectionViewCell *cell1 = [collectionView dequeueReusableCellWithReuseIdentifier:@"loading" forIndexPath:indexPath];
+        
+        UIActivityIndicatorView *view=(UIActivityIndicatorView *)[cell1 viewWithTag:221];
+        [view startAnimating];
+        
+        
+        return cell1;
+    }
+
 
 
     
@@ -629,7 +645,7 @@
 }
 -(void)parsProductList:(id) respons{
     NSMutableDictionary *dic=(NSMutableDictionary *)respons;
-    
+    isLoading=NO;
     
     
     catagoryList=[[dic objectForKey:@"success"]objectForKey:@"categories"];
@@ -638,7 +654,7 @@
 
     [self.collectionview reloadData];
 
-    isSearched=YES;
+
     [loading StopAnimating];
     loading.hidden=YES;
     
@@ -682,6 +698,7 @@
         
         
     }else{
+        isLoading=NO;
         [self.collectionview reloadData];
     }
 

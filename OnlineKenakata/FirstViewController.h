@@ -24,7 +24,9 @@
     BOOL isSearched;
     int counter;
     int searchCounter;
-   
+    BOOL isLoading;
+
+
     NSString *searchText;
 }
 @property UIImage *image;
