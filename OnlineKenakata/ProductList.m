@@ -161,6 +161,9 @@
         
         [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
             
+            if(!isLoading){
+                [MBProgressHUD hideHUDForView:self.view animated:YES];
+            }
             [self parsProductList:responseObject];
             
             
@@ -168,8 +171,9 @@
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             
             // 4
-            loading.hidden=YES;
-            [loading StopAnimating];
+            if(!isLoading){
+                [MBProgressHUD hideHUDForView:self.view animated:YES];
+            }
             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error catagory List"
                                                                 message:[error localizedDescription]
                                                                delegate:nil
@@ -328,7 +332,7 @@
         productName.attributedText=[TextStyling AttributForTitle:[NSString stringWithFormat:@"%@",[dic objectForKey:@"name"]]];
         
         [thumbnil sd_setImageWithURL:[NSURL URLWithString:imgurl]
-                 placeholderImage:[UIImage imageNamed:@"placeholder.gif"]];
+                 placeholderImage:[UIImage imageNamed:@"bg_grid_image_stub.png"]];
         
         int tag = (int)[[dic objectForKey:@"tag"] integerValue];
         if(tag==1){

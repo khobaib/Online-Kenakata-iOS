@@ -482,12 +482,13 @@
         
         operation.responseSerializer = [AFJSONResponseSerializer serializer];
         
-        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        
 
         
         [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
             
-            [MBProgressHUD hideHUDForView:self.view animated:YES];
+            [MBProgressHUD hideHUDForView:loadingTempView animated:YES];
+            [loadingTempView removeFromSuperview];
 
             [self parsProducts:responseObject];
             
@@ -495,7 +496,8 @@
             
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             
-            [MBProgressHUD hideHUDForView:self.view animated:YES];
+            [MBProgressHUD hideHUDForView:loadingTempView animated:YES];
+            [loadingTempView removeFromSuperview];
 
           
             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error catagory List"

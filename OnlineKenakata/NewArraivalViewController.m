@@ -151,7 +151,7 @@
     productName.attributedText=[TextStyling AttributForTitle:[NSString stringWithFormat:@"%@",[dic objectForKey:@"name"]]];
     
     [thumbnil sd_setImageWithURL:[NSURL URLWithString:imgurl]
-                placeholderImage:[UIImage imageNamed:@"placeholder.gif"]];
+                placeholderImage:[UIImage imageNamed:@"bg_grid_image_stub.png"]];
     
     int tag = (int)[[dic objectForKey:@"tag"] integerValue];
     if(tag==1){
