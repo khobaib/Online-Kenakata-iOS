@@ -590,10 +590,14 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     UITableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:@"attributeCell"];
     UILabel *type=(UILabel *)[cell viewWithTag:41];
-    UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(0, cell.contentView.frame.size.height - 6.0, cell.contentView.frame.size.width, 6)];
     
-    lineView.backgroundColor = [UIColor colorWithRed:(233.0f/255.0f) green:(231.0f/255.0f) blue:(238.0f/255.0f) alpha:1];
-    [cell.contentView addSubview:lineView];
+    if(![specialQus isEqualToString:@""]&&indexPath.row==0){
+        UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(0, cell.contentView.frame.size.height - 6.0, cell.contentView.frame.size.width, 6)];
+        
+        lineView.backgroundColor = [UIColor colorWithRed:(233.0f/255.0f) green:(231.0f/255.0f) blue:(238.0f/255.0f) alpha:1];
+        [cell.contentView addSubview:lineView];
+    }
+   
     if(![specialQus isEqualToString:@""] && indexPath.row==0){
         type.text=specialQus;
         return cell;

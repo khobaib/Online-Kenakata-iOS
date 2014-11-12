@@ -790,8 +790,20 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xMu-cN-dIW">
                                 <rect key="frame" x="5" y="6" width="310" height="105"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="q8l-SZ-3LR"/>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="67k-p3-zCy"/>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="q8l-SZ-3LR">
+                                        <rect key="frame" x="0.0" y="0.0" width="114" height="85"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="85" id="44F-gw-Tvh"/>
+                                            <constraint firstAttribute="width" constant="114" id="ys8-4N-asO"/>
+                                        </constraints>
+                                    </imageView>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="67k-p3-zCy">
+                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="50" id="Mt1-Gf-3z6"/>
+                                            <constraint firstAttribute="height" constant="50" id="khI-LI-W2R"/>
+                                        </constraints>
+                                    </imageView>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="182" translatesAutoresizingMaskIntoConstraints="NO" id="q9a-le-xag">
                                         <rect key="frame" x="128" y="4" width="182" height="47"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
@@ -825,7 +837,11 @@
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                 <constraints>
+                                    <constraint firstItem="67k-p3-zCy" firstAttribute="leading" secondItem="xMu-cN-dIW" secondAttribute="leading" id="6Ec-cy-tSg"/>
+                                    <constraint firstItem="67k-p3-zCy" firstAttribute="top" secondItem="xMu-cN-dIW" secondAttribute="top" id="a3s-4b-uQL"/>
+                                    <constraint firstItem="q8l-SZ-3LR" firstAttribute="top" secondItem="xMu-cN-dIW" secondAttribute="top" id="cv5-8Y-hRc"/>
                                     <constraint firstAttribute="height" constant="105" id="gTX-V3-uhv"/>
+                                    <constraint firstItem="q8l-SZ-3LR" firstAttribute="leading" secondItem="xMu-cN-dIW" secondAttribute="leading" id="mLe-wg-cW1"/>
                                 </constraints>
                             </view>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vRZ-9V-Iio">
@@ -837,11 +853,11 @@
                             </textView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="50" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="jab-r6-57T">
                                 <rect key="frame" x="5" y="116" width="310" height="150"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="150" id="gw7-gE-esO"/>
                                 </constraints>
                                 <color key="sectionIndexBackgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="sectionIndexTrackingBackgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="attributeCell" id="kAx-ie-9t8">
                                         <rect key="frame" x="0.0" y="22" width="310" height="50"/>
@@ -868,6 +884,7 @@
                                                 </button>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
@@ -3463,7 +3480,7 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="urM-6g-Tnr" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer delaysTouchesBegan="YES" numberOfTapsRequired="7" id="kN9-pU-dhR">
+                <tapGestureRecognizer delaysTouchesBegan="YES" numberOfTapsRequired="5" id="kN9-pU-dhR">
                     <connections>
                         <action selector="TapHandlerMethod:" destination="EMK-Kg-cc9" id="VRb-tU-whE"/>
                     </connections>

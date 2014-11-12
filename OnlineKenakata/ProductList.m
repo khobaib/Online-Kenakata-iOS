@@ -101,6 +101,10 @@
 
 -(void)get_categories_by_parent_cateogory_id{
     
+    if(!isLoading){
+        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    }
+    
     NSString *string = [NSString stringWithFormat:@"%@/rest_kenakata.php?method=get_products_by_tag_id&tag_id=%@&application_code=%@&start=%d",[Data getBaseUrl],self.productId,[Data getAppCode],counter];
     NSURL *url = [NSURL URLWithString:string];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
@@ -122,6 +126,9 @@
         
         [manager POST:string parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
             
+            if(!isLoading){
+                [MBProgressHUD hideHUDForView:self.view animated:YES];
+            }
             [self parsProductList:responseObject];
             
             
@@ -129,8 +136,12 @@
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             
             // 4
-            loading.hidden=YES;
-            [loading StopAnimating];
+            
+            if(!isLoading){
+                [MBProgressHUD hideHUDForView:self.view animated:YES];
+            }
+            
+            
             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error catagory List"
                                                                 message:[error localizedDescription]
                                                                delegate:nil
