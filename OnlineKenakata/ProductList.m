@@ -477,7 +477,7 @@
         productList=[sortedArray mutableCopy];
         [self.collectionView reloadData];
         
-    }else if(i==2){
+    }/*else if(i==2){
         
         NSArray *sortDescriptors = [NSArray arrayWithObject:[self getDesctiptorwithkey:@"total_favorites" ascending:NO]];
         NSArray *sortedArray;
@@ -486,7 +486,7 @@
         productList=[sortedArray mutableCopy];
         [self.collectionView reloadData];
 
-    }else if (i==3){
+    }*/else if (i==2){
         NSSortDescriptor *sortDescriptor;
         
         sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"tag" ascending:NO comparator:^(id obj1, id obj2) {
@@ -508,7 +508,7 @@
         [self.collectionView reloadData];
 
         
-    }else if (i==4){
+    }else if (i==3){
         NSArray *sortDescriptors = [NSArray arrayWithObject:[self getDesctiptorwithkey:@"tag" ascending:NO]];
         NSArray *sortedArray;
         sortedArray = [productList sortedArrayUsingDescriptors:sortDescriptors];

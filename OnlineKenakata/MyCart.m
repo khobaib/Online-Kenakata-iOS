@@ -69,7 +69,13 @@
     NSMutableDictionary *dic = [NSKeyedUnarchiver unarchiveObjectWithData:[ud objectForKey:@"get_user_data"]];
     
     currency=[[[dic objectForKey:@"success"]objectForKey:@"user"]objectForKey:@"currency"];
-    [self setValueOntop];
+    
+    NSString *str=[self setValueOntop];
+    if(![str isEqualToString:@""]){
+        [self checkAvailablity:str];
+
+    }
+    
     [self.checkoutBtn setBackgroundColor:[TextStyling appColor]];
     
     UIBarButtonItem *newBackButton = [[UIBarButtonItem alloc] initWithTitle:@"< Back" style:UIBarButtonItemStyleBordered target:self action:@selector(home:)];
@@ -95,7 +101,7 @@
     [self.view addSubview:loading];
 }
 
--(void)setValueOntop{
+-(NSString *)setValueOntop{
     self.subTotalLable.text=[NSString stringWithFormat:@"Sub total (%luitems):",(unsigned long)productList.count];
     int total=0;
     NSString *str=@"";
@@ -117,12 +123,13 @@
     self.total.text=[NSString stringWithFormat:@"%@ %d",currency,total+charge];
     self.subTotal.text=[NSString stringWithFormat:@"%@ %d",currency,total];
     self.deleveryChargeLable.text=[NSString stringWithFormat:@"%@ %d",currency,charge];
-    [self checkAvailablity:str];
+    //[self checkAvailablity:str];
     
     [Data setSubTotal:total];
     [Data setProductCount:self.productList.count];
     
 
+    return str;
 }
 
 -(void) viewWillDisappear:(BOOL)animated {
@@ -429,6 +436,7 @@
     [DatabaseHandeler deletItem:product.TABLE_PRIMARY_KEY];
     [productList removeObjectAtIndex:indexPath.row];
     [self.tableview deleteRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath, nil] withRowAnimation:UITableViewRowAnimationAutomatic];
+    [self setValueOntop];
 
 }
 

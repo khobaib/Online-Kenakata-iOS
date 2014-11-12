@@ -183,6 +183,7 @@
     [refreshControl endRefreshing];
     [loading StopAnimating];
     loading.hidden=YES;
+    isLoading=NO;
     [self.collectionview reloadData];
     
     
@@ -707,6 +708,7 @@
     loading.hidden=YES;
 }
 -(void)endSearch{
+     isSearched=NO;
     if(backupproDuctList==nil && backupCatList==nil){
         return;
     }
@@ -716,7 +718,7 @@
     [self.collectionview reloadData];
     backupCatList=nil;
     backupproDuctList=nil;
-    isSearched=NO;
+   
 }
 
 -(IBAction)loginBtn:(id)sender{
