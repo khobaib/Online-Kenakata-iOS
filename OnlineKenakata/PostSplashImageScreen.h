@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "LoadingView.h"
+#import "navicationController.h"
+
 
 
 
@@ -19,6 +21,7 @@
 }
 @property IBOutlet UIScrollView *scrollView;
 @property IBOutlet UIImageView *imageView;
+@property navicationController *nav;
 
 -(void)getUserData: (NSDictionary *) dic;
 

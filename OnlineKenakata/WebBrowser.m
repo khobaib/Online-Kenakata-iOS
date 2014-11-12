@@ -28,7 +28,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self initLoading];
-    
+
     
     NSURL *url=[NSURL URLWithString:self.url];
     NSURLRequest *req = [NSURLRequest requestWithURL:url];

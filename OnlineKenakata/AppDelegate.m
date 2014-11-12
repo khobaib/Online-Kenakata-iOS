@@ -13,7 +13,11 @@
 #import <MapKit/MapKit.h>
 #import "EDStarRating/EDStarRating.h"
 #import <FacebookSDK/FacebookSDK.h>
-
+#import "PostSplashImageScreen.h"
+#import "tabbarController.h"
+#import "FirstViewController.h"
+#import "WebBrowser.h"
+#import "ProductDetails.h"
 
 @implementation AppDelegate
 
@@ -81,52 +85,6 @@
 }
 
 
--(void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification
-{
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"localNotification" object:nil userInfo:notification.userInfo];
-
-    UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"Alerm" message:@"alerm set" delegate:nil cancelButtonTitle:@"cancle" otherButtonTitles: nil];
-    
-    NSLog(@"log log");
-    [alert show];
-}
-/*
--(void)application:(UIApplication *)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings{
-    [UIApplication sharedApplication].applicationIconBadgeNumber =0;
-}*/
-- (void)application:(UIApplication*)application didReceiveRemoteNotification:(NSDictionary*)userInfo
-{
-
-    NSString *str=[[userInfo objectForKey:@"aps"]objectForKey:@"alert"];
-    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Did receive notification"
-                                                        message:str
-                                                       delegate:nil
-                                              cancelButtonTitle:@"Ok"
-                                              otherButtonTitles:nil];
-    [alertView show];
-
-    [UIApplication sharedApplication].applicationIconBadgeNumber =0;
-	//[self addMessageFromRemoteNotification:userInfo updateUI:YES];
-}
-
-
-- (void)addMessageFromRemoteNotification:(NSDictionary*)userInfo updateUI:(BOOL)updateUI
-{
-    
-	NSString *alertValue = [[userInfo valueForKey:@"aps"] valueForKey:@"alert"];
-    
-	NSMutableArray *parts = [NSMutableArray arrayWithArray:[alertValue componentsSeparatedByString:@": "]];
-	
-    NSLog(@"%@ %@",alertValue,parts);
-    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"app launch"
-                                                        message:alertValue
-                                                       delegate:nil
-                                              cancelButtonTitle:@"Ok"
-                                              otherButtonTitles:nil];
-    [alertView show];
-    
-    
-}
 
 -(void) checkAndCreateDatabase{
     BOOL success;
@@ -149,43 +107,6 @@
 }
 
 
-
-- (void)application:(UIApplication*)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData*)deviceToken
-{
-    
-	NSString *newToken = [deviceToken description];
-	newToken = [newToken stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"<>"]];
-	newToken = [newToken stringByReplacingOccurrencesOfString:@" " withString:@""];
-    
-	NSLog(@"My token is: %@", newToken);
-    NSString *string = [NSString stringWithFormat:@"%@/rest.php?method=adddevicetoken&dt=%@&unread=0&application_code=%@",[Data getBaseUrl],newToken,[Data getAppCode]];
-    NSURL *url = [NSURL URLWithString:string];
-    NSURLRequest *request = [NSURLRequest requestWithURL:url];
-    
-    // 2
-    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
-    operation.responseSerializer = [AFJSONResponseSerializer serializer];
-    
-    
-    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
-        
-      
-        
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        
-        
-      
-    }];
-    
-
-    [operation start];
-	
-}
-
-- (void)application:(UIApplication*)application didFailToRegisterForRemoteNotificationsWithError:(NSError*)error
-{
-	NSLog(@"Failed to get token, error: %@", error);
-}
 
 - (void)applicationWillResignActive:(UIApplication *)application
 {
@@ -212,6 +133,142 @@
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+#pragma mark Notification
+
+
+
+
+- (void)application:(UIApplication*)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData*)deviceToken
+{
+    
+    NSString *newToken = [deviceToken description];
+    newToken = [newToken stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"<>"]];
+    newToken = [newToken stringByReplacingOccurrencesOfString:@" " withString:@""];
+    
+    NSLog(@"My token is: %@", newToken);
+    NSString *string = [NSString stringWithFormat:@"%@/rest.php?method=adddevicetoken&dt=%@&unread=0&application_code=%@",[Data getBaseUrl],newToken,[Data getAppCode]];
+    NSURL *url = [NSURL URLWithString:string];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    
+    // 2
+    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    operation.responseSerializer = [AFJSONResponseSerializer serializer];
+    
+    
+    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        
+        
+    }];
+    
+    
+    [operation start];
+    
+}
+
+- (void)application:(UIApplication*)application didFailToRegisterForRemoteNotificationsWithError:(NSError*)error
+{
+    NSLog(@"Failed to get token, error: %@", error);
+}
+
+
+-(void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"localNotification" object:nil userInfo:notification.userInfo];
+    
+    UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"Alerm" message:@"alerm set" delegate:nil cancelButtonTitle:@"cancle" otherButtonTitles: nil];
+    
+    NSLog(@"log log");
+    [alert show];
+}
+/*
+ -(void)application:(UIApplication *)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings{
+ [UIApplication sharedApplication].applicationIconBadgeNumber =0;
+ }*/
+- (void)application:(UIApplication*)application didReceiveRemoteNotification:(NSDictionary*)userInfo
+{
+    [self handleRemortNotification:userInfo];
+    NSLog(@"%@",userInfo);
+    [UIApplication sharedApplication].applicationIconBadgeNumber =0;
+    //[self addMessageFromRemoteNotification:userInfo updateUI:YES];
+}
+
+
+- (void)addMessageFromRemoteNotification:(NSDictionary*)userInfo updateUI:(BOOL)updateUI
+{
+    
+     [self handleRemortNotification:userInfo];
+    
+    NSLog(@"%@",userInfo);
+
+    [UIApplication sharedApplication].applicationIconBadgeNumber =0;
+}
+
+-(void)handleRemortNotification:(NSDictionary *)userInfo{
+    
+    if([userInfo[@"notification_type"]isEqualToString:@"GENERAL"]){
+       
+            NSString *str=[[userInfo objectForKey:@"aps"]objectForKey:@"alert"];
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"কেনাকাটা"
+                                                            message:str
+                                                           delegate:nil
+                                                  cancelButtonTitle:@"Ok"
+                                                  otherButtonTitles:nil];
+            [alertView show];
+        
+        
+    }else if([userInfo[@"notification_type"]isEqualToString:@"WEB_LINK"]){
+        PostSplashImageScreen *vc=(PostSplashImageScreen *)self.window.rootViewController;
+        
+        tabbarController *tvc=[[vc.nav viewControllers]objectAtIndex:0];
+        FirstViewController *fcv=[[tvc viewControllers]objectAtIndex:0];
+        
+        WebBrowser *wb=[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"webbrowser"];
+        
+        wb.url=userInfo[@"additional"];
+        [tvc setSelectedIndex:0];
+        [fcv.navigationController pushViewController:wb animated:YES];
+        
+        
+    }else if([userInfo[@"notification_type"]isEqualToString:@"LIST"]){
+        
+        PostSplashImageScreen *vc=(PostSplashImageScreen *)self.window.rootViewController;
+        
+        tabbarController *tvc=[[vc.nav viewControllers]objectAtIndex:0];
+       
+        if([userInfo[@"additional"]isEqualToString:@"NEW"]){
+             [tvc setSelectedIndex:2];
+            
+            
+        }else if([userInfo[@"additional"]isEqualToString:@"SALE"]){
+             [tvc setSelectedIndex:1];
+        }
+        
+        
+    }else if([userInfo[@"notification_type"]isEqualToString:@"SINGLE"]){
+        
+        NSString *productID=userInfo[@"additional"];
+        NSLog(@"log %@",productID);
+        
+        PostSplashImageScreen *vc=(PostSplashImageScreen *)self.window.rootViewController;
+        
+        tabbarController *tvc=[[vc.nav viewControllers]objectAtIndex:0];
+        FirstViewController *fcv=[[tvc viewControllers]objectAtIndex:0];
+        
+        ProductDetails *pdvc=[[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"productDetails3"];
+        
+        NSMutableDictionary *dic=[[NSMutableDictionary alloc]init];
+        dic[@"product_id"]=productID;
+        pdvc.productData=dic;
+        [fcv.navigationController pushViewController:pdvc animated:YES];
+    }
+    
 }
 
 @end

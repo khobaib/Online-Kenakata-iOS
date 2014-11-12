@@ -232,15 +232,15 @@
              {
                  //[loading StopAnimating];
                  //loading.hidden=YES;
-                 navicationController *nav=[[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"navigationController"];
+                _nav=[[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"navigationController"];
                  
-                 tabbarController *tbc=[nav.viewControllers objectAtIndex:0];
+                 tabbarController *tbc=[_nav.viewControllers objectAtIndex:0];
                  
                  
                  FirstViewController *frst = [tbc.viewControllers objectAtIndex:0];
                  frst.image=image;
                  
-                 [self presentViewController:nav animated:YES completion:nil];
+                 [self presentViewController:_nav animated:YES completion:nil];
 
                  
                //  self.navigationController.navigationBar.hidden=NO;

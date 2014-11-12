@@ -507,6 +507,9 @@
     [loading StopAnimating];
     loading.hidden=YES;
     NSMutableDictionary *dic1=(NSMutableDictionary *)respons;
+    if([[dic1 objectForKey:@"success"]objectForKey:@"products"]==nil){
+        return;
+    }
     self.productData=[[[dic1 objectForKey:@"success"]objectForKey:@"products"]objectAtIndex:0];
     self.similarProducrsData=[self.productData objectForKey:@"similar_products"];
     
