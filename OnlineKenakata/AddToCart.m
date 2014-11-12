@@ -34,7 +34,12 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-   
+  
+    [self.tableView setBackgroundView:nil];
+    UIView *view=[[UIView alloc]initWithFrame:self.tableView.frame];
+    view.backgroundColor=[UIColor whiteColor];
+    
+    [self.tableView setBackgroundView:view];
     self.tableView.layer.borderWidth=2.0f;
     self.tableView.layer.borderColor=[UIColor lightGrayColor].CGColor;
     self.tableView.layer.cornerRadius=5.0f;

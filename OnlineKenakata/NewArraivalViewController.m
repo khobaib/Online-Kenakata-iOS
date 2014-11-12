@@ -43,7 +43,8 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    
+    self.tabBarController.navigationItem.title=@"New Arrival";
+
     [self.collectionView reloadData];
     
 }

@@ -50,7 +50,7 @@
         
         // 3
         UIImageView *newPageView = [[UIImageView alloc] init];
-        [newPageView setFrame:CGRectMake(4, 4, frame.size.width-18, frame.size.height-18)];
+        [newPageView setFrame:CGRectMake(0, 0, frame.size.width-18, frame.size.height-18)];
         
        
         
@@ -71,7 +71,7 @@
         
         
         
-        UIView *view=[[UIView alloc]initWithFrame:CGRectMake(frame.origin.x+5, frame.origin.y+5, frame.size.width-10, frame.size.height-10)];
+        UIView *view=[[UIView alloc]initWithFrame:CGRectMake(frame.origin.x+2, frame.origin.y+2, frame.size.width-4, frame.size.height-4)];
         UIColor *color=[UIColor whiteColor]; //[UIColor colorWithRed:0.75f  green:0.75f blue:0.75f alpha:1.0f];
         
       
@@ -217,6 +217,7 @@
     [self frameUpdateFrom:self.itemCodeLable To:self.similarProductLable];
     [self frameUpdateFrom:self.similarProductLable To:self.collectionView];
     
+    self.scrollHeight.constant=self.collectionView.frame.origin.y+self.collectionView.frame.size.height+self.collectionView.frame.origin.y+10;
     
     int available =[[self.productData objectForKey:@"add_to_cart"]intValue];
     
@@ -336,6 +337,12 @@
     self.similarProducrsData=[[NSMutableArray alloc]init];
     [self initLoading];
 
+    loadingTempView=[[UIView alloc]initWithFrame:self.view.frame];
+    
+    loadingTempView.backgroundColor=[UIColor whiteColor];
+    
+    [self.view addSubview:loadingTempView];
+    [MBProgressHUD showHUDAddedTo:loadingTempView animated:YES];
     [self loadData];
     
     // NSLog(@"%@",self.pageImages);
@@ -446,18 +453,20 @@
         NSMutableDictionary *params=[[NSMutableDictionary alloc]init];
         [params setObject:token forKey:@"token"];
         
-        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+
         
         [manager POST:string parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
-            [MBProgressHUD hideHUDForView:self.view animated:YES];
+            [MBProgressHUD hideHUDForView:loadingTempView animated:YES];
+            [loadingTempView removeFromSuperview];
             [self parsProducts:responseObject];
             
             
             
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             
-            [MBProgressHUD hideHUDForView:self.view animated:YES];
+            [MBProgressHUD hideHUDForView:loadingTempView animated:YES];
 
+            [loadingTempView removeFromSuperview];
             
             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error catagory List"
                                                                 message:[error localizedDescription]
@@ -563,7 +572,7 @@
     [self.starRater addGestureRecognizer:tap];
     [self.starRaterBack setAlpha:0.40];
     
-    [self.starRaterBack.layer setCornerRadius:5.0f];
+   
     
     // border
     [self.starRaterBack.layer setBorderColor:[UIColor grayColor].CGColor];

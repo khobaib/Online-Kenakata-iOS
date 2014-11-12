@@ -16,7 +16,7 @@
     NSString *currency;
     NSMutableArray *photos;
     LoadingView *loading;
-    
+    UIView *loadingTempView;
     BOOL favFlag;
 }
 
@@ -42,6 +42,10 @@
 @property (strong,nonatomic) IBOutlet UIView *starRaterBack;
 @property (strong,nonatomic) IBOutlet UILabel *favoritNumber;
 @property (strong,nonatomic) IBOutlet UILabel *similarProductLable;
+
+
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *scrollHeight;
+@property IBOutlet UIView *containerView;
 
 @property (strong,nonatomic) IBOutlet UIButton *favButton;
 @property (strong,nonatomic) IBOutlet UIImageView *logoImageView;

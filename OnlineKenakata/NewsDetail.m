@@ -67,9 +67,10 @@
     [super viewWillAppear:animated];
     [self addShareButton];
 }
+
 -(void)addShareButton{
     UIButton *sharebtn=[TextStyling sharebutton];
-
+    
     [sharebtn addTarget:self action:@selector(shareButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     
     sharebtn.hidden=NO;
@@ -78,6 +79,73 @@
     
     //[self.navigationItem.titleView addSubview:sharebtn];
 }
+
+- (void)shareConfig:(share *)background {
+    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+    NSMutableDictionary *dic1=[NSKeyedUnarchiver unarchiveObjectWithData:[ud objectForKey:@"get_user_data"]];
+    
+    
+    NSMutableDictionary *dic=[[dic1 objectForKey:@"success"]objectForKey:@"user"];
+    
+    
+    //fb twitter
+    background.titleName=[NSString stringWithFormat:@"Recommended - %@ , by %@ , Call %@ . Download কেনাকাটা (Android/iOS)",self.name.text,[dic objectForKey:@"user_name"],[dic objectForKey:@"user_phone"]];
+    background.descriptionText=[self.dic objectForKey:@"news_contents"];
+    NSString *imageURL=[[[self.dic objectForKey:@"images"]objectAtIndex:0]objectForKey:@"image_url"];
+    background.url=imageURL;
+    background.viewController=self;
+    background.caption=@"";
+    background.imageUrl=@"";
+    background.delegate=self;
+    
+    //email
+    background.emailBody=[NSString stringWithFormat:@"%@ \n%@ .\nDownload কেনাকাটা (Android/iOS)",[self.dic objectForKey:@"news_title"],imageURL];
+    background.emailSub=[NSString stringWithFormat:@"Recommended - %@ , by %@ , Call %@ ",self.name.text,[dic objectForKey:@"user_name"],[dic objectForKey:@"user_phone"]];
+}
+
+-(void)shareInIOS8{
+    UIAlertController *alert=[UIAlertController alertControllerWithTitle:@"Share" message:@"" preferredStyle:UIAlertControllerStyleActionSheet];
+    
+    share *background=[[share alloc]init];
+    
+    [self shareConfig:background];
+    
+    
+    
+    UIAlertAction *facebook=[UIAlertAction actionWithTitle:@"facebook" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
+        [background facebookShare];
+    }];
+    
+    UIAlertAction *twiter=[UIAlertAction actionWithTitle:@"twiter" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
+        [background twiterShare];
+    }];
+    
+    UIAlertAction *email=[UIAlertAction actionWithTitle:@"email" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
+        [background mailShare];
+    }];
+    
+    UIAlertAction *message=[UIAlertAction actionWithTitle:@"message" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
+        
+        [self setMessanger];
+    }];
+    
+    UIAlertAction *cancle=[UIAlertAction actionWithTitle:@"cancle" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action){
+        
+    }];
+    
+    
+    
+    
+    [alert addAction:facebook];
+    [alert addAction:twiter];
+    [alert addAction:email];
+    [alert addAction:message];
+    [alert addAction:cancle];
+    
+    [self presentViewController:alert animated:YES completion:nil];
+    
+}
+
 -(void)shareButtonClick:(id)sender{
     UIActionSheet * action = [[UIActionSheet alloc]
                               initWithTitle:@"Share"
@@ -88,47 +156,34 @@
     
     
     
-    share *background = [[share alloc]initWithFrame:CGRectMake(0, 0, 320, 150) actionSheet:action];
+    share *background;// = [[share alloc]initWithFrame:CGRectMake(0, 0, 320, 150) actionSheet:action];
     
-    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
-    NSMutableDictionary *dic1=[NSKeyedUnarchiver unarchiveObjectWithData:[ud objectForKey:@"get_user_data"]];
-    NSMutableDictionary *dic=[[dic1 objectForKey:@"success"]objectForKey:@"user"];
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
+    {
+        [self shareInIOS8];
+        return;
+    }else{
+        background = [[share alloc]initWithFrame:CGRectMake(0, 0, 320, 150) actionSheet:action];
+    }
     
+    [self shareConfig:background];
     
-    //fb twitter
-    background.caption=[NSString stringWithFormat:@"Recommended - %@ , by %@ , Call %@ . Download Online Kenakata (Android/iOS)",self.name.text,[dic objectForKey:@"user_name"],[dic objectForKey:@"user_phone"]];
-    background.descriptionText=self.descriptionText.text ;
-    NSString *url=[dic objectForKey:@"user_website"];
-    background.url=url;
-    background.viewController=self;
-    background.titleName=background.caption;
-    background.imageUrl=@"";
-    background.delegate=self;
-    
-    //email
-    background.emailBody=[NSString stringWithFormat:@"%@ \n%@ .\nDownload Online Kenakata (Android/iOS)",self.descriptionText.text,url];
-    background.emailSub=[NSString stringWithFormat:@"Recommended - %@ , by %@ , Call %@ ",self.name.text,[dic objectForKey:@"user_name"],[dic objectForKey:@"user_phone"]];
-    
-    // background.image=
-    //NSLog(@"%@",background.caption);
-    
-    // background.backgroundColor = [UIColor whiteColor];
-    
+    background.backgroundColor = [UIColor whiteColor];
     
     [action addSubview:background];
     
     [action showInView:self.view];
     
     
-    
 }
 
 -(void)setMessanger{
     NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+    
     NSMutableDictionary *dic1=[NSKeyedUnarchiver unarchiveObjectWithData:[ud objectForKey:@"get_user_data"]];
     NSMutableDictionary *dic=[[dic1 objectForKey:@"success"]objectForKey:@"user"];
     
-    NSLog(@"protocall");
+    // NSLog(@"protocall");
     if(![MFMessageComposeViewController canSendText]) {
         UIAlertView *warningAlert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Your device doesn't support SMS!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [warningAlert show];
@@ -136,7 +191,7 @@
     }
     
     //  NSArray *recipents = @[@"12345678", @"72345524"];
-    NSString *message = [NSString stringWithFormat:@"Recommended - %@ , %@ , %@ .Download Online Kenakata (Android/iOS)",self.name.text,[dic objectForKey:@"user_name"],[dic objectForKey:@"user_phone"]];
+    NSString *message = [NSString stringWithFormat:@"Recommended - %@ , %@ , %@ .Download কেনাকাটা (Android/iOS)",self.name.text,[dic objectForKey:@"user_name"],[dic objectForKey:@"user_phone"]];
     
     MFMessageComposeViewController *messageController = [[MFMessageComposeViewController alloc] init];
     messageController.messageComposeDelegate = self;
@@ -146,7 +201,9 @@
     // Present message view controller on screen
     [self presentViewController:messageController animated:YES completion:nil];
 }
-
+-(IBAction)TapHandlerMethod:(id)sender{
+    [TextStyling Handle];
+}
 
 - (void)messageComposeViewController:(MFMessageComposeViewController *)controller didFinishWithResult:(MessageComposeResult) result
 {
