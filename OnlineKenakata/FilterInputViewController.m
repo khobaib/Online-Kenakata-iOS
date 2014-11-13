@@ -257,6 +257,9 @@
     return aray;
 }
 
+-(void)viewWillAppear:(BOOL)animated{
+    self.screenName=@"Filter";
+}
 
 #pragma mark - Navigation
 

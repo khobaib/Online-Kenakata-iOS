@@ -10,9 +10,9 @@
 #import "MWPhotoBrowser.h"
 #import "share.h"
 #import <MessageUI/MessageUI.h>
+#import "GAITrackedViewController.h"
 
-
-@interface OfferDetail : UIViewController<MWPhotoBrowserDelegate,shareDelegate,MFMessageComposeViewControllerDelegate>{
+@interface OfferDetail : GAITrackedViewController<MWPhotoBrowserDelegate,shareDelegate,MFMessageComposeViewControllerDelegate>{
     
     NSMutableArray *photos;
     

@@ -26,6 +26,13 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     self.navigationItem.title=self.catagoryName;
+    self.screenName=@"Product List";
+    
+}
+-(void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+
+   
     
 }
 - (void)viewDidLoad
@@ -231,6 +238,8 @@
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
+    
+  [[SDImageCache sharedImageCache] clearMemory];
     // Dispose of any resources that can be recreated.
 }
 
@@ -318,6 +327,7 @@
         
         NSString *marchentLogo=[[[NSUserDefaults standardUserDefaults] objectForKey:key]objectForKey:@"logo"];
      
+       
         [logo sd_setImageWithURL:[NSURL URLWithString:marchentLogo]
                 placeholderImage:[UIImage imageNamed:@"icon"]];
         //
@@ -358,8 +368,10 @@
         
         // NSLog(@"%@",[NSString stringWithFormat:@"%@",[dic objectForKey:@"name"]]);
         
+        
         return cell;
     }
+   
     /*
     UILabel * title=(UILabel *)[cell viewWithTag:202];
     UIImageView *thumbnil=(UIImageView* )[cell viewWithTag:201];

@@ -89,8 +89,9 @@
     
 }
 -(void)viewWillAppear:(BOOL)animated{
+    
     [super viewWillAppear:animated];
-   
+   self.screenName=@"My Cart";
 }
 -(void)initLoading{
     CGFloat x= self.view.frame.size.width/2-65;

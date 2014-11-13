@@ -31,6 +31,9 @@
     return self;
 }
 
+-(void)viewWillAppear:(BOOL)animated{
+    self.screenName=@"Filter List";
+}
 - (void)viewDidLoad
 {
     [super viewDidLoad];

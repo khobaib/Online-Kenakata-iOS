@@ -9,8 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "EDStarRating.h"
 #import "LoadingView.h"
-
-@interface Review : UIViewController<UITableViewDataSource,UITableViewDelegate>{
+#import "GAITrackedViewController.h"
+@interface Review : GAITrackedViewController<UITableViewDataSource,UITableViewDelegate>{
 
     LoadingView *loading;
     NSMutableArray *reviews;

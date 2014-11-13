@@ -41,7 +41,7 @@ int indexOfReadMoreButton;
 
     [self initLoading];
     [self loadData];
-    
+    self.screenName=@"Review";
     isdataloaded=NO;
     
     [super viewWillAppear:animated];

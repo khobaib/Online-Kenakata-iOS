@@ -9,8 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "EDStarRating/EDStarRating.h"
 #import "LoadingView.h"
-
-@interface WriteReviewViewController : UIViewController<UITextFieldDelegate,UITextViewDelegate,EDStarRatingProtocol>{
+#import "GAITrackedViewController.h"
+@interface WriteReviewViewController : GAITrackedViewController<UITextFieldDelegate,UITextViewDelegate,EDStarRatingProtocol>{
     
     LoadingView *loading;
 

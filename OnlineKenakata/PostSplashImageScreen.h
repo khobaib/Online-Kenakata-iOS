@@ -9,12 +9,12 @@
 #import <UIKit/UIKit.h>
 #import "LoadingView.h"
 #import "navicationController.h"
+#import "GAITrackedViewController.h"
 
 
 
 
-
-@interface PostSplashImageScreen : UIViewController
+@interface PostSplashImageScreen : GAITrackedViewController
 {
     LoadingView *loading;
    

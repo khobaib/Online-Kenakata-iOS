@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "LoadingView.h"
-
+#import "GAITrackedViewController.h"
 @interface NewsList : UITableViewController{
     NSMutableArray *newsData;
     LoadingView *loading;

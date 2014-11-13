@@ -31,7 +31,7 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.0.2</string>
+	<string>1.0.0</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleURLTypes</key>
@@ -56,11 +56,11 @@
 	<key>NSContactsUsageDescription</key>
 	<string>This app will use addressbook </string>
 	<key>NSLocationAlwaysUsageDescription</key>
-	<string>Location update needed for showing user&apos;s current location on map</string>
+	<string>Location update needed for showing user's current location on map</string>
 	<key>NSLocationUsageDescription</key>
 	<string>This app will use your location</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Location update needed for showing user&apos;s current location on map</string>
+	<string>Location update needed for showing user's current location on map</string>
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
 	<key>UIRequiredDeviceCapabilities</key>

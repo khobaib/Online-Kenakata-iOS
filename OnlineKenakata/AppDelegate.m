@@ -18,6 +18,7 @@
 #import "FirstViewController.h"
 #import "WebBrowser.h"
 #import "ProductDetails.h"
+#import "GAI.h"
 
 @implementation AppDelegate
 
@@ -27,6 +28,7 @@
     //[FBSession.activeSession closeAndClearTokenInformation];
     // Override point for customization after application launch.
   
+    [self initGoogleAnalytics];
     if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
     {
          [[UIApplication sharedApplication] registerForRemoteNotifications];
@@ -133,6 +135,19 @@
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+-(void)initGoogleAnalytics{
+    [GAI sharedInstance].trackUncaughtExceptions = YES;
+    
+    // Optional: set Google Analytics dispatch interval to e.g. 20 seconds.
+    [GAI sharedInstance].dispatchInterval = 20;
+    
+    // Optional: set Logger to VERBOSE for debug information.
+
+    
+    // Initialize tracker. Replace with your tracking ID.
+    [[GAI sharedInstance] trackerWithTrackingId:@"UA-56078066-1"];
 }
 
 #pragma mark Notification

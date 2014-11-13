@@ -9,11 +9,11 @@
 #import <UIKit/UIKit.h>
 #import "RMPickerViewController.h"
 #import <MapKit/MapKit.h>
+#import "GAITrackedViewController.h"
 
 
 
-
-@interface MapView : UIViewController<RMPickerViewControllerDelegate,MKMapViewDelegate,UIActionSheetDelegate,UITableViewDataSource,UITableViewDelegate,UISearchBarDelegate,UISearchDisplayDelegate>{
+@interface MapView : GAITrackedViewController<RMPickerViewControllerDelegate,MKMapViewDelegate,UIActionSheetDelegate,UITableViewDataSource,UITableViewDelegate,UISearchBarDelegate,UISearchDisplayDelegate>{
     UIActionSheet *sheet;
     NSArray *branches;
     

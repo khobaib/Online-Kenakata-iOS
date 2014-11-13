@@ -7,8 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface NewArraivalViewController : UIViewController<UICollectionViewDataSource,UICollectionViewDelegate>{
+#import "GAITrackedViewController.h"
+@interface NewArraivalViewController : GAITrackedViewController<UICollectionViewDataSource,UICollectionViewDelegate>{
     NSMutableArray *productList;
     NSString *currency;
     int counter;

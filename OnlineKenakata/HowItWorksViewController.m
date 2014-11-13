@@ -39,7 +39,7 @@
 
 
 -(void)viewWillAppear:(BOOL)animated{
-   
+   self.screenName=@"How It Works";
     self.navigationItem.leftBarButtonItem=nil;
 }
 -(void)viewWillDisappear:(BOOL)animated{

@@ -7,8 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface ProceedToCheckout : UIViewController<UIAlertViewDelegate>{
+#import "GAITrackedViewController.h"
+@interface ProceedToCheckout : GAITrackedViewController<UIAlertViewDelegate>{
     NSString *currency;
 }
 

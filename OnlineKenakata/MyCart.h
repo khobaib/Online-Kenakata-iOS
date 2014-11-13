@@ -9,8 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "LoadingView.h"
 #import "RMPickerViewController.h"
-
-@interface MyCart : UIViewController<UITableViewDataSource,UITableViewDelegate,UIPickerViewDataSource,UIPickerViewDelegate,RMPickerViewControllerDelegate>
+#import "GAITrackedViewController.h"
+@interface MyCart : GAITrackedViewController<UITableViewDataSource,UITableViewDelegate,UIPickerViewDataSource,UIPickerViewDelegate,RMPickerViewControllerDelegate>
 {
     NSString *currency;
     NSIndexPath *quantity;

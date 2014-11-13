@@ -7,8 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface SettingsViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,UIAlertViewDelegate>{
+#import "GAITrackedViewController.h"
+@interface SettingsViewController : GAITrackedViewController<UITableViewDataSource,UITableViewDelegate,UIAlertViewDelegate>{
     NSString *token;
 }
 
@@ -22,5 +22,8 @@
 @property (strong,nonatomic) IBOutlet UILabel *email;
 @property (strong,nonatomic) IBOutlet UILabel *appvertion;
 
+
+
++(NSString*)md5HexDigest:(NSString*)input;
 
 @end

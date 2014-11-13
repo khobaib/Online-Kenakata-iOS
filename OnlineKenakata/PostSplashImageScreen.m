@@ -130,8 +130,8 @@
 
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-    
-    [super viewDidLoad];
+    self.screenName=@"Post Splash Image Screen";
+
     [[AFNetworkReachabilityManager sharedManager] startMonitoring];
     
    

@@ -9,10 +9,10 @@
 #import <UIKit/UIKit.h>
 #import "AFNetworking/AFNetworking.h"
 #import <FacebookSDK/FacebookSDK.h>
+#import "GAITrackedViewController.h"
 
 
-
-@interface FacebookViewController : UIViewController{
+@interface FacebookViewController : GAITrackedViewController{
     
 }
 

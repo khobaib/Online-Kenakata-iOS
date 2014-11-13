@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GAITrackedViewController.h"
 
-@interface FilterInputViewController : UIViewController<UIPickerViewDataSource,UIPickerViewDelegate,UITextFieldDelegate>{
+@interface FilterInputViewController : GAITrackedViewController<UIPickerViewDataSource,UIPickerViewDelegate,UITextFieldDelegate>{
     UIPickerView *marchentPicker;
     UIPickerView *tagPicker;
     UIPickerView *pricePicker;

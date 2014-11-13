@@ -8,10 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "LoadingView.h"
+#import "GAITrackedViewController.h"
 
 
-
-@interface FirstViewController : UIViewController<UICollectionViewDataSource,UICollectionViewDelegate,UISearchBarDelegate>
+@interface FirstViewController : GAITrackedViewController<UICollectionViewDataSource,UICollectionViewDelegate,UISearchBarDelegate>
 {
     NSMutableArray *catagoryList;
     NSMutableArray *productList;

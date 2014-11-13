@@ -12,7 +12,8 @@
 #import "share.h"
 #import "RateView.h"
 #import "LoadingView.h"
-@interface ProductDetails : UIViewController<UIScrollViewDelegate,MWPhotoBrowserDelegate,shareDelegate,MFMessageComposeViewControllerDelegate,UIGestureRecognizerDelegate>{
+#import "GAITrackedViewController.h"
+@interface ProductDetails : GAITrackedViewController<UIScrollViewDelegate,MWPhotoBrowserDelegate,shareDelegate,MFMessageComposeViewControllerDelegate,UIGestureRecognizerDelegate>{
     NSString *currency;
     NSMutableArray *photos;
     LoadingView *loading;
@@ -41,7 +42,7 @@
 @property (strong,nonatomic) IBOutlet RateView *starRater;
 @property (strong,nonatomic) IBOutlet UIView *starRaterBack;
 @property (strong,nonatomic) IBOutlet UILabel *favoritNumber;
-@property (strong,nonatomic) IBOutlet UILabel *similarProductLable;
+
 
 
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *scrollHeight;

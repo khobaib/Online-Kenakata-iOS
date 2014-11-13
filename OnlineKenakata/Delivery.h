@@ -9,8 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "DeleveryMethod.h"
 #import "LoadingView.h"
-
-@interface Delivery : UIViewController<UITextFieldDelegate,UIPickerViewDataSource,UIPickerViewDelegate>{
+#import "GAITrackedViewController.h"
+@interface Delivery : GAITrackedViewController<UITextFieldDelegate,UIPickerViewDataSource,UIPickerViewDelegate>{
 
     UIPickerView *paymentMethodPicker;
     NSString *currency;

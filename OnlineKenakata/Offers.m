@@ -32,6 +32,7 @@
     [super viewWillAppear:animated];
     
      self.tabBarController.navigationItem.title=@"Discounts";
+    self.screenName=@"Discount";
 }
 - (void)viewDidLoad
 {

@@ -29,6 +29,9 @@
     }
     return self;
 }
+-(void)viewWillAppear:(BOOL)animated{
+    self.screenName=@"Proceed To Checkout";
+}
 
 - (void)viewDidLoad
 {

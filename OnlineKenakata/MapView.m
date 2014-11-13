@@ -123,13 +123,12 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    
-    [self initBarbutton];
+    self.screenName=@"Location";
     
     if(branches.count!=0){
-      [self goTolocation:0];
-
+        [self goTolocation:0];
     }
+   
     
     
     self.tabBarController.navigationItem.title=@"Location";
@@ -142,16 +141,7 @@
     
     [super viewWillDisappear:animated];
 
-    for(UIView* view in self.tabBarController.navigationController.navigationBar.subviews)
-    {
-        if(view.tag ==1)
-        {
-            view.hidden=NO;
-        }
-    }
-
-    [self.tabBarController.navigationItem setLeftBarButtonItem:nil];
-    [self.tabBarController.navigationItem setRightBarButtonItem:nil];
+    
 
 }
 
@@ -195,17 +185,20 @@
     
     
     static NSString *identifier = @"PushPin";
+    
+    
 
     if ([annotation isKindOfClass:[PushPin class]]) {
         
         PushPin *pin=(PushPin*)annotation;
         MKPinAnnotationView *annotationView = (MKPinAnnotationView *) [_mapView dequeueReusableAnnotationViewWithIdentifier:identifier];
+        annotationView=nil;
         if (annotationView == nil) {
             annotationView = [[MKPinAnnotationView alloc] initWithAnnotation:pin reuseIdentifier:identifier];
             annotationView.enabled = YES;
            
-        
-           
+
+            
             CGRect frame=annotationView.frame;
             
             UIButton *button = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
@@ -220,6 +213,8 @@
             
             
             UIImageView *leftCAV = [[UIImageView alloc] initWithFrame:CGRectMake(0,0,30,30)];
+            
+            
             
             SDWebImageManager *manager = [SDWebImageManager sharedManager];
             [manager downloadImageWithURL:[NSURL URLWithString:pin.imageUrl]
@@ -582,6 +577,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
 
     [self.searchDisplayController setActive:NO];
+    
     
     float lat=[[[searchArray objectAtIndex:indexPath.row]objectForKey:@"latitude"]floatValue];
     float ln=[[[searchArray objectAtIndex:indexPath.row]objectForKey:@"longitude"]floatValue];

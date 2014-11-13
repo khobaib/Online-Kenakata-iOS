@@ -8,8 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "LoadingView.h"
-
-@interface Offers : UIViewController<UICollectionViewDelegate,UICollectionViewDataSource>{
+#import "GAITrackedViewController.h"
+@interface Offers : GAITrackedViewController<UICollectionViewDelegate,UICollectionViewDataSource>{
     NSMutableArray *productList;
     NSMutableArray *catagoryList;
     int counter;

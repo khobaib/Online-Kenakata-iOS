@@ -50,7 +50,7 @@
         
         // 3
         UIImageView *newPageView = [[UIImageView alloc] init];
-        [newPageView setFrame:CGRectMake(0, 0, frame.size.width-18, frame.size.height-18)];
+        [newPageView setFrame:CGRectMake(0, 0, frame.size.width, frame.size.height)];
         
        
         
@@ -71,7 +71,7 @@
         
         
         
-        UIView *view=[[UIView alloc]initWithFrame:CGRectMake(frame.origin.x+2, frame.origin.y+2, frame.size.width-4, frame.size.height-4)];
+        UIView *view=[[UIView alloc]initWithFrame:CGRectMake(frame.origin.x, frame.origin.y+2, frame.size.width-4, frame.size.height-4)];
         UIColor *color=[UIColor whiteColor]; //[UIColor colorWithRed:0.75f  green:0.75f blue:0.75f alpha:1.0f];
         
       
@@ -140,6 +140,7 @@
     
     // 4
  
+    self.screenName=@"Product Details";
 
     [self addShareButton];
     
@@ -212,12 +213,9 @@
     [self.productDetails sizeToFit];
     [self.productDetails setScrollEnabled:NO];
     
-    [self frameUpdateFrom:self.productDetails To:self.itemCodeLable];
-    [self frameUpdateFrom:self.productDetails To:self.itemCode];
-    [self frameUpdateFrom:self.itemCodeLable To:self.similarProductLable];
-    [self frameUpdateFrom:self.similarProductLable To:self.collectionView];
     
-    self.scrollHeight.constant=self.collectionView.frame.origin.y+self.collectionView.frame.size.height+self.collectionView.frame.origin.y+10;
+    
+        self.scrollHeight.constant=self.collectionView.frame.origin.y+self.collectionView.frame.size.height+self.collectionView.frame.origin.y+10;
     
     int available =[[self.productData objectForKey:@"add_to_cart"]intValue];
     
@@ -229,6 +227,20 @@
         self.itemCode.hidden=YES;
         self.itemCodeLable.hidden=YES;
     }
+    
+    if([self.itemCode.text isEqualToString:@""]){
+        self.itemCode.hidden=YES;
+        self.itemCodeLable.hidden=YES;
+        [self frameUpdateFrom:self.productDetails To:self.collectionView];
+    }else{
+        [self frameUpdateFrom:self.productDetails To:self.itemCodeLable];
+        [self frameUpdateFrom:self.productDetails To:self.itemCode];
+        [self frameUpdateFrom:self.itemCodeLable To:self.collectionView];
+    }
+  
+    
+
+    
     NSString *spclQus=[self.productData objectForKey:@"special_question"];
     if([spclQus isEqualToString:@""]){
         if(available<1){
@@ -518,7 +530,9 @@
     [loading StopAnimating];
     loading.hidden=YES;
     NSMutableDictionary *dic1=(NSMutableDictionary *)respons;
-    if([[dic1 objectForKey:@"success"]objectForKey:@"products"]==nil){
+    NSArray *arr=[[dic1 objectForKey:@"success"]objectForKey:@"products"];
+    if(arr.count==0){
+        [self loadData];
         return;
     }
     self.productData=[[[dic1 objectForKey:@"success"]objectForKey:@"products"]objectAtIndex:0];
@@ -577,6 +591,7 @@
    
     
     // border
+    /*
     [self.starRaterBack.layer setBorderColor:[UIColor grayColor].CGColor];
     [self.starRaterBack.layer setBorderWidth:1.5f];
     
@@ -586,7 +601,7 @@
     [self.starRaterBack.layer setShadowRadius:3.0];
     [self.starRaterBack.layer setShadowOffset:CGSizeMake(2.0, 2.0)];
     
-
+*/
     /*
     NSMutableDictionary *arr=[[self.productData objectForKey:@"review_detail"]objectForKey:@"distribution"];
     int total=0;

@@ -14,7 +14,7 @@
 #import "AFNetworking.h"
 #import "Data.h"
 #import "MBProgressHUD.h"
-
+#import <CommonCrypto/CommonDigest.h>
 
 @interface SettingsViewController ()
 
@@ -38,10 +38,12 @@
     // Do any additional setup after loading the view.
 }
 
--(void)viewDidAppear:(BOOL)animated{
+-(void)viewWillAppear:(BOOL)animated{
     
 
     [super viewWillAppear:animated];
+    
+    self.screenName=@"Settings";
     token=[[NSUserDefaults standardUserDefaults] objectForKey:@"token"];
     
    self.tabBarController.navigationItem.title=@"Settings";
@@ -234,7 +236,7 @@
             [self performSegueWithIdentifier:@"locationseg" sender:self];
             
         }else if(indexPath.row==2){
-            [[UIApplication sharedApplication]openURL:[NSURL URLWithString:@"itms-apps://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=905900408"]];
+            [[UIApplication sharedApplication]openURL:[NSURL URLWithString:@"itms-apps://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=941047309"]];
             
         }else if(indexPath.row==3){
             [self performSegueWithIdentifier:@"pushinfo" sender:self];
@@ -295,10 +297,10 @@
     // manager.responseSerializer=[AFCompoundResponseSerializer serializer];
     
     NSMutableDictionary *params=[[NSMutableDictionary alloc]init];
-    
-    params[@"new_pass"]=newpass;
+
+    params[@"new_pass"]=[SettingsViewController md5HexDigest:newpass];
     params[@"token"]=[[NSUserDefaults standardUserDefaults]objectForKey:@"token"];
-    
+    params[@"isNew"]=@"1";
     
     NSString *str=[NSString stringWithFormat:@"%@/rest.php?method=pass_change",[Data getBaseUrl]];
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
@@ -323,6 +325,18 @@
          NSLog(@"Error: %@", error);
      }];
 
+}
+
++(NSString*)md5HexDigest:(NSString*)input {
+    const char* str = [input UTF8String];
+    unsigned char result[CC_MD5_DIGEST_LENGTH];
+    CC_MD5(str, strlen(str), result);
+    
+    NSMutableString *ret = [NSMutableString stringWithCapacity:CC_MD5_DIGEST_LENGTH*2];
+    for(int i = 0; i<CC_MD5_DIGEST_LENGTH; i++) {
+        [ret appendFormat:@"%02x",result[i]];
+    }
+    return ret;
 }
 
 - (void)didReceiveMemoryWarning

@@ -126,7 +126,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    
+    self.screenName=@"Info page";
     // 4
     CGSize pagesScrollViewSize = self.scrollView.frame.size;
     self.scrollView.contentSize = CGSizeMake(pagesScrollViewSize.width * self.pageImages.count, pagesScrollViewSize.height);

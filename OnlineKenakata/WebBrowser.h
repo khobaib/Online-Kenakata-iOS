@@ -8,8 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "LoadingView.h"
-
-@interface WebBrowser : UIViewController<UIWebViewDelegate>{
+#import "GAITrackedViewController.h"
+@interface WebBrowser : GAITrackedViewController<UIWebViewDelegate>{
     LoadingView *loading;
     
 }

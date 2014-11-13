@@ -10,9 +10,9 @@
 #import "MWPhotoBrowser.h"
 #import "share.h"
 #import <MessageUI/MessageUI.h>
+#import "GAITrackedViewController.h"
 
-
-@interface Info : UIViewController<UITableViewDataSource,UITableViewDelegate,MWPhotoBrowserDelegate,UIAlertViewDelegate,shareDelegate,MFMessageComposeViewControllerDelegate>{
+@interface Info : GAITrackedViewController<UITableViewDataSource,UITableViewDelegate,MWPhotoBrowserDelegate,UIAlertViewDelegate,shareDelegate,MFMessageComposeViewControllerDelegate>{
     NSMutableDictionary *dic;
     NSMutableArray *photos;
 

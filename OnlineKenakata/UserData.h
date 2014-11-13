@@ -7,8 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface UserData : UIViewController<UITableViewDataSource,UITableViewDelegate>{
+#import "GAITrackedViewController.h"
+@interface UserData : GAITrackedViewController<UITableViewDataSource,UITableViewDelegate>{
 }
 
 @property (strong,nonatomic) NSMutableArray *tableData;

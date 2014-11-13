@@ -9,8 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "share.h"
 #import <MessageUI/MessageUI.h>
-
-@interface NewsDetail : UIViewController<shareDelegate,MFMessageComposeViewControllerDelegate>{
+#import "GAITrackedViewController.h"
+@interface NewsDetail : GAITrackedViewController<shareDelegate,MFMessageComposeViewControllerDelegate>{
     
 }
 @property (strong,nonatomic) NSDictionary *dic;

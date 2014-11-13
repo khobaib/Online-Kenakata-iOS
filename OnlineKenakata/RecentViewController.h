@@ -7,8 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface RecentViewController : UIViewController<UICollectionViewDelegate,UICollectionViewDataSource>{
+#import "GAITrackedViewController.h"
+@interface RecentViewController : GAITrackedViewController<UICollectionViewDelegate,UICollectionViewDataSource>{
     NSMutableArray *productList;
     NSString *currency;
     

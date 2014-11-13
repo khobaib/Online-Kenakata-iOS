@@ -27,6 +27,9 @@
     return self;
 }
 
+-(void)viewWillAppear:(BOOL)animated{
+    self.screenName=@"Signup";
+}
 - (void)viewDidLoad
 {
     [super viewDidLoad];

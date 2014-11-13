@@ -7,8 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface SignupViewController : UIViewController<UITextFieldDelegate>
+#import "GAITrackedViewController.h"
+@interface SignupViewController : GAITrackedViewController<UITextFieldDelegate>
 
 
 @property (strong,nonatomic) IBOutlet UITextField *userNameField;

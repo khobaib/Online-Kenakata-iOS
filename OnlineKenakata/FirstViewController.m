@@ -114,27 +114,31 @@
     self.signinButton.hidden=YES;
    
     self.tabBarController.navigationItem.title=@"Selected Category";
+    self.screenName=@"Selected Category";
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
     float endScrolling = scrollView.contentOffset.y + scrollView.frame.size.height;
-    if (endScrolling >= scrollView.contentSize.height && counter!=-1)
+    if (endScrolling >= scrollView.contentSize.height && (searchCounter!=-1 ||counter!=-1))
     {
         if(isSearched && searchCounter!=-1){
             searchCounter++;
             [self searchMethod];
-            
+            isLoading=YES;
+            [self.collectionview reloadData];
             return;
         }
-        if(!isSearched){
+        if(!isSearched && counter!=-1){
             counter++;
             [self get_categories_by_parent_cateogory_id];
             NSLog(@"start");
+            
+            isLoading=YES;
+            [self.collectionview reloadData];
         }
         
-        isLoading=YES;
-        [self.collectionview reloadData];
+        
         
     }
 }
@@ -245,6 +249,7 @@
 {
 
     if(isLoading){
+
         return catagoryList.count+productList.count+1;
     }
     
@@ -259,8 +264,10 @@
     
     if(!self.scrollView.hidden){
         self.tabBarController.navigationItem.title=@"Highlight";
+        self.screenName=@"Highlight";
     }else{
          self.tabBarController.navigationItem.title=@"Catalogue";
+        self.screenName=@"Catalogue";
     }
     
    
@@ -283,10 +290,22 @@
 
     }
 
+
 }
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
  
     UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cellGrid" forIndexPath:indexPath];
+    
+    
+    if(isSearched && isLoading && indexPath.row>=productList.count){
+        UICollectionViewCell *cell1 = [collectionView dequeueReusableCellWithReuseIdentifier:@"loading" forIndexPath:indexPath];
+        
+        UIActivityIndicatorView *view=(UIActivityIndicatorView *)[cell1 viewWithTag:221];
+        [view startAnimating];
+        
+        
+        return cell1;
+    }
 
     if(isLoading && indexPath.row>=(productList.count+catagoryList.count)){
         
@@ -429,15 +448,15 @@
         
         if([spclQus isEqualToString:@""]){
             if(available<1){
-                prdtails= [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"ProductDetails2"];
+                prdtails= [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"productDetails3"];
                 NSLog(@"in no button");
                 
             }else{
-                prdtails= [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"productdetails"];
+                prdtails= [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"productDetails3"];
                 
             }
         }else{
-            prdtails= [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"productdetails"];
+            prdtails= [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"productDetails3"];
             
         }
         
@@ -583,7 +602,7 @@
     
     // 2
     
-    NSLog(@"%@",string);
+
     AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
     operation.responseSerializer = [AFJSONResponseSerializer serializer];
     
@@ -610,8 +629,7 @@
     // 5
     //  [self.indecator startAnimating];
     
-    loading.hidden=NO;
-    [loading StartAnimating];
+   
     [operation start];
 }
 
@@ -687,7 +705,7 @@
     }
     
     
-    
+    isLoading=NO;
    
     
     [refreshControl endRefreshing];
@@ -704,8 +722,8 @@
     }
 
     
-    [loading StopAnimating];
-    loading.hidden=YES;
+   
+    
 }
 -(void)endSearch{
      isSearched=NO;

@@ -15,7 +15,7 @@
 #import "SignupViewController.h"
 #import "UserData.h"
 #import "DatabaseHandeler.h"
-
+#import "SettingsViewController.h"
 #import "Delivery.h"
 
 
@@ -35,6 +35,9 @@
     return self;
 }
 
+-(void)viewWillAppear:(BOOL)animated{
+    self.screenName=@"Login";
+}
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -85,7 +88,7 @@
     [params setObject:name forKey:@"email"];
     
     
-    
+    password=[SettingsViewController md5HexDigest:password];
     [params setObject:password forKey:@"password"];
     [self loginNative:params];
     
@@ -274,6 +277,76 @@
     return [textField resignFirstResponder];
 }
 
+
+-(IBAction)forgetPassword:(id)sender{
+    UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"কেনাকাটা" message:@"Please Enter your email address" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Done", nil];
+    
+    alert.alertViewStyle =UIAlertViewStylePlainTextInput;
+    
+    UITextField *tf=[alert textFieldAtIndex:0];
+    
+    tf.keyboardType=UIKeyboardTypeEmailAddress;
+    [alert show];
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if(buttonIndex==1){
+        UITextField *tf=[alertView textFieldAtIndex:0];
+        
+        if([tf.text isEqualToString:@""]){
+            UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"কেনাকাটা" message:@"Please Enter your email address" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+            [alert show];
+         
+            return;
+        }else if (![self NSStringIsValidEmail:tf.text]){
+            UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"কেনাকাটা" message:@"Please Enter a valid email address" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+            [alert show];
+            
+            return;
+        }
+        
+        NSMutableDictionary *params=[[NSMutableDictionary alloc]init];
+       
+        
+        params[@"email"]=tf.text;
+        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+        
+        manager.requestSerializer = [AFJSONRequestSerializer serializer];
+        // manager.responseSerializer=[AFCompoundResponseSerializer serializer];
+        
+        NSString *str=[NSString stringWithFormat:@"%@/rest.php?method=passreset",[Data getBaseUrl]];
+        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        
+        [manager POST:str parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            [MBProgressHUD hideHUDForView:self.view animated:YES];
+            NSDictionary *dic=(NSDictionary *)responseObject;
+            
+            NSLog(@"%@",dic);
+            
+            if([dic[@"success"] isEqualToString:@"ok"]){
+                UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"কেনাকাটা" message:@"Please Check Your Email" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+                [alert show];
+                
+                return;
+            }else{
+                UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"কেনাকাটা" message:@"Something wrong please try again" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+                [alert show];
+                
+                return;
+            }
+            
+        }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                  NSLog(@"Error: %@", error);
+            [MBProgressHUD hideHUDForView:self.view animated:YES];
+            
+            UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"কেনাকাটা" message:@"Something wrong please try again" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+            [alert show];
+            
+            return;
+
+        }];
+    }
+}
 
 
 #pragma mark -validation

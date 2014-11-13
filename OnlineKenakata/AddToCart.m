@@ -54,6 +54,7 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
+    self.screenName=@"Add To Cart";
     NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
     
     NSMutableDictionary *dic = [NSKeyedUnarchiver unarchiveObjectWithData:[ud objectForKey:@"get_user_data"]];;

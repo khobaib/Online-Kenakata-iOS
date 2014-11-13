@@ -9,9 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "LoadingView.h"
 #import "RMPickerViewController.h"
+#import "GAITrackedViewController.h"
 
-
-@interface ProductList : UIViewController<UICollectionViewDelegate,UICollectionViewDataSource,UIPickerViewDataSource,UIPickerViewDelegate,RMPickerViewControllerDelegate>{
+@interface ProductList : GAITrackedViewController<UICollectionViewDelegate,UICollectionViewDataSource,UIPickerViewDataSource,UIPickerViewDelegate,RMPickerViewControllerDelegate>{
 
     NSMutableArray *catagoryList;
     NSMutableArray *productList;

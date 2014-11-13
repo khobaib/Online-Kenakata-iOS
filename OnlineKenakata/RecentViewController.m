@@ -43,7 +43,7 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    
+    self.screenName=@"Recently viewed";
     productList=[DatabaseHandeler getAllProducts];
     [self.collectionView reloadData];
 

@@ -45,6 +45,7 @@
     [super viewWillAppear:animated];
     self.tabBarController.navigationItem.title=@"New Arrival";
 
+    self.screenName=@"New Arrival";
     [self.collectionView reloadData];
     
 }

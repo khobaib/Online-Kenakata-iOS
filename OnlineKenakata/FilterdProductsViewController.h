@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GAITrackedViewController.h"
 
-@interface FilterdProductsViewController : UIViewController<UICollectionViewDelegate,UICollectionViewDataSource>{
+@interface FilterdProductsViewController : GAITrackedViewController<UICollectionViewDelegate,UICollectionViewDataSource>{
     
     NSMutableArray *catagoryList;
     NSMutableArray *productList;

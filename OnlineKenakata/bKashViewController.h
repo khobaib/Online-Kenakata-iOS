@@ -8,8 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "LoadingView.h"
-
-@interface bKashViewController : UIViewController<UITextFieldDelegate>{
+#import "GAITrackedViewController.h"
+@interface bKashViewController : GAITrackedViewController<UITextFieldDelegate>{
     NSMutableDictionary* dic;
     BOOL callMade;
     LoadingView *loading;
